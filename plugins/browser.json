@@ -1,0 +1,91 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-device-orientation": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-sqlite-2": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-file-downloader": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-zip": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-file-md5": {
+      "PACKAGE_NAME": "com.bennetts.vic"
+    }
+  }
+}

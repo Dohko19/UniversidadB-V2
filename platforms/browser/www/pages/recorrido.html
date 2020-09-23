@@ -1,0 +1,280 @@
+<template>
+        <div class="page">
+            <div class="navbar">
+                <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+                <div class="navbar-inner sliding">
+                    <div class="left">
+                        <a href="#" class="link back">
+                            <i class="icon icon-back"></i>
+                            <span class="if-not-md">Back</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                     <input type="hidden" id="resp1" name="resp1" />
+                   
+                    
+                     <div style="text-align: left;">        
+                        <div class="item-inner">
+                            <div class="block-title" style="text-align: center; color:#C83D11; font-size: 18px;"><h2 style="color:#C83D11;">Recorrido</h2></div>
+                        </div>
+                    </div>
+                    <br />
+                    <table style="width:100%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                        <tr>
+                            <td>
+                                <a href="/datosgenerales/" style="border: none; outline:none;"><img src="img/NewDesingMenu2VIC/circulo1Color.png" width="90px" height="90px"  /><br /><span style="color:#00008B; font-weight: bold;">Datos Generales</span></a>
+                            </td>
+                            <td>
+                                <a href="/equipos/" style="border: none; outline:none;"><img src="img/NewDesingMenu2VIC/circulo2Gris.png" width="90px" height="90px"  id="img2"/><br /><span style="color:#00008B; font-weight: bold;">Equipos</span></a>
+                            </td>                       
+                        </tr>
+                        <tr>
+                            <td><br /><br /><a href="/imagen/" style="border: none; outline:none;"><img src="img/NewDesingMenu2VIC/circulo3Gris.png" width="90px" height="90px" id="img3"/><br /><span style="color:#00008B; font-weight: bold;">Imagen</span></a></td>
+
+                            <td><br /><br /><a href="/entrenamiento/"><img src="img/NewDesingMenu2VIC/circulo4Gris.png" width="90px" height="90px" id="img4"/><br /><span style="color:#00008B; font-weight: bold;">Entrenamiento</span></a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br /><br />
+                                <a href="/cuestionarios/"  style="border: none; outline:none;">
+                                    <img src="img/NewDesingMenu2VIC/circulo9Gris.png" width="80px" height="80px" id="img9"/><br /><span style="color:#00008B; font-weight: bold;">Cuestionarios</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table><br />
+                    <div style="text-align: left;">        
+                        <div class="item-inner">
+                            <div class="block-title" style="text-align: center; color:#C83D11; font-size: 18px;"><h2 style="color:#C83D11;">Productos</h2></div>
+                        </div>
+                    </div>
+                    
+                <br />
+                <table style="width:100%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                    <tr>
+                        <td>
+                            <a href="/inventario/" style="border: none; outline:none;">
+                            <img src="img/NewDesingMenu2VIC/circulo5Gris.png" width="80px" height="80px" id="img5" /><br /><span style="color:#00008B; font-weight: bold;">Almacén</span>
+                        </a>
+                        </td>
+                        <td>
+                            <a href="/prod/" style="border: none; outline:none;">
+                            <img src="img/NewDesingMenu2VIC/circulo6Gris.png" width="80px" height="80px" id="img6" /><br /><span style="color:#00008B; font-weight: bold;">Pedido</span>
+                        </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><br /><br />
+                            <a href="/newprod/"  style="border: none; outline:none;">
+                                <img src="img/NewDesingMenu2VIC/circulo7Gris.png" width="80px" height="80px" id="img7"/><br /><span style="color:#00008B; font-weight: bold;">Cotización de <br />Nuevos Productos</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <br/><br/><br/>
+                    <a href="/cierre/" style="border:none; outline:none;"><img src="img/save2.png" width="40px" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+    on: {      
+      pageInit: function () {
+             var icedula = localStorage.getItem("IdCedula");    
+               
+
+               databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM ced_equipos WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen2();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM imagen WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen3();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM entrenamiento WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen4();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM tomaInventario WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen5();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+                //---------
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM pedido WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen6();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM prodnvos WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen7();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "SELECT * FROM Cuestionarios WHERE IdCedula = ?",
+                            [icedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length > 0){
+                                   cambiarImagen9();
+                                } else {
+                                } 
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                //----------
+                function cambiarImagen2(){
+                  document.getElementById("img2").src="img/NewDesingMenu2VIC/circulo2Color.png";
+                }
+                function cambiarImagen3(){
+                  document.getElementById("img3").src="img/NewDesingMenu2VIC/circulo3Color.png";
+                }
+                function cambiarImagen4(){
+                  document.getElementById("img4").src="img/NewDesingMenu2VIC/circulo4Color.png";
+                }
+                function cambiarImagen5(){
+                  document.getElementById("img5").src="img/NewDesingMenu2VIC/circulo5Color.png";
+                }
+                function cambiarImagen6(){
+                  document.getElementById("img6").src="img/NewDesingMenu2VIC/circulo6Color.png";
+                }
+                function cambiarImagen7(){
+                  document.getElementById("img7").src="img/NewDesingMenu2VIC/circulo7Color.png";
+                }
+                function cambiarImagen9(){
+                  document.getElementById("img9").src="img/NewDesingMenu2VIC/circulo9Color.png";
+                }
+           }
+       }
+   }
+
+</script>

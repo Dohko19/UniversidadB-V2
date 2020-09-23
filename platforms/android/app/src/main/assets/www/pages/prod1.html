@@ -1,0 +1,438 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page">
+            <div class="navbar">
+                <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+                <div class="navbar-inner sliding">
+                    <div class="left">
+                        <!--<a href="#"  onclick= "vertical();" class="link back">-->
+                            <a href="#" onclick="regresarRecorrido();">
+                            <i class="icon icon-back"></i>
+                            <span class="if-not-md">Back</span>
+                        </a>
+                    </div>
+                    <div class="right" style="margin-right: 15px">
+                        <a href="#" data-popup=".demo-popup-pedido" class="popup-open">
+                            <i class="icon f7-icons if-not-md">help_round_fill</i>
+                            <i class="icon material-icons if-md">help_outline</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="popup demo-popup-pedido">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="title" style="color: #a1a1a1">Ayuda</div>
+                <div class="right"><a href="#" class="link popup-close">Close</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="block">
+                <style type="text/css">
+                      h2 {color: #222; text-align: center;}
+                      .all {font-size: 10pt;color: #222; }
+                      ul {list-style-type: circle;}
+                    </style>
+                    <center>
+                        <span style="color:#00008B; font-size: 20pt"><strong>Pedido</strong></span>
+                    </center>
+                    <hr width="90%">
+                    <span class="all">
+                        <span style="text-align: justify;"><strong>Esta pantalla puede dividirse en tres secciones: </strong></span>
+                            <li>
+                                Primero tenemos un icono.<br />
+                                <center><img src="img/ayuda/iconoEstadistica.png" width="20%"></center>
+                                donde al preionar nosotros podemos ver la estadistica del cliente de los <strong>ultimos 4 meses.</strong><br /><br/>
+                                <center><img src="img/ayuda/estadistica.png" width="90%"></center>
+
+                            </li><br />
+                            <li>
+                                El siguiente punto es la tabla donde esta se completara con los productos con los que ya cuenta el cliente. Esa misma tabla contiene tres campos que son <font color="#1e90ff">editables</font>: <strong>Inventario al dia</strong>, <strong>Cantidad solicitada</strong> y <strong>Comentario</strong>.<br /> Estos campos tienen un <font color="#1e90ff"><strong>autoguardado</strong></font> que permitira que una vez que se escriba en elllo, se guarde en automatico.<br /><br />
+                                <font color="#a90000"><strong>NOTA:</strong></font> Podremos saber que se guardo cuando el campo se ponga en color azul.<br /><br/>
+                                <center><img src="img/ayuda/tablaPedido.png" width="90%"></center>
+                            </li><br />
+                            <li>
+                                Si se necesita agregar un producto o el cliente no cuenta con este, hay un boton<br>
+                                <center><img src="img/ayuda/signoMas.png" width="12%"></center>que nos ayudara a buscar el producto, editarlo de una vez y poder agregarlo.<br /><br />
+                                <font color="#a90000"><strong>NOTA:</strong></font> Este se agregara directo a la tabla en la parte de abajo.
+
+                            </li>
+
+                    </span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+                <div class="fab fab-center-bottom fab-morph" data-morph-to=".demo-fab-fullscreen-sheet.fab-morph-target">
+                  <a href="#">
+                    <i class="icon f7-icons if-not-md">add</i>
+                    <i class="icon material-icons md-only">add</i>
+                  </a>
+                </div>
+                <div class="demo-fab-fullscreen-sheet fab-morph-target">
+                    <div style="text-align: right; width:90%;"><br /><a href="#" class="fab-close">Cerrar</a></div>
+                    <h3 style="color:#00008B; text-align: center;">Agregar productos</h3>
+
+                    <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar searchbar-init">
+                        <div class="searchbar-inner">
+                            <div class="searchbar-input-wrap">
+                                <input type="search" name="NuevoP" placeholder="Buscar Producto" id="autocomplete-dropdown-ajax"/>
+                                <i class="searchbar-icon"></i>
+                                <span class="input-clear-button"></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="width:95%; margin: 0 auto; border-collapse: collapse;">
+
+                        <label class="span" style="font-weight: bold;">Codigo: <span id="PCode" style="font-weight: normal; color: #000"></span></label>
+                        <span class="span" style="font-weight: bold;">Descripción:</span>
+                        <input type="text" style="font-weight: normal; width:95%;" id="PDesc" name="PDesc" disabled="disabled"/>
+
+                        <span class="span" style="font-weight: bold;">Inventario al dia:</span><input type="number" id="PInven" name="PInven" style="width: 35%; border:solid 1px #C9C9C9;">
+                        <span class="span" style="font-weight: bold;width: ">Cantidad solicitada:</span> <input id="PCanti" name="PCanti" type="number" style="width:45%;border:solid 1px #C9C9C9;" >
+                        <span class="span" style="font-weight: bold;">Comentario: </span>
+                        <textarea id="PComen" name="PComen" cols="35" rows="3" style="border:solid 1px #C9C9C9;" placeholder="Comentarios:"></textarea>
+
+                        <table style="width:100%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                            <tr>
+                                <td >
+                                    <a href="#" onclick="guardadNuevoProdPEDIDO();" style="border: none; outline:none;"><img src="img/save2.png" width="40px" /></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="page-content">
+                    <div class="block">
+                    <table style="width:90%; margin: 0 auto; text-align: left;  border-collapse: collapse;">
+                    <tr>
+                        <td style="text-align: left;"><a class="link popup-open" href="#"  data-popup=".popup-services"><img src="img/tabla.png" width="40px" /></a>
+                        </td>
+                        <td><h2 style="color:#00008B; text-align: center;">Productos</h2> </td>
+                    </tr>
+                </table>
+                <div style="text-align: center;">
+                    <div class="card data-table" >
+                    <div class="infinite-scroll-content">
+                        <table id="PrdCode" style="text-align: center;">
+                            <style>
+                                #PrdCode th{
+                                   background-color: #3590FA;
+                                   color: #fff;
+                                }
+                                #PrdCode td, #PrdCode th {
+                                  padding: 3px;
+                                }
+                                #PrdCode .spanBlanco{
+                                  border: none;
+                                  border-bottom: 2px solid rgba(0,0,0,.2);
+                                  background-color: #FFFFFF;
+                                }
+                            </style>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Codigo</th>
+                                    <th style="text-align: center;">Descripción</th>
+                                    <th style="text-align: center;">Inventario<br> al dia</th>
+                                    <th style="text-align: center;">Cantidad <br>Solicitada</th>
+                                    <th class="comen" style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comentario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                    <th style="text-align: center;">Promedio <br>de compra</th>
+                                    <th style="text-align: center;">Fecha <br>ultima compra</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class='sentencia preloader color-red infinite-scroll-preloader'></div>
+
+                        </div>
+                    </div>
+                    <div style="width:95%; text-align: center; margin: 0 auto; border-collapse: collapse;">
+
+                        <span class="span" style="font-weight: bold;">Observaciones: </span>
+                        <textarea id="Obser" name="Obser" class='spanBlanco' cols="35" rows="5" style="border:solid 1px #C9C9C9;" placeholder="Observaciones:"></textarea>
+
+                        <span id="IdPrd" name ="IdPrd" type="hidden"></span>
+                        <span id="descripcion" name ="descripcion" type="hidden"></span>
+                    </div>
+                </div>
+            <br />
+    </div>
+
+</div>
+
+
+                    <div class="popup popup-services">
+                    <div class="page-content">
+                        <br />
+                        <a class="link popup-close" href="#">Cerrar</a>
+                            <div class="block-title"> ESTADISTICA (Ultimos 4 meses) </div>
+                              <div class="card data-table">
+                              <div class="sentenciae preloader color-blue"></div>
+                                <table id="Estadistica">
+
+                                  <thead>
+                                    <tr>
+                                      <th class="label-cell" style="text-align: center; font-weight: bold;"><span >Código</span></th>
+                                      <th class="numeric-cell" style="text-align: center; font-weight: bold;"><span id="Mes1" ></span></th>
+                                      <th class="numeric-cell" style="text-align: center; font-weight: bold;"><span id="Mes2" ></span></th>
+                                      <th class="numeric-cell" style="text-align: center; font-weight: bold;"><span id="Mes3" ></span></th>
+                                      <th class="numeric-cell" style="text-align: center; font-weight: bold;"><span id="Mes4" ></span></th>
+                                      <th class="numeric-cell" style="text-align: center; font-weight: bold;"><span id="Total" ></span></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="est1">
+
+                                  </tbody>
+                                </table>
+                              </div>
+                        </div>
+                    </div>
+                    <!--------------------->
+                    <div class="popup popup-agregar">
+                    <div class="page-content">
+                        <br />
+                        <a class="link popup-close" href="#">Cerrar</a>
+                            <div class="block-title"> Agregar un nuevo producto </div>
+                            <div class="card data-table">
+                              <div class="sentenciae preloader color-blue"></div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--<form class="list" id="demo-form1">-->
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+  return {
+    on: {
+      pageInit: function (e, page) {
+        var IdC = localStorage.getItem("IdCte");
+        var Division = localStorage.getItem("Division");
+        var IdUsuario = localStorage.getItem("IdUsuario");
+        if(Division == 3){
+            var nomPro = "cteproductoCDC";
+            var AProd = "ProductosCDC";
+            var ProdGral = "ProductosGralCDC";
+        } else {
+            var nomPro = "cteproducto";
+            var AProd = "Productos";
+            var ProdGral = "ProductosGral";
+        }
+        app.request.get(cordova.file.externalRootDirectory + "/jsons/"+nomPro+".json", function (data) {
+            var content = JSON.parse(data);
+            for(var i=0; i < content.length; i++){
+
+                if(content[i].IdCte == IdC){
+                    if(content[i].Categoria == 9 || content[i].Categoria == 12 || content[i].Categoria == 13 || content[i].Categoria == 6){
+                        $(".spanBlanco").change(function(){
+                            if ($(this).val()=="") {
+                                 $(this).css("background-color", "#FFFFFF");
+                            } else {
+                                 $(this).css("background-color", "#E0F8F7");
+                            }
+                        });
+                        $("#PrdCode tbody").append("<tr><td text-align: center;>"+content[i].IdPrd+"</td><td text-align: center;><span id='descripcion"+content[i].IdPrd+"' name='descripcion"+content[i].Descripcion+"'>"+content[i].Descripcion+"</span></td><td text-align: center;><span id='text4'><input class='spanBlanco' type='number' style='width: 100%; font-size: 11pt; text-align: center;' id='inventario"+content[i].IdPrd+"' name='inventario"+content[i].IdPrd+"' onchange='guardarP("+content[i].IdPrd+")'/></span></td><td text-align: center;><span id='text4'><input class='spanBlanco' style='width: 100%; font-size: 11pt; text-align: center;' type='number' id='cantidad"+content[i].IdPrd+"' name='cantidad"+content[i].IdPrd+"' onchange='guardarP("+content[i].IdPrd+")'/></span></td><td text-align: center;><textarea rows='1' style='width:95%; text-align: center;' class='spanBlanco' id='comentario"+content[i].IdPrd+"' name='comentario"+content[i].IdPrd+"' onchange='guardarP("+content[i].IdPrd+")'></textarea></td><td text-align: center;>"+content[i].PromCompra+"</td><td text-align: center;>"+content[i].FechaUltVenta+"</td></tr>");
+
+                    }
+                }
+            }
+        });
+
+         $(".spanBlanco").change(function(){
+                if ($(this).val()=="") {
+                     $(this).css("background-color", "#FFFFFF");
+                } else {
+                     $(this).css("background-color", "#E0F8F7");
+                }
+            });
+        self.autocompleteDropdownAjax = app.autocomplete.create({
+            inputEl: '#autocomplete-dropdown-ajax',
+            openIn: 'dropdown',
+            preloader: true,
+            valueProperty: 'ProdDesc',
+            textProperty:  'Descripcion',
+            limit: 5, //limit to 20 results
+            dropdownPlaceholderText: 'Seleccionar Producto...',
+            source: function (query, render) {
+                var autocomplete = this;
+                var results = [];
+                if (query.length === 0) {
+                    render(results);
+                    return;
+                }
+                autocomplete.preloaderShow();
+                app.request({
+                    url: cordova.file.externalRootDirectory + "/jsons/"+AProd+".json",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                    query: query,
+                    },
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].Descripcion.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i].ProdDesc);
+                        }
+                        autocomplete.preloaderHide();
+                        render(results);
+                    }
+                });
+            }
+        });
+
+        $('#autocomplete-dropdown-ajax').change(function () {
+            var cval = $("#autocomplete-dropdown-ajax").val();
+            var cod = cval.split('-');
+            var co1 = cod[0];
+            //var des = cod[1];
+
+            app.request.get(cordova.file.externalRootDirectory + "/jsons/"+ProdGral+".json", function (data) {
+            var content = JSON.parse(data);
+            for(var i=0; i < content.length; i++){
+
+                if(content[i].IdPrd == co1){
+                    $("#PCode").html(content[i].IdPrd);
+                    $("#PDesc").val(content[i].Descripcion);
+                    $('#autocomplete-dropdown-ajax').val(content[i].IdPrd+" - "+content[i].Descripcion);
+                }
+            }
+            });
+
+        });
+        $('#Obser').change(function () {
+            ObservacionesPe();
+
+        });
+
+        var icedula = localStorage.getItem("IdCedula");
+        //Cargar el contenido si lo tiene
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "Select * from pedido where IdCedula = ?",
+                    [icedula],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            $("#PrdCode tbody").append("<tr><td text-align: center;>"+item2.IdPrd+"</td><td text-align: center;><span id='descripcion"+item2.IdPrd+"' name='descripcion"+item2.Descripcion+"'>"+item2.Descripcion+"</span></td><td text-align: center;><span id='text4'><input class='spanBlanco' type='number' style='width: 100%; font-size: 11pt; text-align: center;' id='inventario"+item2.IdPrd+"' name='inventario"+item2.IdPrd+"' onchange='guardarP("+item2.IdPrd+")' value='"+item2.Inventario+"'/></span></td><td text-align: center;><span id='text4'><input class='spanBlanco' style='width: 100%; font-size: 11pt; text-align: center;' type='number' id='cantidad"+item2.IdPrd+"' name='cantidad"+item2.IdPrd+"' onchange='guardarP("+item2.IdPrd+")' value='"+item2.CanSolicitada+"'/></span></td><td text-align: center;><textarea rows='1' style='width:95%; text-align: center;' class='spanBlanco' id='comentario"+item2.IdPrd+"' name='comentario"+item2.IdPrd+"' onchange='guardarP("+item2.IdPrd+")'>"+item2.Comentario+"</textarea></td><td text-align: center;></td><td text-align: center;></td></tr>");
+                        }
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        var icedula = localStorage.getItem("IdCedula");
+        //Cargar el contenido si lo tiene
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "Select * from ObservacionesPedido where IdCedula = ?",
+                    [icedula],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item = results.rows.item(i);
+
+                            $("#Obser").append(item.Observaciones);
+                        }
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //evento onchange para cuando se coloque el inventario del cliente
+        $('#Invent').change(function () {
+            var PromC = $("#PromCompra").val();
+            var invtc = $("#Invent").val();
+            var peds = PromC - invtc;
+            $("#PedSugerido").val(peds);
+        });
+        //Estaditica
+        app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/estadistica.php', {IdCte: IdC, IdUsu: IdUsuario }, function (data) {
+            $('.sentenciae').remove();
+            var content = JSON.parse(data);
+            var d = new Date();
+            var n = d.getMonth();
+            //alert(n);
+            if(n == 0){ //ENERO
+                $("#Mes1").html('Septiembre'); $("#Mes2").html('Octubre'); $("#Mes3").html('Noviembre'); $("#Mes4").html('Diciembre');
+            }
+            if(n == 1){ //FEBRERO
+                $("#Mes1").html('Octubre'); $("#Mes2").html('Noviembre'); $("#Mes3").html('Diciembre'); $("#Mes4").html('Enero');
+            }
+            if(n == 2){ //MARZO
+                $("#Mes1").html('Noviembre'); $("#Mes2").html('Diciembre'); $("#Mes3").html('Enero'); $("#Mes4").html('Febrero');
+            }
+            if(n == 3){ //ABRIL
+                $("#Mes1").html('Diciembre'); $("#Mes2").html('Enero'); $("#Mes3").html('Febrero'); $("#Mes4").html('Marzo');
+            }
+            if(n == 4){ //MAYO
+                $("#Mes1").html('Enero'); $("#Mes2").html('Febrero'); $("#Mes3").html('Marzo'); $("#Mes4").html('Abril');
+            }
+            if(n == 5){ //JUNIO
+                $("#Mes1").html('Febrero'); $("#Mes2").html('Marzo'); $("#Mes3").html('Abril'); $("#Mes4").html('Mayo');
+            }
+            if(n == 6){ //JULIO
+                $("#Mes1").html('Marzo'); $("#Mes2").html('Abril'); $("#Mes3").html('Mayo'); $("#Mes4").html('Junio');
+            }
+            if(n == 7){ //AGOSTO
+                $("#Mes1").html('Abri'); $("#Mes2").html('Mayo'); $("#Mes3").html('Junio'); $("#Mes4").html('Julio');
+            }
+            if(n == 8){ //SEPTIEMBRE
+                $("#Mes1").html('Mayo'); $("#Mes2").html('Junio'); $("#Mes3").html('Julio'); $("#Mes4").html('Agosto');
+            }
+            if(n == 9){ //OCTUBRE
+                $("#Mes1").html('Junio'); $("#Mes2").html('Julio'); $("#Mes3").html('Agosto'); $("#Mes4").html('Septiembre');
+            }
+            if(n == 10){ //NOVIEMBRE
+                $("#Mes1").html('Julio'); $("#Mes2").html('Agosto'); $("#Mes3").html('Septiembre'); $("#Mes4").html('Octubre');
+            }
+            if(n == 11){ //DICIEMBRE
+                $("#Mes1").html('Agosto'); $("#Mes2").html('Septiembre'); $("#Mes3").html('Octubre'); $("#Mes4").html('Noviembre');
+            }
+            $("#Total").html('Total');
+            for(var x = 0; x < data.length; x++) {
+                $("#Estadistica #est1").append("<tr><td class='label-cell'>"+ content[x].IdPrd +" "+ content[x].Descripcion +"</td><td class='numeric-cell' style='text-align: center;' >"+ content[x].Mes1 +"</td><td class='numeric-cell' style='text-align: center;'>"+content[x].Mes2+"</td><td class='numeric-cell' style='text-align: center;'>"+content[x].Mes3+"</td><td class='numeric-cell' style='text-align: center;'>"+content[x].Mes4+"</td><td class='numeric-cell' style='text-align: center;'>"+content[x].total+"</td></tr>");
+                $('.preloader').remove();
+                $('.color-blue').remove();
+            }
+        });
+      }
+    }
+  }
+</script>

@@ -1,0 +1,131 @@
+body {
+  background-color: #ffffff;
+  font: 1em Helvetica;
+}
+
+#container {
+  width: 840px;
+  margin: 25px auto;
+}
+
+.whysign {
+  float: left;
+  background-color: #ffffff;
+  width: 480px;
+  height: 347px;
+  border-radius: 0 5px 5px 0;
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
+.signup {
+  float: left;
+  width: 300px;
+  padding: 30px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+
+#text {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 25px;
+  line-height: 45px;  
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #717D7E;
+}
+#text2 {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 35px;
+  line-height: 45px;  
+  margin-bottom: 10px;
+  font-size: 1em;
+  background-color: #FFFFE1;
+  color: #717D7E;
+}
+#text3 {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 35px;
+  line-height: 45px;  
+  margin-bottom: 10px;
+  font-size: 1em;
+  background-color: #F4F4F4;
+  color: #717D7E;
+}
+#text:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+#select {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 40px;
+  line-height: 35px;  
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #717D7E;
+}
+h1 {
+  color: rgba(0,0,0,.7);
+  font-weight: 900;
+  font-size: 2.5em;
+}
+
+p {
+  color: rgba(0,0,0,.6);
+  font-size: 1.2em;
+  margin: 50px 0 50px 0;
+}
+
+.span {
+  text-align: left;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 0;
+  height: 25px;
+  line-height: 45px;  
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #717D7E;
+}
+
+p:nth-of-type(2) {
+  font-size: 1em;
+}
+::placeholder{
+ color:#BFC9CA;
+} 
+select {
+  background-color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;  
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #717D7E;
+}
+select:focus{
+  outline: none;
+  border-color: #53CACE;
+}

@@ -1,0 +1,175 @@
+app<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+              <div>
+                <img src="img/key.png" width="95px" height="40px" align="left">
+                <img src="img/bennetts.png" width="180px" height="50px" align="right">
+              </div> 
+              <p><br/><br/>
+                <center><p><h2>Ventas</h2></p></center> 
+              </p>
+              <center><h3><font color="9FA1A3"><span id ="nombreProy"></span></span></font></h3></center><br>
+
+              <div style="text-align: left; justify-content:left; margin-right:auto; margin-left:auto; width: 99%;">
+                    <div class="infinite-scroll-content">
+                        <table id = "imyal" cellpadding="10" >
+                          <header>
+                            <style>
+                              
+                            </style>
+                          </header>
+                          <tbody id="imya">
+                            <tr>
+                              <th>Nombre de la persona que recibe:</th>
+                              <td><span id ="nombrere"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Puesto de la persona que recibe:</th>
+                              <td><span id ="puesre"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Teléfono:</th>
+                              <td><span id ="tel"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Correo:</th>
+                              <td><span id ="correo"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Localización:</th>
+                              <td>Coordenadas<span id ="geolo"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Imagen:</th>
+                              <td><span id ="imagya"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class='sentencia1 preloader color-blue infinite-scroll-preloader'></div>
+                    </div>
+                  </div>
+
+                  <!--Actividades-->
+                  <center><p><h3>ACTIVIDADES</h3></p></center>
+                   
+                    <div class="infinite-scroll-content">
+                     <table id="tablaa">
+                     <header>
+                        <style>
+                          table {border-collapse: collapse;width: 100%;}
+                          th, td {text-align: center;padding: 8px;}
+                          tr:nth-child(even){background-color: #f2f2f2}
+                          th {background-color: #3590FA;color: white;}
+                        </style>
+                      </header>
+                      <tr> 
+                        <th>Actividades</th>
+                      </tr>
+                      <tbody id="ven">
+                        
+                       </tbody>
+                     </table>
+
+                    <div class='sentencia2 preloader color-blue infinite-scroll-preloader'></div>
+                  </div> 
+                  <br /><br />
+                  <!--fin actividades-->
+
+
+                  <div class="infinite-scroll-content">
+                     <table>
+                     <header>
+                        <style>
+                          table {border-collapse: collapse;width: 100%;}
+                          th, td {text-align: center;padding: 8px;}
+                          tr:nth-child(even){background-color: #f2f2f2}
+                          th {background-color: #3590FA;color: white;}
+                        </style>
+                      </header>
+                      <tr> 
+                        <th>Firma</th>
+                        <th>Fotografia</th>
+                      </tr>
+                      <tbody>
+                        <td id="Firma"></td>
+                        <td id="Foto"></td>
+                       </tbody>
+                     </table>
+
+                    <div class='sentencia2 preloader color-blue infinite-scroll-preloader'></div>
+                  </div> 
+                  <!--Fin tabla 2 -->
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+  return {
+        on: {
+          pageInit: function (e, page) {
+                var cedula = app.views.main.router.currentRoute.params.IdCed;
+                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectVen.php', {  IdCed: cedula}, function (data) {
+                    $('.sentencia1').remove();
+                    var content = JSON.parse(data);
+                    for(var c=0; c < content.length; c++){
+                      $("#nombreProy").html(content[c].NombreProyecto);
+                      $("#nombrere").html(content[c].NombreRecibe);
+                      $("#puesre").html(content[c].PuestoRecibe);
+                      $("#tel").html(content[c].Telefono);
+                      $("#correo").html(content[c].Correo);
+                      $("#geolo").html("<br/>["+content[c].geolocation+"]");
+                      $("#imagya").html("<img src='"+content[c].Imagen+"'width='70' height='70' align='right'>");
+                      
+                      if(content[c].ActividadesNum == 1){
+                        $activity = "Censo";
+                      }else if(content[c].ActividadesNum == 2){
+                        $activity = "Contacto";  
+                      }else if(content[c].ActividadesNum == 3){
+                        $activity = "Presentaci\u00f3n del producto";    
+                      }else if(content[c].ActividadesNum == 4){
+                        $activity = "LIP";   
+                      }else if(content[c].ActividadesNum == 5){
+                        $activity = "AD (Analisis - Diagnostico)"; 
+                      }else if(content[c].ActividadesNum == 6){
+                        $activity = "Prueba";  
+                      }else if(content[c].ActividadesNum == 7){
+                        $activity = "Presentaci\u00f3n de la propuesta";  
+                      }else if(content[c].ActividadesNum == 8){
+                        $activity = "Negociaci\u00f3n";  
+                      }else if(content[c].ActividadesNum == 9){
+                      $activity = "Convenio";  
+                      }else if(content[c].ActividadesNum == 10){
+                        $activity = "Cierre";
+                      }else if(content[c].ActividadesNum == 11){
+                        $activity = "Presentaci\u00f3n del asesor a cliente nuevo";
+                      }
+                      
+                      $("#tablaa #ven").append("<tr><td>"+$activity+"</td></tr>");
+                      
+                      $("#Firma").html("<img src='"+content[c].FirmaProspecto+"'width='70' height='70' align='right'>");
+                      $("#Foto").html("<img src='"+content[c].FotoProspecto+"'width='70' height='70' align='right'>");
+
+                      $('.preloader').remove();
+                      $('.infinite-scroll-preloader').remove();     
+                   }
+                  });
+
+          }
+      }
+  }
+</script>
+

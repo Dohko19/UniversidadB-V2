@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="ProjectId" id="1hNGz7m3L1iczxrbvA5NGPyZtxT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\apps\UniversidadB\www\pages\cursos" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\apps\VIC Beta\www\pages" />
+      <recent name="C:\laragon\www\apps\VIC Beta\www\img" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="" />
+      <created>1599844402918</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599844402918</updated>
+      <workItem from="1599844407556" duration="7251000" />
+      <workItem from="1599920456596" duration="11763000" />
+      <workItem from="1600092508097" duration="27000000" />
+      <workItem from="1600178186765" duration="15454000" />
+      <workItem from="1600200201446" duration="1626000" />
+      <workItem from="1600437994706" duration="330000" />
+      <workItem from="1600438614910" duration="90000" />
+      <workItem from="1600438899713" duration="23242000" />
+      <workItem from="1600701532357" duration="22341000" />
+      <workItem from="1600782214307" duration="4327000" />
+      <workItem from="1600797145521" duration="13900000" />
+      <workItem from="1600892086113" duration="2950000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="309" y="42" key="#Inspections" timestamp="1599848845195">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="309" y="42" key="#Inspections/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1599848845195" />
+    <state x="259" y="0" key="#JSHint" timestamp="1600813179654">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="259" y="0" key="#JSHint/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600813179654" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1600786585689">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600786585689" />
+    <state x="212" y="9" key="SettingsEditor" timestamp="1600784603755">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="211" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1600096351937" />
+    <state x="212" y="9" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600784603755" />
+    <state x="367" y="47" width="743" height="658" key="find.popup" timestamp="1600360828545">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="367" y="47" width="743" height="658" key="find.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600360828545" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1600815007515">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600815007515" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1600805393375">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600805393375" />
+  </component>
+</project>

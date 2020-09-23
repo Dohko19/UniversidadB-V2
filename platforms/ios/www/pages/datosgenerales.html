@@ -1,0 +1,200 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup=".demo-popup-generales" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="popup demo-popup-generales">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="title" style="color: #a1a1a1">Ayuda</div>
+                <div class="right"><a href="#" class="link popup-close">Close</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="block">
+
+                <style type="text/css">
+                  h2 {color: #222; text-align: center;}
+                  .all {font-size: 10pt;color: #222; text-align: justify;}
+                </style>
+                <center>
+                    <span style="color:#00008B; font-size: 20pt"><strong>Datos generales</strong></span><br>
+                    <span style="color:#a1a1a1;font-size: 9pt;">(Valido para visita VIC y Visita Apoyo)</span>
+                </center>
+                <hr width="90%">
+                <span class="all">
+                    <span style="text-align: justify;">En esta pantalla se carga <strong>automaticamente</strong> toda la información referente al cliente que se haya seleccionado en la pantalla de: "¡Ya llegue!".<br /><br />
+                            En este apartado se deben tomar en cuenta estos campos: <strong>Nombre comercial</strong>, <strong>Nombre del contacto</strong>, <strong>Telefono</strong> y <strong>Correo</strong>. Ya que estos campos son <font color="#1e90ff"><strong>editables</strong></font>.</span><br /><br /> 
+                            <center><img src="img/ayuda/camposRellenables.png" width="70%"></center><br />
+                            <font color="#a90000"><span style="font-size: 9pt;text-align: justify;"><strong>NOTA:</strong></font> Tener en cuenta que al ser editables estos campos debe conciderarse bien la escritura, ya que se guardara para futuras visitas.</span>
+                </span> 
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Datos Generales</h2>
+
+                <form class="list form-store-data" id="demo-form">
+
+                    
+                    <span style="font-weight: bold; color: #8B0000;">¡Ya llegué!</span><br /><br />
+                    <input type="image" name="foto" style="margin: 0 auto;margin: 0 auto; width:90px; height:120px;" id="foto" src="" disabled="" />
+                    <span class="span" style="font-weight: bold;">Cliente:</span>
+                    
+                    <div id="text">
+                        <input type="text" placeholder="Cliente" name="ncliente" id="autocomplete-dropdown-ajax" class="autocomplete-dropdown item-title" style="width: 100%; white-space: normal; overflow: visible; text-align: left;" disabled=""/>
+                        <input type="hidden" placeholder="Cliente" name="cte" id="cte" style="width: 100%;"/>
+                        <input type="hidden" placeholder="Cliente" name="Nomcte" id="Nomcte" style="width: 100%;"/>
+                    </div>
+                    <br /><br />
+                    <span class="span" style="font-weight: bold;">Nombre Comercial:</span>
+                    <span id="text2">
+                        <input type='text' name="ncomercial" id="ncomercial" placeholder='Nombre Comercial:'  />
+                    </span>
+                    <span class="span" style="font-weight: bold;">Nombre del Contacto:</span>
+                    <span id="text2">
+                        <input type='text' name="ncontacto" id="ncontacto" placeholder='Nombre del Contacto:'  />
+                    </span>
+                    <span class="span" style="font-weight: bold;">Teléfono:</span>
+                    <span id="text2">
+                        <input type='text' name="telefono" id="telefono" placeholder='Teléfono:'  />
+                    </span>
+                    <span class="span" style="font-weight: bold;">Correo(s):</span>
+                    <span id="text2">
+                        <input type='text' name="correo" id="correo" placeholder='Email:'  />
+                    </span>
+                    <span class="span" style="font-weight: bold;">Estatus del Cliente:</span>
+                    <span id="text3">
+                        <input type='text' name="estatusc" id="estatusc" placeholder='Estatus del Cliente:' disabled="disabled"/>
+                        <input type='hidden' name="geolocation" id="geolocation" placeholder='Geolocalización...' disabled="disabled"/>
+                    </span>
+                    <!---CAMBIOS--->
+                    <a href="#" onclick="gdatosgrals();" style="border: none; outline:none;"><img src="img/save2.png" width="40px" /></a> 
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+return {
+    on: {      
+      pageInit: function () {
+        var self = this;
+        var app = self.$app; 
+            
+            var Tced = localStorage.getItem("Opcion");
+            if(Tced == 1){
+                var icedulas = localStorage.getItem("IdCedula");
+                 databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select * from Cedula as s INNER JOIN Clientes as c ON c.IdCte =  s.IdCte  WHERE IdCedula = ?",
+                            [icedulas],
+                            function(tx, results){
+                                 var length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    if(item.Estatus == 1 ){
+                                        $sta = 'Activo';
+                                    }else{
+                                        $sta = 'Inactivo';
+                                    }
+                                    if(item.Estatus == 'Activo' ){
+                                        $sta = 'Activo';
+                                    }else if(item.Estatus == 'Inactivo'){
+                                        $sta = 'Inactivo';
+                                    }
+
+
+                                    $("#autocomplete-dropdown-ajax").val(item.IdCte +" "+ item.Cliente);
+                                    $("#cte").val(item.IdCte);
+                                    $("#ncomercial").val(item.NomComercial);
+                                	$("#ncontacto").val(item.NomContacto);
+                                	$("#telefono").val(item.Telefono);
+                                	$("#correo").val(item.Email);
+                                	$("#estatusc").val($sta);
+                                    $("#Nomcte").val(item.Cliente);
+                                    foto.src = item.Imagen;
+                                    
+                                }
+                               
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                 app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+            if(Tced == 2){
+                var icedulas = localStorage.getItem("IdCedulaSeg");
+                 databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select * from CedulaSeg as s INNER JOIN Clientes as c ON c.IdCte =  s.IdCte  WHERE IdCedulaSeg = ?",
+                            [icedulas],
+                            function(tx, results){
+                                 var length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+
+                                    if(item.Estatus == 1 || item.Estatus == 'Activo'){
+                                        $sta = 'Activo';
+                                    }else{
+                                        $sta = 'Inactivo';
+                                    }
+
+                                    $("#autocomplete-dropdown-ajax").val(item.IdCte +" "+ item.Cliente);
+                                    $("#cte").val(item.IdCte);
+                                    $("#ncomercial").val(item.NomComercial);
+                                	$("#ncontacto").val(item.NomContacto);
+                                	$("#telefono").val(item.Telefono);
+                                	$("#correo").val(item.Email);
+                                	$("#estatusc").val($sta);
+                                    $("#Nomcte").val(item.Cliente);
+                                    foto.src = item.Imagen;
+                                    
+                                }
+                               
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                 app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );    
+            }
+            
+        }
+    }
+}
+</script>

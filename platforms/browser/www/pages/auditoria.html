@@ -1,0 +1,171 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#"  class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div id="AUDITO" class="list accordion-list">
+            <div id="NameAudito" class="block-title"><div id="Resultados"></div></div>
+                
+        </div>
+    </div>
+</template>
+
+<script>
+    console.log("hi");
+    
+    return {
+        on: {
+            pageInit: function (e, page) {
+
+                var IdCedula = localStorage.getItem("IdCedulaA");
+                // alert(IdCedula)
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql("SELECT * FROM ResultAuditorias WHERE IdCedulaA = ?",
+                        [IdCedula],
+                        function(tx1, results){
+
+                            var valor = results.rows.length;
+                            
+                            if(valor > 0){
+
+
+
+                                // alert("SI");
+                                //JSON para carga de cuestionarios
+                                    app.request.get(cordova.file.externalRootDirectory + '/jsons/Auditorias.json', function (data) {
+                                        var contentName = JSON.parse(data);
+                                        var conA = 1;
+                                        for (var i = 0; i < contentName.length; i++) {
+                                            $("#NameAudito").append("<span id='IdAuditoria'>"+contentName[i].IdAuditoria+"</span>.- <span id='NameAuditoria"+conA+"'>"+contentName[i].NombreAuditoria+"</span>");
+                                            conA++;
+                                        }
+                                    });
+                                                    app.request.get(cordova.file.externalRootDirectory + '/jsons/SegmentosAuditoria.json', function (data) {
+                                                        var content1 = JSON.parse(data);
+                                                        if (content1.length == 0) {
+                                                            $("#AUDITO").html("No se encontraron cuestionarios.");
+                                                        }else{
+                                                          var cont = 1;
+
+                                                            for (var i =0; i < content1.length; i++) {
+                                                                $("#AUDITO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloRojo.png' width='15px' height='15px' id ='imgEstat"+cont+"' /></div><div class='item-inner'><div class='item-title'><span id = 'IdSegmento"+cont+"'>"+cont+"</span>.- <span id='NameSegmento"+cont+"'>"+content1[i].NombreSegmento+"</span></div></div></a><div><div class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gAuditoriaResult("+cont+");' class='col button button-online button-round button-raised' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
+                                                                cont++;
+                                                                
+                                                            }
+                                                            app.request.get(cordova.file.externalRootDirectory + '/jsons/PreguntasSegmento.json', function (data1) {
+                                                                var content2 = JSON.parse(data1);
+                                                                var cont2 = 1;
+                                                                var tot = content2.length;
+                                                                for (var w = 1; w <= cont; w++) {
+                                                                    //console.log(content1[w].IdSegmentoAuditoria);
+
+                                                                    for (var j =0; j < content2.length; j++) {
+                                                                        
+                                                                        //console.log(content2[j].IdSegmento +"-->"+w)
+                                                                        if( content2[j].IdSegmento == w){
+                                                                            var item2 = results.rows.item(j);
+                                                                            // alert(item2.Foto)
+                                                                            if(item2.CB == "true"){
+                                                                                if(item2.Foto != ''){
+                                                                                    var srcc = item2.Foto;
+
+                                                                                    $("#Block" + w).append("<div id='card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span style='color:white;' id='Segmento"+cont2+"'>"+content2[j].IdSegmento+"</span><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <center><label style='color:red'>NO</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox' checked><span class='toggle-icon'></span></label> &nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si</label><br> <input type='hidden' name='Foto"+cont2+"' id='Foto"+cont2+"'><br><input type='hidden' name='total' id='total' value='"+tot+"'><br><input type='hidden' name='valor' id='valor' value='"+cont2+"'><br><a style='background-color: white; border: none; outline:none;' onclick='prueba("+cont2+","+tot+");'><img style='margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage"+cont2+"' src='"+item2.Foto+"'/><br><img src='img/cam.png' width='40px' /></a></center><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' placeholder='Comentario:'>"+item2.Comentario+"</textarea><br/></div><br></div><br></div>");
+                                                                                } else {
+                                                                                    var srcc = '';
+                                                                                    $("#Block" + w).append("<div id='card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span style='color:white;' id='Segmento"+cont2+"'>"+content2[j].IdSegmento+"</span><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <center>NO&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox' checked><span class='toggle-icon'></span></label> &nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si</label><br> <input type='hidden' name='Foto"+cont2+"' id='Foto"+cont2+"'><br><input type='hidden' name='total' id='total' value='"+tot+"'><br><input type='hidden' name='valor' id='valor' value='"+cont2+"'><br><a style='background-color: white; border: none; outline:none;' onclick='prueba("+cont2+","+tot+");'><img style='display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage"+cont2+"' src='"+item2.Foto+"'/><br><img src='img/cam.png' width='40px' /></a></center><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' placeholder='Comentario:'>"+item2.Comentario+"</textarea><br/></div><br></div><br></div>");
+                                                                                }
+                                                                                
+                                                                            }else{
+                                                                                if(item2.Foto != ''){
+                                                                                    var srcc = item2.Foto;
+                                                                                    $("#Block" + w).append("<div id='card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span style='color:white;' id='Segmento"+cont2+"'>"+content2[j].IdSegmento+"</span><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <center><label style='color:red'>NO</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox'><span class='toggle-icon'></span></label> &nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si</label><br> <input type='hidden' name='Foto"+cont2+"' id='Foto"+cont2+"'><br><input type='hidden' name='total' id='total' value='"+tot+"'><br><input type='hidden' name='valor' id='valor' value='"+cont2+"'><br><a style='background-color: white; border: none; outline:none;' onclick='prueba("+cont2+","+tot+");'><img style='margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage"+cont2+"' src='"+item2.Foto+"'/><br><img src='img/cam.png' width='40px' /></a></center><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' placeholder='Comentario:'>"+item2.Comentario+"</textarea><br/></div><br></div><br></div>");
+                                                                                } else{
+                                                                                    var srcc = '';
+                                                                                   $("#Block" + w).append("<div id='card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span style='color:white;' id='Segmento"+cont2+"'>"+content2[j].IdSegmento+"</span><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <center><label style='color:red'>NO</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox'><span class='toggle-icon'></span></label> &nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si</label><br> <input type='hidden' name='Foto"+cont2+"' id='Foto"+cont2+"'><br><input type='hidden' name='total' id='total' value='"+tot+"'><br><input type='hidden' name='valor' id='valor' value='"+cont2+"'><br><a style='background-color: white; border: none; outline:none;' onclick='prueba("+cont2+","+tot+");'><img style='display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage"+cont2+"' src='"+item2.Foto+"'/><br><img src='img/cam.png' width='40px' /></a></center><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' placeholder='Comentario:'>"+item2.Comentario+"</textarea><br/></div><br></div><br></div>"); 
+                                                                                }
+                                                                                
+                                                                            }
+                                                                            
+                                                                            cont2++;
+                                                                        }
+                                                                    }
+                                                                }//ResultadosAudi
+                                                                $("#AUDITO").append("<br><center><button class='col button button-fill' onclick='ResultadosAudi()'>Enviar</button></center>");
+                                                            });
+                                                        }
+                                                    }); 
+
+
+                            }else{
+
+
+
+
+                                // salert("No");
+                                //JSON para carga de cuestionarios
+                                    app.request.get(cordova.file.externalRootDirectory + '/jsons/Auditorias.json', function (data) {
+                                        var contentName = JSON.parse(data);
+                                        var conA = 1;
+                                        for (var i = 0; i < contentName.length; i++) {
+                                            $("#NameAudito").append("<span id='IdAuditoria'>"+contentName[i].IdAuditoria+"</span>.- <span id='NameAuditoria"+conA+"'>"+contentName[i].NombreAuditoria+"</span>");
+                                            conA++;
+                                        }
+                                    });
+                                    app.request.get(cordova.file.externalRootDirectory + '/jsons/SegmentosAuditoria.json', function (data) {
+                                                        var content1 = JSON.parse(data);
+                                                        if (content1.length == 0) {
+                                                            $("#AUDITO").html("No se encontraron cuestionarios.");
+                                                        }else{
+                                                            var cont = 1;
+
+                                                            for (var i =0; i < content1.length; i++) {
+                                                                $("#AUDITO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloRojo.png' width='15px' height='15px' id ='imgEstat"+cont+"' /></div><div class='item-inner'><div class='item-title'><span id = 'IdSegmento"+cont+"'>"+cont+"</span>.- <span id='NameSegmento"+cont+"'>"+content1[i].NombreSegmento+"</span></div></div></a><div><div class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gAuditoriaResult("+cont+");' class='col button button-online button-round button-raised' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
+                                                                cont++;
+                                                                
+                                                            }
+                                                            app.request.get(cordova.file.externalRootDirectory + '/jsons/PreguntasSegmento.json', function (data1) {
+                                                                var content2 = JSON.parse(data1);
+                                                                var cont2 = 1;
+                                                                var tot = content2.length;
+                                                                for (var w = 1; w <= cont; w++) {
+                                                                    //console.log(content1[w].IdSegmentoAuditoria);
+                                                                    for (var j =0; j < content2.length; j++) {
+                                                                        //console.log(content2[j].IdSegmento +"-->"+w)
+                                                                        if( content2[j].IdSegmento == w){
+                                                                            //console.log(smallImage[cont2]);
+                                                                            $("#Block" + w).append("<div id='card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span style='color:white;' id='Segmento"+cont2+"'>"+content2[j].IdSegmento+"</span><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <center><label style='color:red'>No</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox'><span class='toggle-icon'></span></label> &nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si</label><br> <input type='hidden' name='Foto"+cont2+"' id='Foto"+cont2+"'><br><input type='hidden' name='total' id='total' value='"+tot+"'><br><input type='hidden' name='valor' id='valor' value='"+cont2+"'><br><a style='background-color: white; border: none; outline:none;' onclick='prueba("+cont2+","+tot+");'><img style='display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage"+cont2+"' src=''/><br><img src='img/cam.png' width='40px' /></a></center><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' placeholder='Comentario:'></textarea><br/></div><br></div><br></div>");
+                                                                            
+                                                                            cont2++;
+                                                                        }
+                                                                    }
+                                                                }//ResultadosAudi
+                                                                $("#AUDITO").append("<br><center><button class='col button button-fill' onclick='ResultadosAudi()'>Enviar</button></center>");
+                                                            });
+                                                        }
+                                                    }); 
+
+                            }
+                    });
+                });
+
+
+
+                
+
+                            
+
+                            
+            }
+        }
+    }
+</script>

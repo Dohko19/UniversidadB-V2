@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIC - Menu</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#2196f3" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:" />
+
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>-->
+    <script type="text/javascript" src="js/raphael-min.js"></script>
+
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/morris.css">
+    <link rel="stylesheet" href="css/app.css" />
+    <!--<link rel="apple-touch-icon" href="img/f7-icon-square.png" />-->
+    <link rel="icon" href="img/f7-icon.png" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/SimpleStarRating.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/databaseHandler.js"></script>
+    <script type="text/javascript" src="js/productHandler.js"></script>
+    <script type="text/javascript" src="js/in.js"></script>
+    <script type="text/javascript" src="js/morris.min.js"></script>
+    <style type="text/css">
+
+	#signatureparent {
+		color:darkblue;
+		background-color:white;
+		padding:1px;
+	}
+
+	/*This is the div within which the signature canvas is fitted*/
+	#signature {
+		border: 2px groove aliceblue;
+		background-color:white;
+        border-radius: 1em;
+	}
+
+	/* Drawing the 'gripper' for touch-enabled devices */
+	html.touch #content {
+		float:left;
+		width:92%;
+	}
+	html.touch #scrollgrabber {
+		float:right;
+		width:4%;
+		margin-right:2%;
+		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
+	}
+	html.borderradius #scrollgrabber {
+		border-radius: 2em;
+	}
+    .big-blue{
+                color: #2E9AFE;
+                font-size: 40px;
+    }
+  .autocomplete-dropdown{
+    white-space: normal;
+    overflow: visible;
+    }
+  .item-title{
+    white-space: normal;
+    overflow: visible;
+    text-align: left;
+    }
+    hr {
+      border:none;
+      height: 20px;
+        width: 90%;
+        height: 50px;
+        margin-top: 0;
+        border-bottom: 1px solid #17202A;
+        box-shadow: 0 20px 20px -20px #2E9AFE;
+      margin: -50px auto 10px;
+    }
+</style>
+</head>
+<body>
+<div id="app">
+    <div class="statusbar"></div>
+    <div class="panel panel-left panel-cover panel-resizable">
+      <div class="page">
+        <div class="page-content">
+          <div class="block-title" style="text-align: center;"><img src="img/logo.png" width="60px" /><br /><br />Ver. 6.9.1</div>
+            <div class="list">
+            <ul>
+
+            <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title"><a href="#" onclick="ptrpro();">Actualizar datos</a></div>
+                    <div class="item-after"><span id="processclick" class="99badge99" hidden="true">0%</span></div>
+                  </div>
+                </div>
+            </li>
+            <li>
+              <div>
+                <center>
+                  <span style="color: #a1a1a1; font-size: 12px; text-align: right;">Ultima actualizacion de datos: </span>
+                  <br>
+                  <span id="Fecha" name="Fecha" style="color: red; font-weight: bold; font-size: 12px; text-align: right;">Sus datos no estan actualizados</span>
+                </center>
+              </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><a href="/admonproyectos/" class="panel-close" >Administraci&oacute;n de proyectos</a></div>
+                    </div>
+                </div>
+            </li>
+
+            <div class="item-content">
+                <div class="item-inner">
+                    <div class="item-title"><a href="/continuarc/" class="panel-close" >Continuar cédula</a></div>
+                    <div class="item-after"><span class="badge" id="contce">0</span></div>
+                    <input type="hidden" id="tvic" name="tvic"   />
+                    <input type="hidden" id="tapoyo" name="tapoyo"  />
+                    <input type="hidden" id="tventas" name="tventas"  />
+                    <input type="hidden" id="tauditoria" name="tauditoria"  />
+                </div>
+            </div>
+            </li>
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="/bandeja/" class="panel-close">Bandeja de salida</a></div>
+                <div class="item-after"><span id="contceb" class="badge">0</span></div>
+                <input type="hidden" id="tvic1" name="tvic"   />
+                <input type="hidden" id="tapoyo1" name="tapoyo"  />
+                 <input type="hidden" id="tventas1" name="tventas"  />
+                 <input type="hidden" id="tauditoria1" name="tauditoria"  />
+                </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="#" onclick="logaout();">Cerrar sesión</a></div>
+                </div>
+                </div>
+            </li>
+            </ul>
+            </div>
+            <br> <br> <br>
+            <center>
+                <span style="color: #a1a1a1;">Bienvenido</span><br>
+                <span id="NombreUsuario" name="NombreUsuario" style="color: #a1a1a1; font-weight: bold;"></span>
+            </center>
+        </div>
+      </div>
+    </div>
+    <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="800" data-url="/">
+      <div class="page">
+        <div class="navbar">
+         <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons if-not-md">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+              </a>
+            </div>
+            <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup=".demo-popup-menu" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+                    </a>
+                </div>
+
+          </div>
+        </div>
+        <div class="popup demo-popup-menu">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="title" style="color: #a1a1a1">Ayuda</div>
+                <div class="right"><a href="#" class="link popup-close">Close</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="block">
+
+                <style type="text/css">
+                  h2 {color: #222; text-align: center;}
+                  .all {font-size: 10pt;color: #222; }
+                  ul {list-style-type: circle;}
+                </style>
+                <center>
+                    <span style="color:#00008B; font-size: 20pt"><strong>Menu</strong></span>
+                </center>
+                <hr width="90%">
+                <span class="all">
+                    <span>
+                        <center><font color="#a90000"><strong>RECUERDA<br>No te olvides de las pantallas de "Ayuda" contienen varios tips o dudas resueltas.</strong></font></center>
+                    </span><br>
+                    <span>
+                        <font color="#a90000"><strong>¿Que sucede si no me cargan los clientes?</strong></font><br />
+                        Recuerda que al <strong>actualizar</strong> o <strong>Instalar</strong> de play store, debes <font color="#1e90ff"><strong>volver a actualizar tus datos</strong></font>, para ello existen dos formas:
+                        <br>
+                        <strong>&nbsp; &nbsp; &nbsp; &nbsp;1.-</strong> En el menu de las tres rayas.<br />
+                        <strong>&nbsp; &nbsp; &nbsp; &nbsp;2.-</strong> deslizando hacia a bajo en la pantalla de menu.<br />
+                        <center><img src="img/ayuda/tresRayas.png" width="40%"> &nbsp; &nbsp; <img src="img/ayuda/bajarMenu.png" width="40%"s></center>
+                    </span><br />
+
+                    <span>
+                        <font color="#a90000"><strong>¿Que sucede si no existe mi cliente?</strong></font>
+                    </span>
+                        <ul>
+                            <li>Si el cliente no esta cargado, podrás colocar el cliente<font color="#1e90ff"><strong> 10,000 </strong></font> que se tomara como una visita extraordinaria.<br>
+                                <font color="#a90000"><strong>Nota:</strong></font> Dar aviso a TIC para que se te vea reflejado en tu programa de visitas.
+                            </li><br>
+
+                            <center><img src="img/ayuda/cliente10000.png" width="70%" style="border: 1px solid;"></center><br>
+                            <li>Dar aviso a soporte de VIC en TIC para que se te de solución.</li>
+                        </ul>
+
+
+
+                    <!--
+                       <li>Se tienen cuatro botones donde <font color="#1e90ff"><strong>por el momento</strong>    </font> solo funcionan los dos primeros <strong>Programa de visitas</strong> e <strong>Historial de visitas</strong>.
+                            <center><img src="img/ayuda/programa.png" width="15%">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="img/ayuda/historial.png" width="15%" ></center>
+                        </li>
+                    -->
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="page-content ptr-content">
+        <div class="ptr-preloader color-red">
+            <br /><br /><br /><div id="process" style="text-align: center; color: #FF0000; font-weight: bold; background-color:#FFFFFF;" hidden="true">0%</div>
+            <div class="preloader color-red"></div>
+            <div class="ptr-arrow"></div>
+        </div>
+
+            <center><h2 style="color:#000;">Visita de Impacto al Cliente</h2></center>
+            <hr>
+            <center>
+              <span style="color: #a1a1a1; font-size: 12px; text-align: right;">Ultima actualizacion de datos: </span>
+              <br>
+              <span id="Fecha2" name="Fecha2" style="color: red; font-weight: bold; font-size: 12px; text-align: right;">Sus datos no estan actualizados</span>
+            </center>
+            <div>
+                <center>
+                    <a class="item-content item-link" href="#" onclick="openVerticalButtons();"  style="text-decoration: none;" ><img src="img/NewDesingMenuVIC/cuadroRojoButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/excel/"><img src="img/NewDesingMenuVIC/cuadroAzulButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/pdfs/" style="text-decoration: none;" ><img src="img/NewDesingMenuVIC/cuadroCafeButton.png" width="100%"></a>
+                    <!--<a class="item-content item-link" href="/PRUEBAS/" style="text-decoration: none;" ><img src="img/NewDesingMenuVIC/cuadroVerdeButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/consultaventas/"><img src="img/NewDesingMenuVIC/cuadroNaranjaButton.png" width="100%"></a>-->
+                    <a class="item-content item-link" href="/tablerocalificaciones/"><img src="img/NewDesingMenuVIC/cuadroMoradoButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/tablaventa/" onclick="horizontal();" style="text-decoration: none;"><img src="img/NewDesingMenuVIC/cuadroAmarilloButton.png" width="100%"></a>
+                    <!--<a class="item-content item-link" href="/construccion/" style="text-decoration: none;"><img src="img/NewDesingMenuVIC/cuadroVerdeFuerteButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/construccion/" style="text-decoration: none;"><img src="img/NewDesingMenuVIC/cuadroAquaButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/construccion/" style="text-decoration: none;"><img src="img/NewDesingMenuVIC/cuadroCoralButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/construccion/" style="text-decoration: none;"><img src="img/NewDesingMenuVIC/cuadroRosaButton.png" width="100%"></a>-->
+                </center>
+            </div>
+            </div>
+        </div> <!-- PAGE CONTENT -->
+            </div>
+            </div>
+            </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="lib/framework7/js/framework7.bundle.min.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/signature/modernizr.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/metodos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/signature/jSignature.min.noconflict.js"></script>
+    <script src="js/SimpleStarRating.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+      var pictureSource;   // picture source
+      var destinationType; // sets the format of returned value
+
+      //Activar el escucha
+      document.addEventListener("deviceready",onDeviceReady,false);
+
+      //GPS Activated
+      document.addEventListener('deviceready',function(){
+        //BackgroundMode :)
+        cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.',silent: true, hidden: true});
+        cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.onactivate = function () {
+          setTimeout(function () {
+            cordova.plugins.backgroundMode.configure({
+              text:'Running in background for more than 5s now.',
+              silent: true,
+              hidden: true
+            });
+          }, 5000);
+      }
+        
+
+        //Verificar GPS
+        cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+          console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
+          if(enabled == true){
+
+          }else{
+              app.dialog.alert('Favor de encender tu GPS.','Aviso!');
+          }
+        },function(error){
+            console.error("The following error occurred: "+error);
+        });
+
+      }, false);
+
+
+
+      function onDeviceReady() {
+          pictureSource=navigator.camera.PictureSourceType;
+          destinationType=navigator.camera.DestinationType;
+          cordova.plugins.backgroundMode.disable();
+      }
+      // Called when a photo is successfully retrieved
+      //
+      function onPhotoDataSuccess(imageData) {
+        // Uncomment to view the base64-encoded image data
+        // console.log(imageData);un
+        // Get image handle
+        //
+        var smallImage = document.getElementById('smallImage');
+        // Unhide image elements
+        //
+        smallImage.style.display = 'block';
+        // Show the captured photo
+        // The in-line CSS rules are used to resize the image
+        //
+        var nameima = "data:image/jpeg;base64," + imageData;
+        smallImage.src = "data:image/jpeg;base64," + imageData;
+
+        $("#imagenC").val(nameima); //modificacion 26 de mayo
+      }
+      // Called when a photo is successfully retrieved
+      //
+      function onPhotoURISuccess(imageURI) {
+        // Uncomment to view the image file URI
+        // console.log(imageURI);
+        // Get image handle
+        //
+        var largeImage = document.getElementById('largeImage');
+        // Unhide image elements
+        //
+        largeImage.style.display = 'block';
+        // Show the captured photo
+        // The in-line CSS rules are used to resize the image
+        //
+        largeImage.src = imageURI;
+       // alert(largeImage); ///coloque este el 25 de mayo
+
+      }
+      // A button will call this function
+      //
+      function prueba(cont2, total){
+        $("#Foto").val(cont2);
+        $("#total").val(total);
+
+        var total = total;
+        var valor = cont2;
+        var gg = capturePhotoAuditoria(valor,total);
+
+        function capturePhotoAuditoria(cont2, total) {
+                    
+                    navigator.camera.getPicture(onPhotoDataSuccess2, onFail, { quality: 50,
+                      destinationType: destinationType.DATA_URL,
+                      targetWidth: 300, targetHeight: 300 });
+                  }
+
+        function onPhotoDataSuccess2(imageData) {
+          
+          
+          //alert(valor);
+          //alert(total);
+
+          var smallImage = document.getElementById('smallImage'+valor);
+          //alert(smallImage);
+          smallImage.style.display = 'block';
+          var nameima = "data:image/jpeg;base64," + imageData;
+          smallImage.src = "data:image/jpeg;base64," + imageData;
+          $("#imagenC").val(nameima);
+
+          //a partir de aqui aqui guardas la foto al momento de que la tomas
+          /*
+          var fd = new FormData();
+          fd.append("valor", valor);
+          fd.append("imageData", imageData);
+          alert("holaa");
+          $.ajax({
+              type: "POST",
+              url: "http://www.appbennetts.com/VIC/ProcesosVIC7/guarda_foto.php",
+              data: fd,
+              processData: false,  // tell jQuery not to process the data
+              contentType: false ,
+              DataType : 'json'
+              ,success: function(data){ 
+                alert(data);
+                 
+              }
+          });
+          */
+            
+        }
+
+
+            }
+
+
+
+
+      function capturePhoto() {
+        // Take picture using device camera and retrieve image as base64-encoded string
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+          destinationType: destinationType.DATA_URL,
+          targetWidth: 300, targetHeight: 300 });
+      }
+      // A button will call this function
+      //
+      function capturePhotoEdit() {
+        // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+          destinationType: destinationType.DATA_URL });
+      }
+      // A button will call this function
+      //
+      function getPhoto(source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+          destinationType: destinationType.FILE_URI,
+          sourceType: source });
+      }
+      // Called if something bad happens.
+      //
+      function onFail(message) {
+        //app.dialog.alert('Error' + message, 'Error!');
+        alert("Failed because: "+message);
+      }
+
+      </script>
+
+      <script type="text/javascript">
+        
+      </script>
+
+
+      <script>
+        //PTR en Click
+      function ptrpro() {
+          $("#processclick").show();
+          $("#processclick").removeClass('99badge99');
+          $("#processclick").addClass('badge');
+
+          downloader.init({folder: "jsons", unzip: true});
+          downloader.get("http://www.appbennetts.com/VIC/ProcesosVIC7/jsons.zip");
+          document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+              var data = event.data;
+              console.log('Proceso', data);
+              $("#processclick").html(data[0] + "%");
+              if(data[0] == 100){
+                  app.ptr.done();
+                  var fecha = new Date();
+                  var fFinal = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+                  var RFC = "123456789";
+                  databaseHandler.db.transaction(
+                      function(tx5){
+                          tx5.executeSql(
+                              "INSERT INTO Actualizaciones (IdUsuario, Fecha, RFC) VALUES (?,?,?)",
+                              [IdUsuario, fFinal, RFC],
+                              function(tx5, results){
+                                  databaseHandler.db.transaction(
+                                      function(tx5){
+                                          tx5.executeSql(
+                                              "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                              [],
+                                              function(tx5, results){
+                                                  var length = results.rows.length;
+                                                  var item1 = results.rows.item(0);
+                                                  $("#Fecha").html(item1.Fecha);
+                                                  $("#Fecha2").html(item1.Fecha);
+                                                  $("#Fecha").css("color","#1e90ff");
+                                                  $("#Fecha2").css("color","#1e90ff");
+                                              }
+                                          );
+                                      },
+                                      function(error){},
+                                      function(){}
+                                  );
+                              }
+                          );
+                      },
+                      function(error){},
+                      function(){}
+                  );
+                  $("#processclick").html("Actualizados");
+
+                  downloader.abort();
+              }
+          });
+          document.addEventListener('DOWNLOADER_downloadError', function(event){
+              var data = event.data;
+              console.log('Proceso', data);
+                  app.ptr.done();
+                  $("#processclick").hide();
+                  app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+                  downloader.abort();
+          });
+          document.addEventListener('downloadSuccess', function(event){
+              var data = event.data;
+              console.log('Proceso', data);
+                  app.ptr.done();
+                  $("#processclick").html("Actualizados");
+                  downloader.abort();
+          });
+      }
+      // PTR en pantalla
+      var $ptrContent = $('.ptr-content');
+      $ptrContent.on('ptr:refresh', function (e) {
+        $("#process").show();
+        setTimeout(function () {
+            downloader.init({folder: "jsons", unzip: true});
+            downloader.get("http://www.appbennetts.com/VIC/ProcesosVIC7/jsons.zip");
+            document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+                var data = event.data;
+                console.log('Proceso', data);
+                $("#process").html(data[0] + "%");
+                if(data[0] == 100){
+                    app.ptr.done();
+                    var fecha = new Date();
+                    var fFinal = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+                    var RFC ="123456789";
+                    databaseHandler.db.transaction(
+                      function(tx5){
+                          tx5.executeSql(
+                              "INSERT INTO Actualizaciones (IdUsuario, Fecha, RFC) VALUES (?,?,?)",
+                              [IdUsuario,fFinal,RFC],
+                              function(tx5, results){
+                                  databaseHandler.db.transaction(
+                                      function(tx5){
+                                          tx5.executeSql(
+                                              "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                              [],
+                                              function(tx5, results){
+                                                  var length = results.rows.length;
+                                                  var item1 = results.rows.item(0);
+                                                  $("#Fecha").html(item1.Fecha);
+                                                  $("#Fecha2").html(item1.Fecha);
+                                                  $("#Fecha").css("color","#1e90ff");
+                                                  $("#Fecha2").css("color","#1e90ff");
+                                              }
+                                          );
+                                      },
+                                      function(error){},
+                                      function(){}
+                                  );
+                              }
+                          );
+                      },
+                      function(error){},
+                      function(){}
+                  );
+                    $("#process").hide();
+                    downloader.abort();
+                }
+            });
+            document.addEventListener('DOWNLOADER_downloadError', function(event){
+                var data = event.data;
+                console.log('Proceso', data);
+                    app.ptr.done();
+                    $("#process").hide();
+                    app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+                    downloader.abort();
+            })
+            document.addEventListener('downloadSuccess', function(event){
+                var data = event.data;
+                console.log('Proceso', data);
+                    app.ptr.done();
+                    $("#process").hide();
+                    downloader.abort();
+            });
+        }, 100);
+    });
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+      // Valida conexión
+      document.addEventListener("online", onOnline, false);
+      function onOnline() {
+          EnviarCedulas();
+      }
+       setInterval(function(){
+        onOnline();
+       },120000);
+
+      function EnviarCedulas(){
+            databaseHandler.db.transaction(
+              function(tx4){
+                tx4.executeSql("SELECT c.IdCte, c.IdCedula FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.envio = 1 OR ci.envio = 2) LIMIT 1",[IdUsuario],
+                function(tx4, results){
+                  var length = results.rows.length;
+                  for(var i = 0; i< length; i++){
+                    var item2 = results.rows.item(i);
+                    databaseHandler.db.transaction(
+                      function(tx7){
+                        tx7.executeSql("UPDATE cierre SET envio = 2 WHERE IdCedula = ?", [item2.IdCedula],
+                          function(tx7, results){
+                            //alert("LISTO");
+                          }
+                        );
+                      }
+                    );
+                    llevarTodo(item2.IdCte, item2.IdCedula);
+                  }
+                },
+                function(tx4, error){
+                   console.log("Error al guardar registro: " + error.message);
+                }
+              );
+            },
+            function(error){},
+            function(){}
+          );
+          //Apoyo
+          databaseHandler.db.transaction(
+            function(tx4){
+              tx4.executeSql("SELECT c.IdCte, c.IdCedulaSeg FROM CedulaSeg as c WHERE c.IdUsuario = ? AND (c.envio = 1 OR c.envio = 2) LIMIT 1",[IdUsuario],
+                function(tx4, results){
+                  var length = results.rows.length;
+                  for(var i = 0; i< length; i++){
+                    var item2 = results.rows.item(i);
+                    databaseHandler.db.transaction(
+                      function(tx7){
+                        tx7.executeSql("UPDATE CedulaSeg SET envio = 2 WHERE IdCedulaSeg = ?",[item2.IdCedulaSeg],
+                          function(tx7, results){
+                          }
+                        );
+                      }
+                    );
+                    llevarTodoSeg(item2.IdCte, item2.IdCedulaSeg);
+                  }
+                },
+                function(tx4, error){
+                  console.log("Error al guardar registro: " + error.message);
+                }
+              );
+            },
+            function(error){},
+            function(){}
+          );
+          //Ventas
+          databaseHandler.db.transaction(
+            function(tx4){
+              tx4.executeSql("SELECT c.IdProyecto, c.IdCedulaV FROM VisitasVentas as c WHERE c.IdUsuario = ? AND (c.envio = 1 OR c.envio = 2) LIMIT 1",[IdUsuario],
+                function(tx4, results){
+                  var length = results.rows.length;
+                  for(var i = 0; i< length; i++){
+                    var item2 = results.rows.item(i);
+                    databaseHandler.db.transaction(
+                      function(tx7){
+                        tx7.executeSql("UPDATE VisitasVentas SET envio = 2 WHERE IdCedulaV = ?",[item2.IdCedulaV],
+                          function(tx7, results){
+                          }
+                        );
+                      }
+                    );
+                    llevarVentaTotal(item2.IdProyecto, item2.IdCedulaV);
+                  }
+                },
+                function(tx4, error){
+                  console.log("Error al guardar registro: " + error.message);
+                }
+              );
+            },
+            function(error){},
+            function(){}
+          );
+          //Auditoria
+          databaseHandler.db.transaction(
+            function(tx4){
+              tx4.executeSql("SELECT IdCedulaA FROM RegistroAuditorias as c WHERE c.IdUsuario = ? AND (c.envio = 1 OR c.envio = 2) LIMIT 1",[IdUsuario],
+                function(tx4, results){
+                  var length = results.rows.length;
+                  for(var i = 0; i< length; i++){
+                    var item2 = results.rows.item(i);
+                    databaseHandler.db.transaction(
+                      function(tx7){
+                        tx7.executeSql("UPDATE RegistroAuditorias SET envio = 2 WHERE IdCedulaA= ?",[item2.IdCedulaA],
+                          function(tx7, results){
+                          }
+                        );
+                      }
+                    );
+                    llevarAuditoriaTotal(item2.IdCedulaA);
+                  }
+                },
+                function(tx4, error){
+                  console.log("Error al guardar registro: " + error.message);
+                }
+              );
+            },
+            function(error){},
+            function(){}
+          );
+      }
+
+
+      //-------------------------------------------------------(INICIO) FUNCIONES PARA LLEVAR---------------------------------------------
+        function llevarTodo(idcte, idcedula){
+          var coche        = new Array();
+          var datosce      = new Array();
+          var datos        = new Array();
+          var datos1       = new Array();
+          var datosen      = new Array();
+          var datosal      = new Array();
+          var datospe      = new Array();
+          var datospn      = new Array();
+          var datosci      = new Array();
+          var datosop      = new Array();
+          var datosAct     = new Array();
+          var datosCues    = new Array();
+
+          var datosResumen = new Array();
+
+          var ce  = 0;
+          var c   = 0;
+          var F   = 0;
+          var en  = 0;
+          var al  = 0;
+          var pe  = 0;
+          var pn  = 0;
+          var ci  = 0;
+          var op  = 0;
+          var Act = 0;
+          var Cues = 0;
+          var res = 0;
+
+          var fecha = new Date();
+          var Anio = fecha.getFullYear();
+          var Mes = fecha.getMonth();
+
+          databaseHandler.db.transaction(
+          function(tx){
+            tx.executeSql("SELECT * FROM Cedula INNER JOIN Clientes ON Cedula.IdCte = Clientes.IdCte WHERE Cedula.IdCedula = ?",[idcedula],
+            function(tx, results){
+              //alert("Entro a Enviar en automatico el AR");
+              var length = results.rows.length;
+              for(var i = 0; i< length; i++){
+                var item1 = results.rows.item(i);
+                datosce[ce] = {'Valor':ce,'IdCedula':item1.IdCed,'IdUsuario':item1.IdUsuario,'IdCte':item1.IdCte,'FechaCaptura':item1.FechaCaptura,'Imagen':item1.Imagen,'geolocation': item1.geolocation,'NomComercial': item1.NomComercial,'NomContacto': item1.NomContacto,'Telefono': item1.Telefono,'Email': item1.Email,'Cliente':item1.Cliente,'TipoT':'1'};
+                ce++;
+              }
+
+              databaseHandler.db.transaction(
+                function(tx2){
+                  tx2.executeSql("SELECT * FROM ced_equipos WHERE IdCedula = ?",[idcedula],
+                    function(tx2, results){
+                     var form_dataE = new FormData();
+                     var length = results.rows.length;
+                     var vEqu = 0;
+                      for(var i = 0; i< length; i++){
+                          var item3 = results.rows.item(i);
+                          datos[c] = {'Valor':c, 'IdCedula': item3.IdCed, 'IdPrd': item3.IdPrd, 'Cantidad':item3.Cantidad,'Ubicacion': item3.Ubicacion,'ImgPrd':item3.ImgPrd,'Comentario':item3.Comentario,'Tickets':item3.Tickets,'FechaRegistro':item3.FechaRegistro,'checkBox':item3.checkBox,'TipoT': '2'};
+                          c++;
+                          vEqu++;
+                      }
+                      databaseHandler.db.transaction(
+                        function(tx){
+                          tx.executeSql("SELECT * FROM imagen WHERE IdCedula = ?",[idcedula],
+                            function(tx, results){
+                              var length = results.rows.length;
+                              for(var i = 0; i< length; i++){
+                                var item4 = results.rows.item(i);
+                                //datos1[F] = {'Valor':F,'Ubicacion':item3.Ubicacion, 'Cantidad': item3.Cantidad, 'img': item3.IdCedula, 'TipoT': '2'};
+                                datos1[F] = {'Valor':F,'IdCedula': item4.IdCed,'IdTipoImagen': item4.IdTipoImagen,'Cantidad': item4.Cantidad,'Ubicacion': item4.Ubicacion,'Comentario': item4.Comentario,'FotoImagen': item4.FotoImagen,'checkBox': item4.checkBox,'TipoT': '3'};
+                                F++;
+                              }
+                              databaseHandler.db.transaction(
+                                function(tx){
+                                  tx.executeSql("SELECT * FROM entrenamiento WHERE IdCedula = ?",[idcedula],
+                                    function(tx, results){
+                                      var length = results.rows.length;
+                                      for(var i = 0; i< length; i++){
+                                        var item4 = results.rows.item(i);
+                                        datosen[en] = {'Valor':en,'IdCedula': item4.IdCed,'PersonaCapacitada': item4.PersonaCapacitada,'TemaCapacitacion': item4.TemaCapacitacion,'Comentario': item4.Comentario,'ImagenFirma': item4.ImagenFirma,'Puesto': item4.Puesto,'TipoT': '4'};
+                                        en++;
+                                      }
+                                      databaseHandler.db.transaction(
+                                        function(tx){
+                                          tx.executeSql("SELECT * FROM tomaInventario WHERE IdCedula = ?",[idcedula],
+                                            function(tx, results){
+                                              var length = results.rows.length;
+                                              for(var i = 0; i< length; i++){
+                                                var item4 = results.rows.item(i);
+                                                 datosal[al] = {'Valor':al,'IdCedula': item4.IdCed,'ImgAlmacen': item4.ImgAlmacen,'Observaciones': item4.Observaciones,'TipoT': '5'};
+                                                 al++;
+                                              }
+                                              databaseHandler.db.transaction(
+                                                function(tx){
+                                                  tx.executeSql("SELECT * FROM pedido WHERE IdCedula = ?",[idcedula],
+                                                    function(tx, results){
+                                                      var length = results.rows.length;
+                                                      for(var i = 0; i< length; i++){
+                                                        var item4 = results.rows.item(i);
+                                                        datospe[pe] = {'Valor':pe,'IdCedula': item4.IdCed,'IdCte':item4.IdCte,'IdPrd': item4.IdPrd,'Descripcion':item4.Descripcion,'Inventario': item4.Inventario,'CanSolicitada':item4.CanSolicitada,'Identificador':item4.Identificador,'Observaciones':item4.Observaciones,'Comentario': item4.Comentario,'TipoT': '6'};
+                                                        pe++;
+                                                      }
+                                                      databaseHandler.db.transaction(
+                                                        function(tx){
+                                                          tx.executeSql("SELECT * FROM prodnvos WHERE IdCedula = ?",[idcedula],
+                                                            function(tx, results){
+                                                              var length = results.rows.length;
+                                                              for(var i = 0; i< length; i++){
+                                                                var item4 = results.rows.item(i);
+                                                                 datospn[pn] = {'Valor':pn,'IdCedula': item4.IdCed,'IdPrd': item4.IdPrd,'Uso':item4.Uso,'Productos': item4.Producto,'Descripcion':item4.Descripcion,'Alta':item4.Alta,'Media':item4.Media,'Baja':item4.Baja,'UsoDirecto':item4.UsoDirecto,'TipoT': '7'};
+                                                                 pn++;
+                                                              }
+                                                              databaseHandler.db.transaction(
+                                                                function(tx){
+                                                                  tx.executeSql("SELECT * FROM cierre WHERE IdCedula = ?",[idcedula],
+                                                                    function(tx, results){
+                                                                      var length = results.rows.length;
+
+                                                                      for(var i = 0; i< length; i++){
+                                                                        var item4 = results.rows.item(i);
+                                                                        datosci[ci] = {'Valor':ci,'IdCedula': item4.IdCed,'eval': item4.eval,'cfirma':item4.cfirma,'geolocalizacion': item4.geolocalizacion,'Solestado':item4.Solestado,'coment':item4.coment,'fcierre':item4.fcierre,'envio':item4.envio,'TipoT': '8', 'FechaCierre': item4.FechaCierre, 'NombreFirma': item4.NombreFirma, 'NombreCuenta': item4.NombreCuenta, 'CorreoCuenta': item4.CorreoCuenta};
+                                                                        ci++;
+                                                                       }
+                                                                       databaseHandler.db.transaction(
+                                                                        function(tx){
+                                                                          tx.executeSql("SELECT * FROM ObservacionesPedido WHERE IdCedula = ?",[idcedula],
+                                                                            function(tx, results){
+                                                                              var length = results.rows.length;
+                                                                              for(var i = 0; i< length; i++){
+                                                                                var item4 = results.rows.item(i);
+                                                                                 datosop[op] = {'Valor':op,'IdCedula': item4.IdCed,'Observaciones':item4.Observaciones,'TipoT': '9'};
+                                                                                 op++;
+                                                                              }
+                                                                              databaseHandler.db.transaction(
+                                                                                function(tx){
+                                                                                  tx.executeSql("SELECT IdUsuario, Fecha, RFC FROM Actualizaciones ORDER BY IdActualizacion DESC LIMIT 1",[],
+                                                                                    function(tx, results){
+                                                                                      var length = results.rows.length;
+                                                                                      for(var i = 0; i< length; i++){
+                                                                                        var item4 = results.rows.item(i);
+                                                                                         datosAct[Act] = {'Valor':Act,'IdUsuario': item4.IdUsuario,'Fecha':item4.Fecha,'RFC':item4.RFC,'TipoT': '10'};
+                                                                                         Act++;
+                                                                                      }
+                                                                                      databaseHandler.db.transaction(
+                                                                                        function(tx){
+                                                                                          tx.executeSql("SELECT * FROM Cuestionarios WHERE IdCedula = ?",[idcedula],
+                                                                                            function(tx, results){
+                                                                                              var length = results.rows.length;
+                                                                                              for(var i = 0; i< length; i++){
+                                                                                                var item4 = results.rows.item(i);
+                                                                                                 datosCues[Cues] = {'Valor':Cues,'IdCedula': item4.IdCedula,'IdCte':item4.IdCte,'IdPregunta':item4.IdPregunta,'Checkbox':item4.Checkbox,'Texto':item4.Texto,'NivelRiesgo':item4.NivelRiesgo,'IdCuestionario':item4.IdCuestionario,'Division':item4.Division,'Evidencia':item4.Evidencia,'TipoT': '10'};
+                                                                                                 Cues++;
+                                                                                              }
+                                                                                              $.ajax({
+                                                                                                type: "POST",
+                                                                                                async : true,
+                                                                                                url: "http://www.appbennetts.com/VIC/ProcesosVIC7/GuardarVIC8.php",
+                                                                                                dataType: 'html',
+                                                                                                data: {'arrayce': JSON.stringify(datosce),'array': JSON.stringify(datos), 'array1': JSON.stringify(datos1),'arrayen': JSON.stringify(datosen),'arrayal': JSON.stringify(datosal),'arraype': JSON.stringify(datospe),'arraypn': JSON.stringify(datospn),'arrayci': JSON.stringify(datosci),'arrayop': JSON.stringify(datosop),'arrayAct':JSON.stringify(datosAct),'arrayCues': JSON.stringify(datosCues)},
+                                                                                                success: function(respuesta){
+                                                                                                  
+                                                                                                  var respu1 = respuesta.split("._.");
+                                                                                                  var dat1 = respu1[0];
+                                                                                                  var dat2 = respu1[1];
+                                                                                                  if(dat1 == "CEDULA"){
+                                                                                                    if(dat2 > 0){
+                                                                                                      databaseHandler.db.transaction(
+                                                                                                        function(tx7){
+                                                                                                          tx7.executeSql("UPDATE cierre SET envio = 3 WHERE IdCedula = ?",[idcedula],
+                                                                                                            function(tx7, results){
+                                                                                                            }
+                                                                                                          );
+                                                                                                        }
+                                                                                                      );
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                            });
+                                                                                            },
+                                                                                           function(tx, error){
+                                                                                             console.log("add client error: " + error.message);
+                                                                                             app.dialog.alert('Error al enviar..', 'Error');
+                                                                                             app.preloader.hide();
+                                                                                           }
+                                                                                          );
+                                                                                        },
+                                                                                        function(error){},
+                                                                                        function(){}
+                                                                                      );
+                                                                                      },
+                                                                                   function(tx, error){
+                                                                                     console.log("add client error: " + error.message);
+                                                                                     app.dialog.alert('Error al enviar..', 'Error');
+                                                                                     app.preloader.hide();
+                                                                                   }
+                                                                                  );
+                                                                                },
+                                                                                function(error){},
+                                                                                function(){}
+                                                                              );
+                                                                           },
+                                                                           function(tx, error){
+                                                                             console.log("add client error: " + error.message);
+                                                                             app.dialog.alert('Error al enviar..', 'Error');
+                                                                             app.preloader.hide();
+                                                                           }
+                                                                          );
+                                                                        },
+                                                                        function(error){},
+                                                                        function(){}
+                                                                      );
+                                                                    },
+                                                                    function(tx, error){
+                                                                      console.log("add client error: " + error.message);
+                                                                      app.dialog.alert('Error al enviar..', 'Error');
+                                                                      app.preloader.hide();
+                                                                    }
+                                                                  );
+                                                                },
+                                                                function(error){},
+                                                                function(){}
+                                                              );
+                                                            },
+                                                            function(tx, error){
+                                                              console.log("add client error: " + error.message);
+                                                              app.dialog.alert('Error al enviar..', 'Error');
+                                                              app.preloader.hide();
+                                                            }
+                                                          );
+                                                        },
+                                                        function(error){},
+                                                        function(){}
+                                                      );
+                                                    },
+                                                    function(tx, error){
+                                                      console.log("add client error: " + error.message);
+                                                      app.dialog.alert('Error al enviar..', 'Error');
+                                                      app.preloader.hide();
+                                                    }
+                                                  );
+                                                },
+                                                function(error){},
+                                                function(){}
+                                              );
+                                            },
+                                            function(tx, error){
+                                              console.log("add client error: " + error.message);
+                                              app.dialog.alert('Error al enviar..', 'Error');
+                                              app.preloader.hide();
+                                            }
+                                          );
+                                        },
+                                        function(error){},
+                                        function(){}
+                                      );
+                                    },
+                                    function(tx, error){
+                                      console.log("add client error: " + error.message);
+                                      app.dialog.alert('Error al enviar..', 'Error');
+                                      app.preloader.hide();
+                                    }
+                                  );
+                                },
+                                function(error){},
+                                function(){}
+                              );
+                             },
+                             function(tx, error){
+                              console.log("add client error: " + error.message);
+                              app.dialog.alert('Error al enviar..', 'Error');
+                              app.preloader.hide();
+                             }
+                            );
+                          },
+                          function(error){},
+                          function(){}
+                          );
+                          //alert(coche["Ubicacion"]);
+                        },
+                        function(tx, error){
+                          console.log("add client error: " + error.message);
+                          app.dialog.alert('Error al enviar..', 'Error');
+                          app.preloader.hide();
+                        }
+                      );
+                    },
+                    function(error){},
+                    function(){}
+                  );
+                },
+                function(tx, error){
+                  console.log("add client error: " + error.message);
+                  app.dialog.alert('Error al enviar..', 'Error');
+                  app.preloader.hide();
+                }
+              );
+            },
+            function(error){},
+            function(){}
+          );
+        }
+        //LLEVAR VENTA
+        function llevarVentaTotal(IdProyecto, IdCedulaV){
+          var datospros = new Array();
+          var datosproy = new Array();
+          var datosven = new Array();
+          var datosminu = new Array();
+          var pros = 0;
+          var proy = 0;
+          var ven = 0;
+          var minu = 0;
+          databaseHandler.db.transaction(
+            function(tx){
+              tx.executeSql("SELECT * FROM Prospectos WHERE IdProyecto = ? AND IdCedulaV = ? ;",[IdProyecto,IdCedulaV],
+                function(tx, results){
+                  //app.dialog.alert('Enviando. Puede continuar usando la aplicaci\u00f3n.', 'Aviso');
+                  var length = results.rows.length;
+                  for(var i = 0; i< length; i++){
+                    var item4 = results.rows.item(i);
+                    datospros[pros] = {'Valor':pros,'IdProyecto': item4.IdProyecto,'IdCedulaV': item4.IdCedulaV,'NombreRecibe':item4.NombreRecibe,'PuestoRecibe':item4.PuestoRecibe,'Telefono':item4.Telefono,'Correo':item4.Correo,'Actividades':item4.Actividades,'FirmaProspecto':item4.FirmaProspecto,'FotoProspecto':item4.FotoProspecto, 'ActividadesNum': item4.ActividadesNum};
+                    pros++;
+                  }
+                  databaseHandler.db.transaction(
+                    function(tx){
+                      tx.executeSql("SELECT * FROM Proyectos WHERE IdProyecto = ?;",[IdProyecto],
+                        function(tx, results){
+                          var length = results.rows.length;
+                          for(var i = 0; i< length; i++){
+                            var item5 = results.rows.item(i);
+                            datosproy[proy] = {'Valor':proy,'IdProyecto': item5.IdProyecto,'FechaCreacion': item5.FechaCreacion,'NombreProyecto':item5.NombreProyecto,'IdUsuario':item5.IdUsuario,'Estatus':item5.Estatus,'Potencial':item5.Potencial,'SegmentoProyecto':item5.SegmentoProyecto};
+                            proy++;
+                          }
+                          databaseHandler.db.transaction(
+                            function(tx){
+                              tx.executeSql("SELECT * FROM VisitasVentas WHERE IdCedulaV = ? AND IdProyecto = ?;",[IdCedulaV, IdProyecto],
+                                function(tx, results){
+                                  var length = results.rows.length;
+                                  for(var i = 0; i< length; i++){
+                                                          var item5 = results.rows.item(i);
+                                                           datosven[ven] = {'Valor':ven,'IdCedulaV':item5.IdCedulaV,'IdProyecto': item5.IdProyecto,'FechaVisita': item5.FechaVisita,'Imagen':item5.Imagen,'Geolocalizacion':item5.Geolocalizacion,'envio':item5.envio,'IdUsuario':item5.IdUsuario,'FechaCierre':item5.FechaCierre};
+                                                           ven++;
+                                                     }
+                                                     databaseHandler.db.transaction(
+                                                          function(tx){
+                                                              tx.executeSql(
+                                                                  "SELECT * FROM Minutas WHERE IdCedulaV = ? AND IdProyecto = ?;",
+                                                                  [IdCedulaV, IdProyecto],
+                                                                  function(tx, results){
+                                                                      var length = results.rows.length;
+
+                                                                      for(var i = 0; i< length; i++){
+                                                                          var item6 = results.rows.item(i);
+                                                                           datosminu[minu] = {'Valor':minu,'IdCedulaV':item6.IdCedulaV,'IdProyecto': item6.IdProyecto,'Tema': item6.Tema,'Compromiso':item6.Compromiso,'FechaMinuta':item6.FechaMinuta,'NumeroMinuta':item6.NumeroMinuta};
+                                                                           minu++;
+                                                                     }
+                                                                       $.ajax({
+                                                                          type: "POST",
+                                                                          async : true,
+                                                                          url: "http://www.appbennetts.com/VIC/ProcesosVIC7/GuardarVentas.php",
+                                                                          dataType: 'html',
+                                                                          data: {'arrayprospecto': JSON.stringify(datospros),'arrayproyectos': JSON.stringify(datosproy),'arrayventas': JSON.stringify(datosven),'arrayminutas': JSON.stringify(datosminu)},
+                                                                          success: function(respuesta){
+                                                                             //Cambiar el estatus
+                                                                                 // setTimeout(function(){
+                                                                                      databaseHandler.db.transaction(
+                                                                                          function(tx7){
+                                                                                              tx7.executeSql(
+                                                                                                  "UPDATE VisitasVentas SET envio = 3 WHERE IdCedulaV = ?",
+                                                                                                  [IdCedulaV],
+                                                                                                  function(tx7, results){
+
+                                                                                                  }
+                                                                                              );
+                                                                                          }
+                                                                                      );
+                                                                              //}, 3000);
+                                                                              //Fin de camiar el estatus
+                                                                          }
+                                                                      });
+                                                                      },
+                                                                  function(tx, error){
+                                                                  console.log("add client error: " + error.message);
+                                                                  app.dialog.alert('Error al enviar..', 'Error');
+                                                                  app.preloader.hide();
+                                                              }
+                                                          );
+                                                      },
+                                                      function(error){},
+                                                      function(){}
+                                                      );
+
+
+                                                  },
+                                                  function(tx, error){
+                                                  console.log("add client error: " + error.message);
+                                                  app.dialog.alert('Error al enviar..', 'Error');
+                                                  app.preloader.hide();
+                                              }
+                                          );
+                                      },
+                                      function(error){},
+                                      function(){}
+                                      );
+                                  },
+                                  function(tx, error){
+                                  console.log("add client error: " + error.message);
+                                  app.dialog.alert('Error al enviar..', 'Error');
+                                  app.preloader.hide();
+                              }
+                          );
+                      },
+                      function(error){},
+                      function(){}
+                      );
+                   },
+                  function(tx, error){
+                  console.log("add client error: " + error.message);
+                  app.dialog.alert('Error al enviar..', 'Error');
+                  app.preloader.hide();
+              }
+          );
+      },
+      function(error){},
+      function(){}
+      );
+  }
+
+  //LLEVAR APOYO
+  function llevarTodoSeg(cte, ced){
+      var datosce = new Array();
+      var datosseg = new Array();
+
+      var ce = 0;
+      var s = 0;
+      databaseHandler.db.transaction(
+          function(tx){
+              tx.executeSql(
+                  "SELECT * FROM CedulaSeg INNER JOIN Clientes ON CedulaSeg.IdCte = Clientes.IdCte WHERE CedulaSeg.IdCedulaSeg = ?",
+                  [ced],
+                  function(tx, results){
+                      var length = results.rows.length;
+                      for(var i = 0; i< length; i++){
+                          var item1 = results.rows.item(i);
+                           datosce[ce] = {'Valor':ce,'IdUsuario':item1.IdUsuario,'IdCte':item1.IdCte,'FechaCaptura':item1.FechaCaptura,'Imagen':item1.Imagen,'geolocation': item1.geolocation,'NomComercial': item1.NomComercial,'NomContacto': item1.NomContacto,'Telefono': item1.Telefono,'Email': item1.Email,'Cliente':item1.Cliente,'TipoT':'1', 'FechaCierre': item1.FechaCierre};
+
+                           ce++;
+                     }
+                     databaseHandler.db.transaction(
+                          function(tx){
+                              tx.executeSql(
+                                  "SELECT * FROM Seguimiento WHERE IdCedula = ?",
+                                  [ced],
+                                  function(tx, results){
+                                      var length = results.rows.length;
+                                      for(var i = 0; i< length; i++){
+                                          var item3 = results.rows.item(i);
+                                           datosseg[s] = {'Valor':s, 'IdCedula': item3.IdCed, 'IdTipoSeguimiento': item3.IdTipoSeguimiento, 'NumTipoSeg':item3.NumTipoSeg,'Otro': item3.Otro,'FotoS':item3.FotoS,'FirmaS':item3.FirmaS,'NombreFirma': item3.NombreFirma,'TipoT': '2', 'Comentario':item3.Comentario};
+
+                                           s++;
+                                     }
+                                      $.ajax({
+                                          type: "POST",
+                                          async : true,
+                                          url: "http://www.appbennetts.com/VIC/ProcesosVIC7/GuardarApoyo.php",
+                                          dataType: 'html',
+                                          data: {'arrayce': JSON.stringify(datosce),'arrayseg': JSON.stringify(datosseg)},
+                                          success: function(respuesta){
+
+                                              databaseHandler.db.transaction(
+                                                function(tx7){
+                                                    tx7.executeSql(
+                                                        "UPDATE CedulaSeg SET envio = 3 WHERE IdCedulaSeg = ?",
+                                                        [ced],
+                                                        function(tx7, results){
+
+                                                        }
+                                                    );
+                                                }
+                                              );
+
+                                          }
+                                      });
+
+                                      },
+                                  function(tx, error){
+                                      console.log("add client error: " + error.message);
+                                      app.dialog.alert('Error al enviar..', 'Error');
+                                      app.preloader.hide();
+                                  }
+                              );
+                          },
+                          function(error){},
+                          function(){}
+                      );
+                  },
+                  function(tx, error){
+                      console.log("add client error: " + error.message);
+                      app.dialog.alert('Error al enviar..', 'Error');
+                      app.preloader.hide();
+                  }
+              );
+          },
+          function(error){},
+          function(){}
+      );
+  }
+
+  //LLEVAR AUDITORIA
+  function llevarAuditoriaTotal(IdCedulaA){
+     app.dialog.alert(" Puede seguir usando la aplicacion","Enviando.");
+    databaseHandler.db.transaction(
+        function(tx7){
+            tx7.executeSql(
+                "UPDATE RegistroAuditorias SET envio = 2 WHERE IdCedulaA = ?",
+                [IdCedulaA],
+                function(tx7, results){
+
+                }
+            );
+        }
+    );
+    var datosRegistroA = new Array();
+    var datosAuditoria = new Array();
+    var dra = 0;
+    var da  = 0;
+
+
+    databaseHandler.db.transaction(
+        function(tx){
+            tx.executeSql(
+                "SELECT * FROM RegistroAuditorias WHERE IdCedulaA = ? ;",
+                [IdCedulaA],
+                function(tx, results){
+                    var length = results.rows.length;
+
+                    for(var i = 0; i< length; i++){
+                        var item4 = results.rows.item(i);
+                         datosRegistroA[dra] = {'Valor':dra,'FechaCreacion': item4.FechaCreacion,'IdUsuario': item4.IdUsuario,'IdCte':item4.IdCte,'Cliente':item4.Cliente,'Division':item4.Division,'Geolocalizacion':item4.Geolocalizacion,'envio':item4.envio,'FechaCierre':item4.FechaCierre,'NombreCierre':item4.NombreCierre,'ComentarioCierre':item4.ComentarioCierre,'FirmaCierre':item4.FirmaCierre};
+                         dra++;
+                   }
+                   databaseHandler.db.transaction(
+                        function(tx){
+                            tx.executeSql(
+                                "SELECT * FROM ResultAuditorias WHERE IdCedulaA = ?;",
+                                [IdCedulaA],
+                                function(tx, results){
+                                    var length = results.rows.length;
+
+                                    for(var i = 0; i< length; i++){
+                                        var item5 = results.rows.item(i);
+                                         datosAuditoria[da] = {'Valor':da,'IdCedulaA': item5.IdCedulaA,'IdAuditoria': item5.IdAuditoria,'IdSegmento':item5.IdSegmento,'IdPregunta':item5.IdPregunta,'CB':item5.CB,'Valor':item5.Valor,'Foto':item5.Foto,'Comentario':item5.Comentario};
+                                         da++;
+                                    }
+                                    $.ajax({
+                                        type: "POST",
+                                        async : true,
+                                        url: "http://www.appbennetts.com/VIC/ProcesosVIC7/GuardarAuditorias.php",
+                                        dataType: 'html',
+                                        data: {'arrayRegistroA': JSON.stringify(datosRegistroA),'arrayAuditoria': JSON.stringify(datosAuditoria)},
+                                        success: function(respuesta){
+                                            var respu1 = respuesta.split("._.");
+                                            var dat1 = respu1[0];
+                                            var dat2 = respu1[1];
+
+                                            if(dat1 == "CEDULA"){
+                                              if(dat2 > 0){
+                                                databaseHandler.db.transaction(
+                                                    function(tx7){
+                                                        tx7.executeSql(
+                                                            "UPDATE RegistroAuditorias SET envio = 3 WHERE IdCedulaA = ?",
+                                                            [IdCedulaA],
+                                                            function(tx7, results){
+                                                                
+
+                                                            }
+                                                        );
+                                                    }
+                                                );
+                                              }
+                                            }
+                                        }
+                                    });
+                                },
+                                function(tx, error){
+                                console.log("add client error: " + error.message);
+                                app.dialog.alert('Error al enviar..', 'Error');
+                                app.preloader.hide();
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                    );
+                 },
+                function(tx, error){
+                console.log("add client error: " + error.message);
+                app.dialog.alert('Error al enviar..', 'Error');
+                app.preloader.hide();
+            }
+        );
+    },
+    function(error){},
+    function(){}
+    );
+  }
+
+      //-------------------------------------------------------(FIN) FUNCIONES PARA LLEVAR---------------------------------------------
+
+      //Sin conexion
+      document.addEventListener("offline", onOffline, false);
+      function networkInfo() {
+       var networkState = navigator.connection.type;
+       var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+        alert("Connection type: "+ states[networkState]);
+        }
+        function onOffline() {
+          app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se enviaran o descargaran los datos.', 'Alerta!');
+        }
+
+
+
+$(document).ready(function(){
+        window.localStorage.removeItem("IdCedula");
+        window.localStorage.removeItem("IdCedulaSeg");
+        window.localStorage.removeItem("imagenC");
+        window.localStorage.removeItem("IdCedulaV");
+        window.localStorage.removeItem("IdProyecto");
+        window.localStorage.removeItem("IdCedulaA");
+
+        var IdCte = localStorage.getItem("IdCte");
+        var IdUsuario = localStorage.getItem("IdUsuario");
+        var Nombre = localStorage.getItem("Nombre");
+        var Apellidos = localStorage.getItem("Apellidos");
+
+        var nombreCompleto = Nombre + " " + Apellidos;
+        $("#NombreUsuario").html(nombreCompleto );
+
+        //creando tabla para Auditorias
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "CREATE TABLE RegistroAuditorias (IdCedulaA integer primary key, FechaCreacion text, IdUsuario integer, IdCte text, Cliente text, Division integer, Geolocalizacion text, envio integer, FechaCierre text, NombreCierre text, ComentarioCierre text, FirmaCierre blob)",
+                    [],
+                    function(tx5, results){
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+        
+        //creando tabla para Auditorias
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "CREATE TABLE ResultAuditorias (IdResultAuditorias primary key, IdCedulaA integer, IdAuditoria integer, IdSegmento integer, IdPregunta integer, CB text, Valor integer, Foto blob, Comentario text)",
+                    [],
+                    function(tx5, results){
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+
+
+
+        //creando tabla para actualizaciones
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "CREATE TABLE Cuestionarios (IdCuestionarios integer primary key, IdCedula integer,IdCte text, IdPregunta integer, Checkbox text,Texto text,NivelRiesgo text,IdCuestionario integer, Division integer, Evidencia blob)",
+                    [],
+                    function(tx5, results){
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+        //creando tabla para actualizaciones
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "CREATE TABLE Actualizaciones (idActualizacion integer primary key,IdUsuario integer, Fecha text)",
+                    [],
+                    function(tx5, results){
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+        //creando tabla para actualizaciones
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "ALTER TABLE Actualizaciones ADD COLUMN RFC text",
+                    [],
+                    function(tx5, results){
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                    [],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        var item1 = results.rows.item(0);
+                        $("#Fecha").html(item1.Fecha);
+                        $("#Fecha2").html(item1.Fecha);
+                        $("#Fecha").css("color","#1e90ff");
+                        $("#Fecha2").css("color","#1e90ff");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //VALIDAR ACTUALIZACION DEL DIA
+        
+        
+
+        //Lo ordenas a gusto.
+        // document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
+
+        databaseHandler.db.transaction(
+          function(tx5){
+              tx5.executeSql(
+                  "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                  [],
+                  function(tx5, results){
+                    //SQLite
+                      var length = results.rows.length;
+                      var item1  = results.rows.item(0);
+                      var tu     = item1.Fecha;
+                      var sep    = tu.split(' ');
+                      var sep2   = sep[0];
+                      var tu2    = sep2.split('-')
+                      var sy     = tu2[0];
+                      var sm     = tu2[1];
+                      var sd     = tu2[2];
+                    //Actual
+                      n =  new Date();
+                      y = n.getFullYear();
+                      m = n.getMonth() + 1;
+                      d = n.getDate();
+                      if(y == sy && m == sm && d == sd){
+                        
+                      }else{
+                        app.dialog.alert("Actualizando datos", "Aviso!");
+                        ptrpro();
+                      }
+                  }
+              );
+          },
+          function(error){},
+          function(){}
+        );
+
+
+    //VIC
+    setInterval(function(){
+       databaseHandler.db.transaction(
+        function(tx5){
+            tx5.executeSql(
+                "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.fcierre = '' OR ci.fcierre is NULL )",
+                [IdUsuario],
+                function(tx5, results){
+                  var length = results.rows.length;
+                  if(length > 0){
+                    setTimeout(function(){app.dialog.alert('Cuentas con cedulas "VIC" sin cerrar.', 'Aviso!'); },3000);
+                  }
+                }
+            );
+        },
+        function(error){},
+        function(){}
+      );
+      //APOYO
+      databaseHandler.db.transaction(
+        function(tx5){
+            tx5.executeSql(
+                "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND envio = 0",
+                [IdUsuario],
+                function(tx5, results){
+                  var length = results.rows.length;
+                  if(length > 0){
+                    setTimeout(function(){app.dialog.alert('Cuentas con cedulas "Apoyo" sin cerrar.', 'Aviso!'); },3000);
+                  }
+                }
+            );
+        },
+        function(error){},
+        function(){}
+      );
+      //ventas
+      databaseHandler.db.transaction(
+        function(tx5){
+            tx5.executeSql(
+                "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto, p.IdProyecto FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND c.envio = 0",
+                [IdUsuario],
+                function(tx5, results){
+                  var length = results.rows.length;
+                  if(length > 0){
+                    setTimeout(function(){app.dialog.alert('Cuentas con cedulas "Ventas" sin cerrar.', 'Aviso!'); },3000);
+                  }
+                }
+            );
+        },
+        function(error){},
+        function(){}
+      );
+    },900000);
+
+
+    //FIN cedulas sin continuarzzzzz
+
+
+        //CONTINUAR CEDULA TOTAL DE PENDIENTES
+        databaseHandler.db.transaction(
+            function(tx4){
+
+                tx4.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.fcierre = '' OR ci.fcierre is NULL )",
+                    [IdUsuario],
+                    function(tx4, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                            for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            $("#tvic").val(length);
+
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tvic").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        }
+
+
+                        //fin de cedula de seguimiento
+
+                    },
+                    function(tx4, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //Cedula de seguimiento
+            databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var lengtha = results.rows.length;
+                        if(lengtha > 0){
+                            for(var i = 0; i< lengtha; i++){
+                            var item3 = results.rows.item(i);
+                            $("#tapoyo").val(lengtha);
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tapoyo").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //cedula de ventas
+
+            databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND c.envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var lengtha = results.rows.length;
+                        if(lengtha > 0){
+                            for(var i = 0; i< lengtha; i++){
+                            var item3 = results.rows.item(i);
+                            $("#tventas").val(lengtha);
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tventas").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2)  + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+            //cedula de auditoria
+
+            databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT * FROM RegistroAuditorias ra  WHERE ra.IdUsuario = ? AND ra.envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var lengtha = results.rows.length;
+                        if(lengtha > 0){
+                            for(var i = 0; i< lengtha; i++){
+                            var item3 = results.rows.item(i);
+                            $("#tauditoria").val(lengtha);
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3)+ parseInt(t4);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tauditoria").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var t4 = $("#tauditoria").val();
+                            var totced =  parseInt(t1) + parseInt(t2)  + parseInt(t3) + parseInt(t4);
+                            $("#contce").html(totced);
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+
+        //fin cedula de visitas
+
+
+        //FIN DE CONTINUAR CEDULA
+         //TOTAL BANDEJA DE SALIDA
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.envio = 1 OR ci.envio = 2) ORDER BY ci.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            //$("#contceb").html(length);
+                            $("#tvic1").val(length);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+
+                            var totced1 =  parseInt(t11) + parseInt(t22)  + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+                        } else {
+                            $("#tvic1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+
+                            var totced1 =  parseInt(t11) + parseInt(t22)  + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND (envio = 1 or envio = 2)",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                           // $("#contceb").html(length);
+                            $("#tapoyo1").val(length);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+
+                        } else {
+                            $("#tapoyo1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //VENTAS
+
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto, p.IdProyecto FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND  (c.envio = 1 OR c.envio = 2) ORDER BY c.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                           // $("#contceb").html(length);
+                            $("#tventas1").val(length);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+
+                        } else {
+                            $("#tventas1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+
+        //cedula de auditoria
+
+            databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT * FROM RegistroAuditorias ra  WHERE ra.IdUsuario = ? AND  (ra.envio = 1 OR ra.envio = 2)",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var lengtha = results.rows.length;
+                        if(lengtha > 0){
+                            for(var i = 0; i< lengtha; i++){
+                            var item3 = results.rows.item(i);
+                            $("#tauditoria1").val(lengtha);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33)+ parseInt(t44);
+                            $("#contceb").html(totced1);
+                        } else {
+                            $("#tauditoria1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var t44 = $("#tauditoria1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33) + parseInt(t44);
+                            $("#contceb").html(totced1);
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+
+
+
+        //FIN DE BANDEJA DE SALIDA
+        EliminarRegistros(); //Este aplica para Cedula VIC
+        EliminarApoyoR();
+        EliminarVentas();
+        EliminarActualizacion();
+        });
+         function openVerticalButtons() {
+            app.dialog.create({
+                title: 'Tipo de visita',
+                    buttons: [
+                    {
+                        text: 'VIC',
+                    },
+                    {
+                        text: 'APOYO',
+                    },
+                    {
+                        text: 'VENTAS',
+                    },
+                    {
+                        text: 'AUDITORIA',
+                    },
+                    {
+                        text: '',
+                    },
+                     {
+                        text: 'Cerrar',
+                    },
+                ],
+                onClick: function (dialog, index) {
+                    if(index === 0){
+                         localStorage.setItem("Opcion", '1');
+
+                        app.views.main.router.navigate({ name: 'yallegue'});
+                    }
+                    else if(index === 1){
+                         localStorage.setItem("Opcion", '2');
+
+                        app.views.main.router.navigate({ name: 'yallegue'});
+
+                    }
+                    else if(index === 2){
+                         localStorage.setItem("Opcion", '3');
+
+                        app.views.main.router.navigate({ name: 'yalleguev'});
+
+                    }
+                    else if(index === 3){
+                        localStorage.setItem("Opcion", '4');
+                        app.views.main.router.navigate({ name: 'yallegueAuditoria'});
+                    } 
+                    else if(index === 4){
+                        window.location.href = "./menu.html";
+                    }
+                },
+                verticalButtons: true,
+            }).open();
+        }
+    </script>
+</body>
+</html>

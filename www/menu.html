@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Universidad Bennetts - Menu</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#2196f3" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:" />
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>-->
+    <script type="text/javascript" src="js/raphael-min.js"></script>
+    <link rel="stylesheet" href="lib/framework7/css/framework7.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/morris.css">
+    <link rel="stylesheet" href="css/app.css" />
+    <!--<link rel="apple-touch-icon" href="img/f7-icon-square.png" />-->
+    <link rel="icon" href="img/f7-icon.png" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/SimpleStarRating.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/databaseHandler.js"></script>
+    <script type="text/javascript" src="js/productHandler.js"></script>
+    <script type="text/javascript" src="js/in.js"></script>
+    <script type="text/javascript" src="js/morris.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-free/css/all.min.css">
+
+    <style type="text/css">
+
+
+	#signatureparent {
+		color:darkblue;
+		background-color:white;
+		padding:1px;
+	}
+
+	/*This is the div within which the signature canvas is fitted*/
+	#signature {
+		border: 2px groove aliceblue;
+		background-color:white;
+        border-radius: 1em;
+	}
+
+	/* Drawing the 'gripper' for touch-enabled devices */
+	html.touch #content {
+		float:left;
+		width:92%;
+	}
+	html.touch #scrollgrabber {
+		float:right;
+		width:4%;
+		margin-right:2%;
+		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
+	}
+	html.borderradius #scrollgrabber {
+		border-radius: 2em;
+	}
+    .big-blue{
+                color: #2E9AFE;
+                font-size: 40px;
+    }
+  .autocomplete-dropdown{
+    white-space: normal;
+    overflow: visible;
+    }
+  .item-title{
+    white-space: normal;
+    overflow: visible;
+    text-align: left;
+    }
+    hr {
+      border:none;
+      height: 20px;
+        width: 90%;
+        height: 50px;
+        margin-top: 0;
+        border-bottom: 1px solid #17202A;
+        box-shadow: 0 20px 20px -20px #2E9AFE;
+      margin: -50px auto 10px;
+    }
+</style>
+</head>
+<body>
+<div id="app">
+    <div class="statusbar"></div>
+    <div class="panel panel-left panel-cover panel-resizable">
+      <div class="page">
+        <div class="page-content">
+          <div class="block-title" style="text-align: center;">
+              <img src="img/logouni.png" width="120px" /><br /><br /><!--Ver. 7.4.2 -->Universidad Bennettss</div>
+            <div class="list">
+            <ul>
+            <li>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title"><a href="#" onclick="ptrpro();">Actualizar datos</a></div>
+                    <div class="item-after"><span id="processclick" class="99badge99" hidden="true">0%</span></div>
+                  </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="#" onclick="logaout();">Cerrar sesión</a></div>
+                </div>
+                </div>
+            </li>
+            </ul>
+            </div>
+            <br> <br> <br>
+            <center>
+                <span style="color: #a1a1a1;">Bienvenido</span><br>
+                <span id="NombreUsuario" name="NombreUsuario" style="color: #a1a1a1; font-weight: bold;"></span>
+            </center>
+        </div>
+      </div>
+    </div>
+    <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="800" data-url="/">
+      <div class="page">
+        <div class="navbar">
+         <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons if-not-md">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+              </a>
+            </div>
+            <div class="right" style="margin-right: 15px">
+                    <!-- <a href="#">
+                        <i class="fa fa-sync"></i>
+                    </a> -->
+                </div>
+          </div>
+        </div>
+        <div class="page-content ptr-content">
+        <div class="ptr-preloader color-red">
+            <br /><br /><br /><div id="process" style="text-align: center; color: #FF0000; font-weight: bold; background-color:#FFFFFF;" hidden="true">0%</div>
+            <div class="preloader color-red"></div>
+            <div class="ptr-arrow"></div>
+        </div>
+            <div>
+                <div id="progreso"></div>
+                </div>
+                <div class="block" id="menuPrincipal">
+                    <p>Listado de Cursos</p>
+                    <p class="row">
+                        <a href="/cursos/induccion/" class="col button button-large button-raised button-fill">Induccion</a>
+                        <a href="/cursos/operador/" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
+                    </p>
+                    <p class="row">
+                        <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
+                            <i class="far fa-question-circle"></i> Ayuda
+                        </a>
+                        <a class="col button dynamic-popup button-large button-raised button-fill"  href="#">Avisos</a>
+                    </p>
+                    <p class="row">
+                        <a class="col-50 button button-large button-raised button-fill color-green"  href="#">Supervisores</a>
+                    </p>
+                </div>
+                <div id="presentacion">
+                    <center>
+                        <div id="player"></div>
+                    </center>
+                </div>
+            </div>
+  <div class="login-screen">
+    <div class="view">
+      <div class="page">
+        <div class="page-content login-screen-content">
+            <a class="link login-screen-close" href="#"><i class="fa fa-times-circle" style="font-size: 18px"></i></a>
+              <div class="login-screen-title">Necesitas Ayuda?</div>
+            <div class="list">
+              <div class="block-footer">
+                    <p style="font-size: 17px">Centro de Ayuda</p>
+                    <!-- Close Popup -->
+                    <p>Buzon de Sugerencias: 5544472755</p>
+                    <p>Correo: admon.rh@bennetts.com.mx</p>
+
+                  <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
+                  <br>
+                  <img src="img/triptico2.PNG" width="100%" alt="triptico parte 2">
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+            </div>
+        </div> <!-- PAGE CONTENT -->
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="lib/framework7/js/framework7.bundle.min.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/signature/modernizr.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/metodos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/signature/jSignature.min.noconflict.js"></script>
+    <script src="js/SimpleStarRating.js"></script>
+    <script src="js/player_api.js"></script>
+<!--    <script src="http://www.youtube.com/player_api?enablejsapi=1&version=3"></script>-->
+    <script type="text/javascript" charset="utf-8">
+      var pictureSource;   // picture source
+      var destinationType; // sets the format of returned value
+
+      //Activar el escucha
+      document.addEventListener("deviceready",onDeviceReady,false);
+
+      //GPS Activated
+      document.addEventListener('deviceready',function(){
+        //BackgroundMode :)
+        cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.',silent: true, hidden: true});
+        cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.onactivate = function () {
+          setTimeout(function () {
+            cordova.plugins.backgroundMode.configure({
+              text:'Running in background for more than 5s now.',
+              silent: true,
+              hidden: true
+            });
+          }, 5000);
+      }
+
+
+        //Verificar GPS
+        cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+          console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
+          if(enabled == true){
+
+          }else{
+              app.dialog.alert('Favor de encender tu GPS.','Aviso!');
+          }
+        },function(error){
+            console.error("The following error occurred: "+error);
+        });
+
+      }, false);
+
+
+
+      function onDeviceReady() {
+          pictureSource=navigator.camera.PictureSourceType;
+          destinationType=navigator.camera.DestinationType;
+          cordova.plugins.backgroundMode.disable();
+      }
+      // Called when a photo is successfully retrieved
+      //
+      function onPhotoDataSuccess(imageData) {
+        // Uncomment to view the base64-encoded image data
+        // console.log(imageData);un
+        // Get image handle
+        //
+        var smallImage = document.getElementById('smallImage');
+        // Unhide image elements
+        //
+        smallImage.style.display = 'block';
+        // Show the captured photo
+        // The in-line CSS rules are used to resize the image
+        //
+        var nameima = "data:image/jpeg;base64," + imageData;
+        smallImage.src = "data:image/jpeg;base64," + imageData;
+
+        $("#imagenC").val(nameima); //modificacion 26 de mayo
+      }
+      // Called when a photo is successfully retrieved
+      //
+      function onPhotoURISuccess(imageURI) {
+        // Uncomment to view the image file URI
+        // console.log(imageURI);
+        // Get image handle
+        //
+        var largeImage = document.getElementById('largeImage');
+        // Unhide image elements
+        //
+        largeImage.style.display = 'block';
+        // Show the captured photo
+        // The in-line CSS rules are used to resize the image
+        //
+        largeImage.src = imageURI;
+       // alert(largeImage); ///coloque este el 25 de mayo
+
+      }
+      // A button will call this function
+      //
+      function prueba(cont2, total){
+        $("#Foto").val(cont2);
+        $("#total").val(total);
+
+        var total = total;
+        var valor = cont2;
+        var gg = capturePhotoAuditoria(valor,total);
+
+        function capturePhotoAuditoria(cont2, total) {
+
+                    navigator.camera.getPicture(onPhotoDataSuccess2, onFail, { quality: 50,
+                      destinationType: destinationType.DATA_URL,
+                      targetWidth: 300, targetHeight: 300 });
+                  }
+
+        function onPhotoDataSuccess2(imageData) {
+
+
+          //alert(valor);
+          //alert(total);
+
+          var smallImage = document.getElementById('smallImage'+valor);
+          //alert(smallImage);
+          smallImage.style.display = 'block';
+          var nameima = "data:image/jpeg;base64," + imageData;
+          smallImage.src = "data:image/jpeg;base64," + imageData;
+          $("#imagenC").val(nameima);
+
+          //a partir de aqui aqui guardas la foto al momento de que la tomas
+          /*
+          var fd = new FormData();
+          fd.append("valor", valor);
+          fd.append("imageData", imageData);
+          alert("holaa");
+          $.ajax({
+              type: "POST",
+              url: "http://www.appbennetts.com/VIC/ProcesosVIC7/guarda_foto.php",
+              data: fd,
+              processData: false,  // tell jQuery not to process the data
+              contentType: false ,
+              DataType : 'json'
+              ,success: function(data){
+                alert(data);
+
+              }
+          });
+          */
+
+        }
+
+
+    }
+      // Called if something bad happens.
+      //
+      function onFail(message) {
+        //app.dialog.alert('Error' + message, 'Error!');
+        alert("Failed because: "+message);
+      }
+
+      var $$ = Dom7;
+      // Login Screen-Modal DOM events
+      $$('.login-screen').on('loginscreen:open', function (e) {
+        console.log('Login screen open')
+      });
+      $$('.login-screen').on('loginscreen:opened', function (e) {
+        console.log('Login screen opened')
+      });
+      $$('.login-screen').on('loginscreen:close', function (e) {
+        console.log('Login screen close')
+      });
+      $$('.login-screen').on('loginscreen:closed', function (e) {
+        console.log('Login screen closed')
+      });
+      // Set progress on inline progressbar
+      $$('.set-inline-progress').on('click', function (e) {
+          var progress = $$(this).attr('data-progress');
+          app.progressbar.set('#demo-inline-progressbar', progress);
+      });
+
+      // DOM events for About popup
+      $$('.popup-about').on('popup:open', function (e) {
+          console.log('About popup open');
+      });
+      $$('.popup-about').on('popup:opened', function (e) {
+          console.log('About popup opened');
+      });
+
+      // Create dynamic Popup
+      var dynamicPopup = app.popup.create({
+          content: '<div class="popup">'+
+              '<div class="">'+
+              '<div class="card">' +
+              '<div class="card-header">Avisos/Boletines: <a style="padding-left: 30px !important;" href="#" class="link popup-close"><i class="far fa-times-circle"></i></a></div>'+
+              ''+
+              '<div id="news"></div>'+
+              '<div>'+
+              ''+
+              '</div>'+
+              '</div>',
+          // Events
+          on: {
+              open: function (popup) {
+                  console.log('Popup open');
+              },
+              opened: function (popup) {
+                  console.log('Popup opened');
+              },
+          }
+      });
+
+      // Open dynamic popup
+      $$('.dynamic-popup').on('click', function () {
+          newsUB();
+          dynamicPopup.open();
+      });
+
+      //end
+      function newsUB() {
+          app.request.get(cordova.file.externalRootDirectory + '/jsons/noticias_news.json', function (data) {
+
+              let content1 = JSON.parse(data);
+                      let news = '';
+                      content1.forEach(data => {
+                          news += '' +
+                              '<div class="card-content card-content-padding">' +
+                              '<p><strong>' + data.title + '</strong></p>' +
+                              '<p>' + data.excerpt + '</p>' +
+                              '<hr>' +
+                              '</div>' +
+                              ''
+                      });
+                      $("#news").html(news);
+          });
+          // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php'){
+          //     then(function (res) {
+          //         let content1 = JSON.parse(res);
+          //         let news = '';
+          //         content1.forEach(data => {
+          //             news += '' +
+          //                 '<div class="card-content card-content-padding">' +
+          //                 '<p><strong>' + data.title + '</strong></p>' +
+          //                 '<p>' + data.excerpt + '</p>' +
+          //                 '<hr>' +
+          //                 '</div>' +
+          //                 ''
+          //         });
+          //         $("#news").html(news);
+          //     })
+          //         .catch(function (err) {
+          //             console.log(err.xhr);
+          //             console.log(err.status);
+          //             console.log(err.message);
+          //         });
+          // }
+      }
+      //Video presentacion
+      var player, iframe;
+      let first_login = localStorage.getItem('first_login');
+      if (first_login == 1)
+      {
+          function onYouTubePlayerAPIReady() {
+              player = new YT.Player('player', {
+                  height: '100%',
+                  width: '100%',
+                  videoId: 'l-aS0XSmShM',
+                  playerVars: {
+                      controls: 0,
+                      disablekb: 0,
+                      autoplay: 1,
+                      showinfo: 0,
+                      rel: 0,
+                      hl: 0,
+                      playsinline: 0
+                  },
+                  events: {
+                      'onReady': onPlayerReady,
+                      'onStateChange': onPlayerStateChange
+                  }
+              });
+          }
+      }
+
+      function onPlayerReady(event) {
+          event.target.playVideo();
+          console.log(event);
+          iframe = $("#player");
+      }
+
+      // function playFullscreen (){
+      //     var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+      //     if (requestFullScreen) {
+      //         requestFullScreen.bind(iframe)();
+      //     }
+      // }
+
+      // when video ends
+      function onPlayerStateChange(event) {
+          console.log(event)
+          if (event.data === -1) {
+              playFullscreen()
+          }
+          if(event.data === 0) {
+              var id = localStorage.getItem("id");
+              $("#progreso").show();
+              $("#menuPrincipal").show();
+              $("#player").hide();
+              removeFirstLogin(id);
+              window.localStorage.removeItem("first_login");
+              localStorage.setItem("first_login", 0);
+              swal.fire('Mensaje','Gracias por ver el video de presentacion, a continuacion puedes acceder a tus cursos', 'info');
+
+          }
+      }
+      </script>
+
+      <script>
+        //PTR en Click
+      function ptrpro() {
+          $("#processclick").show();
+          $("#processclick").removeClass('99badge99');
+          $("#processclick").addClass('badge');
+
+          downloader.init({folder: "jsons", unzip: true});
+          downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+          document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+              var data = event.data;
+              console.log('Proceso', data);
+              $("#processclick").html(data[0] + "%");
+              if(data[0] == 99 || data[0] == 100){
+                  app.ptr.done();
+                  $("#processclick").html("Actualizados");
+
+                  downloader.abort();
+              }
+          });
+          document.addEventListener('DOWNLOADER_downloadError', function(event){
+              var data = event.data;
+              console.log('Proceso', data);
+                  app.ptr.done();
+                  $("#processclick").hide();
+                  app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+                  downloader.abort();
+          });
+          document.addEventListener('downloadSuccess', function(event){
+              var data = event.data;
+              console.log('Proceso', data);
+                  app.ptr.done();
+                  $("#processclick").html("Actualizados");
+                  downloader.abort();
+          });
+      }
+      // PTR en pantalla
+      var $ptrContent = $('.ptr-content');
+      $ptrContent.on('ptr:refresh', function (e) {
+        $("#process").show();
+        setTimeout(function () {
+            downloader.init({folder: "jsons", unzip: true});
+            downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+            document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+                var data = event.data;
+                console.log('Proceso', data);
+                $("#process").html(data[0] + "%");
+                if(data[0] == 99 || data[0] == 100){
+                    app.ptr.done();
+                    $("#process").hide();
+                    downloader.abort();
+                }
+            });
+            document.addEventListener('DOWNLOADER_downloadError', function(event){
+                var data = event.data;
+                console.log('Proceso', data);
+                    app.ptr.done();
+                    $("#process").hide();
+                    app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+                    downloader.abort();
+            })
+            document.addEventListener('downloadSuccess', function(event){
+                var data = event.data;
+                console.log('Proceso', data);
+                    app.ptr.done();
+                    $("#process").hide();
+                    downloader.abort();
+            });
+        }, 100);
+    });
+
+  //-----------------------------------------------------------------------------------------------------------------------------------------
+
+      //Sin conexion
+      document.addEventListener("offline", onOffline, false);
+      function networkInfo() {
+       var networkState = navigator.connection.type;
+       var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+        alert("Connection type: "+ states[networkState]);
+        }
+        function onOffline() {
+          app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se descargaran los datos.', 'Alerta!');
+        }
+
+
+
+$(document).ready(function(){
+
+    function horizontal2(){
+        var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
+
+        if (orientation === "landscape-primary") {
+            console.log("That looks good.");
+        } else if (orientation === "landscape-secondary") {
+            console.log("Mmmh... the screen is upside down!");
+        } else if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+            console.log("Mmmh... you should rotate your device to landscape");
+            screen.orientation.lock("portrait");
+        } else if (orientation === undefined) {
+            console.log("The orientation API isn't supported in this browser :(");
+        }
+    }
+    var id = localStorage.getItem("id");
+    var first_login = localStorage.getItem('first_login');
+    app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
+        .then(function (res) {
+            if (first_login == true) {
+                $("#presentacion").show();
+                $("#progreso").hide();
+                $("#menuPrincipal").hide();
+                progressBarLessons();
+
+            }else{
+                $("#presentacion").hide();
+                // $("#progreso").show();
+                $("#menuPrincipal").show();
+            }
+            // progressBarLessons(res);
+             $("#progreso").append('<div class="block block-strong">'+
+            '<div class="row"> '+
+            '<div class="col text-align-center">'+
+            '<div class="gauge gauge-init" '+
+            'data-type="semicircle"'+
+            'data-value="'+res/100+'"'+
+            'data-value-text="'+res+'%"'+
+            'data-value-text-color="#0CC25E"'+
+            'data-label-font-weight="100"' +
+            'data-label-font-size="20"'+
+            'data-size="150"'+
+            'data-border-color="#0CC25E"'+
+            ' ></div>'+
+            '</div>'+
+            '</div>'+
+            '</div>');
+
+
+        })
+        .catch(function (err) {
+            console.log(err.xhr);
+            console.log(err.status);
+            console.log(err.message);
+        });
+
+
+    //Cierre de sesion
+    // window.localStorage.removeItem("tipoempresa");
+
+    var name = localStorage.getItem("name");
+    var last_name = localStorage.getItem("last_name");
+    var avatar = localStorage.getItem('avatar');
+    var role_name = localStorage.getItem('role_name');
+    var nombreCompleto = name + " " + last_name;
+    $("#NombreUsuario").html(nombreCompleto );
+    $("#RoleName").html(role_name );
+    if(localStorage.getItem("id") == 1){
+        $("#imagi").html("<img class='imagena3' src='img/bennetts.png' width='22%' />");
+    }else{
+        $("#imagi").html("<img class='imagena2' src='img/bennetts.png' width='18%' />");
+    }
+
+
+    document.addEventListener('backbutton', function (e) {
+        app.views.main.router.back();
+    });
+});
+    </script>
+</body>
+</html>

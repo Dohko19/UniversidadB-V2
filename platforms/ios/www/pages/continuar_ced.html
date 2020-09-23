@@ -1,0 +1,179 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back" onclick="regresar();">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Continuar Cedulas</h2>
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">VIC</div>
+                    </div>
+                </div>            
+                <div class="list sortable" id="cedpendientes">
+                    <ul id="ped1">
+        
+                    </ul>
+                </div>
+                <br />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">APOYO</div>
+                    </div>
+                </div>
+                <div class="list sortable" id="cedpendientes">
+                    <ul id="ped2">
+        
+                    </ul>
+                </div>
+                <br />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">VENTAS</div>
+                    </div>
+                </div>
+                <div class="list sortable" id="cedpendientes">
+                    <ul id="ped3">
+        
+                    </ul>
+                </div>
+                <br />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">AUDITORIAS</div>
+                    </div>
+                </div>
+                 <div class="list sortable" id="cedpendientes">
+                    <ul id="ped4">
+        
+                    </ul>
+                </div> 
+            </div>
+        </div>
+    </div> 
+</template>
+<script>
+return {
+    on: {
+      pageInit: function (e, page) {
+        var IdCte = localStorage.getItem("IdCte");
+        var IdUsuario = localStorage.getItem("IdUsuario");
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.fcierre = '' OR ci.fcierre is NULL )",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            $("#ped1").append("<li id='conc"+item2.IdCedula+"'><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circulo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'><a href='#' onclick='continuarCed(\""+item2.IdCte+"\","+item2.IdCedula+");' style='border: none; outline:none;'><img src='img/next.png'  width='25px' height='25px' /></a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='EliminarReg("+item2.IdCedula+", 1);' style='border: none; outline:none;'><img src='img/eliminar.png'  width='27px' height='27px' /></a></div></div></div><div class='sortable-handler'></div></li>");
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+        //CEDULAS DE APOYO
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            $("#ped2").append("<li id='concSeg"+item2.IdCedulaSeg+"'><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circulo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'><a href='#' onclick='continuarCedSeg(\""+item2.IdCte+"\","+item2.IdCedulaSeg+");' style='border: none; outline:none;'><img src='img/next.png'  width='25px' height='25px' /></a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='EliminarReg("+item2.IdCedulaSeg+", 2);' style='border: none; outline:none;'><img src='img/eliminar.png'  width='27px' height='27px' /></a></div></div></div><div class='sortable-handler'></div></li>");
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+        //CEDULAS DE VENTAS
+        
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto, p.IdProyecto FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND c.envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+
+                            var item2 = results.rows.item(i);
+                            //alert(item2.IdCedulaV);
+                            $("#ped3").append("<li id='concVis"+item2.IdCedulaV+"'><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circulo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.NombreProyecto+"</div> <div class='item-after'><a href='#' onclick='continuarCedVis("+item2.IdProyecto+","+item2.IdCedulaV+");' style='border: none; outline:none;'><img src='img/next.png'  width='25px' height='25px' /></a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='EliminarReg("+item2.IdCedulaV+", 3);' style='border: none; outline:none;'><img src='img/eliminar.png'  width='27px' height='27px' /></a></div></div></div><div class='sortable-handler'></div></li>");
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+
+        //AUDITORIAS
+
+
+
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT * FROM RegistroAuditorias ra WHERE ra.IdUsuario = ? AND ra.envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+
+                            var item2 = results.rows.item(i);
+                            //alert(item2.IdCedulaA);
+                            $("#ped4").append("<li id='concVis"+item2.IdCedulaA+"'><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circulo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'><a href='#' onclick='continuarCedAudi(\""+item2.IdCte+"\","+item2.IdCedulaA+");' style='border: none; outline:none;'><img src='img/next.png'  width='25px' height='25px' /></a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='EliminarReg("+item2.IdCedulaA+", 4);' style='border: none; outline:none;'><img src='img/eliminar.png'  width='27px' height='27px' /></a></div></div></div><div class='sortable-handler'></div></li>");
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+
+
+
+
+
+
+           
+    }
+}
+}
+</script>

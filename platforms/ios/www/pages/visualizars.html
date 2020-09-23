@@ -1,0 +1,216 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                  <!-- INICIO REPORTE-->
+                  <script type="text/javascript">
+                    var IdUsuario = localStorage.getItem("IdUsuario");
+                    var Division = localStorage.getItem("Division");
+                    var IdCedula = app.views.main.router.currentRoute.params.IdCed;
+
+                    var $$ = Dom7;
+
+                    $$('.open-prompt').on('click', function () {
+                      app.dialog.prompt('Ingresa el correo electronico','Enviar PDF', function (name) {
+                        app.dialog.confirm('Seguro que esta correcto el correo?<br> ' + name, function () {
+                          app.dialog.alert('Ok, enviando a: ' + name );
+                          app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/EnviarPDFAPOYO.php', { name: name, Division:Division, IdCedula: IdCedula, IdUsuario:IdUsuario}, function (data) {
+                          });
+                        });
+                      });
+                    });
+                  </script>
+
+                  <div>
+                    <img src="img/key.png" width="95px" height="40px" align="left">
+                    <img src="img/bennetts.png" width="180px" height="50px" align="right">
+                  </div>
+                  <p>
+                  <br/>
+                  <br/>
+                    <center><p><h2>Visita de impacto al cliente</h2></p></center>
+                  </p>
+                    <center><h3><font color="9FA1A3"><span id ="num"></span> - <span id ="cli"></span></font></h3></center><br>
+                    <div style="text-align: left; justify-content:left; margin-right:auto; margin-left:auto; width: 99%;">
+                    <div class="infinite-scroll-content">
+                        <table id = "imyal" cellpadding="10" >
+                          <header>
+                            <style>
+
+                            </style>
+                          </header>
+                          <tbody id="imya">
+                            <tr>
+                              <th>Nombre comercial:</th>
+                              <td><span id ="nomcom"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Contacto:</th>
+                              <td><span id ="contac"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Teléfono:</th>
+                              <td><span id ="tel"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Email:</th>
+                              <td><span id ="email"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Estatus:</th>
+                              <td><span id ="estat"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Localización:</th>
+                              <td>Coordenadas<span id ="geolo"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Imagen:</th>
+                              <td><span id ="imagya"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class='sentencia1 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+                <br><br>
+                <hr>
+                <button class="col button open-prompt"><img src="img/enviar.png" width="40px"> Enviar PDF</button>
+                <hr>
+                      </div>
+                      <!----------------EQUIPO-->
+                    <center><p><h3>SEGUIMIENTO</h3></p></center>
+
+                    <div class="infinite-scroll-content">
+                     <table id="tablae">
+                     <header>
+                        <style>
+                          table {
+                            border-collapse: collapse;
+                            width: 100%;
+                          }
+
+                          th, td {
+                            text-align: center;
+                            padding: 8px;
+                          }
+
+                          tr:nth-child(even){background-color: #f2f2f2}
+
+                          th {
+                            background-color: #3590FA;
+                            color: white;
+                          }
+                        </style>
+                      </header>
+                     <tr>
+                      <th>Fotografía</th>
+                      <th>Nombre</th>
+                      <th>Firma</th>
+                      <th>Tipo de seguimiento</th>
+                      <th>Comentario</th>
+                      <th>Descripcion "Otro"</th>
+                      </tr>
+                      <tbody id="segui">
+
+                       </tbody>
+                     </table>
+
+                    <div class='sentencia2 preloader color-blue infinite-scroll-preloader'></div>
+                     </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+          pageInit: function (e, page) {
+                var cliente = app.views.main.router.currentRoute.params.IdCte;
+                var cedula = app.views.main.router.currentRoute.params.IdCed;
+                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectImYa.php', {  IdCed: cedula, IdCte : cliente}, function (data) {
+                    $('.sentencia1').remove();
+                    var content = JSON.parse(data);
+                    for(var c=0; c < content.length; c++){
+                      $("#num").html(content[c].IdCte);
+                      $("#cli").html(content[c].Cliente);
+                      $("#nom").html(content[c].IdCte);
+                      $("#contac").html(content[c].Contacto);
+                      $("#tel").html(content[c].Telefono);
+                      $("#nomcom").html(content[c].NomComercial);
+                      $("#email").html(content[c].Correo);
+                      $("#geolo").html("<br/>["+content[c].geolocation+"]");
+                      $("#imagya").html("<img src='"+content[c].Imagen+"'width='70' height='70' align='right'>");
+                      if(content[c].Estatus  == 1 && content[c].Facturacion == 1){
+                        $status = 'Activo';
+                      }
+                      if(content[c].Estatus == 1 && content[c].Facturacion == 0){
+                        $status = 'Bloqueado';
+                      }
+                      if(content[c].Estatus == 0 && content[c].Facturacion== 0){
+                        $status = 'Inactivo';
+                      }
+                      if(content[c].Estatus == 0 && content[c].Facturacion == 1){
+                        $status = 'Inativo';
+                      }
+                      $("#estat").html($status);
+                      $('.preloader').remove();
+                      $('.infinite-scroll-preloader').remove();
+                  }
+                  });
+                //equipos
+                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectTodoSeg.php', { IdCed: cedula}, function (data) {
+                    $('.sentencia2').remove();
+                  for(var e=0; e < data.length; e++){
+                     var content = JSON.parse(data);
+                       if(content[e].NumTipoSeg == 1){ var $NameS = "Apoyo a instalaci\u00f3n y rellenado de equipos"; }
+                       if(content[e].NumTipoSeg == 2){ var $NameS = "Apoyo a entrega de productos";}
+                       if(content[e].NumTipoSeg == 3){ var $NameS = "Apoyo en instalaci\u00f3n";}
+                       if(content[e].NumTipoSeg == 4){ var $NameS = "Apoyo en negociaci\u00f3n";}
+                       if(content[e].NumTipoSeg == 5){ var $NameS = "Capacitaci\u00f3n a un compañero";}
+                       if(content[e].NumTipoSeg == 6){ var $NameS = "Cobranza";}
+                       if(content[e].NumTipoSeg == 7){ var $NameS = "Mantenimiento a equipos";}
+                       if(content[e].NumTipoSeg == 8){ var $NameS = "Seguimiento en campo";}
+                       if(content[e].NumTipoSeg == 9){ var $NameS = "Otro";}
+
+                       if(content[e].FotoS != ''){
+                            var fS = content[e].FotoS;
+                       } else {
+                            var fS ='';
+                       }
+                       if(content[e].FirmaS != ''){
+                            var firma = content[e].FirmaS;
+                       } else {
+                            var firma ='';
+                       }
+                       if(content[e].FotoS != '' && content[e].FirmaS != ''){
+                            $("#tablae #segui").append("<tr><td><img src='"+fS+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+content[e].NombreFirma+"</td><td><img src='"+firma+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>" + $NameS +"</td><td>"+ content[e].Comentario + "</td><td>"+ content[e].Otro + "</td></tr>");
+                       }
+                       if(content[e].FotoS == '' && content[e].FirmaS == ''){
+                            $("#tablae #segui").append("<tr><td></td><td>"+content[e].NombreFirma+"</td><td></td><td>" + $NameS +"</td><td>"+ content[e].Comentario + "</td><td>"+ content[e].Otro + "</td></tr>");
+                       }
+                       if(content[e].FotoS != '' && content[e].FirmaS == ''){
+                            $("#tablae #segui").append("<tr><td><img src='"+fS+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+content[e].NombreFirma+"</td><td></td><td>" + $NameS +"</td><td>"+ content[e].Comentario + "</td><td>"+ content[e].Otro + "</td></tr>");
+                       }
+                       if(content[e].FotoS == '' && content[e].FirmaS != ''){
+                            $("#tablae #segui").append("<tr><td></td><td>"+content[e].NombreFirma+"</td><td><img src='"+firma+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>" + $NameS +"</td><td>"+ content[e].Comentario + "</td><td>"+ content[e].Otro + "</td></tr>");
+                       }
+                       $('.preloader').remove();
+                       $('.infinite-scroll-preloader').remove();
+                    }
+                 });
+          }
+      }
+  }
+</script>

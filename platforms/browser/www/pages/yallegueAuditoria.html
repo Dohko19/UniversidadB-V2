@@ -1,0 +1,269 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup=".demo-popup-llegue" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup demo-popup-llegue">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="title" style="color: #a1a1a1">Ayuda</div>
+                <div class="right"><a href="#" class="link popup-close">Close</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="block">
+
+                <style type="text/css">
+                  h2 {color: #222; text-align: center;}
+                  .all {font-size: 10pt;color: #222; }
+                  ul {list-style-type: circle;}
+                </style>
+                <center>
+                    <span style="color:#00008B; font-size: 20pt"><strong>¡Ya Llegue!</strong></span><br>
+                    <span style="color:#a1a1a1;font-size: 9pt;">(Valido para visita VIC y Visita Apoyo)</span>
+                </center>
+                <hr width="90%">
+                <span class="all">
+                        <li>En esta pantalla se te pide la fotografía obligatoria que se debera tomar en el lugar donde se realiza la visita.<br />
+                            <center><img src="img/cam.png" width="30px"></center>
+                        </li><br /><br />
+                        <li>Para el caso del campo "Cliente", se tiene que buscar ya sea por <font color="#1e90ff"><strong>Nombre de cliente </strong></font> y/o <font color="#1e90ff"><strong>Numero de cliente</strong></font>. <br />
+                        Se debe tomar en cuenta que es un <strong>autocompletador</strong> y que puede tomar cualquier coincidencia de lo que se escribe en el campo.<br /><br />
+                            <center><img src="img/ayuda/autocompletador.png" width="70%"></center>
+                        </li>
+                        
+                </span> 
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Auditoria</h2>
+                <center>
+                    <span style="color: #a1a1a1; font-size: 12px; text-align: right;">Ultima actualizacion de datos: </span><br>
+                    <span id="FechaAudi" name="FechaAudi" style="color: red; font-weight: bold; font-size: 12px; text-align: right;">Sus datos no estan actualizados</span>
+                </center>
+                <div hidden="true" id="VIC2">
+                    <h2 style="color:#00008B;">Visita de apoyo</h2>
+                </div>
+                <form class="list" id="demo-form">        
+                   <br />
+                   <img src="img/Search.png" width="40px" height="40px"> <br> <label style="color: gray; font-size: 10px;">*Tap Aqui*</label>
+                
+                    <span class="span" style="font-weight: bold;">Cliente:</span>
+                    <div id="text">
+                        <input type="text" placeholder="Cliente" name="ncliente" id="autocomplete-dropdown-ajax" class="autocomplete-dropdown item-title" style="width: 100%; white-space: normal; overflow: visible; text-align: left;"/>
+                        <br>
+                          
+
+                        
+                        <input type="hidden" placeholder="Cliente" name="cte" id="cte" style="width: 100%;"/>
+                        <input type="hidden" placeholder="Cliente" name="Nomcte" id="Nomcte" style="width: 100%;"/>
+                        <input type="hidden" name="ncomercial" id="ncomercial" placeholder='Nombre Comercial:'  />
+                        <input type="hidden" name="ncontacto" id="ncontacto" placeholder='Nombre del Contacto:'  />
+                        <input type="hidden" name="telefono" id="telefono" placeholder='Teléfono:'  />
+                        <input type="hidden" name="correo" id="correo" placeholder='Email:'  />
+                        <input type="hidden" name="estatusc" id="estatusc" placeholder='Estatus del Cliente:' disabled="disabled"/>
+                        <input type="hidden" name="TipoC" id="TipoC" />
+                        
+                        <input type="hidden" name="geolocation" id="geolocation" placeholder='Geolocalización...' disabled="disabled"/>
+                        <br />
+                        <a href="#" onclick="gAuditoria();" style="border: none; outline:none;"><img src="img/save2.png" width="35px" height="35px" /></a>
+                    </div>
+                    <br /><br />
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                //FECHA
+                databaseHandler.db.transaction(
+                    function(tx5){
+                        tx5.executeSql(
+                          "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                          [],
+                          function(tx5, results){
+                              var length = results.rows.length;
+                              var item1 = results.rows.item(0);
+                              $("#FechaAudi").html(item1.Fecha);
+                              $("#FechaAudi").css("color","#1e90ff");
+                          }
+                      );
+                  },
+                  function(error){},
+                  function(){}
+                );
+                //GPS
+                cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+                    console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
+                    if(enabled == true){    
+                    }else{
+                        app.dialog.alert('Favor de encender tu GPS.','Aviso!');
+                    }
+                    
+                }, function(error){
+                    console.error("The following error occurred: "+error);
+                });
+                //Verificar GPS
+                cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+                    console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
+                    if(enabled == true){
+                        
+                    }else{
+                        
+                        app.dialog.alert('Favor de regresar a menu y encender tu ubicacion.','Aviso!');
+                        //setTimeout(function(){ window.location.href= "menu.html"; }, 3000);
+                    }
+                    
+                }, function(error){
+                    console.error("The following error occurred: "+error);
+                });
+                //GEOLOCATION
+                document.addEventListener("deviceready", onDeviceReady, false);
+                function onDeviceReady() {
+                     var test= navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                }
+                function onSuccess(position) {
+                    var element = document.getElementById('geolocation');
+                    $('#geolocation').val(position.coords.latitude+','+position.coords.longitude);
+                }
+                function onError(error) {
+                    alert('Error en la Localización');
+                }
+                //revisar conexion a internet 
+                document.addEventListener("offline", onOffline, false);
+                function onOffline() {
+                    app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se enviaran o descargaran los datos.', 'Alerta!');
+                    $('#geolocation').val('');
+                }
+                //cargar el contenido cad ves que entre aqui
+                var Division = localStorage.getItem("Division");
+                if(Division == 3){
+                    var NomJson ='ClientesCDC';
+                    var NomDescCli = 'ClientesCDCDesc';
+                }else{
+                    var NomJson = 'clientes_desc';
+                    var NomDescCli = "Clientes";
+                }
+                self.autocompleteDropdownAjax = app.autocomplete.create({
+                    inputEl: '#autocomplete-dropdown-ajax',
+                    openIn: 'dropdown',
+                    preloader: true, //enable preloader
+                    valueProperty: 'id', //object's "value" property name
+                    textProperty:  'name', //object's "text" property name
+                    limit: 10, //limit to 20 results
+                    dropdownPlaceholderText: 'Seleccionar Cliente...',
+                    source: function (query, render) {
+                        var autocomplete = this;
+                        var results = [];
+                        if (query.length === 0) {
+                          render(results);
+                          return;
+                        }
+                        // Show Preloader
+                        autocomplete.preloaderShow();
+                        // Do Ajax request to Autocomplete data
+                        app.request({
+                          url: cordova.file.externalRootDirectory + "/jsons/"+NomJson+".json",
+                          method: 'GET',
+                          dataType: 'json',
+                          //send "query" to server. Useful in case you generate response dynamically
+                          data: {
+                            query: query,
+                          },
+                          success: function (data) {
+                            // Find matched items
+                            for (var i = 0; i < data.length; i++) {
+                              
+                              if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
+                              
+                            }
+                            // Hide Preoloader
+                            autocomplete.preloaderHide();
+                            // Render items by passing array with result items
+                            render(results); 
+                          }
+                        }); 
+                    }
+                });
+                //Completar
+                $('#autocomplete-dropdown-ajax').change(function () {
+                var cliente = $("#autocomplete-dropdown-ajax").val();
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql("SELECT * FROM Clientes WHERE IdCte = ? AND Division = ?",
+                            [cliente, Division],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                
+                                if(length > 0){
+                                    var item = results.rows.item(0);
+                                    $("#autocomplete-dropdown-ajax").val(item.IdCte +" "+ item.Cliente);
+                                    $("#cte").val(item.IdCte);
+                                    $("#ncomercial").val(item.NomComercial);
+                                    $("#ncontacto").val(item.NomContacto);
+                                    $("#telefono").val(item.Telefono);
+                                    $("#correo").val(item.Email);
+                                    $("#estatusc").val(item.Estatus);
+                                    $("#Nomcte").val(item.Cliente);
+                                }else{
+                                    app.request.get(cordova.file.externalRootDirectory + "/jsons/"+NomDescCli+".json", function (data) {
+                                        var content2 = JSON.parse(data);
+                                        for(var x = 0; x < content2.length; x++) {
+                                            if(content2[x].IdCte == cliente){
+                                                $("#autocomplete-dropdown-ajax").val(content2[x].IdCte +" "+ content2[x].Cliente);
+                                                $("#cte").val(content2[x].IdCte);
+                                                $("#ncomercial").val(content2[x].NomComercial);
+                                                $("#ncontacto").val(content2[x].Contacto);
+                                                $("#telefono").val(content2[x].Telefono);
+                                                $("#correo").val(content2[x].Correo);
+                                                $("#estatusc").val(content2[x].Estatus);
+                                                $("#Nomcte").val(content2[x].Cliente);
+                                                //$("#imagenC").val("");
+                                            }         
+                                        }
+                                    });
+                                }
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+            });  
+
+         
+
+            }
+        }
+    }
+</script>

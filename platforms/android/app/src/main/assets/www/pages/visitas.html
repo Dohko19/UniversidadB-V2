@@ -1,0 +1,130 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" onclick="regresar();" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Programa de visitas</h2>
+                <div class="infinite-scroll-content">
+                    <div id="wrap">
+                        <div class="field">
+                            <ul class="options">
+                                <li>
+                                    <input type="file" id="myfile" name="myfile" class="rm-input" onchange="selectedFile();"/>
+                                </li>
+                                <li>
+                                    <div id="fileSize"></div></li>
+                                <li>
+                                    <div id="fileType"></div></li>
+                                <li>
+                                    <input type="button" value="Subir Archivo" onClick="uploadFile()" class="rm-button" /></li>
+                            </ul>
+                        </div>
+                        <progress id="progressBar" value="0" max="100" class="rm-progress"></progress>
+                        <div id="percentageCalc"></div>
+                    </div>
+
+
+                    
+                    <!--<table id="tablapVisitas" style="width:98%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                        <header>
+                            <style>
+                                table {border-collapse: collapse;width: 100%;}
+                                th, td {text-align: center;padding: 8px;}
+                                tr:nth-child(even){background-color: #f2f2f2}
+                                th {background-color: #3590FA;color: white;}
+                              </style>
+                        </header>
+                        <tr>
+                            <th>Cliente</th>                                                
+                            <th>Total</th>
+                            <th>Realizadas</th>
+                            <th>Faltantes</th>
+                        </tr>   
+                        <tbody id="tbodyVisitas">
+                            
+                        </tbody>
+                    </table>-->
+                    <div class='sentencia preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    function selectedFile() {
+        var archivoSeleccionado = document.getElementById("myfile");
+        var file = archivoSeleccionado.files[0];
+        if (file) {
+            var fileSize = 0;
+            if (file.size > 1048576)
+                fileSize = (Math.round(file.size * 100 / 1048576) / 100).toString() + ' MB';
+            else
+                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + ' Kb';
+
+            var divfileSize = document.getElementById('fileSize');
+            var divfileType = document.getElementById('fileType');
+            divfileSize.innerHTML = 'Tamaño: ' + fileSize;
+            divfileType.innerHTML = 'Tipo: ' + file.type;
+
+        }
+      }     
+ 
+    function uploadFile(){
+        //var url = "http://localhost/ReadMoveWebServices/WSUploadFile.asmx?op=UploadFile";
+        var url = "/ReadMoveWebServices/WSUploadFile.asmx/UploadFile";
+        var archivoSeleccionado = document.getElementById("myfile");
+        var file = archivoSeleccionado.files[0];
+        var fd = new FormData();
+        fd.append("archivo", file);
+        var xmlHTTP= new XMLHttpRequest();
+        //xmlHTTP.upload.addEventListener("loadstart", loadStartFunction, false);
+        xmlHTTP.upload.addEventListener("progress", progressFunction, false);
+        xmlHTTP.addEventListener("load", transferCompleteFunction, false);
+        xmlHTTP.addEventListener("error", uploadFailed, false);
+        xmlHTTP.addEventListener("abort", uploadCanceled, false);
+        xmlHTTP.open("POST", url, true);
+        //xmlHTTP.setRequestHeader('book_id','10');
+        xmlHTTP.send(fd);
+    }       
+
+    function progressFunction(evt){
+        var progressBar = document.getElementById("progressBar");
+        var percentageDiv = document.getElementById("percentageCalc");
+        if (evt.lengthComputable) {
+            progressBar.max = evt.total;
+            progressBar.value = evt.loaded;
+            percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
+        }
+    }
+
+    function loadStartFunction(evt){
+        alert('Comenzando a subir el archivo');
+    }
+    function transferCompleteFunction(evt){
+        alert('Transferencia completa');
+        var progressBar = document.getElementById("progressBar");
+        var percentageDiv = document.getElementById("percentageCalc");
+        progressBar.value = 100;
+        percentageDiv.innerHTML = "100%";
+    }   
+
+    function uploadFailed(evt) {
+        alert("Hubo un error al subir el archivo.");
+    }
+
+    function uploadCanceled(evt) {
+        alert("La operación se canceló o la conexión fue interrunpida.");
+    }
+ 
+</script>
+

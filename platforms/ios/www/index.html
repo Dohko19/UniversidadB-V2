@@ -1,0 +1,113 @@
+<script>
+var IdUsuario = localStorage.getItem("IdUsuario");
+    if (IdUsuario > 0){
+        window.location.href = "menu.html";
+        var IdUsuario = localStorage.setItem(IdUsuario);
+    }
+</script>
+<!DOCTYPE html>
+<html>
+<title>Index VIC</title>
+<head>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/geturl.js"></script>
+    <script>
+    $(document).ready(function(){
+        document.addEventListener("offline", onOffline, false);
+    function networkInfo() {
+     var networkState = navigator.connection.type;
+     var states = {};
+      states[Connection.UNKNOWN]  = 'Unknown connection';
+      states[Connection.ETHERNET] = 'Ethernet connection';
+      states[Connection.WIFI]     = 'WiFi connection';
+      states[Connection.CELL_2G]  = 'Cell 2G connection';
+      states[Connection.CELL_3G]  = 'Cell 3G connection';
+      states[Connection.CELL_4G]  = 'Cell 4G connection';
+      states[Connection.CELL]     = 'Cell generic connection';
+      states[Connection.NONE]     = 'No network connection';
+   alert("Connection type:"+ states[networkState]);
+}
+function onOffline() {
+  window.location.href = "offline.html";
+}
+        $("#insert").click(function(){
+            $('#preloader').html('<div class="preloader"></div>');
+            var nombre = $('#nombre').val();
+            var contra = $("#contra").val();
+            var datos = "nombre=" + nombre + "&contra=" + contra +"&insert=";
+            if($.trim(nombre).length > 0 & $.trim(contra).length > 0){
+                $.ajax({
+                    type: "POST",
+                    url: "http://www.appbennetts.com/VIC/validaIndex.php",
+                    data: datos,
+                    success: function(data){
+                        if(data == "0"){
+                            alert("Usuario y/o Contraseña invalido(s).");
+                            $("#preloader").fadeOut("slow");
+                        }else{
+
+                            var separado = data.split("/");
+                             var Usuario = separado[0];
+                             var Division = separado[1];
+                             var Nombre = separado[2];
+                             var Apellidos = separado[3];
+
+
+                             console.log(Usuario+Division+Nombre+Apellidos)
+                            localStorage.setItem("IdUsuario", Usuario);
+                            localStorage.setItem("Division", Division);
+                            localStorage.setItem("Nombre", Nombre);
+                            localStorage.setItem("Apellidos", Apellidos);
+
+                            window.location.href = "menu.html";
+                        }
+                    }
+                });
+            }else{
+                //app.dialog.alert('Favor de completar todos los datos.', 'Aviso');
+                alert("Datos incompletos");
+                $("#preloader").fadeOut("slow");
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+	<div class="container-login100" >
+            <div class="wrap-login100">
+            <div style="text-align: center;">
+                <img src="img/bennetts.png" width="50%" />
+                </div>
+                <div id="preloader"></div>
+				<form  method="post" class="login100-form validate-form" id="formulario">
+					<div class="wrap-input100 validate-input m-b-26" >
+						<span class="label-input100">Usuario</span>
+						<input class="input100" type="text" name="nombre" id="nombre" required>
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 validate-input m-b-18" >
+						<span class="label-input100">Password</span>
+						<input class="input100" type="password" name="contra" id="contra" required >
+						<span class="focus-input100"></span>
+					</div>
+					<div class="container-login100-form-btn">
+                    <br />
+						<a id="insert"  class="login100-form-btn" style="text-decoration: none;">
+							Login
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+</body>
+</html>

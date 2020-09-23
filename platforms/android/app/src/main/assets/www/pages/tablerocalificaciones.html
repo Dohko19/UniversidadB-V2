@@ -1,0 +1,122 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" onclick="regresar();" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup=".demo-popup-tableroCalificaciones" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="popup demo-popup-tableroCalificaciones">
+        <div class="page">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="title" style="color: #a1a1a1">Ayuda</div>
+                    <div class="right"><a href="#" class="link popup-close">Close</a></div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="block">
+                    <style type="text/css">
+                      h2 {color: #222; text-align: center;}
+                      .all {font-size: 10pt;color: #222; text-align: justify;}
+                    </style>
+                    <center>
+                        <span style="color:#00008B; font-size: 20pt"><strong>Tablero de calificaciones</strong></span>
+                    </center>
+                    <hr width="90%">
+                    <span class="all">
+                        <span>En esta pantalla podremos observar una <font color="#1e90ff">gráfica de barras</font> que nos muestra el total de estrellas (evaluación) que han dado los clientes en nuestras cédulas.</span><br>
+                        <span style="color:#a1a1a1;font-size: 9pt;text-align: justify; font-weight: bold;">Ejemplo: </span><br>
+                        <span style="color:#a1a1a1;font-size: 9pt;text-align: justify;">He realizado 29 cedulas, 26 con 5 estrellas y 3 con 4 estrellas</span><br>
+                        <span style="color:#a1a1a1;font-size: 9pt;text-align: justify;">Imagen de referecia: </span><br>
+                        <center><img src="img/ayuda/graficaEvaluacion.png" width="65%"></center>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Tablero de calificaciones <br> de clientes</h2>
+            </div>
+            <hr>
+            <div class = "row">
+                <div class="col-md-6">
+                    <h2>Resultados de satisfacci&oacute;n</h2>
+
+                    <div id="mysecondchart" style="height: 250px;" >
+                        <center><span style="color:#a1a1a1;font-size: 9pt;text-align: justify;">Estrellas</span></center>
+                    </div>
+
+                    <script type="text/javascript">
+                        var IdUsuario = localStorage.getItem("IdUsuario");
+
+                        app.request.get("http://www.appbennetts.com/VIC/ProcesosVIC7/Evaluacion.php",{IdUsuario: IdUsuario}, function (data) {
+                                var content = JSON.parse(data);
+                                for(var i=0; i < content.length; i++){
+                                    var uno = content[0].Total;
+                                    var dos = content[1].Total;
+                                    var tres = content[2].Total;
+                                    var cuatro = content[3].Total;
+                                    var cinco  = content[4].Total;
+
+                                }
+                                //alert("Valores: "+ uno+","+dos+","+tres+","+cuatro+","+cinco);
+                                Morris.Bar({
+                                  element: 'mysecondchart',
+                                  data: [
+                                    { Cedulas: '1', Evaluacion: uno},
+                                    { Cedulas: '2', Evaluacion: dos},
+                                    { Cedulas: '3', Evaluacion: tres},
+                                    { Cedulas: '4', Evaluacion: cuatro},
+                                    { Cedulas: '5', Evaluacion: cinco}
+                                  ],
+                                  xkey: 'Cedulas',
+                                  ykeys: ['Evaluacion'],
+                                  labels: ['Cedulas'],
+                                  xLabelMargin: 0,
+                                  barShape: 'soft',
+                                });
+                        });
+                    </script>
+                </div>
+            </div>
+            <!--
+            <div class = "row">
+                <div class="col-md-6">
+                    <h2>Grafica de pastel</h2>
+                    <hr>
+                    <div id="myfirstchart" style="height: 250px;"></div>
+                    <script type="text/javascript">
+                        Morris.Donut({
+                            element: 'myfirstchart',
+                            data: [
+                              { label: "Download Sales", value: 12 },
+                              { label: "In-Store Sales", value: 30 },
+                              { label: "Mail-Order Sales", value: 20 }
+                            ]
+                        });
+                    </script>
+                </div>
+            </div>
+        -->
+
+        </div>
+    </div>
+</template>
+

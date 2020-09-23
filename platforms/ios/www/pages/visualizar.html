@@ -1,0 +1,714 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                  <!-- INICIO REPORTE-->
+
+                  <script type="text/javascript">
+                    var IdUsuario = localStorage.getItem("IdUsuario");
+                    var Division = localStorage.getItem("Division");
+                    var IdCedula = app.views.main.router.currentRoute.params.IdCed;
+
+                    var $$ = Dom7;
+
+                    $$('.open-prompt').on('click', function () {
+                      app.dialog.prompt('Ingresa el correo electronico','Enviar PDF', function (name) {
+                        app.dialog.confirm('Seguro que esta correcto el correo?<br> ' + name, function () {
+                          app.dialog.alert('Ok, enviando a: ' + name );
+                          app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/EnviarPDFVIC.php', { name: name, Division:Division, IdCedula: IdCedula, IdUsuario:IdUsuario}, function (data) {
+                          });
+                        });
+                      });
+                    });
+                  </script>
+                  <div>
+                    <img src="img/key.png" width="95px" height="40px" align="left">
+                    <img src="img/bennetts.png" width="180px" height="50px" align="right">
+                  </div>
+                  <p>
+                  <br/>
+                  <br/>
+                    <center><p><h2>Visita de impacto al cliente</h2></p></center>
+                  </p>
+                    <center><h3><font color="9FA1A3"><span id ="num"></span> - <span id ="cli"></span></font></h3></center><br>
+                    <div style="text-align: left; justify-content:left; margin-right:auto; margin-left:auto; width: 99%;">
+                    <div class="infinite-scroll-content">
+                        <table id = "imyal" cellpadding="10" >
+                          <header>
+                            <style>
+
+                            </style>
+                          </header>
+                          <tbody id="imya">
+                            <tr>
+                              <th>Nombre comercial:</th>
+                              <td><span id ="nomcom"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Contacto:</th>
+                              <td><span id ="contac"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Teléfono:</th>
+                              <td><span id ="tel"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Email:</th>
+                              <td><span id ="email"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Estatus:</th>
+                              <td><span id ="estat"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Localización:</th>
+                              <td>Coordenadas<span id ="geolo"></span></td>
+                            </tr>
+                            <tr>
+                              <th>Imagen:</th>
+                              <td><span id ="imagya"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class='sentencia1 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+                <br><br>
+                <hr>
+                <button class="col button open-prompt"><img src="img/enviar.png" width="40px"> Enviar PDF</button>
+                <hr>
+                      </div>
+                      <!----------------EQUIPO-->
+                      <div id="equiposdiv">
+                    <center><p><h3>EQUIPO</h3></p></center>
+                    <div class="infinite-scroll-content">
+                      <div id="FEquipos">
+                      </div>
+                      <div class='sentencia2 preloader color-red infinite-scroll-preloader'></div>
+                          </div>
+                    <div class="infinite-scroll-content">
+                     <table id="tablae">
+                     <header>
+                        <style>
+                          table {
+                            border-collapse: collapse;
+                            width: 100%;
+                          }
+
+                          th, td {
+                            text-align: center;
+                            padding: 8px;
+                          }
+
+                          tr:nth-child(even){background-color: #f2f2f2}
+
+                          th {
+                            background-color: #3590FA;
+                            color: white;
+                          }
+                        </style>
+                      </header>
+                     <tr>
+                      <th>Fotografía</th>
+                      <th>Estado del equipo</th>
+                      <th>Código</th>
+                      <th>Descripción</th>
+                      <th>Cantidad</th>
+                      <th>Ubicación</th>
+                      <th>Motivo</th>
+                      <th>Comentario</th>
+                      </tr>
+                      <tbody id="eq">
+
+                       </tbody>
+                     </table>
+
+                    <div class='sentencia2 preloader color-blue infinite-scroll-preloader'></div>
+                     </div>
+                   </div>
+
+                     <!------------------------------------>
+                     <center><p><h3>IMAGEN</h3></p></center>
+                     <div class="infinite-scroll-content">
+
+                      <div id="FImagen">
+                      </div>
+                      <div class='sentencia3 preloader color-red infinite-scroll-preloader'></div>
+                          </div>
+                     <div class="infinite-scroll-content">
+                       <table id="tablai">
+                       <header>
+                          <style>
+                            table {
+                              border-collapse: collapse;
+                              width: 100%;
+                            }
+
+                            th, td {
+                              text-align: center;
+                              padding: 8px;
+                            }
+
+                            tr:nth-child(even){background-color: #f2f2f2}
+
+                            th {
+                              background-color: #3590FA;
+                              color: white;
+                            }
+                          </style>
+                        </header>
+                       <tr>
+                          <th>Fotografía</th>
+                          <th>Tipo imagen</th>
+                          <th>Estado de la imagen</th>
+                          <th>Cantidad</th>
+                          <th>Ubicación</th>
+                          <th>Comentario</th>
+                        </tr>
+
+                        <tbody id="coco1">
+
+                           </tbody>
+                         </table>
+                <div class='sentencia3 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+
+
+                         <!----------------------->
+                         <center><p><h3>ENTRENAMIENTO</h3></p></center>
+                         <div class="infinite-scroll-content">
+                           <table id="tablaen">
+                           <header>
+                              <style>
+                                table {
+                                  border-collapse: collapse;
+                                  width: 100%;
+                                }
+
+                                th, td {
+                                  text-align: center;
+                                  padding: 8px;
+                                }
+
+                                tr:nth-child(even){background-color: #f2f2f2}
+
+                                th {
+                                  background-color: #3590FA;
+                                  color: white;
+                                }
+                              </style>
+                            </header>
+                           <tr>
+                              <th>Fotografía</th>
+                              <th>Persona Capacitada</th>
+                              <th>Puesto</th>
+                              <th>Tema</th>
+                            </tr>
+                            <tbody id="coco2">
+
+                             </tbody>
+                           </table>
+                            <div class='sentencia4 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+                           <!------------------------------------->
+                           <center><p><h3>ALMACEN</h3></p></center>
+                           <div class="infinite-scroll-content">
+                             <table id="tablaal">
+                             <header>
+                                <style>
+                                  table {
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                  }
+
+                                  th, td {
+                                    text-align: center;
+                                    padding: 8px;
+                                  }
+
+                                  tr:nth-child(even){background-color: #f2f2f2}
+
+                                  th {
+                                    background-color: #3590FA;
+                                    color: white;
+                                  }
+                                </style>
+                              </header>
+                             <tr>
+                                <th>Fotografía</th>
+                                  <th>Observaciones</th>
+                              </tr>
+                              <tbody id="coco3">
+
+                               </tbody>
+                             </table>
+                            <div class='sentencia5 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+                             <!---------------------->
+
+                             <center><p><h3>PEDIDO</h3></p></center>
+                              <div class="infinite-scroll-content">
+                                <div id ="FPedidoCheck"></div>
+                                <div class='sentencia5 preloader color-red infinite-scroll-preloader'></div>
+                              </div>
+
+                             <div class="infinite-scroll-content">
+
+                               <table id="tablaPe">
+                               <header>
+                                  <style>
+                                    table {
+                                      border-collapse: collapse;
+                                      width: 100%;
+                                    }
+
+                                    th, td {
+                                      text-align: center;
+                                      padding: 8px;
+                                    }
+
+                                    tr:nth-child(even){background-color: #f2f2f2}
+
+                                    th {
+                                      background-color: #3590FA;
+                                      color: white;
+                                    }
+                                  </style>
+                                </header>
+                               <tr>
+                                  <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Inventario al dia del cliente</th>
+                                    <th>Cantidad para pedido</th>
+                                    <th>Comentario</th>
+                                </tr>
+                                <tbody id ="coco4">
+
+                                 </tbody>
+                               </table>
+                                <div class='sentencia6 preloader color-blue infinite-scroll-preloader'></div>
+                               </div>
+
+                               <div class="block-title">Observaciones (Pedido)</div>
+                                <div class="card">
+                                  <div class="card-content card-content-padding" id="ObserPe"></div>
+                                </div>
+                               <!---------------------------->
+
+                               <center><p><h3>COTIZACION DE NUEVOS PRODUCTOS</h3></p></center>
+                               <div class="infinite-scroll-content">
+                                 <table id="tablaPN">
+                                 <header>
+                                    <style>
+                                      table {
+                                        border-collapse: collapse;
+                                        width: 100%;
+                                      }
+
+                                      th, td {
+                                        text-align: center;
+                                        padding: 8px;
+                                      }
+
+                                      tr:nth-child(even){background-color: #f2f2f2}
+
+                                      th {
+                                        background-color: #3590FA;
+                                        color: white;
+                                      }
+                                    </style>
+                                  </header>
+                                 <tr>
+                                    <th>Código</th>
+                                      <th>Descripción</th>
+                                      <th>Uso</th>
+                                  </tr>
+                                  <tbody id="coco5">
+                                   </tbody>
+                                 </table>
+                                 <div class='sentencia7 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+                <!---------------------------->
+                <div id="cuestionario">
+                  <center><h3>NIVEL DE RIESGO</h3></center>
+                  <div class="infinite-scroll-content">
+                       <table id="Triesgo">
+                       
+                        <tr style='background-color: #83c6dd; color: black; text-align: center;'>
+                          <th colspan="2">Evaluacion de riesgos
+                          </th>
+                        </tr>
+                       <tr>
+                            <th style="background-color: #D6D6D6; color: black; text-align: center">Riesgos criticos</th>
+                            <th style="background-color: #D6D6D6; color: black; text-align: center">Riesgos inminentes</th>
+                        </tr>
+                        <tbody id="riesgos">
+                         </tbody>
+                       </table>
+                       <div class='sentencia10 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+
+                  
+                </div>
+
+                <div id="preguntas">
+                  <br>
+                  <div class="infinite-scroll-content">
+                       <table id="Tpreguntas">
+                       
+                        <tr style='background-color: #83c6dd; color: black; text-align: center;'>
+                          <th colspan="6">FORMATO DE REVISIÓN PARA UNIDADES
+                          </th>
+                        </tr>
+                       <tr>
+                            <th style="background-color: #D6D6D6; color: black; text-align: center">No. pregunta</th>
+                            <th style="background-color: #D6D6D6; color: black; text-align: center">Nivel de riesgo</th>
+                            <th colspan="2" style="background-color: #D6D6D6; color: black; text-align: center">Descripción</th>
+                            <th style="background-color: #D6D6D6; color: black; text-align: center">Si/No</th>
+                            <th style="background-color: #D6D6D6; color: black; text-align: center">Recomendación</th>
+                        </tr>
+                        <tbody id="preguntas">
+                         </tbody>
+                       </table>
+                       <div class='sentencia11 preloader color-blue infinite-scroll-preloader'></div>
+                </div>
+
+                  
+                </div>
+
+
+
+
+
+                <!-------------------------------->
+
+                               <center><p><h3>CIERRE</h3></p></center>
+                               <div class="infinite-scroll-content">
+                                 <table id="tablaCi">
+                                 <header>
+                                    <style>
+                                      table {
+                                        border-collapse: collapse;
+                                        width: 100%;
+                                      }
+
+                                      th, td {
+                                        text-align: center;
+                                        padding: 8px;
+                                      }
+
+                                      tr:nth-child(even){background-color: #f2f2f2}
+
+                                      th {
+                                        background-color: #3590FA;
+                                        color: white;
+                                      }
+                                    </style>
+                                  </header>
+                                 <tr>
+                                    <th>Firma</th>
+                                      <th>Evaluación</th>
+                                      <th>Comentario</th>
+                                      <th>Fotografía</th>
+                                      <th>Nombre</th>
+                                  </tr>
+                                  <tbody id="coco6">
+                                   </tbody>
+                                 </table>
+                                 <div class='sentencia8 preloader color-blue infinite-scroll-preloader'></div>
+
+                </div>
+                     <!--  FIN REPORTE-->
+
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+          pageInit: function (e, page) {
+            //$("#equiposdiv").hide();
+            $("#preguntas").hide();
+            $("#cuestionario").hide();
+                var cliente = app.views.main.router.currentRoute.params.IdCte;
+                var cedula = app.views.main.router.currentRoute.params.IdCed;
+                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectImYa.php', {  IdCed: cedula, IdCte : cliente}, function (data) {
+                    $('.sentencia1').remove();
+                    var content = JSON.parse(data);
+                    for(var c=0; c < content.length; c++){
+                      $("#num").html(content[c].IdCte);
+                      $("#cli").html(content[c].Cliente);
+                      $("#nom").html(content[c].IdCte);
+                      $("#contac").html(content[c].Contacto);
+                      $("#tel").html(content[c].Telefono);
+                      $("#nomcom").html(content[c].NomComercial);
+                      $("#email").html(content[c].Correo);
+                      $("#geolo").html("<br/>["+content[c].geolocation+"]");
+                      $("#imagya").html("<img src='"+content[c].Imagen+"'width='70' height='70' align='right'>");
+                      if(content[c].Estatus  == 1 && content[c].Facturacion == 1){
+                        $status = 'Activo';
+                      }
+                      if(content[c].Estatus == 1 && content[c].Facturacion == 0){
+                        $status = 'Bloqueado';
+                      }
+                      if(content[c].Estatus == 0 && content[c].Facturacion== 0){
+                        $status = 'Inactivo';
+                      }
+                      if(content[c].Estatus == 0 && content[c].Facturacion == 1){
+                        $status = 'Inativo';
+                      }
+                      $("#estat").html($status);
+                      $('.preloader').remove();
+                      $('.infinite-scroll-preloader').remove();
+                  }
+                  });
+                //equipos
+                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectTodoProd.php', { IdCed: cedula}, function (data) {
+                    $('.sentencia2').remove();
+                  for(var e=0; e < data.length; e++){
+                     var content = JSON.parse(data);
+
+
+
+
+
+                        if(content[e].Tickets ==  1){
+                            $NT = "Daño del equipo por uso normal";
+                        }
+                        if(content[e].Tickets ==  2){
+                            $NT = "Equipo dañado por descuido";
+                        }
+                        if(content[e].Tickets ==  3){
+                            $NT = "Mantenimiento correctivo";
+                        }
+                        if(content[e].Tickets ==  0){
+                            $NT = "";
+                        }
+                        if(content[e].ImgPrd == ''){
+                            $("#tablae #eq").append("<tr><td></td><td>"+ content[e].checkBox + "</td><td>" + content[e].IdPrd +"</td><td>"+ content[e].Descripcion + "</td><td>"+ content[e].Cantidad + "</td><td>" + content[e].Ubicacion + "</td><td>" + $NT + "</td><td>" + content[e].Comentario + "</td></tr>");
+                        } else {
+                          $("#equiposdiv").show();
+                            $("#tablae #eq").append("<tr><td><img src='"+content[e].ImgPrd+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+ content[e].checkBox + "</td><td>" + content[e].IdPrd +"</td><td>"+ content[e].Descripcion + "</td><td>"+ content[e].Cantidad + "</td><td>" + content[e].Ubicacion + "</td><td>" + $NT + "</td><td>" + content[e].Comentario + "</td></tr>");
+                        }
+
+
+                       $('.preloader').remove();
+                       $('.infinite-scroll-preloader').remove();
+
+                    }
+                 });
+
+                //IMAGEN
+                 app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectTodoImag.php', { IdCed: cedula}, function (data) {
+                    $('.sentencia3').remove();
+                    var content = JSON.parse(data);
+                    var valor='';
+                    for(var i=0; i < content.length; i++){
+
+                      if(content[i].checkBox == 1){var NomC = "Imagen en buen estado";}
+                      if(content[i].checkBox == 2){var NomC = "Imagen en mal estado";}
+
+                      if(content[i].IdTipoImagen == 1){
+                        $valor = "Wallchart";
+                      }
+                      if(content[i].IdTipoImagen == 2){
+                        $valor = "Etiqueta";
+                      }
+                      if(content[i].IdTipoImagen == 3){
+                        $valor = "Imagen del cliente";
+                      }
+                      if(content[i].IdTipoImagen == 4){
+                        $valor = "Carpeta del cliente";
+                      }
+                      if(content[i].IdTipoImagen == 5){
+                        $valor = "Concentraci&oacute;n de Equipos";
+                      }
+                      if(content[i].FotoImagen == ''){
+                        $("#tablai #coco1").append("<tr><td></td><td>"+ $valor + "</td><td>"+ NomC + "</td><td>"+ content[i].Cantidad + "</td><td>" + content[i].Ubicacion + "</td><td>" + content[i].Comentario + "</td></tr>");
+                      }else {
+                        $("#tablai #coco1").append("<tr><td><img src='"+content[i].FotoImagen+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+ $valor + "</td><td>"+ NomC + "</td><td>"+ content[i].Cantidad + "</td><td>" + content[i].Ubicacion + "</td><td>" + content[i].Comentario + "</td></tr>");
+                      }
+
+                       $('.preloader').remove();
+                       $('.infinite-scroll-preloader').remove();
+                     //}
+                      }
+                   });
+
+                 //Entrenamiento
+                   app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectTodoEntre.php', { IdCed: cedula}, function (data) {
+                    $('.sentencia4').remove();
+                    var content = JSON.parse(data);
+                    for(var en=0; en < content.length; en++){
+                        if(content[en].ImagenFirma == ''){
+                         $("#tablaen #coco2").append("<tr><td></td><td>"+ content[en].PersonaCapacitada + "</td><td>"+ content[en].Puesto + "</td><td>" + content[en].TemaCapacitacion + "</td></tr>");
+                        }else {
+                         $("#tablaen #coco2").append("<tr><td><img src='"+content[en].ImagenFirma+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+ content[en].PersonaCapacitada + "</td><td>"+ content[en].Puesto + "</td><td>" + content[en].TemaCapacitacion + "</td></tr>");
+                        }
+
+                         $('.preloader').remove();
+                         $('.infinite-scroll-preloader').remove();
+                       }
+                   });
+                   //ALMACEN
+                   app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/conInventario.php', {Iced: cedula, opc:'2' }, function (data) {
+                    $('.sentencia5').remove();
+                      for(var x = 0; x < data.length; x++) {
+                      var content = JSON.parse(data);
+                        if(content[x].ImgAlmacen == ''){
+                          $("#tablaal #coco3").append("<tr><td></td><td>"+ content[x].Obser + "</td>");
+                        }else{
+                          $("#tablaal #coco3").append("<tr><td><img src='"+content[x].ImgAlmacen+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+ content[x].Obser + "</td>");
+                        }
+
+
+
+                      $('.preloader').remove();
+                      $('.infinite-scroll-preloader').remove();
+                      }
+                  });
+
+                    //PEDIDO
+                     app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/conInvProd.php', {Iced: cedula }, function (data) {
+                        $('.sentencia6').remove();
+                        for(var x = 0; x < data.length; x++) {
+                        var content = JSON.parse(data);
+
+                            if(content[x].Comentario == ''){
+                                var valComen = '';
+                            } else {
+                                var valComen = content[x].Comentario;
+                            }
+                            $("#tablaPe #coco4").append("<tr><td style='text-align: center;'>" + content[x].IdPrd + "</td><td style='text-align: center;'>" + content[x].Descripcion + "</td><td style='text-align: center;'>"+ content[x].Inventario + "</td><td style='text-align: center;'>" + content[x].CanSolicitada + "</td><td style='text-align: center;'>" + valComen + "</td></tr>");
+                            $('.preloader').remove();
+                            $('.infinite-scroll-preloader').remove();
+                         // }
+                        }
+                    });
+
+
+                    //observaciones pedido
+                     app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/conObservacionesP.php', {Iced: cedula }, function (data) {
+                        $('.sentencia6').remove();
+                        for(var x = 0; x < data.length; x++) {
+                        var content = JSON.parse(data);
+
+                            $("#ObserPe").append(content[x].Observaciones);
+                            $('.preloader').remove();
+                            $('.infinite-scroll-preloader').remove();
+
+                        }
+                    });
+
+                     //nuevos productos
+                     app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/conNewProd.php', {Iced: cedula }, function (data) {
+                        $('.sentencia7').remove();
+                        var content = JSON.parse(data);
+                        for(var x = 0; x < data.length; x++) {
+                        $("#tablaPN #coco5").append("<tr><td>" + content[x].IdPrd + "</td><td>" + content[x].Descripcion + "</td><td>"+ content[x].Uso + "</td></tr>");
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                        }
+                    });
+
+                     //tabla de riesgos
+                     app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/EvaluacionRiesgo.php', {Iced: cedula,IdCte:cliente }, function (data) {
+                        //alert(data);
+                        $('.sentencia10').remove();
+                        var content = JSON.parse(data);
+                       
+                        //alert(content)
+                        if (content.malasC > 4 && content.malasRI < 1) {
+                           $("#cuestionario").show();
+                          $("#Triesgo #riesgos").append("<tr><td style='background-color: #F9665E;color: white;text-align: center;'>" + content.malasC + "</td><td style='text-align: center;'>" + content.malasRI + "</td></tr>");
+                        }
+                        if(content.malasRI > 0 && content.malasC < 5){
+                           $("#cuestionario").show();
+                          $("#Triesgo #riesgos").append("<tr><td style='text-align: center;'>" + content.malasC + "</td><td style='background-color: #F9665E;color: white;text-align: center;'>" + content.malasRI + "</td></tr>");
+                        }if(content.malasC > 4 && content.malasRI > 0){
+                           $("#cuestionario").show();
+                          $("#Triesgo #riesgos").append("<tr><td style='background-color: #F9665E;color: white;text-align: center;'>" + content.malasC + "</td><td style='background-color: #F9665E;color: white;text-align: center;'>" + content.malasRI + "</td></tr>");
+                        }else if(content.malasC >= 0  && content.malasC < 5 && content.malasRI == 0){
+                           $("#cuestionario").show();
+                          $("#Triesgo #riesgos").append("<tr><td style='text-align: center;'>" + content.malasC + "</td><td style='text-align: center;'>" + content.malasRI + "</td></tr>");
+                        }
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                    });
+
+
+                     //tabla de preguntas 
+
+                     app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectPreguntas.php', {Iced: cedula }, function (data) {
+                        $('.sentencia11').remove();
+                       // alert(data)
+                        var content = JSON.parse(data);
+                        var i = 1;
+                        for(var x = 0; x < data.length; x++) {
+
+                          
+                          if (content[x].Value == 1) {
+                            $("#preguntas").show();
+                            $("#Tpreguntas #preguntas").append("<tr><td>"+i+"</td><td>" + content[x].Riesgo + "</td><td style='text-align: left;'>"+ content[x].Pregunta + "</td><td>SI</td><td>"+ content[x].Recomendacion + "</td></tr>");
+                          }else if(content[x].Value == 0){
+                            $("#preguntas").show();
+                            $("#Tpreguntas #preguntas").append("<tr><td>"+i+"</td><td>" + content[x].Riesgo + "</td><td style='text-align: left;'>"+ content[x].Pregunta + "</td><td>NO</td><td>"+ content[x].Recomendacion + "</td></tr>");
+                          }
+                        
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                        i++;
+                        }
+                    });
+
+
+                     //cierre
+                     app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/selectCierre.php', {IdCed: cedula }, function (data) {
+                        $('.sentencia8').remove();
+
+                        var content = JSON.parse(data);
+                        for(var x = 0; x < data.length; x++) {
+                          if (content[x].eval == 1) {
+                            $stars = "<img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'>";
+                          }
+                          if (content[x].eval == 2) {
+                              $stars = "<img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'>";
+                          }
+                          if (content[x].eval == 3) {
+                              $stars = "<img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'>";
+                          }
+                          if (content[x].eval == 4) {
+                              $stars = "<img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_blanca.png' style='width: 20px; height: 20px;'>";
+                          }
+                          if (content[x].eval == 5) {
+                              $stars = "<img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'><img src='img/estrella_azul.png' style='width: 20px; height: 20px;'>";
+                          }
+
+                        if(content[x].cfirma != ''){
+                          $("#tablaCi #coco6").append("<tr><td><img src='"+content[x].cfirma+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td style='text-align: center;'>" + $stars+ "</td><td style='text-align: center;'>"+ content[x].comentarios + "</td><td><img src='"+content[x].fcierre+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+content[x].NombreFirma+"</td></tr>");
+                        } else {
+                          $("#tablaCi #coco6").append("<tr><td></td><td style='text-align: center;'>" + $stars+ "</td><td style='text-align: center;'>"+ content[x].comentarios + "</td><td><img src='"+content[x].fcierre+"' style='width: 70px; height: 90px;' style='width: 70px; height: 90px;'></td><td>"+content[x].NombreFirma+"</td></tr>");
+                        }
+                        
+
+
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                        }
+                    });
+
+          }
+      }
+  }
+</script>

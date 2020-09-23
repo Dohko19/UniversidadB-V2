@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIC - Menu</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#2196f3" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:" />
+
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>-->
+    <script type="text/javascript" src="js/raphael-min.js"></script>
+
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/morris.css">
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="apple-touch-icon" href="img/f7-icon-square.png" />
+    <link rel="icon" href="img/f7-icon.png" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/SimpleStarRating.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/databaseHandler.js"></script>
+    <script type="text/javascript" src="js/productHandler.js"></script>
+    <script type="text/javascript" src="js/in.js"></script>
+    <script type="text/javascript" src="js/morris.min.js"></script>
+    <style type="text/css">
+
+	#signatureparent {
+		color:darkblue;
+		background-color:white;
+		padding:1px;
+	}
+
+	/*This is the div within which the signature canvas is fitted*/
+	#signature {
+		border: 2px groove aliceblue;
+		background-color:white;
+        border-radius: 1em;
+	}
+
+	/* Drawing the 'gripper' for touch-enabled devices */
+	html.touch #content {
+		float:left;
+		width:92%;
+	}
+	html.touch #scrollgrabber {
+		float:right;
+		width:4%;
+		margin-right:2%;
+		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
+	}
+	html.borderradius #scrollgrabber {
+		border-radius: 2em;
+	}
+    .big-blue{
+                color: #2E9AFE;
+                font-size: 40px;
+    }
+  .autocomplete-dropdown{
+    white-space: normal;
+    overflow: visible;
+    }
+  .item-title{
+    white-space: normal;
+    overflow: visible;
+    text-align: left;
+    }
+    hr {
+      border:none;
+      height: 20px;
+        width: 90%;
+        height: 50px;
+        margin-top: 0;
+        border-bottom: 1px solid #17202A;
+        box-shadow: 0 20px 20px -20px #2E9AFE;
+      margin: -50px auto 10px;
+    }
+</style>
+</head>
+<body>
+<div id="app">
+    <div class="statusbar"></div>
+    <div class="panel panel-left panel-cover panel-resizable">
+      <div class="page">
+        <div class="page-content">
+          <div class="block-title" style="text-align: center;"><img src="img/logo.png" width="60px" /><br /><br />Ver. 3.3.1</div>
+            <div class="list">
+            <ul>
+
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="#" onclick="ptrpro();">Actualizar datos</a></div>
+                <div class="item-after"><span id="processclick" class="99badge99" hidden="true">0%</span></div>
+                </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><a href="/admonproyectos/" class="panel-close" >Administraci&oacute;n de proyectos</a></div>
+                    </div>
+                </div>
+            </li>
+
+            <div class="item-content">
+                <div class="item-inner">
+                    <div class="item-title"><a href="/continuarc/" class="panel-close" >Continuar cédula</a></div>
+                    <div class="item-after"><span class="badge" id="contce">0</span></div>
+                    <input type="hidden" id="tvic" name="tvic"   />
+                    <input type="hidden" id="tapoyo" name="tapoyo"  />
+                    <input type="hidden" id="tventas" name="tventas"  />
+                </div>
+            </div>
+            </li>
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="/bandeja/" class="panel-close">Bandeja de salida</a></div>
+                <div class="item-after"><span id="contceb" class="badge">0</span></div>
+                <input type="hidden" id="tvic1" name="tvic"   />
+                <input type="hidden" id="tapoyo1" name="tapoyo"  />
+                 <input type="hidden" id="tventas1" name="tventas"  />
+                </div>
+                </div>
+            </li>
+            <!--<li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="#" onclick="actproyectos();">Actualizar proyectos</a></div>
+                <div class="item-after"><span id="processclick" class="99badge99" hidden="true">0%</span></div>
+                </div>
+                </div>
+            </li> -->
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="#" onclick="logaout();">Cerrar sesión</a></div>
+                </div>
+                </div>
+            </li>
+            </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="800" data-url="/">
+      <div class="page">
+        <div class="navbar">
+         <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons if-not-md">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+              </a>
+            </div>
+            <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup=".demo-popup-menu" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+                    </a>
+                </div>
+
+          </div>
+        </div>
+        <div class="popup demo-popup-menu">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="title" style="color: #a1a1a1">Ayuda</div>
+                <div class="right"><a href="#" class="link popup-close">Close</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="block">
+
+                <style type="text/css">
+                  h2 {color: #222; text-align: center;}
+                  .all {font-size: 10pt;color: #222; }
+                  ul {list-style-type: circle;}
+                </style>
+                <center>
+                    <span style="color:#00008B; font-size: 20pt"><strong>Menu</strong></span>
+                </center>
+                <hr width="90%">
+                <span class="all">
+                    <span>
+                        <center><font color="#a90000"><strong>RECUERDA<br>No te olvides de las pantallas de "Ayuda" contienen varios tips o dudas resueltas.</strong></font></center>
+                    </span><br>
+                    <span>
+                        <font color="#a90000"><strong>¿Que sucede si no me cargan los clientes?</strong></font><br />
+                        Recuerda que al <strong>actualizar</strong> o <strong>Instalar</strong> de play store, debes <font color="#1e90ff"><strong>volver a actualizar tus datos</strong></font>, para ello existen dos formas:
+                        <br>
+                        <strong>&nbsp; &nbsp; &nbsp; &nbsp;1.-</strong> En el menu de las tres rayas.<br />
+                        <strong>&nbsp; &nbsp; &nbsp; &nbsp;2.-</strong> deslizando hacia a bajo en la pantalla de menu.<br />
+                        <center><img src="img/ayuda/tresRayas.png" width="40%"> &nbsp; &nbsp; <img src="img/ayuda/bajarMenu.png" width="40%"s></center>
+                    </span><br />
+
+                    <span>
+                        <font color="#a90000"><strong>¿Que sucede si no existe mi cliente?</strong></font>
+                    </span>
+                        <ul>
+                            <li>Si el cliente no esta cargado, podrás colocar el cliente<font color="#1e90ff"><strong> 10,000 </strong></font> que se tomara como una visita extraordinaria.<br>
+                                <font color="#a90000"><strong>Nota:</strong></font> Dar aviso a TIC para que se te vea reflejado en tu programa de visitas.
+                            </li><br>
+
+                            <center><img src="img/ayuda/cliente10000.png" width="70%" style="border: 1px solid;"></center><br>
+                            <li>Dar aviso a soporte de VIC en TIC para que se te de solución.</li>
+                        </ul>
+
+
+
+                    <!--
+                       <li>Se tienen cuatro botones donde <font color="#1e90ff"><strong>por el momento</strong>    </font> solo funcionan los dos primeros <strong>Programa de visitas</strong> e <strong>Historial de visitas</strong>.
+                            <center><img src="img/ayuda/programa.png" width="15%">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="img/ayuda/historial.png" width="15%" ></center>
+                        </li>
+                    -->
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="page-content ptr-content">
+        <div class="ptr-preloader color-red">
+            <br /><br /><br /><div id="process" style="text-align: center; color: #FF0000; font-weight: bold; background-color:#FFFFFF;" hidden="true">0%</div>
+            <div class="preloader color-red"></div>
+            <div class="ptr-arrow"></div>
+        </div>
+
+            <center><h2 style="color:#000;">Visita de Impacto al Cliente</h2></center>
+            <hr><br/>
+            <div>
+                <center>
+                    <a class="item-content item-link" href="#" onclick="openVerticalButtons();"  style="text-decoration: none;" ><img src="img/NewDesingMenuVIC/cuadroRojoButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/excel/"><img src="img/NewDesingMenuVIC/cuadroAzulButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/pdfs/" style="text-decoration: none;" ><img src="img/NewDesingMenuVIC/cuadroCafeButton.png" width="100%"></a>
+                    <img src="img/NewDesingMenuVIC/cuadroVerdeButton.png" width="100%">
+                    <a class="item-content item-link" href="/consultaventas/"><img src="img/NewDesingMenuVIC/cuadroNaranjaButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/tablerocalificaciones/"><img src="img/NewDesingMenuVIC/cuadroMoradoButton.png" width="100%"></a>
+                    <a class="item-content item-link" href="/tablaventa/" onclick="horizontal();" style="text-decoration: none;"><img src="img/NewDesingMenuVIC/cuadroAmarilloButton.png" width="100%"></a>
+                </center>
+            </div>
+            </div>
+        </div> <!-- PAGE CONTENT -->
+            </div>
+            </div>
+            </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="lib/framework7/js/framework7.bundle.min.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/signature/modernizr.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/metodos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/signature/jSignature.min.noconflict.js"></script>
+    <script src="js/SimpleStarRating.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64-encoded image data
+      // console.log(imageData);
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
+      // Show the captured photo
+      // The in-line CSS rules are used to resize the image
+      //
+      var nameima = "data:image/jpeg;base64," + imageData;
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+
+      $("#imagenC").val(nameima); //modificacion 26 de mayo
+    }
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+      // Get image handle
+      //
+      var largeImage = document.getElementById('largeImage');
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
+      // Show the captured photo
+      // The in-line CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+     // alert(largeImage); ///coloque este el 25 de mayo
+
+    }
+    // A button will call this function
+    //
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
+    // A button will call this function
+    //
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+      //app.dialog.alert('Error' + message, 'Error!');
+      alert("Failed because: "+message);
+    }
+
+    </script>
+    <script>
+
+    //PTR en Click
+    function ptrpro() {
+    $("#processclick").show();
+    $("#processclick").removeClass('99badge99');
+    $("#processclick").addClass('badge');
+    downloader.init({folder: "jsons", unzip: true});
+    downloader.get("http://serviciosbennetts.com//VIC/jsons.zip");
+    document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+            var data = event.data;
+            console.log('Proceso', data);
+            $("#processclick").html(data[0] + "%");
+            if(data[0] == 100){
+                app.ptr.done();
+                $("#processclick").html("Actualizados");
+                downloader.abort();
+            }
+            })
+    document.addEventListener('DOWNLOADER_downloadError', function(event){
+            var data = event.data;
+            console.log('Proceso', data);
+                app.ptr.done();
+                $("#processclick").hide();
+                app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+                downloader.abort();
+            })
+    document.addEventListener('downloadSuccess', function(event){
+            var data = event.data;
+            console.log('Proceso', data);
+                app.ptr.done();
+                $("#processclick").html("Actualizados");
+                downloader.abort();
+            })
+        }
+        // PTR en pantalla
+    var $ptrContent = $('.ptr-content');
+    $ptrContent.on('ptr:refresh', function (e) {
+        $("#process").show();
+        setTimeout(function () {
+    downloader.init({folder: "jsons", unzip: true});
+    downloader.get("http://serviciosbennetts.com//VIC/jsons.zip");
+    document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+            var data = event.data;
+            console.log('Proceso', data);
+            $("#process").html(data[0] + "%");
+            if(data[0] == 100){
+                app.ptr.done();
+                $("#process").hide();
+                downloader.abort();
+            }
+            })
+    document.addEventListener('DOWNLOADER_downloadError', function(event){
+            var data = event.data;
+            console.log('Proceso', data);
+                app.ptr.done();
+                $("#process").hide();
+                app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+                downloader.abort();
+            })
+    document.addEventListener('downloadSuccess', function(event){
+            var data = event.data;
+            console.log('Proceso', data);
+                app.ptr.done();
+                $("#process").hide();
+                downloader.abort();
+            })
+    }, 100)
+    });
+    //valida conexión
+
+    document.addEventListener("online", onOnline, false);
+        function onOnline() {
+
+        // Handle the online event
+
+        databaseHandler.db.transaction(
+            function(tx4){
+
+                tx4.executeSql(
+                    "SELECT c.IdCte, c.IdCedula FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND ci.envio = 1 LIMIT 1",
+                    [IdUsuario],
+                    function(tx4, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            databaseHandler.db.transaction(
+                                function(tx7){
+                                    tx7.executeSql(
+                                        "UPDATE cierre SET envio = 2 WHERE IdCedula = ?",
+                                        [item2.IdCedula],
+                                        function(tx7, results){
+
+                                        }
+                                    );
+                                }
+                            );
+                            llevarTodo(item2.IdCte, item2.IdCedula);
+                        }
+                    },
+                    function(tx4, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //cedula de seguimiento
+        databaseHandler.db.transaction(
+            function(tx4){
+
+                tx4.executeSql(
+                    "SELECT c.IdCte, c.IdCedulaSeg FROM CedulaSeg as c WHERE c.IdUsuario = ? AND c.envio = 1",
+                    [IdUsuario],
+                    function(tx4, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            databaseHandler.db.transaction(
+                                function(tx7){
+                                    tx7.executeSql(
+                                        "UPDATE CedulaSeg SET envio = 2 WHERE IdCedulaSeg = ?",
+                                        [item2.IdCedulaSeg],
+                                        function(tx7, results){
+
+                                        }
+                                    );
+                                }
+                            );
+                            llevarTodoSeg(item2.IdCte, item2.IdCedulaSeg);
+                        }
+                    },
+                    function(tx4, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //cedula de ventas
+        databaseHandler.db.transaction(
+            function(tx4){
+
+                tx4.executeSql(
+                    "SELECT c.IdProyecto, c.IdCedulaV FROM VisitasVentas as c WHERE c.IdUsuario = ? AND c.envio = 1",
+                    [IdUsuario],
+                    function(tx4, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            databaseHandler.db.transaction(
+                                function(tx7){
+                                    tx7.executeSql(
+                                        "UPDATE VisitasVentas SET envio = 2 WHERE IdCedulaV = ?",
+                                        [item2.IdCedulaV],
+                                        function(tx7, results){
+                                        }
+                                    );
+                                }
+                            );
+                            llevarVentaTotal(item2.IdProyecto, item2.IdCedulaV);
+                        }
+                    },
+                    function(tx4, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+      }
+    document.addEventListener("offline", onOffline, false);
+    function networkInfo() {
+     var networkState = navigator.connection.type;
+     var states = {};
+      states[Connection.UNKNOWN]  = 'Unknown connection';
+      states[Connection.ETHERNET] = 'Ethernet connection';
+      states[Connection.WIFI]     = 'WiFi connection';
+      states[Connection.CELL_2G]  = 'Cell 2G connection';
+      states[Connection.CELL_3G]  = 'Cell 3G connection';
+      states[Connection.CELL_4G]  = 'Cell 4G connection';
+      states[Connection.CELL]     = 'Cell generic connection';
+      states[Connection.NONE]     = 'No network connection';
+      alert("Connection type: "+ states[networkState]);
+      }
+      function onOffline() {
+        app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se enviaran o descargaran los datos.', 'Alerta!');
+      }
+
+
+
+$(document).ready(function(){
+        window.localStorage.removeItem("IdCedula");
+        window.localStorage.removeItem("IdCedulaSeg");
+        window.localStorage.removeItem("imagenC");
+        window.localStorage.removeItem("IdCedulaV");
+        window.localStorage.removeItem("IdProyecto");
+        window.localStorage.removeItem("geolocation");
+
+        var IdCte = localStorage.getItem("IdCte");
+        var IdUsuario = localStorage.getItem("IdUsuario");
+        //CONTINUAR CEDULA TOTAL DE PENDIENTES
+        //CONTINUAR CEDULA TOTAL DE PENDIENTES
+        databaseHandler.db.transaction(
+            function(tx4){
+
+                tx4.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.fcierre = '' OR ci.fcierre is NULL )",
+                    [IdUsuario],
+                    function(tx4, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                            for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            $("#tvic").val(length);
+
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tvic").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3);
+                            $("#contce").html(totced);
+                        }
+
+
+                        //fin de cedula de seguimiento
+
+                    },
+                    function(tx4, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //Cedula de seguimiento
+            databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var lengtha = results.rows.length;
+                        if(lengtha > 0){
+                            for(var i = 0; i< lengtha; i++){
+                            var item3 = results.rows.item(i);
+                            $("#tapoyo").val(lengtha);
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tapoyo").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3);
+                            $("#contce").html(totced);
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //cedula de visitas
+
+            databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND c.envio = 0",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var lengtha = results.rows.length;
+                        if(lengtha > 0){
+                            for(var i = 0; i< lengtha; i++){
+                            var item3 = results.rows.item(i);
+                            $("#tventas").val(lengtha);
+                            }
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+
+                            var totced =  parseInt(t1) + parseInt(t2) + parseInt(t3);
+                            $("#contce").html(totced);
+                        } else {
+                            $("#tventas").val('0');
+                            var t1 = $("#tvic").val();
+                            var t2 = $("#tapoyo").val();
+                            var t3 = $("#tventas").val();
+                            var totced =  parseInt(t1) + parseInt(t2)  + parseInt(t3);
+                            $("#contce").html(totced);
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+        //fin cedula de visitas
+
+
+        //FIN DE CONTINUAR CEDULA
+         //TOTAL BANDEJA DE SALIDA
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.envio = 1 OR ci.envio = 2) ORDER BY ci.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            //$("#contceb").html(length);
+                            $("#tvic1").val(length);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22)  + parseInt(t33);
+                            $("#contceb").html(totced1);
+                        } else {
+                            $("#tvic1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22)  + parseInt(t33);
+                            $("#contceb").html(totced1);
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND (envio = 1 or envio = 2)",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                           // $("#contceb").html(length);
+                            $("#tapoyo1").val(length);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33);
+                            $("#contceb").html(totced1);
+
+                        } else {
+                            $("#tapoyo1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33);
+                            $("#contceb").html(totced1);
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //VENTAS
+
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto, p.IdProyecto FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND  (c.envio = 1 OR c.envio = 2) ORDER BY c.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        if(length > 0){
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                           // $("#contceb").html(length);
+                            $("#tventas1").val(length);
+                            }
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33);
+                            $("#contceb").html(totced1);
+
+                        } else {
+                            $("#tventas1").val('0');
+                            var t11 = $("#tvic1").val();
+                            var t22 = $("#tapoyo1").val();
+                            var t33 = $("#tventas1").val();
+                            var totced1 =  parseInt(t11) + parseInt(t22) + parseInt(t33);
+                            $("#contceb").html(totced1);
+                        }
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+        //FIN DE BANDEJA DE SALIDA
+        EliminarRegistros(); //Este aplica para Cedula VIC
+        EliminarApoyoR();
+        EliminarVentas();
+        });
+        function openVerticalButtons() {
+            app.dialog.create({
+                title: 'Tipo de visita',
+                    buttons: [
+                    {
+                        text: 'VIC',
+                    },
+                    {
+                        text: 'APOYO',
+                    },
+                    {
+                        text: 'VENTAS',
+                    },
+                    {
+                        text: '',
+                    },
+                     {
+                        text: 'Cerrar',
+                    },
+                ],
+                onClick: function (dialog, index) {
+                    if(index === 0){
+                         localStorage.setItem("Opcion", '1');
+
+                        app.views.main.router.navigate({ name: 'yallegue'});
+                    }
+                    else if(index === 1){
+                         localStorage.setItem("Opcion", '2');
+
+                        app.views.main.router.navigate({ name: 'yallegue'});
+
+                    }
+                    else if(index === 2){
+                        localStorage.setItem("Opcion", '3');
+                        app.views.main.router.navigate({ name: 'yalleguev'});
+
+                    } else if(index === 4){
+                        window.location.href = "./menu.html";
+                    }
+                },
+                verticalButtons: true,
+            }).open();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-background-mode": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-device-orientation": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-file-downloader": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-sqlite-2": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova.plugins.diagnostic": {
+      "ANDROID_SUPPORT_VERSION": "28.+",
+      "PACKAGE_NAME": "com.bennetts.university"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-zip": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-file-md5": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    }
+  }
+}

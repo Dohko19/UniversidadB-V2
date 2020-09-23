@@ -1,0 +1,493 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" onclick="regresar();" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup=".demo-popup-historialVisitas" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup demo-popup-historialVisitas">
+            <div class="page">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="title" style="color: #a1a1a1">Ayuda</div>
+                        <div class="right"><a href="#" class="link popup-close">Close</a></div>
+                    </div>
+                </div>
+                <div class="block">
+                    <style type="text/css">
+                      h2 {color: #222; text-align: center;}
+                      .all {font-size: 10pt;color: #222; text-align: justify;}
+                    </style>
+                    <center>
+                        <span style="color:#00008B; font-size: 20pt"><strong>Historial de visitas</strong></span>
+                    </center>
+                    <hr width="90%">
+                    <span class="all">
+                        <span>Esta pantalla cuenta con una tabla que nos mostrará al momento todas y cada una de las cédulas que llevemos registradas.</span><br><br>
+                        Vamos a contar con <font color="#1e90ff">5 (cinco)</font> encabezados: <strong>Visita</strong>,<strong> Cliente o proyecto</strong>,<strong>Fecha</strong>,<strong> PDF</strong> y<strong> Envios</strong>.<br>
+                        <span style="color:#a1a1a1;font-size: 9pt;text-align: justify;">Imagen de referecia:</span><br>
+                        <center><img src="img/ayuda/tablaHistorial.png" width="60%"></center>
+                        <br><br>
+                        <span><strong>- Visita: </strong></span>Nos indicara que tipo de cedula es.(VIC, Apoyo, Ventas).<br>
+                        <span><strong>- Cliente o proyecto: </strong></span>En caso de ser VIC o Apoyo nos mostrara el cliente con el que trabajamos y si es Ventas nos mostrara el proyecto.<br>
+                        <span><strong>- Fecha: </strong></span>Fecha en que se hizo la cedula.<br>
+                        <span><strong>- PDF: </strong></span>En este icono vamos a poder darle click  y automaticamente nos abrirá el reporte <strong>completo</strong> tal y como se haya capturado la cedula.<br>
+                        <center><img src="img/ver.png" width="15%"></center><br>
+                        <span><strong>- Envios: </strong></span>En este icono nosotros vamos a poder mandar ese reporte en formato PDF  a cualquier correo solo se tedra que escribir correctamente el correo y en automatico se enviara.<br>
+                        <center><img src="img/enviar.png" width="20%"></center><br><br>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Historial de visitas</h2>
+                <hr>
+                <br/>
+                <!--//BUSCADOR-->
+                <span style="color: grey; ">Buscador</span>
+                <table style="width: 100%;">
+                    <tr>
+                        <td colspan="2"><span class="span" style="font-weight: bold;">Cliente:</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="text" placeholder="Cliente" name="ncliente" id="autocomplete-dropdown-ajax" class="autocomplete-dropdown item-title" style="border: none; border-bottom: 2px solid #3590FA;"/></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span" style="font-weight: bold;">Fecha inicial:</span></td>
+                        <td><span class="span" style="font-weight: bold;">Fecha final:</span></td>
+                    </tr>
+                    <tr>
+                        <td><input style="border: none; border-bottom: 2px solid #3590FA;" type='date' id='Fecha0' name='Fecha0' /></td>
+                        <td><input style="border: none; border-bottom: 2px solid #3590FA;" type='date' id='Fecha1' name='Fecha1' /></td>
+                    </tr>
+                    
+                </table>
+
+
+                <!--//LIST-->
+                <div class="page-content infinite-scroll-content infinite-scroll-top">
+                    <style type="text/css">
+                        #encabezado1{background-color: #3590FA;color: white; font-weight: bold;}
+                        #encabezado2{font-weight: bold;}
+                        #encabezado3{background-color: #3590FA;color: white; font-weight: bold;}
+                        #encabezado4{background-color: #3590FA;color: white; font-weight: bold;}
+                    </style>
+                    <div class="list sortable">
+                        <ul id="cedul">
+                            <li>
+                                <div id="encabezado1" class='item-content'>
+                                    <div class='item-media'>Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class='item-inner'>
+                                        <div id="encabezado2" class='item-title'>Cliente o Proyecto</div>
+                                        <div id="encabezado3" class='item-after'>Fecha</div>
+                                        <div id="encabezado4" class='item-after'>PDF</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--<li>
+                                <div class='item-content'>
+                                    <div class='item-media'>DANNY</div>
+                                    <div class='item-inner'>
+                                        <div class='item-title'>1210 restaurante toks coyoacan sa de cv</div>
+                                        <div class='item-after'>19-01-2020 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src='img/ver.png' width='40px' /></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>Item 3</li>-->
+                        </ul>
+                    </div>
+                    <!-- <div class="preloader infinite-scroll-preloader"></div> -->
+                    <!-- <div id="preloader2"></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    return {
+        on: {
+          pageInit: function (e, page) {
+            var IdU = localStorage.getItem("IdUsuario");
+
+            //Infinite preloader
+            // var $$ = Dom7;
+            // var allowInfinite = true;
+            // var lastItemIndex = $$('.list sortable li').length;
+            // var maxItems = 150;
+            // var itemsPerLoad = 5;
+            // $$('.infinite-scroll-content').on('infinite', function () {
+            //     if (!allowInfinite) return;
+            //     allowInfinite = false;
+            //     setTimeout(function () {
+            //         allowInfinite = true;
+            //         if (lastItemIndex >= maxItems) {
+            //             app.infiniteScroll.destroy('.infinite-scroll-content');
+            //             $$('.infinite-scroll-preloader').remove();
+            //             return;
+            //         }
+            //         var html = '';
+            //         for (var i = lastItemIndex + 1; i <= lastItemIndex + itemsPerLoad; i++) {
+            //             //html += '<li>Item ' + i + '</li>';
+            //             cargar();
+            //         }
+            //         $$('.list sortable ul').append(html);
+            //         lastItemIndex = $$('.list sortable li').length;
+            //     }, 1000);
+            // });
+
+            //Consultas para lista
+            function cargar(){
+                var Division = localStorage.getItem("Division");
+                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/PRpdf.php', { IdUsuario: IdU}, function (data) {
+                    var content = JSON.parse(data);
+                    if(content.length > 0){
+                        for(var e=0; e < content.length; e++){
+                            var resp = content[e].FechaCaptura.split(' ');
+                            if(content[e].TipoCed == 1){
+                                var $NTipo ="VIC";
+                                $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+$NTipo+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                            } else if(content[e].TipoCed == 2){
+                                var $NTipo ="Apoyo";
+                                $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+$NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                            } else if(content[e].TipoCed == 3){
+                                var $NTipo ="Ventas";
+                                $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+$NTipo+"</div><div class='item-inner'><div class='item-title'>" +content[e].NombreProyecto+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf("+content[e].IdProyecto+","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                            }else if(content[e].TipoCed == 4){
+                                var $NTipo ="Auditoria";
+                                $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+$NTipo+"</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdfAuditoria("+Division+","+content[e].IdCedula+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                            }
+                        }  
+                    }else{
+                    }
+                    
+                });
+            }
+
+            cargar();
+
+                //Contenido para el autocompletador
+                var Division = localStorage.getItem("Division");
+                if(Division == 3){
+                    var NomJson ='ClientesCDC'; var NomDescCli = 'ClientesCDCDesc';
+                }else{
+                    var NomJson = 'clientes_desc'; var NomDescCli = "Clientes";
+                }
+                self.autocompleteDropdownAjax = app.autocomplete.create({
+                    inputEl: '#autocomplete-dropdown-ajax',
+                    openIn: 'dropdown',
+                    preloader: true,
+                    valueProperty: 'id',
+                    textProperty:  'name',
+                    limit: 10,
+                    dropdownPlaceholderText: 'Seleccionar Cliente...',
+                    source: function (query, render) {
+                        var autocomplete = this;
+                        var results = [];
+                        if (query.length === 0) {
+                          render(results);
+                          return;
+                        }
+                        autocomplete.preloaderShow();
+                        app.request({
+                            url: cordova.file.externalRootDirectory + "/jsons/"+NomJson+".json",
+                            method: 'GET',
+                            dataType: 'json',
+                            data: {
+                              query: query,
+                            },
+                            success: function (data) {
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
+                                }
+                                autocomplete.preloaderHide();
+                                render(results);
+                            }
+                        });
+                    }
+                });
+
+                $("#Fecha1").change(function(){
+                    var FechaI  = $("#Fecha0").val();
+                    if(FechaI == ''){
+                        app.dialog.alert("Favor de ingresar la fecha inicial","Aviso!");
+                        $("#Fecha1").val("");
+                    }else{
+                        var FechaI  = $("#Fecha0").val();
+                        var FechaF  = $("#Fecha1").val();
+
+                        app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/ConsultarCedMesRango.php', { IdUsuario: IdU, FechaI : FechaI, FechaF: FechaF}, function (data) {
+                            var content = JSON.parse(data);
+                            var list = document.getElementById("cedul");
+                            while (list.hasChildNodes()) {
+                                list.removeChild(list.firstChild);
+                            }
+                            $("#cedul").append('<li><div id="encabezado1" class="item-content"><div class="item-media">Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="item-inner"><div id="encabezado2" class="item-title">Cliente o <br>proyecto</div><div id="encabezado3" class="item-after">Fecha</div><div id="encabezado4" class="item-after">PDF</div> </div></div></li>');
+
+                            document.getElementById("encabezado1").style.backgroundColor = "#F1DCAE";
+                            document.getElementById("encabezado2").style.backgroundColor = "#F1DCAE";
+                            document.getElementById("encabezado3").style.backgroundColor = "#F1DCAE";
+                            document.getElementById("encabezado4").style.backgroundColor = "#F1DCAE";
+                            document.getElementById("encabezado1").style.fontWeight = "bold";
+                            document.getElementById("encabezado2").style.fontWeight = "bold";
+                            document.getElementById("encabezado3").style.fontWeight = "bold";
+                            document.getElementById("encabezado4").style.fontWeight = "bold";
+                            document.getElementById("encabezado1").style.color = "black";
+                            document.getElementById("encabezado2").style.color = "black";
+                            document.getElementById("encabezado3").style.color = "black";
+                            document.getElementById("encabezado4").style.color = "black";
+
+                            for(var e=0; e < content.length; e++){
+                                if(content[e].TipoCed != ''){
+                                    if(content[e].TipoCed == 1){
+                                        var NTipo ="VIC";
+                                        var resp = content[e].FechaCaptura.split(' ');
+                                        $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                        
+                                    } else if(content[e].TipoCed == 2){
+                                        var NTipo ="Apoyo";
+                                        var resp = content[e].FechaCaptura.split(' ');
+                                        $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                        
+                                    } else if(content[e].TipoCed == 4){
+                                        var NTipo ="Auditoria";
+                                        var resp = content[e].FechaCaptura.split(' ');
+                                        $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdfAuditoria("+Division+","+content[e].IdCedula+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+
+                                    }
+                                }else{
+                                }
+                            }
+                        });
+                    }
+                });
+    
+                //Mandamos los datos al autocompletador
+                $('#autocomplete-dropdown-ajax').change(function () {
+                    var cliente = $("#autocomplete-dropdown-ajax").val();
+                    var FechaI  = $("#Fecha0").val();
+                    var FechaF  = $("#Fecha1").val();
+                    if(cliente == ""){
+                        var list = document.getElementById("cedul");
+                        while (list.hasChildNodes()) {
+                            list.removeChild(list.firstChild);
+                        }
+                        $("#cedul").append('<li><div id="encabezado1" class="item-content"><div class="item-media">Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="item-inner"><div id="encabezado2" class="item-title">Cliente o <br>proyecto</div><div id="encabezado3" class="item-after">Fecha</div><div id="encabezado4" class="item-after">PDF</div> </div></div></li>');
+                        document.getElementById("encabezado1").style.backgroundColor = "#3590FA";
+                        document.getElementById("encabezado2").style.backgroundColor = "#3590FA";
+                        document.getElementById("encabezado3").style.backgroundColor = "#3590FA";
+                        document.getElementById("encabezado4").style.backgroundColor = "#3590FA";
+                        document.getElementById("encabezado1").style.fontWeight = "bold";
+                        document.getElementById("encabezado2").style.fontWeight = "bold";
+                        document.getElementById("encabezado3").style.fontWeight = "bold";
+                        document.getElementById("encabezado4").style.fontWeight = "bold";
+                        document.getElementById("encabezado1").style.color = "white";
+                        document.getElementById("encabezado2").style.color = "white";
+                        document.getElementById("encabezado3").style.color = "white";
+                        document.getElementById("encabezado4").style.color = "white";
+
+                        cargar();
+                    }else{
+                        databaseHandler.db.transaction(
+                            function(tx1){
+                                tx1.executeSql("SELECT * FROM Clientes WHERE IdCte = ? AND Division = ?",
+                                    [cliente, Division],
+                                    function(tx, results){
+                                        var length = results.rows.length;
+                                        if(length > 0){
+                                            var item = results.rows.item(0);
+                                            $("#autocomplete-dropdown-ajax").val(item.IdCte +" "+ item.Cliente);
+                                            var IdCte = item.IdCte;
+                                            if (FechaI == "" && FechaF == "") {
+                                                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/ConsultarCedMes.php', { IdUsuario: IdU, IdCte: IdCte}, function (data) {
+                                                    var content = JSON.parse(data);
+                                                    var list = document.getElementById("cedul");
+                                                    while (list.hasChildNodes()) {
+                                                        list.removeChild(list.firstChild);
+                                                    }
+                                                    $("#cedul").append('<li><div id="encabezado1" class="item-content"><div class="item-media">Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="item-inner"><div id="encabezado2" class="item-title">Cliente o <br>proyecto</div><div id="encabezado3" class="item-after">Fecha</div><div id="encabezado4" class="item-after">PDF</div> </div></div></li>');
+                                                    document.getElementById("encabezado1").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado2").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado3").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado4").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado1").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado2").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado3").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado4").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado1").style.color = "black";
+                                                    document.getElementById("encabezado2").style.color = "black";
+                                                    document.getElementById("encabezado3").style.color = "black";
+                                                    document.getElementById("encabezado4").style.color = "black";
+                                                    for(var e=0; e < content.length; e++){
+                                                        if(content[e].TipoCed == 1){
+                                                            var NTipo ="VIC";
+                                                            var resp = content[e].FechaCaptura.split(' ');
+                                                            $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                            
+                                                        } else if(content[e].TipoCed == 2){
+                                                            var NTipo ="Apoyo";
+                                                            var resp = content[e].FechaCaptura.split(' ');
+                                                            $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");    
+                                                        }
+                                                    }
+                                                });
+                                            }else{
+                                                app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/ConsultarCedMesRango.php', { IdUsuario: IdU, IdCte: IdCte, FechaI : FechaI, FechaF: FechaF}, function (data) {
+                                                    var content = JSON.parse(data);
+                                                    var list = document.getElementById("cedul");
+                                                    while (list.hasChildNodes()) {
+                                                        list.removeChild(list.firstChild);
+                                                    }
+                                                    $("#cedul").append('<li><div id="encabezado1" class="item-content"><div class="item-media">Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="item-inner"><div id="encabezado2" class="item-title">Cliente o <br>proyecto</div><div id="encabezado3" class="item-after">Fecha</div><div id="encabezado4" class="item-after">PDF</div> </div></div></li>');
+                                                    document.getElementById("encabezado1").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado2").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado3").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado4").style.backgroundColor = "#F1DCAE";
+                                                    document.getElementById("encabezado1").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado2").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado3").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado4").style.fontWeight = "bold";
+                                                    document.getElementById("encabezado1").style.color = "black";
+                                                    document.getElementById("encabezado2").style.color = "black";
+                                                    document.getElementById("encabezado3").style.color = "black";
+                                                    document.getElementById("encabezado4").style.color = "black";
+                                                    for(var e=0; e < content.length; e++){
+                                                        if(content[e].TipoCed != ''){
+                                                            if(content[e].TipoCed == 1){
+                                                                var NTipo ="VIC";
+                                                                var resp = content[e].FechaCaptura.split(' ');
+                                                                $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                                
+                                                            } else if(content[e].TipoCed == 2){
+                                                                var NTipo ="Apoyo";
+                                                                var resp = content[e].FechaCaptura.split(' ');
+                                                                $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                               
+                                                            }
+                                                        }else{
+                                                        }
+                                                    }
+                                                });
+                                            }//fin else fecha
+                                        }else{ //Else >0
+                                            app.request.get(cordova.file.externalRootDirectory + "/jsons/"+NomDescCli+".json", function (data) {
+                                                var content2 = JSON.parse(data);
+                                                for(var x = 0; x < content2.length; x++) {
+                                                    if(content2[x].IdCte == cliente){
+                                                        $("#autocomplete-dropdown-ajax").val(content2[x].IdCte +" "+ content2[x].Cliente);
+                                                        var IdCte = content2[x].IdCte;
+                                                        if (FechaI == "" && FechaF == "") {
+                                                            app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/ConsultarCedMes.php', { IdUsuario: IdU, IdCte: IdCte}, function (data) {
+                                                                var content = JSON.parse(data);
+                                                                var list = document.getElementById("cedul");
+                                                                while (list.hasChildNodes()) {
+                                                                    list.removeChild(list.firstChild);
+                                                                }
+                                                                $("#cedul").append('<li><div id="encabezado1" class="item-content"><div class="item-media">Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="item-inner"><div id="encabezado2" class="item-title">Cliente o <br>proyecto</div><div id="encabezado3" class="item-after">Fecha</div><div id="encabezado4" class="item-after">PDF</div> </div></div></li>');
+                                                                document.getElementById("encabezado1").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado2").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado3").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado4").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado1").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado2").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado3").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado4").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado1").style.color = "black";
+                                                                document.getElementById("encabezado2").style.color = "black";
+                                                                document.getElementById("encabezado3").style.color = "black";
+                                                                document.getElementById("encabezado4").style.color = "black";
+                                                                for(var e=0; e < content.length; e++){
+                                                                    if(content[e].TipoCed != ''){
+                                                                        if(content[e].TipoCed == 1){
+                                                                            var NTipo ="VIC";
+                                                                            var resp = content[e].FechaCaptura.split(' ');
+                                                                            $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                                            
+                                                                        } else if(content[e].TipoCed == 2){
+                                                                            var NTipo ="Apoyo";
+                                                                            var resp = content[e].FechaCaptura.split(' ');
+                                                                            $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                                           
+                                                                        }
+                                                                    }else{
+                                                                    }
+                                                                }
+                                                            });
+                                                        }else{
+                                                            
+                                                            app.request.get('http://www.appbennetts.com/VIC/ProcesosVIC7/ConsultarCedMesRango.php', { IdUsuario: IdU, IdCte: IdCte, FechaI : FechaI, FechaF: FechaF}, function (data) {
+                                                                var content = JSON.parse(data);
+                                                                var list = document.getElementById("cedul");
+                                                                while (list.hasChildNodes()) {
+                                                                    list.removeChild(list.firstChild);
+                                                                }
+                                                                $("#cedul").append('<li><div id="encabezado1" class="item-content"><div class="item-media">Visita&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="item-inner"><div id="encabezado2" class="item-title">Cliente o <br>proyecto</div><div id="encabezado3" class="item-after">Fecha</div><div id="encabezado4" class="item-after">PDF</div> </div></div></li>');
+                                                                document.getElementById("encabezado1").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado2").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado3").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado4").style.backgroundColor = "#F1DCAE";
+                                                                document.getElementById("encabezado1").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado2").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado3").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado4").style.fontWeight = "bold";
+                                                                document.getElementById("encabezado1").style.color = "black";
+                                                                document.getElementById("encabezado2").style.color = "black";
+                                                                document.getElementById("encabezado3").style.color = "black";
+                                                                document.getElementById("encabezado4").style.color = "black";
+                                                                for(var e=0; e < content.length; e++){
+                                                                    if(content[e].TipoCed != ''){
+                                                                        if(content[e].TipoCed == 1){
+                                                                            var NTipo ="VIC";
+                                                                            var resp = content[e].FechaCaptura.split(' ');
+                                                                            $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                                            
+                                                                        } else if(content[e].TipoCed == 2){
+                                                                            var NTipo ="Apoyo";
+                                                                            var resp = content[e].FechaCaptura.split(' ');
+                                                                            $("#cedul").append("<li><div class='item-content'><div class='item-media'>"+NTipo+"&nbsp;</div><div class='item-inner'><div class='item-title'>" +content[e].IdCte+" - "+unescape(content[e].Cliente)+ "</div><div class='item-after'>"+resp[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='verpdf(\""+content[e].IdCte+"\","+content[e].IdCedula+","+content[e].TipoCed+")' style='border: none; outline:none;'><img src='img/ver.png' width='40px' /></a></div></div></div></li>");
+                                                                           
+                                                                        }
+                                                                    }else{
+                                                                    }
+                                                                }
+                                                            });
+                                                        }//fin else fecha
+                                                    }//fin cliente json
+                                                }//fin recorrer json
+                                            });
+                                        }//fin else >0
+                                    },
+                                    function(tx, error){
+                                        console.log("Error al consultar: " + error.message);
+                                    }
+                                );
+                                console.log("Consulta correcta");
+                            },
+                            function(error){},
+                            function(){}
+                        );
+                    }//fin if cliente null
+                });
+    
+            }//Fin function
+        }
+    }
+</script>

@@ -1,0 +1,218 @@
+<template>
+  <div class="view view-main view-init safe-areas">
+  <div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Back</span>
+        </a>
+      </div>
+      <div class="title">Cierre con el Cliente</div>
+    </div>
+  </div>
+  <div class="toolbar toolbar-bottom tabbar">
+    <font size="1">
+      <div class="toolbar-inner">
+        <a href="#tab-1" class="tab-link tab-link-active" style="font-size: 16px;">Cliente</a>
+        <a href="#tab-2" class="tab-link" style="font-size: 16px;">Recorrido</a>
+      </div>
+    </font>
+  </div>
+  <div class="tabs-animated-wrap">
+    <div class="tabs">
+      <div id="tab-1" class="page-content tab tab-active">
+        <div class="block">
+          <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+            <h2 style="color:#00008B;">Datos Generales</h2>
+            <p>   
+              <span style="color: #9DC7F8; font-weight: bold;" id ="num"> </span> 
+              <span style="color: #9DC7F8;"> - </span> 
+              <span style="color: #9DC7F8; font-weight: bold;" id ="cli"></span>
+            </p>
+          </div>
+            <div style="text-align: left; justify-content:left; margin-right:auto; margin-left:auto; width: 99%;">
+            <div class="infinite-scroll-content">
+            <div class='sentencia1 preloader color-red infinite-scroll-preloader'></div>
+                </div>
+              <table id = "imyal" cellpadding="10" >
+                
+                <tbody id="imya">
+                  <tr>
+                    <th>Nombre comercial:</th>
+                    <td><span id ="nomcom"></span></td>
+                  </tr>
+                  <tr>
+                    <th>Contacto:</th>
+                    <td><span id ="contac"></span></td>
+                  </tr>
+                  <tr>
+                    <th>Teléfono:</th>
+                    <td><span id ="tel"></span></td>
+                  </tr>
+                  <tr>
+                    <th>Email:</th>
+                    <td><span id ="email"></span></td>
+                  </tr>
+                  <tr>
+                    <th>Estatus:</th>
+                    <td><span id ="estat"></span></td>
+                  </tr>
+                  <tr>
+                    <th>Imagen:</th>
+                    <td><span id ="imagya"></span></td>
+                  </tr>
+                  
+                  
+                  </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+      
+
+      <div id="tab-2" class="page-content tab">
+       
+       <div class="block-title" style="text-align: center;">Equipos</div>
+        <div class="infinite-scroll-content">
+            <div id="FEquipos">
+            </div>
+            <div class='sentencia2 preloader color-red infinite-scroll-preloader'></div>
+                </div>
+       
+      
+          <div class="card data-table" >
+              <div class="infinite-scroll-content">
+                  <table id="Seguimiento1">
+                      <thead>
+                          <tr>
+                            <th class="numeric-cell" style="text-align: center;">Fotografia</th>
+                            <th class="numeric-cell" style="text-align: center;">Nombre</th>
+                            <th class="numeric-cell" style="text-align: center;">Firma</th>
+                            <th class="numeric-cell" style="text-align: center;">Tipo de seguimiento</th>
+                            <th class="numeric-cell" style="text-align: center;">Comentario</th>
+                            <th class="numeric-cell" style="text-align: center;">Descripcion "Otro"</th>
+                          </tr>
+                      </thead>
+                      <tbody id="Seg1">
+                      
+                      </tbody>
+                  </table>
+              
+              <div class='sentencia6 preloader color-red infinite-scroll-preloader'></div>
+          </div>
+        </div><br /><br />
+        <div style="text-align: center;">
+            <a href="#" onclick="gEnvioCS();" style="border:none; outline:none;"><img src="img/save2.png" width="40px" /></a>
+        </div>  
+               
+</div>
+          <br /><br/>
+     </div>
+      
+
+    </div>
+  </div>
+</div>
+</div>
+</template>
+<script>
+  return {
+    on: {
+      pageInit: function (e, page) {
+
+    //    var IdCte = localStorage.getItem("IdCte");
+        var icedula = localStorage.getItem("IdCedulaSeg");
+        
+        //Datos generales e imagen
+        databaseHandler.db.transaction(
+            function(tx5){
+
+                tx5.executeSql(
+                    "SELECT d.NomComercial, d.NomContacto, d.Telefono, d.Email, d.Cliente, d.Estatus, c.Imagen, c.IdCte FROM CedulaSeg as c INNER JOIN Clientes as d ON c.IdCte = d.IdCte WHERE IdCedulaSeg = ?",
+                    [icedula],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        var item2 = results.rows.item(0);
+                        $("#num").html(item2.IdCte);
+                        $("#cli").html(item2.Cliente);
+                        $("#nom").html(item2.IdCte);
+                        $("#contac").html(item2.NomContacto);
+                        $("#tel").html(item2.Telefono);
+                        $("#nomcom").html(item2.NomComercial);
+                        $("#email").html(item2.Email);
+                        $("#imagya").html("<img src='"+item2.Imagen+"'width='70' height='70'>");
+                        $("#estat").html(item2.Estatus);  
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove(); 
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+      
+        
+        //equipos
+        databaseHandler.db.transaction(
+            function(tx1){
+
+                tx1.executeSql(
+                    "Select * from Seguimiento where IdCedula = ?",
+                    [icedula],
+                    function(tx, results){
+                        var length = results.rows.length;
+                        var notro='';
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            if(item2.Otro !=''){
+                                notro = item2.Otro;
+                            }  else {
+                                notro = '';
+                            }
+                            if(item2.FotoS == '' && item2.FirmaS == ''){
+                                $("#Seguimiento1 tbody").append("<tr><td text-align: center;></td><td text-align: center;>"+item2.NombreFirma+"</td><td text-align: center;></td><td text-align: center;>" + item2.IdTipoSeguimiento + "</td><td text-align: center;>" + item2.Comentario + "</td><td text-align: center;>"+ notro+"</td></tr>");    
+                            }else if(item2.FotoS !='' && item2.FirmaS == ''){
+                                $("#Seguimiento1 tbody").append("<tr><td text-align: center;><img src='" + item2.FotoS + "' width='60px' /></td><td text-align: center;>"+item2.NombreFirma+"</td><td text-align: center;></td><td text-align: center;>" + item2.IdTipoSeguimiento + "</td><td text-align: center;>" + item2.Comentario + "</td><td text-align: center;>"+ notro+"</td></tr>");
+                            }else if(item2.FotoS =='' && item2.FirmaS != ''){
+                                $("#Seguimiento1 tbody").append("<tr><td text-align: center;></td><td text-align: center;>"+item2.NombreFirma+"</td><td text-align: center;><img src='" + item2.FirmaS + "' width='80px' /></td><td text-align: center;>" + item2.IdTipoSeguimiento + "</td><td text-align: center;>" + item2.Comentario + "</td><td text-align: center;>"+ notro+"</td></tr>");
+                            } else if(item2.FotoS !='' && item2.FirmaS != ''){
+                                $("#Seguimiento1 tbody").append("<tr><td text-align: center;><img src='" + item2.FotoS + "' width='60px' /></td><td text-align: center;>"+item2.NombreFirma+"</td><td text-align: center;><img src='" + item2.FirmaS + "' width='80px' /></td><td text-align: center;>" + item2.IdTipoSeguimiento + "</td><td text-align: center;>" + item2.Comentario + "</td><td text-align: center;>"+ notro+"</td></tr>");    
+                            }
+                            
+                           
+                            
+                        }
+                    },
+                    function(tx, error){
+                        console.log("Error al consultar: " + error.message);
+                    }
+                );
+                console.log("Consulta correcta");
+            },
+            function(error){},
+            function(){}
+        );
+       
+ 
+      
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }
+        function onSuccess(position) {
+            var element = document.getElementById('geolocation');
+            $('#geolocation').val(position.coords.latitude+','+position.coords.longitude);
+        }
+        function onError(error) {
+            alert('Error en la Localización');
+        }
+      }
+    }
+  }
+</script>

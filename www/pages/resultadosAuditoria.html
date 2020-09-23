@@ -1,0 +1,243 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: right; margin-top: 4px;"><img src="img/key.png" width="60px" />&nbsp;&nbsp;&nbsp;</div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#"  class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="title">Cierre auditoria</div>
+            </div>
+        </div>
+
+
+        <div class="toolbar toolbar-bottom tabbar">
+            <font size="1">
+                <div class="toolbar-inner">
+                    <a href="#tab-1" class="tab-link tab-link-active" style="font-size: 16px;">Resultados</a>
+                    <a href="#tab-2" class="tab-link" style="font-size: 16px;">Cierre</a>
+                </div>
+            </font>
+        </div>
+
+        <div class="tabs-animated-wrap">
+            <div class="tabs">
+
+                <div id="tab-1" class="page-content tab tab-active form-store-data">
+                    <center>
+                        <h2 style="color:#00008B;">Resultados</h2>
+                        <hr><br>
+                        <span id ="NombreCliente" style="font-weight: bold; color: grey; size: 14px"></span>
+                        <br><br>
+                        <div><span style='font-weight: bold; font-size: 12px;'>Fecha: </span><span id="FechaCre" style="font-size: 12px;"></span></div>
+                        <div id="TablaResultados">
+                            <table style='width: 90%; ' bordercolor='#fff'>
+                                <tr>
+                                    <th colspan='5' style='background-color: #3590FA; color: white; text-align: center;'>SEMAFORO DE RIESGO</th>
+                                </tr>
+                                <tr>
+                                    <th style='background-color: #59A5FE; color: white; text-align: center;'>Rango</th>
+                                    <th style='background-color: #59A5FE; color: white; text-align: center;'>Puntuación total</th>
+                                    <th style='background-color: #59A5FE; color: white; text-align: center;'>Porcentaje</th> 
+                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td id = 'contentColor1'></td>
+                                        <td id = 'contentColor2'></td>
+                                        <td id = 'contentColor3'></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br> 
+                        <table>
+                            <tr>
+                                <td style='color: gray; font-size: 10px;'><span style="background-color: #88FF54;">&nbsp;&nbsp;&nbsp;</span> Aceptable&nbsp;&nbsp;</td>
+                                <td style='color: gray; font-size: 10px;'><span style="background-color: yellow;">&nbsp;&nbsp;&nbsp;</span> Áreas por subsanar&nbsp;</td>
+                                <td style='color: gray; font-size: 10px;'><span style="background-color: red;">&nbsp;&nbsp;&nbsp;</span> Sanción o clausura</td>
+                            </tr>
+                            <tr>
+                                <td style='color: gray; text-align: center; font-size: 10px;'>De 47 a 54</td>
+                                <td style='color: gray; text-align: center; font-size: 10px;'>De 42 a 46</td>
+                                <td style='color: gray; text-align: center; font-size: 10px;'>Menos de 42</td>
+                            </tr>
+                        </table>
+                        <!-- <br>
+                        <h2 style="color: #00008B;">Resumen de visitas en negativo</h2>
+                        <hr>
+                        <table id="TablaResu"  style='width: 90%; ' bordercolor='#fff'>
+                            <th colspan='5' style='background-color: #3590FA; color: white; text-align: center;'>Preguntas en negativo</th>
+                            <tr>
+                                <th style='background-color: gray; color: white; text-align: center;'>#</th>
+                                <th style='background-color: gray; color: white; text-align: center;'>Pregunta</th>
+                                <th style='background-color: gray; color: white; text-align: center;'>Calificación</th>
+                                <th style='background-color: gray; color: white; text-align: center;'>Comentario</th>
+                            </tr>
+                            <tbody id="TR">
+                                
+                            </tbody>
+                        </table> -->
+                    </center>
+                </div>
+
+
+
+                <div id="tab-2" class="page-content tab">
+                    <div class="block">
+                        <center>
+                            <h2 style="color:#00008B;">Cierre</h2>
+                            <hr><br>
+                            
+                            <label style="font-size: 15px;"><strong>Nombre</strong></label><br>
+                            <input style="display: block;margin: 0 auto;width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2);height: 35px;line-height: 45px;  margin-bottom: 10px;font-size: 1em;" class="spanBlanco" type="text" name="NombreCierre" id="NombreCierre" placeholder="Nombre:"><br>
+                            <label style="font-size: 15px;"><strong>Comentarios adicionales</strong></label><br>
+                            <textarea id="ComentarioCierre" name="ComentarioCierre" rows="2" cols="20" placeholder="Comentarios" style="display: block;margin: 0 auto;width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2);line-height: 45px;  margin-bottom: 10px;font-size: 1em;" class="spanBlanco"></textarea><br>
+                            <label style="font-size: 15px;"><strong>Firma</strong></label><br>
+                            <input type="hidden" name="signate" id="signate" placeholder="sfirmc"/> 
+                            <img id="ImagenFirmaView" src="" width="65%"><br>
+                            <span id="VolverFirmar" style="color: gray; font-size: 11px;s"></span><br>
+                            <a class="link popup-open" href="#" onclick="landsca();" data-popup=".popup-services"><img src="img/NewDesingComplements/circuloFirmaColor.png" width="65px" /></a><br /><br />
+                            <div class="popup popup-services">
+                                <br />
+                                <a class="link popup-close" onclick="gfirma();" href="#">Guardar Firma</a>
+                                <div id="signatureparent">
+                                    <div id="signature"></div>&nbsp;<br>
+                                </div>
+                            </div>
+                            <a href="#" onclick="CierreAuditoria();" style="border: none; outline:none;"><img src="img/save2.png" width="40px" /></a>
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      
+        
+
+
+
+    </div>
+</template>
+
+<script>
+     return {
+        on: {
+            pageInit: function (e, page) {
+                var IdCedulaA    = localStorage.getItem("IdCedulaA");
+                databaseHandler.db.transaction(
+                    function(tx5){
+                        tx5.executeSql("SELECT * FROM RegistroAuditorias ra INNER JOIN ResultAuditorias r ON ra.IdCedulaA = r.IdCedulaA WHERE ra.IdCedulaA = ?",
+                            [IdCedulaA],
+                            function(tx5, results){
+                                var longitud = results.rows.length;
+                                if(longitud > 0){
+                                    var item = results.rows.item(0);
+                                    $("#NombreCliente").append(item.IdCte + " - " + item.Cliente);
+                                    $("#FechaCre").append(item.FechaCreacion);
+                                        var Total = 0;
+                                        for (var i = 0; i < longitud; i++) {
+                                            var item1 = results.rows.item(i);
+                                            if(item1.Valor == 1){
+                                                Total++;
+                                            }
+                                        }
+                                         var Porcentaje = parseInt(Total) * parseInt(100) / parseInt(longitud);
+                                         var intPorcentaje = Porcentaje.toFixed(2);
+
+                                        $("#contentColor2").append(Total);
+                                        $("#contentColor3").append(intPorcentaje+"%");
+                                        if(Total >= 47){
+                                            $("#contentColor1").append("Aceptable");
+                                            $("#contentColor1").css("background-color", "#B8FE7A");
+                                            $("#contentColor1").css("font-weight", "bold");
+                                            $("#contentColor1").css("color", "black");
+                                            $("#contentColor1").css("text-align", "center");
+                                            $("#contentColor2").css("background-color", "#B8FE7A");
+                                            $("#contentColor2").css("font-weight", "bold");
+                                            $("#contentColor2").css("color", "black");
+                                            $("#contentColor2").css("text-align", "center");
+                                            $("#contentColor3").css("background-color", "#B8FE7A");
+                                            $("#contentColor3").css("font-weight", "bold");
+                                            $("#contentColor3").css("color", "black");
+                                            $("#contentColor3").css("text-align", "center");
+                                        }
+                                        if(Total >= 42 && Total <= 46){
+                                            $("#contentColor1").append("Áreas por subsanar");
+                                            $("#contentColor1").css("background-color", "yellow");
+                                            $("#contentColor1").css("font-weight", "bold");
+                                            $("#contentColor1").css("color", "black");
+                                            $("#contentColor1").css("text-align", "center");
+                                            $("#contentColor2").css("background-color", "yellow");
+                                            $("#contentColor2").css("font-weight", "bold");
+                                            $("#contentColor2").css("color", "black");
+                                            $("#contentColor2").css("text-align", "center");
+                                            $("#contentColor3").css("background-color", "yellow");
+                                            $("#contentColor3").css("font-weight", "bold");
+                                            $("#contentColor3").css("color", "black");
+                                            $("#contentColor3").css("text-align", "center");
+                                        }
+                                        if(Total < 42){
+                                            $("#contentColor1").append("Sanción o clasura");
+                                            $("#contentColor1").css("background-color", "red");
+                                            $("#contentColor1").css("font-weight", "bold");
+                                            $("#contentColor1").css("color", "white");
+                                            $("#contentColor1").css("text-align", "center");
+                                            $("#contentColor2").css("background-color", "red");
+                                            $("#contentColor2").css("font-weight", "bold");
+                                            $("#contentColor2").css("color", "white");
+                                            $("#contentColor2").css("text-align", "center");
+                                            $("#contentColor3").css("background-color", "red");
+                                            $("#contentColor3").css("font-weight", "bold");
+                                            $("#contentColor3").css("color", "white");
+                                            $("#contentColor3").css("text-align", "center");
+                                        }
+                                    
+                                    
+                                } else {
+                                }
+                            },
+                            function(tx5, error){
+                                console.log("Error al guardar consultar los resultados: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );   
+
+                // var IdCedula = localStorage.getItem("IdCedulaA");
+                // // alert(IdCedula)
+                // databaseHandler.db.transaction(
+                //     function(tx1){
+                //         tx1.executeSql("SELECT * FROM ResultAuditorias WHERE IdCedulaA = ?",
+                //         [IdCedula],
+                //         function(tx1, results){
+                //             var valor = results.rows.length; 
+                //             if(valor > 0){
+                //                 for (var i = 0; i < results.length; i++) {
+                //                     var item = results.rows.item(i);
+                //                     $("#TablaResu TR").append("<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>");
+                //                 }
+                                
+                //             }
+                //         });
+                //     }
+                // );
+
+
+
+                $(".spanBlanco").change(function(){
+                    if ($(this).val()=="") {
+                         $(this).css("background-color", "#ffffff");
+                    } else {
+                         $(this).css("background-color", "#E0F8F7");
+                    }
+                });
+                
+            }
+        }
+    }
+</script>

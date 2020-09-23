@@ -1,0 +1,69 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" onclick="regresar();" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup="" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Historial de visitas</h2>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.2/jSignature.min.js" integrity="sha256-D7kWEIHWLFrjqBvSjtsbAWsGSn89lacfFhOShSU/Xuk=" crossorigin="anonymous"></script>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td width="48%">
+                          <label>Firma:</label><br/>
+                          <div id="firma1" style="border: 1px solid blue"></div>
+                        </td>
+                        <td>
+                          <label>Copia:</label><br/>
+                          <img id="resultado" style="border: 1px solid red" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <button id="exportar">Pulse para exportar</button>
+                  <br/><br/><br/><br/><br/><br/>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+ <script>
+    /* Iniciamos la zona de firma */
+    $(function(){
+        $("#firma1").jSignature();
+    });
+
+    /* Capturamos el evento onClick del botón */
+    $( "#exportar" ).click(function() {
+      /* Datos devueltos por jSignature (tipo mime y datos en base64) */
+      var datos = $( "#firma1" ).jSignature("getData", "image");
+      /* Cadena base64 útil montada a partir de los datos proporcionados */
+      var base64 = "data:" + datos.join(',');
+      console.log(base64);
+      $( "#resultado" ).attr("src", base64);
+    });
+</script> 

@@ -1,0 +1,209 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back" onclick="regresar();">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00008B;">Bandeja de salida</h2> 
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">VIC</div>
+                    </div>
+                </div>               
+                <div class="list sortable" id="cedpendientes">
+                  <ul id="bandeja">
+                    
+                  </ul>
+                </div><br />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">APOYO</div>
+                    </div>
+                </div> 
+                <div class="list sortable" id="cedpendientes">
+                  <ul id="bandejaA">
+                    
+                  </ul>
+                </div>
+                <br />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">VENTAS</div>
+                    </div>
+                </div> 
+                <div class="list sortable" id="cedpendientes">
+                  <ul id="bandejaV">
+                    
+                  </ul>
+                </div>
+                <br>
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: left; color:#00008B; font-size: 16px;">AUDITORIAS</div>
+                    </div>
+                </div> 
+                <div class="list sortable" id="cedpendientes">
+                  <ul id="bandejaAudi">
+                    
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+</template>
+<script>
+return {
+    on: {
+      pageInit: function (e, page) {
+        var IdCte = localStorage.getItem("IdCte");
+        var IdUsuario = localStorage.getItem("IdUsuario");
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedula, ct.Cliente, ci.envio FROM Cedula as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte LEFT OUTER JOIN  cierre as ci ON ci.IdCedula = c.IdCedula WHERE c.IdUsuario = ? AND (ci.envio = 1 OR ci.envio = 2 OR ci.envio = 3) ORDER BY ci.envio ASC;",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            if(item2.envio == 1){
+                                var NomEnv = "Lista para enviar";
+                                $("#bandeja").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloRojo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevar(\""+item2.IdCte+"\","+item2.IdCedula+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>");
+                            }
+                            if(item2.envio == 2){
+                                var NomEnv = "Enviando...";
+                                $("#bandeja").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloNaranja.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevar(\""+item2.IdCte+"\","+item2.IdCedula+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            } 
+                            if(item2.envio == 3){
+                                var NomEnv = "Enviado";
+                                $("#bandeja").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloVerde.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;</div></div></div><div class='sortable-handler'></div></li>"); 
+                            }
+                            
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+        
+        //apoyo
+        
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "SELECT c.IdCte, c.FechaCaptura, c.IdCedulaSeg, ct.Cliente, c.envio FROM CedulaSeg as c INNER JOIN Clientes as ct ON ct.IdCte = c.IdCte WHERE c.IdUsuario = ? AND (c.envio = 1 OR c.envio = 2 OR c.envio = 3) ORDER BY c.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            if(item2.envio == 1){
+                                var NomEnv = "Lista para enviar";
+                                $("#bandejaA").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloRojo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevarTodoSegInd(\""+item2.IdCte+"\","+item2.IdCedulaSeg+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            }if(item2.envio == 2){
+                                var NomEnv = "Enviando...";
+                                $("#bandejaA").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloNaranja.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevarTodoSegInd(\""+item2.IdCte+"\","+item2.IdCedulaSeg+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            }if(item2.envio == 3){
+                                var NomEnv = "Enviado";
+                                $("#bandejaA").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloVerde.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;</div></div></div><div class='sortable-handler'></div></li>");
+                            }
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+        
+        //VENTAS
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "SELECT c.FechaVisita, c.IdCedulaV, p.NombreProyecto, p.IdProyecto, c.envio FROM VisitasVentas as c INNER JOIN Proyectos as p ON p.IdProyecto = c.IdProyecto WHERE c.IdUsuario = ? AND  (c.envio = 1 OR c.envio = 2 OR c.envio = 3) ORDER BY c.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            if(item2.envio == 1){
+                                var NomEnv = "Lista para enviar";
+                                $("#bandejaV").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloRojo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>" + item2.NombreProyecto+"</div> <div class='item-after'><br>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevarVenta("+item2.IdProyecto+","+item2.IdCedulaV+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            }if(item2.envio == 2){
+                                var NomEnv = "Enviando...";
+                                $("#bandejaV").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloNaranja.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>" + item2.NombreProyecto+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevarVenta("+item2.IdProyecto+","+item2.IdCedulaV+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            }if(item2.envio == 3){
+                                var NomEnv = "Enviado";
+                                $("#bandejaV").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloVerde.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'> " + item2.NombreProyecto+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;</div></div></div><div class='sortable-handler'></div></li>");
+                            }
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+
+        //AUDITORIAS
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "SELECT * FROM RegistroAuditorias ra WHERE ra.IdUsuario = ? AND (ra.envio = 1 OR ra.envio = 2 OR ra.envio = 3) ORDER BY ra.envio ASC",
+                    [IdUsuario],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item2 = results.rows.item(i);
+                            if(item2.envio == 1){
+                                var NomEnv = "Lista para enviar";
+                                $("#bandejaAudi").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloRojo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'><br>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevarAuditoria(\""+item2.IdCte+"\","+item2.IdCedulaA+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            }if(item2.envio == 2){
+                                var NomEnv = "Enviando...";
+                                $("#bandejaAudi").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloNaranja.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='llevarAuditoria(\""+item2.IdCte+"\","+item2.IdCedulaA+");' style='border: none; outline:none;'><img src='img/enviarCedula.png'  width='40px' height='40px' /></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                            }if(item2.envio == 3){
+                                var NomEnv = "Enviado";
+                                $("#bandejaAudi").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloVerde.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>"+ item2.IdCte + "  " + item2.Cliente+"</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;</div></div></div><div class='sortable-handler'></div></li>");
+                            }
+                        }
+
+                    },
+                    function(tx5, error){
+                        console.log("Error al guardar registro: " + error.message);
+                    }
+                );  
+            },
+            function(error){},
+            function(){}
+        );
+
+
+
+
+
+
+
+    }
+}
+}
+</script>

@@ -1,0 +1,282 @@
+<template>
+<div class="page">
+    <div class="navbar">
+        <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon icon-back"></i>
+                    <span class="if-not-md">Back</span>
+                </a>
+            </div>
+            <div class="right" style="margin-right: 15px">
+                <a href="#" data-popup=".demo-popup-prospecto" class="popup-open">
+                    <i class="icon f7-icons if-not-md">help_round_fill</i>
+                    <i class="icon material-icons if-md">help_outline</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="popup demo-popup-prospecto">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="title" style="color: #a1a1a1">Ayuda</div>
+                <div class="right"><a href="#" class="link popup-close">Close</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="block">
+
+                <style type="text/css">
+                  h2 {color: #222; text-align: center;}
+                  .all {font-size: 10pt;color: #222; text-align: justify;}
+                </style>
+                <center>
+                    <span style="color:#00008B; font-size: 20pt"><strong>Visita proyectos</strong></span>
+                </center>
+                <hr width="90%">
+                <span class="all">
+                     <li>En esta pantalla se te pide que llenes los siguientes campos para concluir con la visita del proyecto.<br />
+                        <strong>Persona que atiende, Puesto de la persona que atiende, Telefono, Correo</strong>
+                            <center><img src="img/ayuda/campospros.png" width="100px"></center>
+                     </li><br /><br />
+                     <li>
+                        Para el campo actividades al darle clic nos <strong>desplegara las opciones</strong>, se debe <strong>seleccionar una opcion</strong> por lo menos.
+                        <center><img src="img/ayuda/actividadespros.png" width="100px"></center><br /><br />
+                     </li>
+                     <li>
+                        Tambien se debe tomar una <strong>fotografia</strong>, la <strong>firma de la persona que atendio</strong> y por ultimo dar <strong>clic en guardar</strong>, al realizar esto se guardar la cedula.
+                        <center><img src="img/ayuda/foto-firma-guardar.png" width="100px"></center><br /><br />
+                     </li>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <div class="page-content">
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+            <h2 style="color:#00008B;">Visita proyectos</h2>
+            <!--<form class="list" id="demo-form1">-->
+           
+            <form id="demo-form">
+                 <!--<a onclick="limpiar();"><img src="img/escoba.png" width="15%" align="right"></a><br>-->
+                <span class="span" style="font-weight: bold;">Persona que atiende:</span>
+                <input class="spanBlanco" type='text' id="NombreRecibe" name="NombreRecibe" placeholder='Nombre:'  /> 
+                <span class="span" style="font-weight: bold;">Puesto de la persona que atiende:</span>
+                <input class="spanBlanco" type='text' id="PuestoRecibe" name="PuestoRecibe" placeholder='Puesto:'/>
+
+                <span class="span" style="font-weight: bold;">Telefono:</span>
+                <input class="spanBlanco"  type='number' id="Telefono" name ="Telefono" placeholder='Telefono:'  />
+
+                <span class="span" style="font-weight: bold;">Correo:</span>
+                <input class="spanBlanco" type='text' id="Correo" name="Correo" placeholder="correo:" />
+
+                <span class="span" style="font-weight: bold;">Actividades:</span>
+
+                <a class="item-link smart-select smart-select-init" data-open-in="popup"  data-searchbar-placeholder="Descripcion">
+                    <select name="Actividades" multiple ="" id="Actividades" class="spanBlanco">
+                        <optgroup label="Actividades">
+                            <option value="1">Censo</option>
+                            <option value="2">Contacto</option>
+                            <option value="3">Presentaci\u00f3n del producto</option>
+                            <option value="4">LIP</option>
+                            <option value="5">AD (Analisis - Diagnostico)</option>
+                            <option value="6">Prueba</option>}
+                            <option value="7">Presentaci\u00f3n de la propuesta</option>
+                            <option value="8">Negociaci\u00f3n</option>
+                            <option value="9">Convenio</option>
+                            <option value="10">Cierre</option>
+                            <option value="11">Presentaci\u00f3n del asesor a cliente nuevo</option>
+                            <option value="12">Acompañamiento con gerente</option>
+                        </optgroup>
+                    </select>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">Actividades</div>
+                        </div>
+                    </div>
+                </a>
+                <br>
+                <div align="center">
+                    <div class="block-title">Minuta</div>
+                    <div class="data-table data-table-init card">
+                        <div class="card-header">
+                            <div class="data-table-links"><a class="button" onclick="agregar();">Agregar</a></div>
+                        </div>
+                        <div class="card-content">
+                            <table id="tablaMinuta">
+                                <thead>
+                                    <tr>
+                                        <th class="label-cell">&nbsp;&nbsp;#&nbsp;&nbsp;</th>
+                                        <th class="label-cell">Tema</th>
+                                        <th class="label-cell">Compromiso</th>
+                                        <th class="label-cell">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </form>
+
+            <!--FOTOGRAFIA-->
+            <a href="#" style="background-color: white; border: none; outline:none;" onclick="capturePhoto();" ><img src="img/cam.png" width="50px" /></a>
+            <br />
+            <img style="display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;" id="smallImage" src="" />
+            <img style="display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;" id="smallImage1" src="" />
+            <input type="hidden" id="imagenC" name="imagenC"/>
+            <br /><br />
+
+            <!--FIRMA-->
+            <input type="hidden" name="signate" id="signate" placeholder="sfirmc" />    
+            
+            <a class="link popup-open" href="#" onclick="landsca();" data-popup=".popup-services"><img src="img/NewDesingComplements/circuloFirmaColor.png" width="70px" /></a><br /><br />
+            
+            <div class="popup popup-services">
+                <br />
+                <a class="link popup-close" onclick="gfirma();" href="#">Guardar Firma</a>
+                <div id="signatureparent">
+                    <div id="signature"></div>
+                </div>
+            </div>
+            
+            <br />         
+            <br />
+            <div class="block-title">Registros Guardados</div>
+            <div class="card data-table">
+            <div class="infinite-scroll-content">
+                <table id ="tablaProspectos">
+                    <thead>
+                        <tr>
+                            <th class="numeric-cell" style="text-align: center;">Acciones</th>
+                            <th class="numeric-cell" style="text-align: center;">Fotografía</th>
+                            <th class="numeric-cell" style="text-align: center;">Firma</th>
+                            <th class="numeric-cell" style="text-align: center;">Nombre quien recibe</th>
+                            <th class="numeric-cell" style="text-align: center;">Puesto</th>
+                            <th class="numeric-cell" style="text-align: center;">Telefono</th>
+                            <th class="numeric-cell" style="text-align: center;">Correo</th>
+                            <th class="numeric-cell" style="text-align: center;">Actividades</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                               
+                    </tbody>
+                </table>
+                <div class='sentencia preloader color-red infinite-scroll-preloader'></div>
+                </div>
+            </div>
+            <br />
+            <div style="text-align: right;">
+                <br />
+                <table style="width:100%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                <tr>
+                <td style="text-align: right;"><a href="#" onclick="guardarProspecto()" style="border: none; outline:none;"><img src="img/save2.png" width="40px" /></a></td>
+                </tr>
+                </table>
+            </div> 
+        </div>
+    </div>
+
+</template>
+
+<script>
+    return {
+        on: {
+            pageInit: function () {
+            //Cargar el contenido si lo tiene
+            var IdCedulaV = localStorage.getItem("IdCedulaV");
+            var IdProyecto = localStorage.getItem("IdProyecto");
+            var NombreProyecto = localStorage.getItem("NombreProyecto");
+            //---------------------INICIO DE JSON-------------------------------------------------''
+            
+            app.request.get(cordova.file.externalRootDirectory + "/jsons/Proyectos.json", function (data) {
+                var content = JSON.parse(data);
+                for (var i = 0; i < content.length; i++) {
+                    if(NombreProyecto == content[i].NombreProyecto){
+                        $("#NombreRecibe").val(content[i].NombreRecibe);
+                        $("#PuestoRecibe").val(content[i].PuestoRecibe);
+                        $("#Telefono").val(content[i].Telefono);
+                        $("#Correo").val(content[i].Correo);
+                    }
+                }
+            });
+                           
+
+            
+            //---------------------Traer datos de minutas----------------------------------------------------
+            databaseHandler.db.transaction(
+                function(tx5){
+                    tx5.executeSql(
+                        "Select * from Minutas where IdProyecto = ?",
+                        [IdProyecto],
+                        function(tx5, results){
+                            var length = results.rows.length;
+                            for(var i = 0; i< length; i++){
+                                var item2 = results.rows.item(i);
+                                $("#tablaMinuta tbody").append("<tr><td text-align: center;>"+ item2.NumeroMinuta +"</td><td text-align: center;>"+item2.Tema+"</td><td text-align: center;>"+item2.Compromiso+"</td><td text-align: center;>"+item2.FechaMinuta+"</td></tr>");
+                                
+                            }
+                            $('.preloader').remove();
+                            $('.infinite-scroll-preloader').remove();    
+                        },
+                        function(tx5, error){
+                            console.log("Error al guardar registro: " + error.message);
+                        }
+                    );  
+                },
+                function(error){},
+                function(){}
+            );
+
+            //-----------------------------------------------------------------------
+            databaseHandler.db.transaction(
+                function(tx5){
+                    tx5.executeSql(
+                        "Select * from Prospectos where IdProyecto = ? AND IdCedulaV = ?",
+                        [IdProyecto,IdCedulaV],
+                        function(tx5, results){
+                            var length = results.rows.length;
+                            for(var i = 0; i< length; i++){
+                                var item2 = results.rows.item(i);
+
+                                $("#tablaProspectos tbody").append("<tr id='fila"+ item2.IdProspectos +"'><td><a href='#' onclick='eliminarFila("+ item2.IdProspectos +", 7);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></td><td text-align: center;><img src='" + item2.FotoProspecto + "' width='60px' /></td><td text-align: center;><img src='" + item2.FirmaProspecto + "' width='60px' /></td><td text-align: center;>"+item2.NombreRecibe+"</td><td text-align: center;>"+ item2.PuestoRecibe + "</td><td text-align: center;>" + item2.Telefono + "</td><td text-align: center;>" + item2.Correo + "</td><td text-align: center;>"+ item2.Actividades+"</td></tr>");
+                                
+                            }
+                            $('.preloader').remove();
+                            $('.infinite-scroll-preloader').remove();    
+                        },
+                        function(tx5, error){
+                            console.log("Error al guardar registro: " + error.message);
+                        }
+                    );  
+                },
+                function(error){},
+                function(){}
+            );
+        $(".spanBlanco").change(function(){
+            if ($(this).val()=="") {
+                 $(this).css("background-color", "#ffffff");
+            } else {
+                 $(this).css("background-color", "#E0F8F7");
+            }
+        });
+        $("smallImage").change(function(){
+          var smallImage1 = document.getElementById('smallImage1');
+          smallImage1.style.display = 'block';
+          var nameima = $("#imagenC").val();
+          smallImage1.src = nameima;
+        });
+
+        
+      }
+      }
+    }
+</script> 
