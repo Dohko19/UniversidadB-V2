@@ -39,7 +39,13 @@
                 }, false);
                 let id = app.views.main.router.currentRoute.params.id;
                 let name = app.views.main.router.currentRoute.params.name;
-                $("#title").append('<b>'+name+'</b>');
+                if (localStorage.getItem('idCuestionario'))
+                {
+                    let idCuestionario = localStorage.getItem('idCuestionario');
+                    alert(idCuestionario);
+                }else{
+                    alert("error 566: Dont get item id")
+                }
                 let user_id = localStorage.getItem("id");
                 app.request.get(cordova.file.externalRootDirectory + '/jsons/preguntas_leccion.json', function (data) {
                 app.request.get(cordova.file.externalRootDirectory + '/jsons/respues_pregunta.json', function (ans) {
@@ -47,6 +53,7 @@
                     const answers = JSON.parse(ans);
                     const questions = JSON.parse(data);
                     if (questions.length !== 0) {
+                        $("#title").append('<b>'+name+'</b>');
                         for (var w = 0; w < questions.length; w++) { //preguntas
                             if (questions[w].courses_details_id === id) {
                                 $("#Questions").append('<div class="card card-outline">' +
@@ -67,7 +74,7 @@
                                             '<label class="item-radio item-radio-icon-start item-content">' +
                                             '<input type="radio" onchange="saveQuest(this)" ' +
                                                     'id="'+questions[w].id+'" ' +
-                                                    'name="pregunta'+questions[w].id+'" ' +
+                                                    'name="pregunta'+questions[w].id+'"' +
                                                     'value="'+answers[i].correct_answer+'"' +
                                                     '>' +
                                             ' <i class="icon icon-radio"></i>' +

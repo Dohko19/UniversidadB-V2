@@ -1006,6 +1006,7 @@ function saveQuest(el)
 {
     console.log(el.value);
     console.log(el.id);
+    console.log(el.name);
     var fecha = new Date();
     var user_id = localStorage.getItem("id");
     var question_id = el.id;
