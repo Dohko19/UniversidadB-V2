@@ -20,10 +20,10 @@
                     </center>
                 </div>
                 <div id="Questions" style="width: 100%;"></div>
-                    <button onclick="EnviarCuestionario()" class="link col button button-large button-raised button-fill color-green">
-                    <i class="fas fa-save"></i>
-                        Guardar
-                    </button>
+                    <span style="width: 100%;" id="enviarCuestionario"></span>
+                <div id="success" style="width: 100%;"></div>
+
+                <p style="color: red;">Nota: Una vez enviado el cuestionario no podras responder este cuestionario hasta el dia de mañana</p>
             </div>
         </div>
     </div>
@@ -39,21 +39,17 @@
                 }, false);
                 let id = app.views.main.router.currentRoute.params.id;
                 let name = app.views.main.router.currentRoute.params.name;
-                if (localStorage.getItem('idCuestionario'))
-                {
-                    let idCuestionario = localStorage.getItem('idCuestionario');
-                    alert(idCuestionario);
-                }else{
-                    alert("error 566: Dont get item id")
-                }
                 let user_id = localStorage.getItem("id");
                 app.request.get(cordova.file.externalRootDirectory + '/jsons/preguntas_leccion.json', function (data) {
                 app.request.get(cordova.file.externalRootDirectory + '/jsons/respues_pregunta.json', function (ans) {
-
                     const answers = JSON.parse(ans);
                     const questions = JSON.parse(data);
                     if (questions.length !== 0) {
                         $("#title").append('<b>'+name+'</b>');
+                        $("#enviarCuestionario").append('<button onclick="EnviarCuestionario()" class="link col button button-large button-raised button-fill color-green">' +
+                            '                    <i class="fas fa-save"></i>' +
+                            '                        Guardar' +
+                            '                    </button>');
                         for (var w = 0; w < questions.length; w++) { //preguntas
                             if (questions[w].courses_details_id === id) {
                                 $("#Questions").append('<div class="card card-outline">' +
@@ -68,13 +64,14 @@
                                     if (answers[i].question_id == questions[w].id)
                                     {
                                         $("#answers"+w).append(
-                                            '<div class="list">' +
+                                            '<div class="list" id="preguntas">' +
                                             '<ul>' +
                                             '<li>' +
                                             '<label class="item-radio item-radio-icon-start item-content">' +
-                                            '<input type="radio" onchange="saveQuest(this)" ' +
+                                            '<input type="radio" onchange="saveQuest(this,'+ answers[i].idR+')" ' +
                                                     'id="'+questions[w].id+'" ' +
                                                     'name="pregunta'+questions[w].id+'"' +
+                                                    'data-ansId="'+answers[i].idR+'" ' +
                                                     'value="'+answers[i].correct_answer+'"' +
                                                     '>' +
                                             ' <i class="icon icon-radio"></i>' +

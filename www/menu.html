@@ -23,7 +23,7 @@
     <script type="text/javascript" src="js/productHandler.js"></script>
     <script type="text/javascript" src="js/in.js"></script>
     <script type="text/javascript" src="js/morris.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script type="text/javascript" src="js/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/fontawesome-free/css/all.min.css">
 
     <style type="text/css">
@@ -128,9 +128,9 @@
               </a>
             </div>
             <div class="right" style="margin-right: 15px">
-                    <!-- <a href="#">
+                    <a href="#" onclick="drawProgressBar()">
                         <i class="fa fa-sync"></i>
-                    </a> -->
+                    </a>
                 </div>
           </div>
         </div>
@@ -141,7 +141,24 @@
             <div class="ptr-arrow"></div>
         </div>
             <div>
-                <div id="progreso"></div>
+                <div id="progreso">
+                    <div class="block block-strong">
+                        <div class="row">
+                            <div class="col text-align-center">
+                                <div class="gauge gauge-init"
+                                data-type="semicircle"
+                                data-value="100/100"
+                                data-value-text="100"
+                                data-value-text-color="#0CC25E"
+                                data-label-font-weight="100"
+                                data-label-font-size="20"
+                                data-size="150"
+                                data-border-color="#0CC25E"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
                 <div class="block" id="menuPrincipal">
                     <p>Listado de Cursos</p>
@@ -156,7 +173,7 @@
                         <a class="col button dynamic-popup button-large button-raised button-fill"  href="#">Avisos</a>
                     </p>
                     <p class="row">
-                        <a class="col-50 button button-large button-raised button-fill color-green"  href="#">Supervisores</a>
+                        <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu" href="#">Supervisores</a>
                     </p>
                 </div>
                 <div id="presentacion">
@@ -170,17 +187,18 @@
       <div class="page">
         <div class="page-content login-screen-content">
             <a class="link login-screen-close" href="#"><i class="fa fa-times-circle" style="font-size: 18px"></i></a>
-              <div class="login-screen-title">Necesitas Ayuda?</div>
+              <div class="login-screen-title" style="color: #2196f3;">¿Necesitas Ayuda?</div>
             <div class="list">
               <div class="block-footer">
-                    <p style="font-size: 17px">Centro de Ayuda</p>
+                   <p> Centro de Ayuda <br> <br>
                     <!-- Close Popup -->
-                    <p>Buzon de Sugerencias: 5544472755</p>
-                    <p>Correo: admon.rh@bennetts.com.mx</p>
+                       <b>Buzon de Sugerencias:</b> 5544472755 <br>
+                       <b>Correo:</b> admon.rh@bennetts.com.mx <br>
 
-                  <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
-                  <br>
-                  <img src="img/triptico2.PNG" width="100%" alt="triptico parte 2">
+                      <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
+                      <br>
+                      <img src="img/triptico2.PNG" width="100%" alt="triptico parte 2">
+                    </p>
               </div>
             </div>
         </div>
@@ -595,7 +613,7 @@
 
 
 $(document).ready(function(){
-
+    drawProgressBar();
     function horizontal2(){
         var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 
@@ -610,46 +628,21 @@ $(document).ready(function(){
             console.log("The orientation API isn't supported in this browser :(");
         }
     }
-    var id = localStorage.getItem("id");
     var first_login = localStorage.getItem('first_login');
-    app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
-        .then(function (res) {
+    // app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
+    //     .then(function (res) {
             if (first_login == true) {
                 $("#presentacion").show();
                 $("#progreso").hide();
                 $("#menuPrincipal").hide();
-                progressBarLessons();
 
             }else{
                 $("#presentacion").hide();
-                // $("#progreso").show();
+                $("#progreso").show();
                 $("#menuPrincipal").show();
             }
             // progressBarLessons(res);
-             $("#progreso").append('<div class="block block-strong">'+
-            '<div class="row"> '+
-            '<div class="col text-align-center">'+
-            '<div class="gauge gauge-init" '+
-            'data-type="semicircle"'+
-            'data-value="'+res/100+'"'+
-            'data-value-text="'+res+'%"'+
-            'data-value-text-color="#0CC25E"'+
-            'data-label-font-weight="100"' +
-            'data-label-font-size="20"'+
-            'data-size="150"'+
-            'data-border-color="#0CC25E"'+
-            ' ></div>'+
-            '</div>'+
-            '</div>'+
-            '</div>');
 
-
-        })
-        .catch(function (err) {
-            console.log(err.xhr);
-            console.log(err.status);
-            console.log(err.message);
-        });
 
 
     //Cierre de sesion
@@ -660,6 +653,16 @@ $(document).ready(function(){
     var avatar = localStorage.getItem('avatar');
     var role_name = localStorage.getItem('role_name');
     var nombreCompleto = name + " " + last_name;
+    var role_id = localStorage.getItem('role_id');
+
+    if (role_id == 1 || role_id == 2)
+    {
+        $("#supervisorMenu").show();
+    }else
+    {
+        $("#supervisorMenu").hide();
+    }
+
     $("#NombreUsuario").html(nombreCompleto );
     $("#RoleName").html(role_name );
     if(localStorage.getItem("id") == 1){

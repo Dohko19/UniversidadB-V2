@@ -962,7 +962,7 @@ function registerQuest(lesson_id){
                                                 var length = results.rows.length;
                                                 console.log(results.rows);
                                                 var item = results.rows.item(0);
-                                                // alert(item.Id)
+                                                alert(item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
                                                 // var IdRegistro = localStorage.getItem("IdRegistro");
                                             });
@@ -1002,20 +1002,23 @@ function registerQuest(lesson_id){
     );
 }
 
-function saveQuest(el)
+function saveQuest(el, ansId)
 {
+    console.log(el);
     console.log(el.value);
     console.log(el.id);
     console.log(el.name);
+    console.log(ansId);
     var fecha = new Date();
     var user_id = localStorage.getItem("id");
+    var idCuestionario = localStorage.getItem("idCuestionario");
     var question_id = el.id;
     var answer = el.value;
+    var answerId = ansId;
     var created_at = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
     var dateFNow = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate();
     var date = new Date();
-    var dateY = offDays(date, 0)
-    var idQuestionario = localStorage.getItem('idCuestionario');
+    var dateY = offDays(date, 0);
 
     databaseHandler.db.transaction(
         function (tx1) {
@@ -1032,29 +1035,29 @@ function saveQuest(el)
 
                     if (length > 0 && questionId == question_id && userId === user_id && dateF === dateY)
                     {
-                        tx1.executeSql("UPDATE answer_user SET answer = ?, updated_at = ? WHERE question_id = ?",
-                            [answer, created_at, question_id],
+                        tx1.executeSql("UPDATE answer_user SET answer_id = ?, answer = ?, updated_at = ? WHERE question_id = ?",
+                            [answerId, answer, created_at, question_id],
                         function (tx1, resultsB){
                             // alert("Update");
                         })
                     }
                     else {
-                        tx1.executeSql("INSERT INTO answer_user(answer, question_id, user_id, created_at, dateF ) VALUES (?,?,?,?,?)",
-                            [answer, question_id, user_id, created_at, dateFNow],
+                        tx1.executeSql("INSERT INTO answer_user(idCuestionario, answer, question_id, user_id, answer_id, created_at, dateF ) VALUES (?,?,?,?,?,?,?)",
+                            [idCuestionario, answer, question_id, user_id, answerId, created_at, dateFNow],
                             function (tx1, results) {
-                                databaseHandler.db.transaction(
-                                    function (tx) {
-                                        tx.executeSql("SELECT MAX(question_id) as Id FROM anwser_user",
-                                            [],
-                                            function (tx, results) {
-                                                var length = results.rows.length;
-                                                var item = results.rows.item(0);
-                                                // alert("guardado"+item.Id)
-                                                // localStorage.setItem("IdRegistro", item.Id);
-                                                // var IdRegistro = localStorage.getItem("IdRegistro");
-
-                                            })
-                                    });
+                                // databaseHandler.db.transaction(
+                                //     function (tx) {
+                                //         tx.executeSql("SELECT MAX(question_id) as Id FROM anwser_user",
+                                //             [],
+                                //             function (txB, resultsB) {
+                                //                 var length = resultsB.rows.length;
+                                //                 var item = resultsB.rows.item(0);
+                                //                 // alert("guardado"+item.Id)
+                                //                 // localStorage.setItem("IdRegistro", item.Id);
+                                //                 // var IdRegistro = localStorage.getItem("IdRegistro");
+                                //
+                                //             })
+                                //     });
                             }
                         )
                     }
@@ -1096,6 +1099,10 @@ function offDays(date, days) {
 }
 
 function EnviarCuestionario(){
+    var idCuestionario = localStorage.getItem('idCuestionario');
+    var answersArray = [];
+    var a = 0;
+
     Swal.fire({
         title: '¿Estas seguro de enviar el cuestionario?',
         showDenyButton: true,
@@ -1105,14 +1112,129 @@ function EnviarCuestionario(){
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Swal.fire('Guardado!', '', 'success')
-        } else if (result.isDenied) {
-            Swal.fire('El cuestionario no se envio', '', 'info')
+            databaseHandler.db.transaction(
+                function (tx1) {
+                    tx1.executeSql("UPDATE register SET status = 1 WHERE idCuestionario = ?",
+                        [idCuestionario],
+                        function (tx, resultsA) {
+                        //do Something
+                        })
+
+                },
+                function (error) {
+                    console.log("add client error: " + error.message);
+                    app.dialog.alert('Error al insertar registro.', 'Error');
+                    app.preloader.hide();
+                },
+                function () {
+                }
+            );
+
+            databaseHandler.db.transaction(
+                function (tx1) {
+                    tx1.executeSql("SELECT * FROM answer_user as r WHERE idCuestionario = ?",
+                        [idCuestionario],
+                        function (tx, resultsA) {
+                            var length = resultsA.rows.length;
+
+                            for(var i = 0; i< length; i++) {
+                                var item4 = resultsA.rows.item(i);
+                                answersArray[a] = {'valor:': a, 'question_id': item4.question_id, 'user_id': item4.user_id, 'answer': item4.answer, 'answer_id': item4.answer_id};
+                                a++;
+                            }
+                            console.log(JSON.stringify(answersArray))
+                            $.ajax({
+                                type: "POST",
+                                async: true,
+                                url: "http://serviciosbennetts.com/universidadBennetts/questionaires/store.php",
+                                data: { 'arrayAQ': JSON.stringify(answersArray) },
+                                success: function(respuesta){
+                                    if (respuesta == 1) {
+                                        databaseHandler.db.transaction(
+                                            function (tx1) {
+                                                tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
+                                                    [idCuestionario],
+                                                    function (tx, resultsA) {
+                                                        let timerInterval
+                                                        Swal.fire({
+                                                            title: 'Aviso:!',
+                                                            html: 'Guardando <b></b>',
+                                                            timer: 2000,
+                                                            timerProgressBar: true,
+                                                            willOpen: () => {
+                                                                Swal.showLoading()
+                                                                timerInterval = setInterval(() => {
+                                                                    const content = Swal.getContent()
+                                                                    if (content) {
+                                                                        const b = content.querySelector('b')
+                                                                        if (b) {
+                                                                            b.textContent = Swal.getTimerLeft()
+                                                                        }
+                                                                    }
+                                                                }, 100)
+                                                            },
+                                                            willClose: () => {
+                                                                clearInterval(timerInterval)
+                                                            }
+                                                        }).then((result) => {
+                                                            /* Read more about handling dismissals below */
+                                                            if (result.dismiss === Swal.DismissReason.timer) {
+                                                                Swal.fire('Guardado!', '', 'success');
+                                                                $("#preguntas").hide();
+                                                                $("#success").append('<p></p>');
+                                                            }
+                                                        }) //END SWAL FIRE
+
+                                                    })
+
+                                            },
+                                            function (error) {
+                                                console.log("add client error: " + error.message);
+                                                app.dialog.alert('Error al insertar registro.', 'Error');
+                                                app.preloader.hide();
+                                            },
+                                            function () {
+                                            });
+                                    }
+                                    else {
+                                        Swal.fire('Guardado!', '', 'error')
+                                    }
+                                }
+                            })
+                        })
+                },
+                function (error) {
+                    console.log("add client error: " + error.message);
+                    app.dialog.alert('Error al insertar registro.', 'Error');
+                    app.preloader.hide();
+                }
+                )
+        }
+        else if (result.isDenied) {
+            Swal.fire('Los cambios no se guardaron', '', 'info')
         }
     })
 }
 
+function drawProgressBar()
+{
+    var id = localStorage.getItem("id");
 
+    app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
+        .then(function (res) {
+            $( "#progreso" ).empty();
+
+            $("#values").append(''+
+                'data-value="'+res/100+'"'+
+                'data-value-text="'+res+'%"');
+        })
+        .catch(function (err) {
+            console.log(err.xhr);
+            console.log(err.status);
+            console.log(err.message);
+        });
+
+}
 
 //--------------------------------------------------------------------
 // for(var i = 0; i< length; i++) {

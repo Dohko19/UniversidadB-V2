@@ -3,12 +3,50 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/sweetalert2.all.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/sweetalert2@9.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/sweetalert2.all.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/sweetalert2@9.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico1.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico1.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico2.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico2.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/res/xml/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/img/triptico1.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/www/img/triptico1.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/img/triptico2.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/www/img/triptico2.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,27 +55,21 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="C:\laragon\www\apps\UniversidadB\.idea" />
-      </set>
-    </option>
-  </component>
   <component name="ProjectId" id="1hNGz7m3L1iczxrbvA5NGPyZtxT" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -46,18 +78,18 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\apps\UniversidadB\www\pages\cursos" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\apps\VIC Beta\www\pages" />
       <recent name="C:\laragon\www\apps\VIC Beta\www\img" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\apps\UniversidadB\www\pages\cursos" />
-    </key>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -80,11 +112,26 @@
       <workItem from="1600782214307" duration="4327000" />
       <workItem from="1600797145521" duration="13900000" />
       <workItem from="1600892086113" duration="8669000" />
+      <workItem from="1600957134666" duration="26172000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="309" y="42" key="#Inspections" timestamp="1599848845195">
@@ -99,10 +146,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600786585689" />
-    <state x="212" y="9" key="SettingsEditor" timestamp="1600784603755">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="211" y="9" key="SettingsEditor" timestamp="1600957159065">
+      <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="211" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1600096351937" />
+    <state x="211" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1600957159065" />
     <state x="212" y="9" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600784603755" />
     <state x="367" y="47" width="743" height="658" key="find.popup" timestamp="1600360828545">
       <screen x="0" y="0" width="1366" height="728" />
@@ -112,9 +159,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600815007515" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1600805393375">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1600971532277">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600805393375" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600971532277" />
   </component>
 </project>

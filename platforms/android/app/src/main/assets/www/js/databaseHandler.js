@@ -10,7 +10,7 @@ var databaseHandler = {
             function (tx) {
                     //Run sql here using tx
                     tx.executeSql(
-                        "create table if not exists answer_user(answer integer,question_id integer,user_id, created_at text, updated_at text, dateF text)",
+                        "create table if not exists answer_user(idCuestionario integer, answer integer,question_id integer,user_id, answer_id integer, created_at text, updated_at text, dateF text)",
                         [],
                         function (tx, results) {
                         },
