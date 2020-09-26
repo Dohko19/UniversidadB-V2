@@ -14,7 +14,7 @@
         </div>
         <div class="page-content">
             <div class="row">
-                <div class="block-title">Cuestionario Correspondiente a la leccion:
+                <div id="primary-title" class="block-title">Cuestionario Correspondiente a la leccion:
                     <center>
                         <div id="title" class="items-cente"></div>
                     </center>
@@ -23,7 +23,7 @@
                     <span style="width: 100%;" id="enviarCuestionario"></span>
                 <div id="success" style="width: 100%;"></div>
 
-                <p style="color: red;">Nota: Una vez enviado el cuestionario no podras responder este cuestionario hasta el dia de mañana</p>
+                <p id="note" style="color: red;">Nota: Una vez enviado el cuestionario no podras responder este cuestionario hasta el dia de mañana</p>
             </div>
         </div>
     </div>
@@ -47,9 +47,9 @@
                     if (questions.length !== 0) {
                         $("#title").append('<b>'+name+'</b>');
                         $("#enviarCuestionario").append('<button onclick="EnviarCuestionario()" class="link col button button-large button-raised button-fill color-green">' +
-                            '                    <i class="fas fa-save"></i>' +
-                            '                        Guardar' +
-                            '                    </button>');
+                                                        '<i class="fas fa-save"></i>' +
+                                                        '    Guardar' +
+                                                        '</button>');
                         for (var w = 0; w < questions.length; w++) { //preguntas
                             if (questions[w].courses_details_id === id) {
                                 $("#Questions").append('<div class="card card-outline">' +

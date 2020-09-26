@@ -560,6 +560,7 @@ function llevarTodoSegInd(cte, ced){
 }
 
 
+
 // eliminar registros apoyo
 
 function EliminarApoyoR(){
@@ -937,7 +938,7 @@ function registerQuest(lesson_id){
     const dayOff = offDays(date, 0);
     databaseHandler.db.transaction(
         function (tx1) {
-            tx1.executeSql("SELECT lesson_id, idCuestionario, dateF FROM register WHERE lesson_id = ?",
+            tx1.executeSql("SELECT lesson_id, idCuestionario, dateF, status, dateF FROM register WHERE lesson_id = ?",
                 [lesson_id],
                 function (tx, resultsA){
                 console.log(tx);
@@ -945,9 +946,19 @@ function registerQuest(lesson_id){
                     var length = resultsA.rows.length;
                     var item3;
                     var dateF;
+                    var status;
                     for(var i = 0; i< length; i++) {
-                         item3 = resultsA.rows.item(i).lesson_id
-                         dateF = resultsA.rows.item(i).dateF
+                         item3 = resultsA.rows.item(i).lesson_id;
+                         dateF = resultsA.rows.item(i).dateF;
+                        status = resultsA.rows.item(i).status;
+                    }
+                    if (status == 1 || status == 2 && dateF == dayOff)
+                    {
+                        $("#Questions").hide();
+                        $("#primary-title").hide();
+                        $("#note").hide();
+                        $("#enviarCuestionario").hide();
+                        $("#success").append('<div style="background-color: forestgreen; color: #FFFFFF;" ><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
                     }
 
                     if (length > 0 && lesson_id === item3 && dateF === dayOff) {
@@ -956,7 +967,7 @@ function registerQuest(lesson_id){
                             function (tx1, results) {
                                 databaseHandler.db.transaction(
                                     function (tx) {
-                                        tx.executeSql("SELECT MAX(idCuestionario) as Id FROM register",
+                                        tx.executeSql("SELECT MAX(idCuestionario) as Id, status FROM register",
                                             [],
                                             function (tx, results) {
                                                 var length = results.rows.length;
@@ -1112,6 +1123,10 @@ function EnviarCuestionario(){
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+            $("#Questions").hide();
+            $("#primary-title").hide();
+            $("#enviarCuestionario").hide();
+            $("#success").append('<div style="background-color: green;"><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
             databaseHandler.db.transaction(
                 function (tx1) {
                     tx1.executeSql("UPDATE register SET status = 1 WHERE idCuestionario = ?",
@@ -1139,16 +1154,17 @@ function EnviarCuestionario(){
 
                             for(var i = 0; i< length; i++) {
                                 var item4 = resultsA.rows.item(i);
-                                answersArray[a] = {'valor:': a, 'question_id': item4.question_id, 'user_id': item4.user_id, 'answer': item4.answer, 'answer_id': item4.answer_id};
+                                answersArray[a] = {'valor:': a, 'question_id': item4.question_id, 'user_id': item4.user_id, 'answer': item4.answer, 'answer_id': item4.answer_id, 'created_at': item4.created_at, 'updated_at': item4.updated_at, 'dateF': item4.dateF};
                                 a++;
                             }
-                            console.log(JSON.stringify(answersArray))
+                            // console.log(JSON.stringify(answersArray));
+
                             $.ajax({
                                 type: "POST",
                                 async: true,
                                 url: "http://serviciosbennetts.com/universidadBennetts/questionaires/store.php",
                                 data: { 'arrayAQ': JSON.stringify(answersArray) },
-                                success: function(respuesta){
+                                success: function(respuesta) {
                                     if (respuesta == 1) {
                                         databaseHandler.db.transaction(
                                             function (tx1) {
@@ -1179,11 +1195,15 @@ function EnviarCuestionario(){
                                                         }).then((result) => {
                                                             /* Read more about handling dismissals below */
                                                             if (result.dismiss === Swal.DismissReason.timer) {
+                                                                // $("#Questions").hide();
+                                                                // $("#enviarCuestionario").hide();
+                                                                // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                                                                 Swal.fire('Guardado!', '', 'success');
-                                                                $("#preguntas").hide();
-                                                                $("#success").append('<p></p>');
                                                             }
                                                         }) //END SWAL FIRE
+                                                            .catch((err) => {
+                                                            alert(err);
+                                                        })
 
                                                     })
 
@@ -1192,28 +1212,136 @@ function EnviarCuestionario(){
                                                 console.log("add client error: " + error.message);
                                                 app.dialog.alert('Error al insertar registro.', 'Error');
                                                 app.preloader.hide();
+                                                Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
+
                                             },
                                             function () {
                                             });
+                                    } else {
+                                        Swal.fire('Guardado!', '', 'warning')
                                     }
-                                    else {
-                                        Swal.fire('Guardado!', '', 'error')
-                                    }
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                    $("#preguntas").hide();
+                                    $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                                 }
                             })
                         })
+
                 },
                 function (error) {
                     console.log("add client error: " + error.message);
                     app.dialog.alert('Error al insertar registro.', 'Error');
                     app.preloader.hide();
+
                 }
-                )
+            )
         }
         else if (result.isDenied) {
             Swal.fire('Los cambios no se guardaron', '', 'info')
         }
     })
+}
+
+function EvniarCuestionarioBack() {
+    let userId = localStorage.getItem('id');
+    databaseHandler.db.transaction(
+        function (tx4) {                                    //regisstro            //seguimeinto                                         //Cierre
+            tx4.executeSql("SELECT r.status, r.idUser, r.idCuestionario AS cuestionarioId, au.user_id, au.idCuestionario FROM register as r LEFT OUTER JOIN answer_user as au on cuestionarioId = au.idCuestionario WHERE user_id = ? AND r.status = 1 GROUP BY cuestionarioId",
+                [userId], //Verifica  que haya un registro que haya un seguimiento y un cierre
+                //tu haras lo mismo verifica que haya un registro de ese cuestionario
+                //que haya preguntas ocntestadas de ese cuestionario
+                //y que haya un cierre ;)
+                function (tx4, results) {
+                    var length = results.rows.length;
+                    alert(length);
+                    for (var i = 0; i < length; i++) {
+                        var item2 = results.rows.item(i);
+                        // databaseHandler.db.transaction(
+                        //     function (tx7) {
+                        //         tx7.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?", [item2.cuestionarioId],
+                        //             function (tx7, results) {
+                        //                 //alert("LISTO");
+                        //             }
+                        //         );
+                        //     }
+                        // );
+                        storeQuestions(item2.cuestionarioId);
+                    }
+                },
+                function (tx4, error) {
+                    console.log("Error al guardar registro: " + error.message);
+                }
+            );
+        },
+        function (error) {
+        },
+        function () {
+        }
+    );
+}
+
+function storeQuestions(questionId)
+{
+    let cuestionarioId = questionId;
+    var answersArray = [];
+    var a = 0;
+
+databaseHandler.db.transaction(
+        function (tx1) {
+            tx1.executeSql("SELECT * FROM answer_user as r WHERE idCuestionario = ?",
+                [cuestionarioId],
+                function (tx, resultsA) {
+                    var length = resultsA.rows.length;
+
+                    for(var i = 0; i< length; i++) {
+                        var item4 = resultsA.rows.item(i);
+                        answersArray[a] = {'valor:': a, 'question_id': item4.question_id, 'user_id': item4.user_id, 'answer': item4.answer, 'answer_id': item4.answer_id, 'created_at': item4.created_at, 'updated_at': item4.updated_at, 'dateF': item4.dateF};
+                        a++;
+                    }
+                    // console.log(JSON.stringify(answersArray));
+
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        url: "http://serviciosbennetts.com/universidadBennetts/questionaires/store.php",
+                        data: { 'arrayAQ': JSON.stringify(answersArray) },
+                        success: function(respuesta) {
+                            if (respuesta == 1) {
+                                databaseHandler.db.transaction(
+                                    function (tx1) {
+                                        tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
+                                            [cuestionarioId],
+                                            function (tx, resultsA) {
+                                            })
+
+                                    },
+                                    function (error) {
+                                        console.log("add client error: " + error.message);
+                                        app.dialog.alert('Error al insertar registro.', 'Error');
+                                        app.preloader.hide();
+                                        Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
+
+                                    },
+                                    function () {
+                                    });
+                            }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            $("#preguntas").hide();
+                            $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
+                        }
+                    })
+                })
+
+        },
+        function (error) {
+            console.log("add client error: " + error.message);
+            app.dialog.alert('Error al insertar registro.', 'Error');
+            app.preloader.hide();
+
+        }
+    )
 }
 
 function drawProgressBar()
@@ -1222,12 +1350,21 @@ function drawProgressBar()
 
     app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
         .then(function (res) {
-            $( "#progreso" ).empty();
+            // $( "#values" ).empty();
 
-            $("#values").append(''+
-                'data-value="'+res/100+'"'+
-                'data-value-text="'+res+'%"');
+            $("#values").append('<div class="gauge gauge-init"' +
+                '    data-type="semicircle"' +
+                '    data-value="'+res/100+'"' +
+                '    data-value-text="'+res+'%"' +
+                '    data-value-text-color="#0CC25E"' +
+                '    data-label-font-weight="100"' +
+                '    data-label-font-size="20"' +
+                '    data-size="150"' +
+                '    data-border-color="#0CC25E"' +
+                '    ></div>');
         })
+
+
         .catch(function (err) {
             console.log(err.xhr);
             console.log(err.status);

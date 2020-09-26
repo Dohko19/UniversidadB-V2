@@ -140,25 +140,14 @@
             <div class="preloader color-red"></div>
             <div class="ptr-arrow"></div>
         </div>
+            <!-- eh we  necesitamos primero poner en tu Menu  un metodo para el background pos donde lo ponemos da igual?-->
             <div>
-                <div id="progreso">
-                    <div class="block block-strong">
-                        <div class="row">
-                            <div class="col text-align-center">
-                                <div class="gauge gauge-init"
-                                data-type="semicircle"
-                                data-value="100/100"
-                                data-value-text="100"
-                                data-value-text-color="#0CC25E"
-                                data-label-font-weight="100"
-                                data-label-font-size="20"
-                                data-size="150"
-                                data-border-color="#0CC25E"
-                                ></div>
-                            </div>
+                <div id="" class="block block-strong">
+                    <div class="row">
+                        <div class="col text-align-center">
+                            <div id="values"></div>
                         </div>
                     </div>
-                </div>
                 </div>
                 <div class="block" id="menuPrincipal">
                     <p>Listado de Cursos</p>
@@ -228,16 +217,25 @@
       document.addEventListener("deviceready",onDeviceReady,false);
 
       //GPS Activated
+
+      //
       document.addEventListener('deviceready',function(){
-        //BackgroundMode :)
+        //BackgroundMode :) MIRA ESTE ES EL METODO PARA EL BACKGROUND hay ponemos la wea o asi se define? asi se define brou
+          // y  para definir el metodo a llaar es en el document ready
+          // lo que aun no entiendo es que metodo es xd el q esta en el pull?
+          //Te marco mejor va? va
+          //arre perro estaras en altavoz y aqui estan tus jefo la vayas a cagar XD
+          //y hablar correctamente y apropiadamente
+          //aha si xd
+
         cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.',silent: true, hidden: true});
         cordova.plugins.backgroundMode.enable();
         cordova.plugins.backgroundMode.onactivate = function () {
           setTimeout(function () {
             cordova.plugins.backgroundMode.configure({
               text:'Running in background for more than 5s now.',
-              silent: true,
-              hidden: true
+              silent: false,
+              hidden: false
             });
           }, 5000);
       }
@@ -613,6 +611,20 @@
 
 
 $(document).ready(function(){
+    function onOnline() {
+        EvniarCuestionarioBack(); // Este metodo llama a otro we no es al e enviar
+        //Debe llamr a un metodo que haga una consulta que si existen reportes que no se hayan enviado  (Estatus 1 o 2 )
+        //mira asi
+
+    }
+    setInterval(function(){
+        onOnline();
+        console.log('Enviando...')
+    },120000);
+
+
+
+
     drawProgressBar();
     function horizontal2(){
         var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
