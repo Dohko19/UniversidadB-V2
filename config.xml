@@ -27,6 +27,12 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <allow-navigation href="*" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">http://serviciosbennetts.com/</domain>
+        <domain includeSubdomains="true">http://serviciosbennetts.com/</domain>
+        <domain includeSubdomains="true">http://serveripaddress</domain>
+    </domain-config>
     <platform name="android">
       <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
       <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root" />

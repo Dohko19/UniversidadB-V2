@@ -1,3 +1,4 @@
+
 //id_usuario
 var IdUsuario = localStorage.getItem("id");
     $("#IdUsuario").val(IdUsuario);
@@ -973,7 +974,7 @@ function registerQuest(lesson_id){
                                                 var length = results.rows.length;
                                                 console.log(results.rows);
                                                 var item = results.rows.item(0);
-                                                alert(item.Id)
+                                                // alert(item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
                                                 // var IdRegistro = localStorage.getItem("IdRegistro");
                                             });
@@ -992,7 +993,7 @@ function registerQuest(lesson_id){
                                             function (tx, results) {
                                                 var length = results.rows.length;
                                                 var item = results.rows.item(0);
-                                                alert("insert new"+item.Id)
+                                                // alert("insert new"+item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
                                                 var idCuestionario = localStorage.getItem("idCuestionario");
 
@@ -1344,37 +1345,67 @@ function storeQuestions(questionId){
 }
 
 function drawProgressBar() {
+
+    // const axios = require('axios').default;
+
     var id = localStorage.getItem("id");
+        axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id)
+            .then(res => {
+                console.log(res);
+                $("#values").append('<div class="gauge gauge-init"' +
+                            '    data-type="semicircle"' +
+                            '    data-value="'+res.data/100+ '"' +
+                            '    data-value-text="' + res.data + '%"' +
+                            '    data-value-text-color="#0CC25E"' +
+                            '    data-label-font-weight="100"' +
+                            '    data-label-font-size="20"' +
+                            '    data-size="150"' +
+                            '    data-border-color="#0CC25E"' +
+                            '    ></div>');
 
-    app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
-        .then(function (res) {
-            // $( "#values" ).empty();
+                if (res == 100) {
+                        $("#getCertificado").show();
+                    } else {
+                        $("#getCertificado").hide();
 
-            $("#values").append('<div class="gauge gauge-init"' +
-                '    data-type="semicircle"' +
-                '    data-value="' + res / 100 + '"' +
-                '    data-value-text="' + res + '%"' +
-                '    data-value-text-color="#0CC25E"' +
-                '    data-label-font-weight="100"' +
-                '    data-label-font-size="20"' +
-                '    data-size="150"' +
-                '    data-border-color="#0CC25E"' +
-                '    ></div>');
+                    }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        // app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
+        //     .then(function (res) {
+        //
+        //
+        //         $("#values").append('<div class="gauge gauge-init"' +
+        //             '    data-type="semicircle"' +
+        //             '    data-value="'+res/100+ '"' +
+        //             '    data-value-text="' + res + '%"' +
+        //             '    data-value-text-color="#0CC25E"' +
+        //             '    data-label-font-weight="100"' +
+        //             '    data-label-font-size="20"' +
+        //             '    data-size="150"' +
+        //             '    data-border-color="#0CC25E"' +
+        //             '    ></div>');
+        //
+        //
+        //         if (res == 100) {
+        //             $("#getCertificado").show();
+        //         } else {
+        //             $("#getCertificado").hide();
+        //
+        //         }
+        //     })
+        //     .catch(function (err) {
+        //         console.log(err.xhr);
+        //         console.log(err.status);
+        //         console.log(err.message);
+        //     });
 
-            if (res == 100) {
-                $("#getCertificado").show();
-            }
-            else{
-                $("#getCertificado").hide();
 
-            }
-        })
-        .catch(function (err) {
-            console.log(err.xhr);
-            console.log(err.status);
-            console.log(err.message);
-        });
 }
+
+
 
 function updateStatusCourse()
 {

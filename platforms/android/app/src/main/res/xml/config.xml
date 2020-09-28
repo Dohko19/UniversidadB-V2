@@ -122,6 +122,11 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">http://serviciosbennetts.com/</domain>
+        <domain includeSubdomains="true">http://serveripaddress</domain>
+    </domain-config>
     <allow-intent href="market:*" />
     <splash density="land-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
     <splash density="land-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />

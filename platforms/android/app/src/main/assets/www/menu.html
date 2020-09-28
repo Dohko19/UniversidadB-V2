@@ -140,12 +140,11 @@
             <div class="preloader color-red"></div>
             <div class="ptr-arrow"></div>
         </div>
-            <!-- eh we  necesitamos primero poner en tu Menu  un metodo para el background pos donde lo ponemos da igual?-->
             <div>
                 <div id="" class="block block-strong">
                     <div class="row">
                         <div class="col text-align-center">
-                            <canvas id="values"></canvas>
+                            <div id="values"></div>
                         </div>
                     </div>
                 </div>
@@ -185,7 +184,9 @@
                     <!-- Close Popup -->
                        <b>Buzon de Sugerencias:</b> 5544472755 <br>
                        <b>Correo:</b> admon.rh@bennetts.com.mx <br>
-
+                       <br>
+                       <b>Telefon: 55-67-49-69 Ext.   2178, 2177, 2179</b>
+                       <br><br>
                       <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
                       <br>
                       <img src="img/triptico2.PNG" width="100%" alt="triptico parte 2">
@@ -209,9 +210,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="js/signature/jSignature.min.noconflict.js"></script>
     <script src="js/SimpleStarRating.js"></script>
+    <script src="js/axios.min.js"></script>
     <script src="js/player_api.js"></script>
 <!--    <script src="http://www.youtube.com/player_api?enablejsapi=1&version=3"></script>-->
-    <script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
       var pictureSource;   // picture source
       var destinationType; // sets the format of returned value
 
@@ -248,8 +250,6 @@
         });
 
       }, false);
-
-
 
       function onDeviceReady() {
           pictureSource=navigator.camera.PictureSourceType;
@@ -459,7 +459,7 @@
               player = new YT.Player('player', {
                   height: '100%',
                   width: '100%',
-                  videoId: 'l-aS0XSmShM',
+                  videoId: 'YGrKJYEG-fc',
                   playerVars: {
                       controls: 0,
                       disablekb: 0,
@@ -483,12 +483,12 @@
           iframe = $("#player");
       }
 
-      // function playFullscreen (){
-      //     var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-      //     if (requestFullScreen) {
-      //         requestFullScreen.bind(iframe)();
-      //     }
-      // }
+      function playFullscreen (){
+          var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+          if (requestFullScreen) {
+              requestFullScreen.bind(iframe)();
+          }
+      }
 
       // when video ends
       function onPlayerStateChange(event) {
@@ -507,10 +507,10 @@
               swal.fire('Mensaje','Gracias por ver el video de presentacion, a continuacion puedes acceder a tus cursos', 'info');
 
           }
-      }
-      </script>
+}
+</script>
 
-      <script>
+<script>
         //PTR en Click
       function ptrpro() {
           $("#processclick").show();
@@ -580,9 +580,6 @@
             });
         }, 100);
     });
-
-  //-----------------------------------------------------------------------------------------------------------------------------------------
-
       //Sin conexion
       document.addEventListener("offline", onOffline, false);
       function networkInfo() {
@@ -601,10 +598,8 @@
         function onOffline() {
           app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se descargaran los datos.', 'Alerta!');
         }
+    $(document).ready(function(){
 
-
-
-$(document).ready(function(){
     function onOnline() {
         EvniarCuestionarioBack(); // Este metodo llama a otro we no es al e enviar
         //Debe llamr a un metodo que haga una consulta que si existen reportes que no se hayan enviado  (Estatus 1 o 2 )
@@ -616,10 +611,43 @@ $(document).ready(function(){
         console.log('Enviando...')
     },120000);
 
+    // async function waitForBar() {
+    //     await drawProgressBar();
+    //
+    // }
+    //
+    // waitForBar();
 
+    async function waitBar()
+    {
+        try {
+            var id = localStorage.getItem("id");
 
+            const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
+            console.log(response);
+            $("#values").append('<div class="gauge gauge-init"' +
+                '    data-type="semicircle"' +
+                '    data-value="'+response.data/100+ '"' +
+                '    data-value-text="' + response.data + '%"' +
+                '    data-value-text-color="#0CC25E"' +
+                '    data-label-font-weight="100"' +
+                '    data-label-font-size="20"' +
+                '    data-size="150"' +
+                '    data-border-color="#0CC25E"' +
+                '    ></div>');
 
-    drawProgressBar();
+            if (response.data == 100) {
+                $("#getCertificado").show();
+            } else {
+                $("#getCertificado").hide();
+
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    waitBar();
+
     function horizontal2(){
         var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 
@@ -648,9 +676,6 @@ $(document).ready(function(){
                 $("#menuPrincipal").show();
             }
             // progressBarLessons(res);
-
-
-
     //Cierre de sesion
     // window.localStorage.removeItem("tipoempresa");
 
@@ -687,11 +712,10 @@ $(document).ready(function(){
         $("#imagi").html("<img class='imagena2' src='img/bennetts.png' width='18%' />");
     }
 
-
     document.addEventListener('backbutton', function (e) {
         app.views.main.router.back();
     });
 });
-    </script>
+</script>
 </body>
 </html>

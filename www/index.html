@@ -1,5 +1,5 @@
 <script>
-let IdUsuario = localStorage.getItem("id");
+var IdUsuario = localStorage.getItem("id");
 	if (IdUsuario > 0){
 		var IdUsuario = localStorage.setItem(id);
 		let active = localStorage.getItem('active')
@@ -149,6 +149,7 @@ let IdUsuario = localStorage.getItem("id");
 <!--===============================================================================================-->
 <script src="login-plugin/js/main.js"></script>
 <script type="text/javascript" src="js/sweetalert2.all.min.js"></script>
+<script src="js/metodos.js"></script>
 
 
 <script>
@@ -237,6 +238,7 @@ let IdUsuario = localStorage.getItem("id");
                                         'No tienes asignado ningun rol',
                                         'info'
                                     )
+                                    logaout()
                                     // app.dialog.alert('Favor de completar todos los datos.', 'Aviso');
 
                                     $("#preloader").fadeOut("slow");
