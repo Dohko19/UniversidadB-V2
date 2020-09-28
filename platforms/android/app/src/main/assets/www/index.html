@@ -188,7 +188,7 @@ let IdUsuario = localStorage.getItem("id");
                             Swal.fire(
                                 '!!',
                                 'Usuario y/o contraseña Incorrectos',
-                                'info'
+                                'error'
                             )
                             $("#preloader").fadeOut("slow");
                         }else{
@@ -260,7 +260,7 @@ let IdUsuario = localStorage.getItem("id");
                 Swal.fire(
                     '!!',
                     'Datos Incompletos',
-                    'info'
+                    'warning'
                 )
 
                 $("#preloader").fadeOut("slow");

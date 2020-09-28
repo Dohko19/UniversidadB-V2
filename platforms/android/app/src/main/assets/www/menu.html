@@ -164,6 +164,8 @@
                     <p class="row">
                         <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu" href="#">Supervisores</a>
                     </p>
+                    <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p>
+                    <p class="row"><a href="#" target="_blank" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
                 </div>
                 <div id="presentacion">
                     <center>
@@ -666,6 +668,16 @@ $(document).ready(function(){
     var role_name = localStorage.getItem('role_name');
     var nombreCompleto = name + " " + last_name;
     var role_id = localStorage.getItem('role_id');
+    let status_course = localStorage.getItem('status_course');
+
+    // if (status_course == 0){
+    //     $("#getCertificado").hide();
+    //     $("#downloadCertificate").hide();
+    // }
+    // else {
+    //     $("#getCertificado").show();
+    // }
+    $("#downloadCertificate").hide();
 
     if (role_id == 1 || role_id == 2)
     {

@@ -24,12 +24,13 @@
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fetch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +99,9 @@
       <workItem from="1600892086113" duration="8669000" />
       <workItem from="1600957134666" duration="26172000" />
       <workItem from="1601043014428" duration="30775000" />
+      <workItem from="1601104159785" duration="3013000" />
+      <workItem from="1601160178988" duration="7426000" />
+      <workItem from="1601227159313" duration="1366000" />
     </task>
     <servers />
   </component>
@@ -138,6 +142,10 @@
     </state>
     <state x="211" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1600957159065" />
     <state x="212" y="9" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600784603755" />
+    <state x="398" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1601227174951">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1601227174951" />
     <state x="367" y="47" width="743" height="658" key="find.popup" timestamp="1600360828545">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

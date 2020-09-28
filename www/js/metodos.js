@@ -1281,13 +1281,12 @@ function EvniarCuestionarioBack() {
     );
 }
 
-function storeQuestions(questionId)
-{
+function storeQuestions(questionId){
     let cuestionarioId = questionId;
     var answersArray = [];
     var a = 0;
 
-databaseHandler.db.transaction(
+    databaseHandler.db.transaction(
         function (tx1) {
             tx1.executeSql("SELECT * FROM answer_user as r WHERE idCuestionario = ?",
                 [cuestionarioId],
@@ -1344,8 +1343,7 @@ databaseHandler.db.transaction(
     )
 }
 
-function drawProgressBar()
-{
+function drawProgressBar() {
     var id = localStorage.getItem("id");
 
     app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
@@ -1354,17 +1352,49 @@ function drawProgressBar()
 
             $("#values").append('<div class="gauge gauge-init"' +
                 '    data-type="semicircle"' +
-                '    data-value="'+res/100+'"' +
-                '    data-value-text="'+res+'%"' +
+                '    data-value="' + res / 100 + '"' +
+                '    data-value-text="' + res + '%"' +
                 '    data-value-text-color="#0CC25E"' +
                 '    data-label-font-weight="100"' +
                 '    data-label-font-size="20"' +
                 '    data-size="150"' +
                 '    data-border-color="#0CC25E"' +
                 '    ></div>');
+
+            if (res == 100) {
+                $("#getCertificado").show();
+            }
+            else{
+                $("#getCertificado").hide();
+
+            }
         })
+        .catch(function (err) {
+            console.log(err.xhr);
+            console.log(err.status);
+            console.log(err.message);
+        });
+}
 
+function updateStatusCourse()
+{
+    if (localStorage.getItem('status_course') == 1 ) {
+            $("#downloadCertificate").show();
+            return;
+    }
+    let user_id = localStorage.getItem('id');
+    localStorage.removeItem('status_course');
+    localStorage.setItem('status_course', 1)
+    const date = new Date();
+    const dateWhenFinish = offDays(date, 0);
 
+    app.request.promise.post('http://serviciosbennetts.com/universidadBennetts/updateStatusCourse.php', {id: user_id, dateWhenFinish: dateWhenFinish})
+        .then(function (res) {
+            Swal.fire('Felicidades!', 'Haz completado satisfactoriamente todos los cursos, en el menu principal veras un boton para obtener tu certificado', 'success');
+            $("#downloadCertificate").show();
+            $("#getCertificado").hide();
+
+        })
         .catch(function (err) {
             console.log(err.xhr);
             console.log(err.status);
@@ -1372,6 +1402,19 @@ function drawProgressBar()
         });
 
 }
+
+function getCertificate()
+{
+    var id = localStorage.getItem('id');
+    var statusCourse = localStorage.getItem('status_course');
+    if (statusCourse == 1)
+    {
+        window.open("http://serviciosbennetts.com/universidadBennetts/certificate.php?id="+ id, '_system');
+    }else{
+        swal.fire('Atencion', 'termina todos tu cursos para obtener tu certificado', 'info');
+    }
+}
+
 
 //--------------------------------------------------------------------
 // for(var i = 0; i< length; i++) {
