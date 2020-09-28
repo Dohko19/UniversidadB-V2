@@ -1254,7 +1254,7 @@ function EvniarCuestionarioBack() {
                 //y que haya un cierre ;)
                 function (tx4, results) {
                     var length = results.rows.length;
-                    alert(length);
+
                     for (var i = 0; i < length; i++) {
                         var item2 = results.rows.item(i);
                         // databaseHandler.db.transaction(

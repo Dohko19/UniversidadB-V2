@@ -145,7 +145,7 @@
                 <div id="" class="block block-strong">
                     <div class="row">
                         <div class="col text-align-center">
-                            <div id="values"></div>
+                            <canvas id="values"></canvas>
                         </div>
                     </div>
                 </div>
@@ -222,14 +222,6 @@
 
       //
       document.addEventListener('deviceready',function(){
-        //BackgroundMode :) MIRA ESTE ES EL METODO PARA EL BACKGROUND hay ponemos la wea o asi se define? asi se define brou
-          // y  para definir el metodo a llaar es en el document ready
-          // lo que aun no entiendo es que metodo es xd el q esta en el pull?
-          //Te marco mejor va? va
-          //arre perro estaras en altavoz y aqui estan tus jefo la vayas a cagar XD
-          //y hablar correctamente y apropiadamente
-          //aha si xd
-
         cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.',silent: true, hidden: true});
         cordova.plugins.backgroundMode.enable();
         cordova.plugins.backgroundMode.onactivate = function () {
