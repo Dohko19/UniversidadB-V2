@@ -939,8 +939,8 @@ function registerQuest(lesson_id){
     const dayOff = offDays(date, 0);
     databaseHandler.db.transaction(
         function (tx1) {
-            tx1.executeSql("SELECT lesson_id, idCuestionario, dateF, status, dateF FROM register WHERE lesson_id = ?",
-                [lesson_id],
+            tx1.executeSql("SELECT lesson_id, idCuestionario, dateF, status, dateF FROM register WHERE lesson_id = ? AND dateF = ?",
+                [lesson_id, dayOff],
                 function (tx, resultsA){
                 console.log(tx);
                 console.log(resultsA);
@@ -952,6 +952,7 @@ function registerQuest(lesson_id){
                          item3 = resultsA.rows.item(i).lesson_id;
                          dateF = resultsA.rows.item(i).dateF;
                         status = resultsA.rows.item(i).status;
+                        console.log(status);
                     }
                     if (status == 1 || status == 2 && dateF == dayOff)
                     {
@@ -959,7 +960,13 @@ function registerQuest(lesson_id){
                         $("#primary-title").hide();
                         $("#note").hide();
                         $("#enviarCuestionario").hide();
-                        $("#success").append('<div style="background-color: forestgreen; color: #FFFFFF;" ><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
+                        // $("#success").append('<div style="background-color: forestgreen; color: #FFFFFF;" ><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
+                        Swal.fire('Enhorabuena!', '¡Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success');
+                        //
+                    }
+                    else {
+                        // alert('nope' + dateF + dayOff);
+                        // alert(status);
                     }
 
                     if (length > 0 && lesson_id === item3 && dateF === dayOff) {
@@ -1006,7 +1013,7 @@ function registerQuest(lesson_id){
         },
         function (error) {
             console.log("add client error: " + error.message);
-            app.dialog.alert('Error al insertar registro.', 'Error');
+            app.dialog.alert('Error al insertar registro. ccc2', 'Error');
             app.preloader.hide();
         },
         function () {
@@ -1200,6 +1207,7 @@ function EnviarCuestionario(){
                                                                 // $("#enviarCuestionario").hide();
                                                                 // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                                                                 Swal.fire('Guardado!', '', 'success');
+                                                                navigator.app.backHistory();
                                                             }
                                                         }) //END SWAL FIRE
                                                             .catch((err) => {
@@ -1225,6 +1233,8 @@ function EnviarCuestionario(){
                                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                                     $("#preguntas").hide();
                                     $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
+                                    Swal.fire('Enhorabuena!', 'Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success')
+
                                 }
                             })
                         })
@@ -1329,7 +1339,9 @@ function storeQuestions(questionId){
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             $("#preguntas").hide();
-                            $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
+                            Swal.fire('Enhorabuena!', 'Ya respondiste este cuestionario, regresa mañana para voler a intentarlo', 'info');
+
+                            // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                         }
                     })
                 })
@@ -1337,73 +1349,73 @@ function storeQuestions(questionId){
         },
         function (error) {
             console.log("add client error: " + error.message);
-            app.dialog.alert('Error al insertar registro.', 'Error');
+            app.dialog.alert('Error al insertar registro. ccc', 'Error');
             app.preloader.hide();
 
         }
     )
 }
 
-function drawProgressBar() {
-
-    // const axios = require('axios').default;
-
-    var id = localStorage.getItem("id");
-        axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id)
-            .then(res => {
-                console.log(res);
-                $("#values").append('<div class="gauge gauge-init"' +
-                            '    data-type="semicircle"' +
-                            '    data-value="'+res.data/100+ '"' +
-                            '    data-value-text="' + res.data + '%"' +
-                            '    data-value-text-color="#0CC25E"' +
-                            '    data-label-font-weight="100"' +
-                            '    data-label-font-size="20"' +
-                            '    data-size="150"' +
-                            '    data-border-color="#0CC25E"' +
-                            '    ></div>');
-
-                if (res == 100) {
-                        $("#getCertificado").show();
-                    } else {
-                        $("#getCertificado").hide();
-
-                    }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        // app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
-        //     .then(function (res) {
-        //
-        //
-        //         $("#values").append('<div class="gauge gauge-init"' +
-        //             '    data-type="semicircle"' +
-        //             '    data-value="'+res/100+ '"' +
-        //             '    data-value-text="' + res + '%"' +
-        //             '    data-value-text-color="#0CC25E"' +
-        //             '    data-label-font-weight="100"' +
-        //             '    data-label-font-size="20"' +
-        //             '    data-size="150"' +
-        //             '    data-border-color="#0CC25E"' +
-        //             '    ></div>');
-        //
-        //
-        //         if (res == 100) {
-        //             $("#getCertificado").show();
-        //         } else {
-        //             $("#getCertificado").hide();
-        //
-        //         }
-        //     })
-        //     .catch(function (err) {
-        //         console.log(err.xhr);
-        //         console.log(err.status);
-        //         console.log(err.message);
-        //     });
-
-
-}
+// function drawProgressBar() {
+//
+//     // const axios = require('axios').default;
+//
+//     var id = localStorage.getItem("id");
+//         axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id)
+//             .then(res => {
+//                 console.log(res);
+//                 $("#values").append('<div class="gauge gauge-init"' +
+//                             '    data-type="semicircle"' +
+//                             '    data-value="'+res.data/100+ '"' +
+//                             '    data-value-text="' + res.data + '%"' +
+//                             '    data-value-text-color="#0CC25E"' +
+//                             '    data-label-font-weight="100"' +
+//                             '    data-label-font-size="20"' +
+//                             '    data-size="150"' +
+//                             '    data-border-color="#0CC25E"' +
+//                             '    ></div>');
+//
+//                 if (res == 100) {
+//                         $("#getCertificado").show();
+//                     } else {
+//                         $("#getCertificado").hide();
+//
+//                     }
+//             })
+//             .catch(err => {
+//                 console.log(err);
+//             })
+//         // app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
+//         //     .then(function (res) {
+//         //
+//         //
+//         //         $("#values").append('<div class="gauge gauge-init"' +
+//         //             '    data-type="semicircle"' +
+//         //             '    data-value="'+res/100+ '"' +
+//         //             '    data-value-text="' + res + '%"' +
+//         //             '    data-value-text-color="#0CC25E"' +
+//         //             '    data-label-font-weight="100"' +
+//         //             '    data-label-font-size="20"' +
+//         //             '    data-size="150"' +
+//         //             '    data-border-color="#0CC25E"' +
+//         //             '    ></div>');
+//         //
+//         //
+//         //         if (res == 100) {
+//         //             $("#getCertificado").show();
+//         //         } else {
+//         //             $("#getCertificado").hide();
+//         //
+//         //         }
+//         //     })
+//         //     .catch(function (err) {
+//         //         console.log(err.xhr);
+//         //         console.log(err.status);
+//         //         console.log(err.message);
+//         //     });
+//
+//
+// }
 
 
 

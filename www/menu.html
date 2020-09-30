@@ -79,6 +79,44 @@
         box-shadow: 0 20px 20px -20px #2E9AFE;
       margin: -50px auto 10px;
     }
+    .circles {
+        margin-bottom: -10px;
+    }
+
+    .circle {
+        width: 100px;
+        margin: 6px 6px 20px;
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .circle canvas {
+        vertical-align: top;
+    }
+
+    .circle strong {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        line-height: 40px;
+        font-size: 30px;
+    }
+
+    .circle strong i {
+        font-style: normal;
+        font-size: 0.6em;
+        font-weight: normal;
+    }
+
+    .circle span {
+        display: block;
+        color: #aaa;
+        margin-top: 12px;
+    }
 </style>
 </head>
 <body>
@@ -110,8 +148,10 @@
             </div>
             <br> <br> <br>
             <center>
-                <span style="color: #a1a1a1;">Bienvenido</span><br>
-                <span id="NombreUsuario" name="NombreUsuario" style="color: #a1a1a1; font-weight: bold;"></span>
+                <span style="color: black; font-size: 15px; font-weight: bold">Bienvenido</span><br>
+                <span id="NombreUsuario" name="NombreUsuario" style="color: black; font-size: 15px; font-weight: bold"></span><br>
+                <span style="color: #a1a1a1;">Rol</span><br>
+                <span id="RoleName" name="RoleName" style="color: #a1a1a1; font-weight: bold;"></span>
             </center>
         </div>
       </div>
@@ -128,7 +168,7 @@
               </a>
             </div>
             <div class="right" style="margin-right: 15px">
-                    <a href="#" onclick="drawProgressBar()">
+                    <a href="#">
                         <i class="fa fa-sync"></i>
                     </a>
                 </div>
@@ -141,14 +181,32 @@
             <div class="ptr-arrow"></div>
         </div>
             <div>
+                <div class="block">
+                    <center>
+                        <div id="welcome" style="color: red; font-size: 17px; font-weight: bold"></div>
+                    </center>
+                </div>
                 <div id="" class="block block-strong">
-                    <div class="row">
-                        <div class="col text-align-center">
-                            <div id="values"></div>
-                        </div>
+                    <div class="">
+<!--                        <div class="col text-align-center">-->
+<!--                            <div id="values"></div>-->
+<!--                        </div>-->
+                        <center>
+                            <div class="circles">
+                                <div id="demo" class="circle">
+                                    <strong></strong>
+                                    <span>Progreso de Cursos</span>
+                                </div>
+                                <div id="demo2" class="circle">
+                                    <strong></strong>
+                                    <span>Calif. Cuestionarios</span>
+                                </div>
+                            </div>
+                        </center>
                     </div>
                 </div>
                 <div class="block" id="menuPrincipal">
+
                     <p>Listado de Cursos</p>
                     <p class="row">
                         <a href="/cursos/induccion/" class="col button button-large button-raised button-fill">Induccion</a>
@@ -185,7 +243,7 @@
                        <b>Buzon de Sugerencias:</b> 5544472755 <br>
                        <b>Correo:</b> admon.rh@bennetts.com.mx <br>
                        <br>
-                       <b>Telefon: 55-67-49-69 Ext.   2178, 2177, 2179</b>
+                       <b>Telefon: 55-67-49-69 <br> Ext. 2178, 2177, 2179</b>
                        <br><br>
                       <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
                       <br>
@@ -207,10 +265,10 @@
     <script src="js/signature/modernizr.js"></script>
     <script src="js/app.js"></script>
     <script src="js/metodos.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="js/signature/jSignature.min.noconflict.js"></script>
+    <script src="js/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="js/SimpleStarRating.js"></script>
     <script src="js/axios.min.js"></script>
+    <script src="js/circle-progress.min.js"></script>
     <script src="js/player_api.js"></script>
 <!--    <script src="http://www.youtube.com/player_api?enablejsapi=1&version=3"></script>-->
 <script type="text/javascript" charset="utf-8">
@@ -511,7 +569,9 @@
 </script>
 
 <script>
-        //PTR en Click
+
+
+    //PTR en Click
       function ptrpro() {
           $("#processclick").show();
           $("#processclick").removeClass('99badge99');
@@ -600,6 +660,8 @@
         }
     $(document).ready(function(){
 
+
+
     function onOnline() {
         EvniarCuestionarioBack(); // Este metodo llama a otro we no es al e enviar
         //Debe llamr a un metodo que haga una consulta que si existen reportes que no se hayan enviado  (Estatus 1 o 2 )
@@ -624,17 +686,6 @@
             var id = localStorage.getItem("id");
 
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
-            console.log(response);
-            $("#values").append('<div class="gauge gauge-init"' +
-                '    data-type="semicircle"' +
-                '    data-value="'+response.data/100+ '"' +
-                '    data-value-text="' + response.data + '%"' +
-                '    data-value-text-color="#0CC25E"' +
-                '    data-label-font-weight="100"' +
-                '    data-label-font-size="20"' +
-                '    data-size="150"' +
-                '    data-border-color="#0CC25E"' +
-                '    ></div>');
 
             if (response.data == 100) {
                 $("#getCertificado").show();
@@ -642,6 +693,48 @@
                 $("#getCertificado").hide();
 
             }
+            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
+            $("#demo").circleProgress({
+                value: dataBar,
+                fill: { gradient: ['#0dc9f3','#058f94'] },
+                animation: {
+                    duration: 1200,
+                    easing: 'circleProgressEasing'
+                },
+                emptyFill: "#929292",
+            }).on('circle-animation-progress', function(event, progress, stepValue) {
+                $(this).find('strong').text(response.data+'%');
+            });
+
+            $('#demo2').circleProgress({ // calificacion general
+                value: 0.6,
+                thickness: 'auto',
+                animation: {
+                    duration: 1200,
+                    easing: 'circleProgressEasing'
+                },
+                emptyFill: "#929292",
+                fill: {
+                    gradient: ['#92f533','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+                },
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(60 + '<i>/100</i>');
+            });
+            // $("#values").append('' +
+            //     '<div class="gauge gauge-init"' +
+            //     '    data-type="semicircle"' +
+            //     '    data-value="'+response.data/100+ '"' +
+            //     '    data-value-text="' + response.data + '%"' +
+            //     '    data-value-text-color="#0CC25E"' +
+            //     '    data-label-font-weight="100"' +
+            //     '    data-label-font-size="20"' +
+            //     '    data-size="150"' +
+            //     '    data-border-color="#0CC25E"' +
+            //     '    ></div>' +
+            //     '<div class="progressbar" data-progress="'+response.data+'">' +
+            //     '  <span></span>' +
+            //     '</div>' +
+            //     '<span>'+response.data+'</span>');
         } catch (error) {
             console.error(error);
         }
@@ -705,6 +798,7 @@
     }
 
     $("#NombreUsuario").html(nombreCompleto );
+    $("#welcome").html("Bienvenido "+nombreCompleto );
     $("#RoleName").html(role_name );
     if(localStorage.getItem("id") == 1){
         $("#imagi").html("<img class='imagena3' src='img/bennetts.png' width='22%' />");
