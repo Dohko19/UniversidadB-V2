@@ -567,7 +567,7 @@ var routes = [
   },
   {
     name: 'question_lessons',
-    path: '/questions/show/:id/:name',
+    path: '/questions/show/:id/:course_id/:name',
     componentUrl: './pages/questions/show.html',
   },
   // Pages EVALUACION

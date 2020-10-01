@@ -1,3 +1,4 @@
+<!--suppress JSAnnotator -->
 <template>
     <div class="page">
         <div class="navbar">
@@ -27,8 +28,11 @@
                         let content = JSON.parse(res);
                         var valor = '';
                         content.forEach(data => {
+
+
                             valor += '<div class="card">'+
                                 '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ data.name +'</div>'+
+                                '<div class="item-after"><span class="badge color-green">5</span></div>'+
                                 '<div class="card-content card-content-padding">'+
                                 '<p class="date small">'+ data.description +'</p>' +
                                 '</div>' +

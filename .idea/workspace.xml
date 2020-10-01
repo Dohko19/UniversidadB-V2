@@ -23,22 +23,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/css/simpleGauge.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/circle-progress.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/jquery-3.3.1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/simpleGauge.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/css/simpleGauge.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/circle-progress.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/jquery-3.3.1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/simpleGauge.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,6 +116,7 @@
       <workItem from="1601227159313" duration="1366000" />
       <workItem from="1601303259429" duration="19197000" />
       <workItem from="1601395495284" duration="19520000" />
+      <workItem from="1601559267983" duration="29649000" />
     </task>
     <servers />
   </component>
@@ -145,6 +151,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="259" y="0" key="#JSHint/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600813179654" />
+    <state x="272" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601582436063">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="272" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1360.728@0.0.1360.728" timestamp="1601582436063" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1600786585689">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -166,14 +176,28 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="367" y="47" width="743" height="658" key="find.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600360828545" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1601326899725">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="338" y="162" key="run.anything.popup" timestamp="1601570879516">
+      <screen x="0" y="0" width="1360" height="728" />
     </state>
+    <state x="338" y="162" key="run.anything.popup/0.0.1360.728@0.0.1360.728" timestamp="1601570879516" />
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601326899725" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601416305954">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="344" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601583009512">
+      <screen x="0" y="0" width="1360" height="728" />
     </state>
+    <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601416305954" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1601052866358" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/www/js/metodos.js</url>
+          <line>1024</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

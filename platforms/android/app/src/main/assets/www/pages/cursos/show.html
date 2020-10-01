@@ -29,10 +29,11 @@
                //course_show.json
                app.request.get(cordova.file.externalRootDirectory + '/jsons/course_show.json', function (data) {
                    const courses_show = JSON.parse(data);
+                   console.log("COURSES SHOW   " + data)
 
                    if (courses_show.length !== 0)
                    {
-                       for (var i = 0; i < courses_show.length; i++) {
+                       for (var i = 0; i <= courses_show.length; i++) {
                            if(courses_show[i].course_id == id)
                            {
                                $("#Lessons").append(
@@ -46,7 +47,7 @@
                                      'Completar esta Lección'+
                                      '</div>'+
                                      '<p class="row">'+
-                                     '<a onclick="registerQuest('+ courses_show[i].id +')" href="/questions/show/'+courses_show[i].id+'/'+courses_show[i].name+'" class="link col button button-large button-raised button-fill">'+
+                                     '<a onclick="registerQuest('+ courses_show[i].id +', '+courses_show[i].course_id+')" href="/questions/show/'+courses_show[i].id+'/'+courses_show[i].course_id+'/'+courses_show[i].name+'" class="link col button button-large button-raised button-fill">'+
                                      '<i class="fas fa-question"></i> Resolver Cuestionario</a>'+
                                      '</p>'+
                                      '</label>'+

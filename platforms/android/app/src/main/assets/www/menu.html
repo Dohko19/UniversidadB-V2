@@ -184,6 +184,11 @@
                 <div class="block">
                     <center>
                         <div id="welcome" style="color: red; font-size: 17px; font-weight: bold"></div>
+                        <center>
+                            <span style="color:gray; font-size: 12px; text-align: right; font-weight: bold;">Ultima actualizacion de datos: </span>
+                            <br>
+                            <span id="Fecha" name="Fecha" style="color: red; font-weight: bold; font-size: 14px; text-align: right; ">Sus datos no estan actualizados</span>
+                        </center>
                     </center>
                 </div>
                 <div id="" class="block block-strong">
@@ -572,74 +577,187 @@
 
 
     //PTR en Click
-      function ptrpro() {
-          $("#processclick").show();
-          $("#processclick").removeClass('99badge99');
-          $("#processclick").addClass('badge');
+    //PTR en Click
+    function ptrpro() {
+        $("#processclick").show();
+        $("#processclick").removeClass('99badge99');
+        $("#processclick").addClass('badge');
 
-          downloader.init({folder: "jsons", unzip: true});
-          downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
-          document.addEventListener('DOWNLOADER_downloadProgress', function(event){
-              var data = event.data;
-              console.log('Proceso', data);
-              $("#processclick").html(data[0] + "%");
-              if(data[0] == 99 || data[0] == 100){
-                  app.ptr.done();
-                  $("#processclick").html("Actualizados");
+        downloader.init({folder: "jsons", unzip: true});
+        downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+        document.addEventListener('DOWNLOADER_downloadProgress', function (event) {
+            var data = event.data;
+            console.log('Proceso', data);
+            $("#processclick").html(data[0] + "%");
+            if (data[0] == 99 || data[0] == 100) {
+                app.ptr.done();
+                var fecha = new Date();
+                var fFinal = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+                databaseHandler.db.transaction(
+                    function (tx5) {
+                        tx5.executeSql(
+                            "INSERT INTO Actualizaciones (IdUsuario, Fecha) VALUES (?,?)",
+                            [IdUsuario, fFinal],
+                            function (tx5, results) {
+                                databaseHandler.db.transaction(
+                                    function (tx5) {
+                                        tx5.executeSql(
+                                            "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                            [],
+                                            function (tx5, results) {
+                                                var length = results.rows.length;
+                                                var item1 = results.rows.item(0);
+                                                $("#Fecha").html(item1.Fecha);
+                                                $("#Fecha2").html(item1.Fecha);
+                                                // $("#Fecha").css("color","#1e90ff");
+                                                $("#Fecha").css("color", "#019CDC");
+                                                $("#Fecha2").css("color", "#019CDC");
+                                            }
+                                        );
+                                    },
+                                    function (error) {
+                                    },
+                                    function () {
+                                    }
+                                );
+                            }
+                        );
+                    },
+                    function (error) {
+                    },
+                    function () {
+                    }
+                );
+                $("#processclick").html("Actualizados");
 
-                  downloader.abort();
-              }
-          });
-          document.addEventListener('DOWNLOADER_downloadError', function(event){
-              var data = event.data;
-              console.log('Proceso', data);
-                  app.ptr.done();
-                  $("#processclick").hide();
-                  app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
-                  downloader.abort();
-          });
-          document.addEventListener('downloadSuccess', function(event){
-              var data = event.data;
-              console.log('Proceso', data);
-                  app.ptr.done();
-                  $("#processclick").html("Actualizados");
-                  downloader.abort();
-          });
-      }
-      // PTR en pantalla
-      var $ptrContent = $('.ptr-content');
-      $ptrContent.on('ptr:refresh', function (e) {
+                downloader.abort();
+            }
+        });
+    }
+    //   function ptrpro() {
+    //       $("#processclick").show();
+    //       $("#processclick").removeClass('99badge99');
+    //       $("#processclick").addClass('badge');
+    //
+    //       downloader.init({folder: "jsons", unzip: true});
+    //       downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+    //       document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+    //           var data = event.data;
+    //           console.log('Proceso', data);
+    //           $("#processclick").html(data[0] + "%");
+    //           if(data[0] == 99 || data[0] == 100){
+    //               app.ptr.done();
+    //               $("#processclick").html("Actualizados");
+    //
+    //               downloader.abort();
+    //           }
+    //       });
+    //       document.addEventListener('DOWNLOADER_downloadError', function(event){
+    //           var data = event.data;
+    //           console.log('Proceso', data);
+    //               app.ptr.done();
+    //               $("#processclick").hide();
+    //               app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+    //               downloader.abort();
+    //       });
+    //       document.addEventListener('downloadSuccess', function(event){
+    //           var data = event.data;
+    //           console.log('Proceso', data);
+    //               app.ptr.done();
+    //               $("#processclick").html("Actualizados");
+    //               downloader.abort();
+    //       });
+    //   }
+    // PTR en pantalla
+    var $ptrContent = $('.ptr-content');
+    $ptrContent.on('ptr:refresh', function (e) {
         $("#process").show();
         setTimeout(function () {
             downloader.init({folder: "jsons", unzip: true});
             downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
-            document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+            document.addEventListener('DOWNLOADER_downloadProgress', function (event) {
                 var data = event.data;
                 console.log('Proceso', data);
                 $("#process").html(data[0] + "%");
-                if(data[0] == 99 || data[0] == 100){
+                if (data[0] == 99 || data[0] == 100) {
                     app.ptr.done();
+                    var fecha = new Date();
+                    var fFinal = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+                    var RFC = "123456789";
+                    databaseHandler.db.transaction(
+                        function (tx5) {
+                            tx5.executeSql(
+                                "INSERT INTO Actualizaciones (IdUsuario, Fecha) VALUES (?,?)",
+                                [IdUsuario, fFinal],
+                                function (tx5, results) {
+                                    databaseHandler.db.transaction(
+                                        function (tx5) {
+                                            tx5.executeSql(
+                                                "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                                [],
+                                                function (tx5, results) {
+                                                    var length = results.rows.length;
+                                                    var item1 = results.rows.item(0);
+                                                    $("#Fecha").html(item1.Fecha);
+                                                    $("#Fecha2").html(item1.Fecha);
+                                                    // $("#Fecha").css("color","#1e90ff");
+                                                    $("#Fecha").css("color", "#019CDC");
+                                                    $("#Fecha2").css("color", "#019CDC");
+                                                }
+                                            );
+                                        },
+                                        function (error) {
+                                        },
+                                        function () {
+                                        }
+                                    );
+                                }
+                            );
+                        },
+                        function (error) {
+                        },
+                        function () {
+                        }
+                    );
                     $("#process").hide();
                     downloader.abort();
                 }
             });
-            document.addEventListener('DOWNLOADER_downloadError', function(event){
-                var data = event.data;
-                console.log('Proceso', data);
-                    app.ptr.done();
-                    $("#process").hide();
-                    app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
-                    downloader.abort();
-            })
-            document.addEventListener('downloadSuccess', function(event){
-                var data = event.data;
-                console.log('Proceso', data);
-                    app.ptr.done();
-                    $("#process").hide();
-                    downloader.abort();
-            });
-        }, 100);
-    });
+        })
+        })
+    //   var $ptrContent = $('.ptr-content');
+    //   $ptrContent.on('ptr:refresh', function (e) {
+    //     $("#process").show();
+    //     setTimeout(function () {
+    //         downloader.init({folder: "jsons", unzip: true});
+    //         downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+    //         document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+    //             var data = event.data;
+    //             console.log('Proceso', data);
+    //             $("#process").html(data[0] + "%");
+    //             if(data[0] == 99 || data[0] == 100){
+    //                 app.ptr.done();
+    //                 $("#process").hide();
+    //                 downloader.abort();
+    //             }
+    //         });
+    //         document.addEventListener('DOWNLOADER_downloadError', function(event){
+    //             var data = event.data;
+    //             console.log('Proceso', data);
+    //                 app.ptr.done();
+    //                 $("#process").hide();
+    //                 app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+    //                 downloader.abort();
+    //         })
+    //         document.addEventListener('downloadSuccess', function(event){
+    //             var data = event.data;
+    //             console.log('Proceso', data);
+    //                 app.ptr.done();
+    //                 $("#process").hide();
+    //                 downloader.abort();
+    //         });
+    //     }, 100);
+    // });
       //Sin conexion
       document.addEventListener("offline", onOffline, false);
       function networkInfo() {
@@ -659,19 +777,91 @@
           app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se descargaran los datos.', 'Alerta!');
         }
     $(document).ready(function(){
-
+        app.dialog.preloader('Cargando...');
 
 
     function onOnline() {
-        EvniarCuestionarioBack(); // Este metodo llama a otro we no es al e enviar
-        //Debe llamr a un metodo que haga una consulta que si existen reportes que no se hayan enviado  (Estatus 1 o 2 )
-        //mira asi
+        EvniarCuestionarioBack();
 
     }
     setInterval(function(){
         onOnline();
         console.log('Enviando...')
     },120000);
+
+        databaseHandler.db.transaction(
+            function(tx5){
+                tx5.executeSql(
+                    "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                    [],
+                    function(tx5, results){
+                        var length = results.rows.length;
+                        var item1 = results.rows.item(0);
+                        $("#Fecha").html(item1.Fecha);
+                        $("#Fecha2").html(item1.Fecha);
+                        $("#Fecha").css("color","#019CDC");
+                        $("#Fecha2").css("color","#019CDC");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+        );
+
+
+        databaseHandler.db.transaction(
+        function(tx5){
+            tx5.executeSql(
+                "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                [],
+                function(tx5, results){
+//SQLite
+                    var length = results.rows.length;
+
+                    if(length > 0 ) {
+                        var item1 = results.rows.item(0);
+                        var tu = item1.Fecha;
+                        var sep = tu.split(' ');
+                        var sep2 = sep[0];
+                        var tu2 = sep2.split('-')
+                        var sy = tu2[0];
+                        var sm = tu2[1];
+                        var sd = tu2[2];
+//Actual
+                        n = new Date();
+                        y = n.getFullYear();
+                        m = n.getMonth() + 1;
+                        d = n.getDate();
+                        if (y == sy && m == sm && d == sd) {
+
+                        } else {
+                            var updateData = app.toast.create({
+                                text: 'Actualizando datos',
+                                closeButton: true,
+                                closeButtonText: 'Cerrar',
+                                closeButtonColor: 'red',
+                            });
+                            updateData.open();
+                            ptrpro();
+                        }
+                    }else{
+                        // app.dialog.alert("Actualizando datos", "Aviso!");
+                        var updateData = app.toast.create({
+                            text: 'Actualizando datos',
+                            closeButton: true,
+                            closeButtonText: 'Cerrar',
+                            closeButtonColor: 'red',
+                        });
+                        updateData.open();
+                        ptrpro();
+                    }
+
+                }
+            );
+        },
+        function(error){},
+        function(){}
+    );
 
     // async function waitForBar() {
     //     await drawProgressBar();
@@ -805,6 +995,8 @@
     }else{
         $("#imagi").html("<img class='imagena2' src='img/bennetts.png' width='18%' />");
     }
+
+        app.dialog.close();
 
     document.addEventListener('backbutton', function (e) {
         app.views.main.router.back();

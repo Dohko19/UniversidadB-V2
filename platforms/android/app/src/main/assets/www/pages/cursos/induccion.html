@@ -28,6 +28,8 @@
           app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
               const courses = JSON.parse(data);
               console.log(courses);
+              // const courses_show = JSON.parse(data);
+
               if (courses.length !== 0)
               {
                   for (var i = 0; i < courses.length; i++) {
@@ -35,16 +37,21 @@
                       if(courses[i].category_id == catId)
                       {
                         $("#Listado").append(
-                            '<div class="card">'+
-                            '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ courses[i].name +'</div>'+
+                            '<div class="card item-content">'+
+                            '<div class="card-header item-inner" style="text-shadow:  1px 1px">'+ courses[i].name +
+                            '<div class="item-after" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
+                            '</div>'+
                             '<div class="card-content card-content-padding">'+
                             '<p class="date small">'+ courses[i].description +'</p>' +
                             '</div>' +
-                            '<div class="card-footer"><a href="/cursos/show/'+ courses[i].idCourse +'" class="link">Ingresar al Curso</a></div>' +
+                            '<a href="/cursos/show/'+courses[i].idCourse+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'">Ingresar al Curso</div></a>' +
                             '<div class="progressbar" data-progress="100">'+
-                            ' <span></span>'+
+                            '<span><br></span>'+
                             '</div></div>'
                         );
+
+                          checkIfCoursesComplete(courses[i].idCourse);
+
                       }
 
                   }
@@ -87,4 +94,11 @@
 .demo-card-header-pic .card-content-padding .date{
   color: #8e8e93;
 }
+
+  .isDisabled {
+      color: currentColor;
+      cursor: not-allowed;
+      opacity: 0.5;
+      text-decoration: none;
+  }
 </style>

@@ -901,7 +901,7 @@ function learn(id)
             var toastTop = app.toast.create({
                 text: 'La leccion fue maracada como completada ' ,
                 position: 'top',
-                closeTimeout: 2000,
+                closeTimeout: 1500,
             });
             toastTop.open();
             var inp = $("#complete"+id);
@@ -926,7 +926,7 @@ function learn(id)
 
 
 //-----------------------------------------------------------
-function registerQuest(lesson_id){
+function registerQuest(lesson_id, course_id){
 
     var now = new Date();
     // var idCuestionario = localStorage.getItem('idCuestionario');
@@ -990,8 +990,8 @@ function registerQuest(lesson_id){
                         )
                     }
                     else {
-                        tx1.executeSql("INSERT INTO register(idUser, status, lesson_id,  created_at, dateF ) VALUES (?,?,?,?,?)",
-                            [user_id, 0, lesson_id, fecha, fechaF],
+                        tx1.executeSql("INSERT INTO register(idUser, status, lesson_id, course_id,  created_at, dateF ) VALUES (?,?,?,?,?,?)",
+                            [user_id, 0, lesson_id, course_id, fecha, fechaF],
                             function (tx1, results) {
                                 databaseHandler.db.transaction(
                                     function (tx) {
@@ -1117,11 +1117,14 @@ function offDays(date, days) {
     return ppy
 }
 
-function EnviarCuestionario(){
+function EnviarCuestionario(course_id){
     var idCuestionario = localStorage.getItem('idCuestionario');
     var answersArray = [];
     var a = 0;
+    var courseID = course_id;
 
+    const dateNow = new Date();
+    const now = offDays(dateNow, 0);
     Swal.fire({
         title: '¿Estas seguro de enviar el cuestionario?',
         showDenyButton: true,
@@ -1174,6 +1177,7 @@ function EnviarCuestionario(){
                                 data: { 'arrayAQ': JSON.stringify(answersArray) },
                                 success: function(respuesta) {
                                     if (respuesta == 1) {
+
                                         databaseHandler.db.transaction(
                                             function (tx1) {
                                                 tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
@@ -1207,7 +1211,23 @@ function EnviarCuestionario(){
                                                                 // $("#enviarCuestionario").hide();
                                                                 // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                                                                 Swal.fire('Guardado!', '', 'success');
-                                                                navigator.app.backHistory();
+                                                                databaseHandler.db.transaction(
+                                                                    function (tx1) {
+                                                                        tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
+                                                                            [courseID, now, 1],
+                                                                            function (tx, resultsA) {
+                                                                            })
+
+                                                                    },
+                                                                    function (error) {
+                                                                        console.log("add client error: " + error.message);
+                                                                        app.dialog.alert('Error al insertar registro.', 'Error');
+                                                                        app.preloader.hide();
+                                                                        Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
+
+                                                                    },
+                                                                    function () {
+                                                                    });
                                                             }
                                                         }) //END SWAL FIRE
                                                             .catch((err) => {
@@ -1458,6 +1478,56 @@ function getCertificate()
     }
 }
 
+async function CheckCourses()
+{
+
+}
+
+function checkIfCoursesComplete(course_id){
+
+    const date = new Date();
+    const dayOff = offDays(date, 0);
+
+    databaseHandler.db.transaction(
+        function (tx1) {
+            tx1.executeSql("SELECT course_id, dateF, finish FROM courses_finish WHERE course_id = ?", //
+                [course_id],
+                function (tx, resultsA){
+                    var length = resultsA.rows.length;
+                    var id_curso, status, finiDate;
+                    if (length > 0){
+                        for(var i = 0; i< length; i++) {
+                            id_curso = resultsA.rows.item(i).course_id;
+                            status = resultsA.rows.item(i).finish;
+                            finiDate = resultsA.rows.item(i).dateF;
+                        }
+                        if ( status == 1 ){
+                            $("#linkToC"+id_curso).hide();
+                            $("#terminadoCourse"+id_curso).show();
+                        }
+                        else{
+                            // $("#linkToC"+course_id).show();
+                            // $("#terminadoCourse"+course_id).hide();
+                        }
+                    }
+                    else {
+                        // $("#linkToC"+course_id).show();
+                        $("#terminadoCourse"+course_id).hide();
+                    }
+
+                })
+            let timerInterval
+
+        },
+        function (error) {
+            console.log("add client error: " + error.message);
+            app.dialog.alert('Error al insertar registro.  in checkIfCoursesComplete', 'Error');
+            app.preloader.hide();
+        },
+        function () {
+        }
+    );
+}
 
 //--------------------------------------------------------------------
 // for(var i = 0; i< length; i++) {

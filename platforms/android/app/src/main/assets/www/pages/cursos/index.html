@@ -28,8 +28,10 @@
                         let content = JSON.parse(res);
                         var valor = '';
                         content.forEach(data => {
-                            valor += '<div class="card">' +
-                                '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">' + data.name + '</div>' +
+                            valor += '<div class="card item-content">' +
+                                '<div class="card-header item-inner" style="text-shadow: black 0.1em 0.1em 0.2em">' + data.name +
+                                '<div class="item-after"><span class="badge color-green">5</span></div>'+
+                                '</div>' +
                                 '<div class="card-content card-content-padding">' +
                                 '<p class="date small">' + data.description + '</p>' +
                                 '<p>Subido el: 22 de junio del 2020</p>' +
