@@ -542,14 +542,14 @@ var routes = [
   },
   // page
   {
-    name: 'cursos_operador',
-    path: '/cursos/operador',
-    componentUrl: './pages/cursos/operador_limpieza.html',
+    name: 'cursos_index',
+    path: '/cursos/index/:id',
+    componentUrl: './pages/cursos/index.html',
     options: {
       transition: 'f7-circle',
     },
   },
-  {
+  { // ruta no usada
     name: 'cursos_induccion',
     path: '/cursos/induccion/',
     componentUrl: './pages/cursos/induccion.html',
@@ -567,13 +567,13 @@ var routes = [
   },
   {
     name: 'question_lessons',
-    path: '/questions/show/:id/:course_id/:name',
+    path: '/questions/show/:id/:course_id/:catId/:name',
     componentUrl: './pages/questions/show.html',
   },
   // Pages EVALUACION
   {
     name: 'cursos/',
-    path: '/cursos/show/:id',
+    path: '/cursos/show/:id/:catId',
     componentUrl: './pages/cursos/show.html',
   },
   // Default route (404 page). MUST BE THE LAST

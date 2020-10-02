@@ -750,7 +750,7 @@
 				INFOPLIST_FILE = "HelloCordova/HelloCordova-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.vic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.university;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -772,7 +772,7 @@
 				INFOPLIST_FILE = "HelloCordova/HelloCordova-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.vic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.university;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -816,7 +816,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.vic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.university;
 			};
 			name = Debug;
 		};
@@ -856,7 +856,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.vic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bennetts.university;
 			};
 			name = Release;
 		};

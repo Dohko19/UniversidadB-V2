@@ -1,0 +1,110 @@
+<!--suppress JSAnnotator -->
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
+            <div class="navbar-inner">
+                <div class="left">
+<!--                    <a href="#"  class="back">-->
+<!--                        <i class="icon icon-back"></i>-->
+<!--                        <span class="if-not-md">Back</span>-->
+<!--                    </a>-->
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <div id="primary-title" class="block-title">Cuestionario Correspondiente a la leccion:
+                    <center>
+                        <div id="title" class="items-cente"></div>
+                    </center>
+                </div>
+                <div id="Questions" style="width: 100%;"></div>
+                    <span style="width: 100%;" id="enviarCuestionario"></span>
+                <div id="success" style="width: 100%;"></div>
+
+                <p id="note" style="color: red;">Nota: Una vez enviado el cuestionario no podras responder este cuestionario hasta el dia de mañana</p>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function(e, page)
+            {
+                let id = app.views.main.router.currentRoute.params.id;
+                let name = app.views.main.router.currentRoute.params.name;
+                let cursoID = app.views.main.router.currentRoute.params.course_id;
+                let user_id = localStorage.getItem("id");
+
+
+                app.request.get(cordova.file.externalRootDirectory + '/jsons/preguntas_leccion.json', function (data) {
+                app.request.get(cordova.file.externalRootDirectory + '/jsons/respues_pregunta.json', function (ans) {
+                    const answers = JSON.parse(ans);
+                    const questions = JSON.parse(data);
+                    if (questions.length !== 0) {
+                        $("#title").append('<b>'+name+'</b>');
+                        $("#enviarCuestionario").append('<button onclick="EnviarCuestionario('+cursoID+')" class="link col button button-large button-raised button-fill color-green">' +
+                                                        '<i class="fas fa-save"></i>' +
+                                                        '    Guardar' +
+                                                        '</button>');
+                        for (var w = 0; w < questions.length; w++) { //preguntas
+                            if (questions[w].courses_details_id === id) {
+                                $("#Questions").append('<div class="card card-outline">' +
+                                    '<div class="card-header" style="font-weight: bold; color: white; font-size: 17px; background-color: #2196f3;" id="Pregunta'+questions[w].id+'">' + questions[w].name_question + '</div>' +
+                                    '<div class="card-content card-content-padding">' +
+                                    '<div id="answers'+w+'"></div>' +
+                                    '</div>' +
+                                    '</div>'
+                                );
+                                for (let i = 0; i < answers.length; i++) // respuestas
+                                {
+                                    if (answers[i].question_id == questions[w].id)
+                                    {
+                                        $("#answers"+w).append(
+                                            '<div class="list" id="preguntas">' +
+                                            '<ul>' +
+                                            '<li>' +
+                                            '<label class="item-radio item-radio-icon-start item-content">' +
+                                            '<input type="radio" onchange="saveQuest(this,'+ answers[i].idR+')" ' +
+                                                    'id="'+questions[w].id+'" ' +
+                                                    'name="pregunta'+questions[w].id+'"' +
+                                                    'data-ansId="'+answers[i].idR+'" ' +
+                                                    'value="'+answers[i].correct_answer+'"' +
+                                                    '>' +
+                                            ' <i class="icon icon-radio"></i>' +
+                                            '<div class="item-inner">' +
+                                            '<div class="item-title">'+answers[i].answers+'</div>'+
+                                            '</div>'+
+                                            '</label>' +
+                                            '</li>' +
+                                            '</ul>' +
+                                            '</div>'
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                        {
+
+                    }
+                    });//CLSE REQUEST
+                });//CLSE REQUEST
+
+            }
+        }
+    }
+</script>
+<style>
+    .items-cente {
+        margin: 1rem;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        font-size: 20px;
+        /* IMPORTANTE */
+        text-align: center;
+    }
+</style>

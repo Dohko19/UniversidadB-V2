@@ -1,0 +1,166 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/key.png" width="60px" /></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" onclick="gCuestionarioF()">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right" style="margin-right: 15px">
+                    <a href="#" data-popup="" class="popup-open">
+                        <i class="icon f7-icons if-not-md">help_round_fill</i>
+                        <i class="icon material-icons if-md">help_outline</i>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                    <h2 style="color:#00008B;">Check List</h2>
+                    <hr>
+                    <div id="CUESTIO" class="list accordion-list">
+                        
+                    </div><br><br>
+                </div>
+                <br><br>
+                <center>
+                    <div class="col-25">
+                        <!--<div class="preloader color-blue"></div>-->
+                        <span id="Cargando">Cargando...</span>
+                        <script type="text/javascript"> app.preloader.show('blue');</script>
+                    </div>
+                </center>
+            </div>
+
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+
+
+                //Llenado de textarea de recomentadiones 
+                $(".spanBlanco").change(function(){
+                    if ($(this).val()=="") {
+                        $(this).css("background-color", "#ffffff");
+                    } else {
+                        $(this).css("background-color", "#E0F8F7");
+                    }
+                });
+
+                //Sabe si existe ya un registro
+
+    //Comprobar cuestionario
+                var IdCedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql("SELECT * FROM Cuestionarios WHERE IdCedula = ?",
+                        [IdCedula],
+                        function(tx1, results){
+
+                            var valor = results.rows.length;
+                            if(valor > 0){
+                                
+                                //JSON para carga de cuestionarios
+                                app.request.get(cordova.file.externalRootDirectory + '/jsons/Cuestionarios.json', function (data) {
+                                        var content1 = JSON.parse(data);
+                                        if (content1.length == 0) {
+                                            $("#CUESTIO").html("No se encontraron cuestionarios.");
+                                        }else{
+                                            var cont = 1;
+                                            for (var i =0; i < content1.length; i++) {
+                                                $("#CUESTIO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloVerde.png' width='15px' height='15px' id ='imgEstat' /></div><div class='item-inner'><div class='item-title'><span id = 'IdCuestionario'>"+cont+"</span>.- <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span></div></div></a><div><div class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gCuestionario();' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
+                                                cont++;
+                                            }
+                                            app.request.get(cordova.file.externalRootDirectory + '/jsons/PreguntasCuestionario.json', function (data) {
+                                                var content2 = JSON.parse(data);
+                                                var cont2 = 1;
+                                                for (var w =1; w <= cont; w++) {
+                                                    if(content2[i].IdCuestionario == w){
+                                                        for (var j =0; j < content2.length; j++) {
+                                                            var item2 = results.rows.item(j);
+                                                            
+                                                            if(item2.Checkbox == "true"){
+                                                                $("#Block" + w).append("<div id = 'card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgo"+cont2+"' style='color: #019CDC; font-weight: bold;'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br>    <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox' checked><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                            }else{
+                                                                $("#Block" + w).append("<div id = 'card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgo"+cont2+"' style='color: #019CDC; font-weight: bold;'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                            }
+                                                               
+                                                            cont2++;
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
+                                    app.preloader.hide();
+                                    document.getElementById("Cargando").innerHTML ="";
+
+
+
+
+                                    // var con = 1;
+                                    // for(var i = 0; i< valor; i++){
+                                    //     var item2 = results.rows.item(i);
+                                    //     console.log(item2.Texto);
+                                    //     $("#T"+con).val(item2.Texto);
+                                    //     if(item2.Checkbox == "true"){
+                                    //         $("#"+con).prop("checked",true);
+                                    //     }else{
+
+                                    //     }
+                                    //         app.preloader.hide();
+                                    //         document.getElementById("Cargando").innerHTML ="";
+                                    //     con++;
+                                    // }
+                            }else{
+                                    
+                                //JSON para carga de cuestionarios
+                                app.request.get(cordova.file.externalRootDirectory + '/jsons/Cuestionarios.json', function (data) {
+                                    var content1 = JSON.parse(data);
+                                    if (content1.length == 0) {
+                                        $("#CUESTIO").html("No se encontraron cuestionarios.");
+                                    }else{
+                                        var cont = 1;
+                                        for (var i =0; i < content1.length; i++) {
+                                            $("#CUESTIO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloRojo.png' width='15px' height='15px' id ='imgEstat' /></div><div class='item-inner'><div class='item-title'><span id = 'IdCuestionario'>"+cont+"</span>.- <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span></div></div></a><div><div class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gCuestionario();' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
+                                            cont++;
+                                        }
+                                        app.request.get(cordova.file.externalRootDirectory + '/jsons/PreguntasCuestionario.json', function (data) {
+                                            var content2 = JSON.parse(data);
+                                            var cont2 = 1;
+                                            for (var w =1; w <= cont; w++) {
+                                                if(content2[i].IdCuestionario == w){
+                                                    for (var j =0; j < content2.length; j++) {
+                                                        $("#Block" + w).append("<div id = 'card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgo"+cont2+"' style='color: #019CDC; font-weight: bold;'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox'><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'></textarea><br/></div><br></div><br></div>");
+                                                        
+                                                        cont2++;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                app.preloader.hide();
+                                document.getElementById("Cargando").innerHTML ="";
+                                
+                            }
+                         } 
+                    )},
+                );
+
+                
+                
+                
+
+            }
+        }
+    }
+</script>

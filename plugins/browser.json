@@ -78,6 +78,9 @@
     },
     "cordova-plugin-background-mode": {
       "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-enable-cleartext-traffic": {
+      "PACKAGE_NAME": "com.bennetts.vic"
     }
   },
   "dependent_plugins": {

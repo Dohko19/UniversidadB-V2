@@ -939,7 +939,7 @@ function registerQuest(lesson_id, course_id){
     const dayOff = offDays(date, 0);
     databaseHandler.db.transaction(
         function (tx1) {
-            tx1.executeSql("SELECT lesson_id, idCuestionario, dateF, status, dateF FROM register WHERE lesson_id = ? AND dateF = ?",
+                tx1.executeSql("SELECT lesson_id, idCuestionario, dateF, status, dateF FROM register WHERE lesson_id = ? AND dateF = ?",
                 [lesson_id, dayOff],
                 function (tx, resultsA){
                 console.log(tx);
@@ -952,6 +952,7 @@ function registerQuest(lesson_id, course_id){
                          item3 = resultsA.rows.item(i).lesson_id;
                          dateF = resultsA.rows.item(i).dateF;
                         status = resultsA.rows.item(i).status;
+                        alert(item3);
                         console.log(status);
                     }
                     if (status == 1 || status == 2 && dateF == dayOff)
@@ -983,7 +984,31 @@ function registerQuest(lesson_id, course_id){
                                                 var item = results.rows.item(0);
                                                 // alert(item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
-                                                // var IdRegistro = localStorage.getItem("IdRegistro");
+                                                var idC = localStorage.getItem("idCuestionario");
+                                                alert('ya mero' + idC);
+                                            databaseHandler.db.transaction(
+                                                function (tx1) {
+                                                //answer_id == lesson ID
+                                                tx1.executeSql("SELECT question_id, user_id, idCuestionario FROM answer_user WHERE idCuestionario = ? AND user_id = ? AND dateF = ?",
+                                                    [idC, user_id, dayOff],
+                                                    function (tx1, resultsQ) {
+                                                        var questionId;
+                                                        var length = resultsQ.rows.length;
+                                                        alert("longitud" + length);
+                                                        for (var i = 0; length < i; i++)
+                                                        {
+                                                            questionId = resultsQ.rows.item(i).question_id;
+                                                            alert("id cuestion" + questionId);
+                                                            $("#"+questionId).attr('checked', true);
+                                                        }
+                                                    }
+                                                )
+                                                },
+                                                function (error) {
+                                                    console.log("add client error: " + error.message);
+                                                    app.dialog.alert('Error al insertar registro. ccc2', 'Error');
+                                                    app.preloader.hide();
+                                                });
                                             });
                                     });
                             }
@@ -1003,6 +1028,8 @@ function registerQuest(lesson_id, course_id){
                                                 // alert("insert new"+item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
                                                 var idCuestionario = localStorage.getItem("idCuestionario");
+
+
 
                                             })
                                     });
@@ -1028,6 +1055,7 @@ function saveQuest(el, ansId)
     console.log(el.id);
     console.log(el.name);
     console.log(ansId);
+
     var fecha = new Date();
     var user_id = localStorage.getItem("id");
     var idCuestionario = localStorage.getItem("idCuestionario");
@@ -1057,13 +1085,33 @@ function saveQuest(el, ansId)
                         tx1.executeSql("UPDATE answer_user SET answer_id = ?, answer = ?, updated_at = ? WHERE question_id = ?",
                             [answerId, answer, created_at, question_id],
                         function (tx1, resultsB){
-                            // alert("Update");
+                            if(answer == 1)
+                            {
+                                $('#label'+answerId).css("background-color", "#2eff2b47");
+                            }
+                            else{
+                                $('#label'+answerId).css("background-color", "#ff757540");
+
+                            }
+
+                            $('input[name=pregunta'+question_id+']').attr("disabled",true);
                         })
                     }
                     else {
                         tx1.executeSql("INSERT INTO answer_user(idCuestionario, answer, question_id, user_id, answer_id, created_at, dateF ) VALUES (?,?,?,?,?,?,?)",
                             [idCuestionario, answer, question_id, user_id, answerId, created_at, dateFNow],
                             function (tx1, results) {
+                            if(answer == 1)
+                            {
+                                $('#label'+answerId).css("background-color", "#2eff2b47");
+                            }
+                            else{
+                                $('#label'+answerId).css("background-color", "#ff757540");
+
+                            }
+
+                                $('input[name=pregunta'+question_id+']').attr("disabled",true);
+
                                 // databaseHandler.db.transaction(
                                 //     function (tx) {
                                 //         tx.executeSql("SELECT MAX(question_id) as Id FROM anwser_user",
@@ -1117,7 +1165,8 @@ function offDays(date, days) {
     return ppy
 }
 
-function EnviarCuestionario(course_id){
+function EnviarCuestionario(course_id, catId){
+    let categoryId = catId;
     var idCuestionario = localStorage.getItem('idCuestionario');
     var answersArray = [];
     var a = 0;
@@ -1207,17 +1256,15 @@ function EnviarCuestionario(course_id){
                                                         }).then((result) => {
                                                             /* Read more about handling dismissals below */
                                                             if (result.dismiss === Swal.DismissReason.timer) {
-                                                                // $("#Questions").hide();
-                                                                // $("#enviarCuestionario").hide();
-                                                                // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
-                                                                Swal.fire('Guardado!', '', 'success');
                                                                 databaseHandler.db.transaction(
                                                                     function (tx1) {
                                                                         tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
                                                                             [courseID, now, 1],
                                                                             function (tx, resultsA) {
-                                                                            })
+                                                                                Swal.fire('Guardado!', '', 'success');
+                                                                                app.views.main.router.navigate({ name: 'cursos_index' , params: {id: categoryId}});
 
+                                                                            })
                                                                     },
                                                                     function (error) {
                                                                         console.log("add client error: " + error.message);
@@ -1272,6 +1319,12 @@ function EnviarCuestionario(course_id){
             Swal.fire('Los cambios no se guardaron', '', 'info')
         }
     })
+}
+
+function goBackxtwo()
+{
+    history.go(-2);
+    navigator.app.backHistory();
 }
 
 function EvniarCuestionarioBack() {
@@ -1376,69 +1429,6 @@ function storeQuestions(questionId){
     )
 }
 
-// function drawProgressBar() {
-//
-//     // const axios = require('axios').default;
-//
-//     var id = localStorage.getItem("id");
-//         axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id)
-//             .then(res => {
-//                 console.log(res);
-//                 $("#values").append('<div class="gauge gauge-init"' +
-//                             '    data-type="semicircle"' +
-//                             '    data-value="'+res.data/100+ '"' +
-//                             '    data-value-text="' + res.data + '%"' +
-//                             '    data-value-text-color="#0CC25E"' +
-//                             '    data-label-font-weight="100"' +
-//                             '    data-label-font-size="20"' +
-//                             '    data-size="150"' +
-//                             '    data-border-color="#0CC25E"' +
-//                             '    ></div>');
-//
-//                 if (res == 100) {
-//                         $("#getCertificado").show();
-//                     } else {
-//                         $("#getCertificado").hide();
-//
-//                     }
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//             })
-//         // app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
-//         //     .then(function (res) {
-//         //
-//         //
-//         //         $("#values").append('<div class="gauge gauge-init"' +
-//         //             '    data-type="semicircle"' +
-//         //             '    data-value="'+res/100+ '"' +
-//         //             '    data-value-text="' + res + '%"' +
-//         //             '    data-value-text-color="#0CC25E"' +
-//         //             '    data-label-font-weight="100"' +
-//         //             '    data-label-font-size="20"' +
-//         //             '    data-size="150"' +
-//         //             '    data-border-color="#0CC25E"' +
-//         //             '    ></div>');
-//         //
-//         //
-//         //         if (res == 100) {
-//         //             $("#getCertificado").show();
-//         //         } else {
-//         //             $("#getCertificado").hide();
-//         //
-//         //         }
-//         //     })
-//         //     .catch(function (err) {
-//         //         console.log(err.xhr);
-//         //         console.log(err.status);
-//         //         console.log(err.message);
-//         //     });
-//
-//
-// }
-
-
-
 function updateStatusCourse()
 {
     if (localStorage.getItem('status_course') == 1 ) {
@@ -1476,11 +1466,6 @@ function getCertificate()
     }else{
         swal.fire('Atencion', 'termina todos tu cursos para obtener tu certificado', 'info');
     }
-}
-
-async function CheckCourses()
-{
-
 }
 
 function checkIfCoursesComplete(course_id){
@@ -1529,77 +1514,26 @@ function checkIfCoursesComplete(course_id){
     );
 }
 
-//--------------------------------------------------------------------
-// for(var i = 0; i< length; i++) {
-//     var item3 = results.rows.item(i);
-// }
-//-------------------------------------------------------------------
-//Extraer el ultimo
-// databaseHandler.db.transaction(
-//     function(tx1){
-//         tx1.executeSql(
-//             "Select MAX(IdProyecto) as Id from Proyectos",
-//             [],
-//             function(tx, results){
-//                 var length = results.rows.length;
-//                 var item = results.rows.item(0);
-//                 localStorage.setItem("IdProyecto", item.Id);
-//                 envio = 0;
-//                 databaseHandler.db.transaction(
-//                     function(tx1){
-//                         tx1.executeSql(
-//                             "INSERT INTO VisitasVentas (IdProyecto, FechaVisita, Imagen, Geolocalizacion, envio, IdUsuario) VALUES (?,?,?,?,?,?)",
-//                             [item.Id,fFinal,imagenC,geolocation,envio, IdUsu],
-//                             function(tx, results){
-//
-//                                 //Extraer el ultimo id de la visita
-//                                 databaseHandler.db.transaction(
-//                                     function(tx1){
-//                                         tx1.executeSql(
-//                                             "Select MAX(IdCedulaV) as Id from VisitasVentas",
-//                                             [],
-//                                             function(tx, results){
-//                                                 var length = results.rows.length;
-//                                                 var item3 = results.rows.item(0);
-//                                                 localStorage.setItem("IdCedulaV", item3.Id);
-//
-//                                                 $('.preloader').remove();
-//                                                 $('.infinite-scroll-preloader').remove();
-//
-//                                                 app.dialog.alert('El registro se guardo correctamente.', 'Aviso');
-//                                                 app.views.main.router.navigate({name: 'seguimientov'}); //Colocar la pagina que realizaste
-//                                             },
-//                                             function(tx, error){
-//                                                 console.log("Error al consultar: " + error.message);
-//                                             }
-//                                         );
-//                                         console.log("Consulta correcta");
-//                                     },
-//                                     function(error){},
-//                                     function(){}
-//                                 );
-//                                 //Fin de extraer el ultimo id de la visita
-//
-//
-//
-//                             },
-//                             function(tx, error){
-//                                 console.log("Error al consultar: " + error.message);
-//                             }
-//                         );
-//                         console.log("Consulta correcta");
-//                     },
-//                     function(error){},
-//                     function(){}
-//                 );
-//             },
-//             function(tx, error){
-//                 console.log("Error al consultar: " + error.message);
-//             }
-//         );
-//         console.log("Consulta correcta");
-//     },
-//     function(error){},
-//     function(){}
-// );
-//Fin de extraer el ultimo
+function EvaluacionFinal(){
+    app.request.get(cordova.file.externalRootDirectory + '/jsons/eval_final_preguntas.json', function (data) {
+        console.log(data);
+        const preguntas = JSON.parse(data);
+        if (preguntas.length !== 0) {
+            $("#instructionsFinal").append('<p><b>Relación de Columnas: ' +
+                'En las siguientes colunmas encontras una el nombre del proceso y en otro los pasos de ' +
+                'cada procesos, deberás colocar sobre el cuadro verde el número que corresponda al proceso que ' +
+                'se está describiendo en los pasos.</p></b>');
+            for (var w = 0; w < preguntas.length; w++) { //preguntas
+                $("#content").append('<div class="card">' +
+                    '<div class="card-content card-content-padding">' +
+                    preguntas[w].pregunta +
+                    '</div>'+
+                    '</div>')
+            }
+        }
+        else {
+            Swal.fire('Atencion!', 'No hay disponible una evaluacion final, vuelve mas tarde', 'error');
+        }
+    });
+
+}

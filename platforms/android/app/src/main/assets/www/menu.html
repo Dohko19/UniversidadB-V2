@@ -117,6 +117,15 @@
         color: #aaa;
         margin-top: 12px;
     }
+    .uniBack{
+        background-image: url("img/logouni.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-blend-mode: lighten;
+        -webkit-filter: blur(8px);
+        /* Full height */
+        background-size: cover;
+    }
 </style>
 </head>
 <body>
@@ -204,8 +213,8 @@
 
                     <p>Listado de Cursos</p>
                     <p class="row">
-                        <a href="/cursos/induccion/" class="col button button-large button-raised button-fill">Induccion</a>
-                        <a href="/cursos/operador/" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
+                        <a href="/cursos/index/1" class="col button button-large button-raised button-fill">Induccion</a>
+                        <a href="/cursos/index/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
                     </p>
                     <p class="row">
                         <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
@@ -218,11 +227,16 @@
                     </p>
                     <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p>
                     <p class="row"><a href="#" target="_blank" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
+                    <p class="row">
+                        <a href="#" id="finalQuestions"
+                           class="col-100 dynamic-popup2 button button-fill button-large button-raised color-orange">
+                            Realizar Evalucion Final
+                        </a>
+                    </p>
                 </div>
                 <div id="presentacion">
                     <center>
                         <div id="player">
-
                         </div>
                         <span><b><h3 style="color: red;">Puedes tocar dos veces el video para entrar en modo pantalla completa</h3></b></span>
                     </center>
@@ -238,10 +252,10 @@
               <div class="block-footer">
                    <p> Centro de Ayuda <br> <br>
                     <!-- Close Popup -->
-                       <b>Buzon de Sugerencias:</b> 5544472755 <br>
+                       <b>Buzon de Sugerencias:</b> 55-44-47-27-55 <br>
                        <b>Correo:</b> admon.rh@bennetts.com.mx <br>
                        <br>
-                       <b>Telefon: 55-67-49-69 <br> Ext. 2178, 2177, 2179</b>
+                       <b>Telefon: 55-55-67-49-69 <br> Ext. 2178, 2177, 2179</b>
                        <br><br>
                       <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
                       <br>
@@ -412,30 +426,33 @@
 
       var $$ = Dom7;
       // Login Screen-Modal DOM events
-      $$('.login-screen').on('loginscreen:open', function (e) {
-        console.log('Login screen open')
-      });
-      $$('.login-screen').on('loginscreen:opened', function (e) {
-        console.log('Login screen opened')
-      });
-      $$('.login-screen').on('loginscreen:close', function (e) {
-        console.log('Login screen close')
-      });
-      $$('.login-screen').on('loginscreen:closed', function (e) {
-        console.log('Login screen closed')
+      // Create dynamic Popup
+      var dynamicPopup2 = app.popup.create({
+          content: '<div class="popup">'+
+              '<p><a href="#" class="link popup-close"><i class="fas fa-window-close"></i></a></p>'+
+              '<div class="page"><div class="page-content">'+
+              '<div class="block">'+
+              '<div id="instructionsFinal"></div>' +
+              '<div id="content"></div>'+
+              '</div>'+
+              '</div>'+
+              '</div>'+
+              '</div>',
+          // Events
+          on: {
+              open: function (popup) {
+                  console.log('Open eval final');
+
+              },
+              opened: function (popup) {
+                  console.log('finish open eval final');
+              },
+          }
       });
       // Set progress on inline progressbar
       $$('.set-inline-progress').on('click', function (e) {
           var progress = $$(this).attr('data-progress');
           app.progressbar.set('#demo-inline-progressbar', progress);
-      });
-
-      // DOM events for About popup
-      $$('.popup-about').on('popup:open', function (e) {
-          console.log('About popup open');
-      });
-      $$('.popup-about').on('popup:opened', function (e) {
-          console.log('About popup opened');
       });
 
       // Create dynamic Popup
@@ -466,6 +483,12 @@
           newsUB();
           dynamicPopup.open();
       });
+
+      $$('.dynamic-popup2').on('click', function () {
+            EvaluacionFinal();
+          dynamicPopup2.open();
+      });
+
 
       //end
       function newsUB() {

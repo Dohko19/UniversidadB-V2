@@ -1,11 +1,11 @@
 var routes = [
-    
+
   // Index page
-  {
-    path: '/',
-    url:  './index.html',
-    name: 'home',
-  },
+  // {
+  //   path: '/',
+  //   url:  './index.html',
+  //   name: 'home',
+  // },
   // About page
   {
     path: '/about/',
@@ -13,24 +13,24 @@ var routes = [
     name: 'about',
   },
     // Pages VIC
-  
-  {  
-    name: 'recorrido', 
+
+  {
+    name: 'recorrido',
     path: '/recorrido/',
     componentUrl: './pages/recorrido.html',
   },
-  {  
-    name: 'recorridoseg', 
+  {
+    name: 'recorridoseg',
     path: '/recorridoseg/',
     url: './pages/recorridoseg.html',
   },
-  {  
-    name: 'seguimientov', 
+  {
+    name: 'seguimientov',
     path: '/seguimientov/',
     url: './pages/recorridoven.html',
   },
   {
-    name: 'equipos',    
+    name: 'equipos',
     path: '/equipos/',
     componentUrl: './pages/equipos.html',
   },
@@ -130,6 +130,11 @@ var routes = [
     componentUrl: './pages/construccion.html',
   },
   {
+    name: 'consultatickets',
+    path: '/consultatickets/',
+    componentUrl: './pages/consultatickets.html',
+  },
+  {
     name: 'cuestionarios',
     path: '/cuestionarios/',
     componentUrl: './pages/cuestionarios.html',
@@ -178,12 +183,12 @@ var routes = [
     name: 'resultadosAuditoria',
     path: '/resultadosAuditoria/',
     componentUrl: './pages/resultadosAuditoria.html',
-  }, 
+  },
   {
     name: 'datosgenerales',
     path: '/datosgenerales/',
     componentUrl: './pages/datosgenerales.html',
-  }, 
+  },
   {
     name: 'seguimientoc',
     path: '/seguimientoc/',
@@ -425,84 +430,6 @@ var routes = [
     url: './pages/subnavbar-title.html',
   },
   {
-    path: '/swiper/',
-    url: './pages/swiper.html',
-    routes: [
-      {
-        path: 'swiper-horizontal/',
-        url: './pages/swiper-horizontal.html',
-      },
-      {
-        path: 'swiper-vertical/',
-        url: './pages/swiper-vertical.html',
-      },
-      {
-        path: 'swiper-space-between/',
-        url: './pages/swiper-space-between.html',
-      },
-      {
-        path: 'swiper-multiple/',
-        url: './pages/swiper-multiple.html',
-      },
-      {
-        path: 'swiper-nested/',
-        url: './pages/swiper-nested.html',
-      },
-      {
-        path: 'swiper-loop/',
-        url: './pages/swiper-loop.html',
-      },
-      {
-        path: 'swiper-3d-cube/',
-        url: './pages/swiper-3d-cube.html',
-      },
-      {
-        path: 'swiper-3d-coverflow/',
-        url: './pages/swiper-3d-coverflow.html',
-      },
-      {
-        path: 'swiper-3d-flip/',
-        url: './pages/swiper-3d-flip.html',
-      },
-      {
-        path: 'swiper-fade/',
-        url: './pages/swiper-fade.html',
-      },
-      {
-        path: 'swiper-scrollbar/',
-        url: './pages/swiper-scrollbar.html',
-      },
-      {
-        path: 'swiper-gallery/',
-        componentUrl: './pages/swiper-gallery.html',
-      },
-      {
-        path: 'swiper-custom-controls/',
-        url: './pages/swiper-custom-controls.html',
-      },
-      {
-        path: 'swiper-parallax/',
-        url: './pages/swiper-parallax.html',
-      },
-      {
-        path: 'swiper-lazy/',
-        url: './pages/swiper-lazy.html',
-      },
-      {
-        path: 'swiper-pagination-progress/',
-        url: './pages/swiper-pagination-progress.html',
-      },
-      {
-        path: 'swiper-pagination-fraction/',
-        url: './pages/swiper-pagination-fraction.html',
-      },
-      {
-        path: 'swiper-zoom/',
-        url: './pages/swiper-zoom.html',
-      },
-    ],
-  },
-  {
     path: '/swipeout/',
     componentUrl: './pages/swipeout.html',
   },
@@ -523,76 +450,12 @@ var routes = [
     url: './pages/tabs-swipeable.html',
   },
   {
-    path: '/tabs-routable/',
-    url: './pages/tabs-routable.html',
-    tabs: [
-      {
-        path: '/',
-        id: 'tab1',
-        content: ' \
-        <div class="block"> \
-          <p>Tab 1 content</p> \
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam enim quia molestiae facilis laudantium voluptates obcaecati officia cum, sit libero commodi. Ratione illo suscipit temporibus sequi iure ad laboriosam accusamus?</p> \
-          <p>Saepe explicabo voluptas ducimus provident, doloremque quo totam molestias! Suscipit blanditiis eaque exercitationem praesentium reprehenderit, fuga accusamus possimus sed, sint facilis ratione quod, qui dignissimos voluptas! Aliquam rerum consequuntur deleniti.</p> \
-          <p>Totam reprehenderit amet commodi ipsum nam provident doloremque possimus odio itaque, est animi culpa modi consequatur reiciendis corporis libero laudantium sed eveniet unde delectus a maiores nihil dolores? Natus, perferendis.</p> \
-        </div> \
-        ',
-      },
-      {
-        path: '/tab2/',
-        id: 'tab2',
-        content: '\
-        <div class="block"> \
-          <p>Tab 2 content</p> \
-          <p>Suscipit, facere quasi atque totam. Repudiandae facilis at optio atque, rem nam, natus ratione cum enim voluptatem suscipit veniam! Repellat, est debitis. Modi nam mollitia explicabo, unde aliquid impedit! Adipisci!</p> \
-          <p>Deserunt adipisci tempora asperiores, quo, nisi ex delectus vitae consectetur iste fugiat iusto dolorem autem. Itaque, ipsa voluptas, a assumenda rem, dolorum porro accusantium, officiis veniam nostrum cum cumque impedit.</p> \
-          <p>Laborum illum ipsa voluptatibus possimus nesciunt ex consequatur rem, natus ad praesentium rerum libero consectetur temporibus cupiditate atque aspernatur, eaque provident eligendi quaerat ea soluta doloremque. Iure fugit, minima facere.</p> \
-        </div> \
-        ',
-      },
-      {
-        path: '/tab3/',
-        id: 'tab3',
-        content: '\
-        <div class="block"> \
-          <p>Tab 3 content</p> \
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam enim quia molestiae facilis laudantium voluptates obcaecati officia cum, sit libero commodi. Ratione illo suscipit temporibus sequi iure ad laboriosam accusamus?</p> \
-          <p>Deserunt adipisci tempora asperiores, quo, nisi ex delectus vitae consectetur iste fugiat iusto dolorem autem. Itaque, ipsa voluptas, a assumenda rem, dolorum porro accusantium, officiis veniam nostrum cum cumque impedit.</p> \
-          <p>Laborum illum ipsa voluptatibus possimus nesciunt ex consequatur rem, natus ad praesentium rerum libero consectetur temporibus cupiditate atque aspernatur, eaque provident eligendi quaerat ea soluta doloremque. Iure fugit, minima facere.</p> \
-        </div> \
-        ',
-      },
-    ],
-  },
-  {
     path: '/toast/',
     componentUrl: './pages/toast.html',
   },
   {
     path: '/toggle/',
     url: './pages/toggle.html',
-  },
-  {
-    path: '/toolbar-tabbar/',
-    componentUrl: './pages/toolbar-tabbar.html',
-    routes: [
-      {
-        path: 'tabbar/',
-        componentUrl: './pages/tabbar.html',
-      },
-      {
-        path: 'tabbar-labels/',
-        componentUrl: './pages/tabbar-labels.html',
-      },
-      {
-        path: 'tabbar-scrollable/',
-        componentUrl: './pages/tabbar-scrollable.html',
-      },
-      {
-        path: 'toolbar-hide-scroll/',
-        url: './pages/toolbar-hide-scroll.html',
-      },
-    ],
   },
   {
     path: '/tooltip/',
@@ -669,7 +532,50 @@ var routes = [
       },
     ]
   },
-
+  {
+    path: '/',
+    url:  './index.html',
+    name: 'home',
+    options: {
+      transition: 'f7-circle',
+    },
+  },
+  // page
+  {
+    name: 'cursos_operador',
+    path: '/cursos/operador',
+    componentUrl: './pages/cursos/operador_limpieza.html',
+    options: {
+      transition: 'f7-circle',
+    },
+  },
+  {
+    name: 'cursos_induccion',
+    path: '/cursos/induccion/',
+    componentUrl: './pages/cursos/induccion.html',
+    options: {
+      transition: 'f7-circle',
+    },
+  },
+  {
+    name: 'operador',
+    path: '/cursos/operador/',
+    componentUrl: './pages/cursos/operador.html',
+    options: {
+      transition: 'f7-circle',
+    },
+  },
+  {
+    name: 'question_lessons',
+    path: '/questions/show/:id/:course_id/:name',
+    componentUrl: './pages/questions/show.html',
+  },
+  // Pages EVALUACION
+  {
+    name: 'cursos/',
+    path: '/cursos/show/:id',
+    componentUrl: './pages/cursos/show.html',
+  },
   // Default route (404 page). MUST BE THE LAST
   {
     path: '(.*)',

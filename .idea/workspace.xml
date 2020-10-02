@@ -23,12 +23,80 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/res/xml/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/browser.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/browser.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/js/databaseHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/js/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/offline.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/offline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/auditoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/pages/auditoria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/cierre.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/pages/cierre.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/cuestionarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/browser/www/pages/cuestionarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/visualizar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/visualizara.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/visualizars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/visualizarv.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/visualizarv_1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/yallegue.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/yallegueAuditoria.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/browser/www/pages/yalleguev.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/HelloCordova.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/HelloCordova.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/HelloCordova/HelloCordova-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/HelloCordova/HelloCordova-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/HelloCordova/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/HelloCordova/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/frameworks.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/frameworks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/js/databaseHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/js/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/offline.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/offline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/auditoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/pages/auditoria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/cierre.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/pages/cierre.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/cuestionarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/pages/cuestionarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/visualizar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/visualizara.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/visualizars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/visualizarv.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/visualizarv_1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/yallegue.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/yallegueAuditoria.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/pages/yalleguev.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/browser.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/browser.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fetch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +104,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -72,7 +138,7 @@
       <recent name="C:\laragon\www\apps\VIC Beta\www\img" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -116,13 +182,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -176,16 +241,5 @@
     <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601416305954" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1601601101686" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/www/js/metodos.js</url>
-          <line>1032</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
