@@ -131,14 +131,6 @@
             <ul>
             <li>
                 <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title"><a href="#" onclick="ptrpro();">Actualizar datos</a></div>
-                    <div class="item-after"><span id="processclick" class="99badge99" hidden="true">0%</span></div>
-                  </div>
-                </div>
-            </li>
-            <li>
-                <div class="item-content">
                 <div class="item-inner">
                 <div class="item-title"><a href="#" onclick="logaout();">Cerrar sesión</a></div>
                 </div>
@@ -168,10 +160,8 @@
               </a>
             </div>
             <div class="right" style="margin-right: 15px">
-                    <a href="#">
-                        <i class="fa fa-sync"></i>
-                    </a>
-                </div>
+
+            </div>
           </div>
         </div>
         <div class="page-content ptr-content">
@@ -181,7 +171,7 @@
             <div class="ptr-arrow"></div>
         </div>
             <div>
-                <div class="block">
+                <div class="block" id="messageWelcome">
                     <center>
                         <div id="welcome" style="color: red; font-size: 17px; font-weight: bold"></div>
                         <center>
@@ -191,7 +181,7 @@
                         </center>
                     </center>
                 </div>
-                <div id="" class="block block-strong">
+                <div id="circleProgressBar" class="block block-strong">
                     <div class="">
 <!--                        <div class="col text-align-center">-->
 <!--                            <div id="values"></div>-->
@@ -231,7 +221,10 @@
                 </div>
                 <div id="presentacion">
                     <center>
-                        <div id="player"></div>
+                        <div id="player">
+
+                        </div>
+                        <span><b><h3 style="color: red;">Puedes tocar dos veces el video para entrar en modo pantalla completa</h3></b></span>
                     </center>
                 </div>
             </div>
@@ -270,7 +263,7 @@
     <script src="js/signature/modernizr.js"></script>
     <script src="js/app.js"></script>
     <script src="js/metodos.js"></script>
-    <script src="js/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.3.1.js"></script>
     <script src="js/SimpleStarRating.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/circle-progress.min.js"></script>
@@ -876,6 +869,7 @@
             var id = localStorage.getItem("id");
 
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
+            const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
 
             if (response.data == 100) {
                 $("#getCertificado").show();
@@ -884,6 +878,7 @@
 
             }
             let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
+            let dataBar2 = response2.data/100; // solo acepta numeros entre 0.1 a 1.0
             $("#demo").circleProgress({
                 value: dataBar,
                 fill: { gradient: ['#0dc9f3','#058f94'] },
@@ -897,7 +892,7 @@
             });
 
             $('#demo2').circleProgress({ // calificacion general
-                value: 0.6,
+                value: dataBar2,
                 thickness: 'auto',
                 animation: {
                     duration: 1200,
@@ -908,23 +903,9 @@
                     gradient: ['#92f533','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
                 },
             }).on('circle-animation-progress', function(event, progress) {
-                $(this).find('strong').html(60 + '<i>/100</i>');
+                $(this).find('strong').html(response2.data+'%');
             });
-            // $("#values").append('' +
-            //     '<div class="gauge gauge-init"' +
-            //     '    data-type="semicircle"' +
-            //     '    data-value="'+response.data/100+ '"' +
-            //     '    data-value-text="' + response.data + '%"' +
-            //     '    data-value-text-color="#0CC25E"' +
-            //     '    data-label-font-weight="100"' +
-            //     '    data-label-font-size="20"' +
-            //     '    data-size="150"' +
-            //     '    data-border-color="#0CC25E"' +
-            //     '    ></div>' +
-            //     '<div class="progressbar" data-progress="'+response.data+'">' +
-            //     '  <span></span>' +
-            //     '</div>' +
-            //     '<span>'+response.data+'</span>');
+
         } catch (error) {
             console.error(error);
         }
@@ -948,15 +929,19 @@
     var first_login = localStorage.getItem('first_login');
     // app.request.promise.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php', {id: id})
     //     .then(function (res) {
-            if (first_login == true) {
+            if (first_login == 1) {
                 $("#presentacion").show();
                 $("#progreso").hide();
                 $("#menuPrincipal").hide();
+                $("#messageWelcome").hide();
+                $("#circleProgressBar").hide();
 
             }else{
                 $("#presentacion").hide();
                 $("#progreso").show();
                 $("#menuPrincipal").show();
+                $("#messageWelcome").show();
+                $("#circleProgressBar").show();
             }
             // progressBarLessons(res);
     //Cierre de sesion
