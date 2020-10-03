@@ -36,6 +36,7 @@
                 let id = app.views.main.router.currentRoute.params.id;
                 let name = app.views.main.router.currentRoute.params.name;
                 let cursoID = app.views.main.router.currentRoute.params.course_id;
+                let catId = app.views.main.router.currentRoute.params.catId;
                 let user_id = localStorage.getItem("id");
 
 
@@ -45,7 +46,8 @@
                     const questions = JSON.parse(data);
                     if (questions.length !== 0) {
                         $("#title").append('<b>'+name+'</b>');
-                        $("#enviarCuestionario").append('<button onclick="EnviarCuestionario('+cursoID+')" class="link col button button-large button-raised button-fill color-green">' +
+                        $("#enviarCuestionario").append('<button onclick="EnviarCuestionario('+cursoID+', '+catId+')" ' +
+                            'class="link col button button-large button-raised button-fill color-green">' +
                                                         '<i class="fas fa-save"></i>' +
                                                         '    Guardar' +
                                                         '</button>');
@@ -66,7 +68,8 @@
                                             '<div class="list" id="preguntas">' +
                                             '<ul>' +
                                             '<li>' +
-                                            '<label class="item-radio item-radio-icon-start item-content">' +
+                                            '<label class="item-radio item-radio-icon-start item-content border-black" style="border: 2px dotted black;' +
+                                            'border-radius: 10px;" id="label'+answers[i].idR+'">' +
                                             '<input type="radio" onchange="saveQuest(this,'+ answers[i].idR+')" ' +
                                                     'id="'+questions[w].id+'" ' +
                                                     'name="pregunta'+questions[w].id+'"' +
@@ -106,5 +109,8 @@
         font-size: 20px;
         /* IMPORTANTE */
         text-align: center;
+    }
+    input[type=text]:disabled {
+        background: #dddddd;
     }
 </style>

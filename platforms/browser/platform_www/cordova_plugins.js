@@ -670,7 +670,8 @@ module.exports.metadata =
     "cordova-plugin-file-downloader": "0.4.0",
     "cordova-plugin-screen-orientation": "3.0.1",
     "cordova.plugins.diagnostic": "5.0.1",
-    "cordova-plugin-background-mode": "0.7.3"
+    "cordova-plugin-background-mode": "0.7.3",
+    "cordova-plugin-enable-cleartext-traffic": "2.1.0"
 }
 // BOTTOM OF METADATA
 });

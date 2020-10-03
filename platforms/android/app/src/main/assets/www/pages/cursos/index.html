@@ -1,66 +1,95 @@
-<!--suppress ALL -->
+<!--suppress JSAnnotator -->
 <template>
-       <div class="page">
-           <div class="navbar">
-           <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
-               <div class="navbar-inner">
-                   <div class="left">
-                     <a onclick="regresar()"  class="back">
-                       <i class="icon icon-back"></i>
-                       <span class="if-not-md"></span>
-                     </a>
-                   </div>
-               </div>
-           </div>
-           <div class="page-content">
-              <div class="row">
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
+            <div class="navbar-inner">
+                <div class="left">
+                    <a onclick="regresar()"  class="back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="row">
                 <div id="Listado"></div>
-           </div>
-           </div>
-       </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
     return {
         on: {
-            pageInit: function (e, page) {
-                app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/courses/index.php')
-                    .then(function (res) {
-                        let content = JSON.parse(res);
-                        var valor = '';
-                        content.forEach(data => {
-                            valor += '<div class="card item-content">' +
-                                '<div class="card-header item-inner" style="text-shadow: black 0.1em 0.1em 0.2em">' + data.name +
-                                '<div class="item-after"><span class="badge color-green">5</span></div>'+
-                                '</div>' +
-                                '<div class="card-content card-content-padding">' +
-                                '<p class="date small">' + data.description + '</p>' +
-                                '<p>Subido el: 22 de junio del 2020</p>' +
-                                '</div>' +
-                                '<div class="card-footer"><a href="/cursos/show/' + data.id + '" class="link">Ingresar al Curso</a></div>' +
-                                '<div class="progressbar" data-progress="100">' +
-                                ' <span></span>' +
-                                '</div></div>'
-                        })
-                        $("#Listado").html(valor);
-                    })
-                    .catch(function (err) {
-                        console.log(err.xhr)
-                        console.log(err.status)
-                        console.log(err.message)
-                    });
+            pageInit: function(e, page)
+            {
+                let catId = app.views.main.router.currentRoute.params.id;
+                app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
+                    const courses = JSON.parse(data);
+                    console.log(courses);
+                    if (courses.length !== 0)
+                    {
+                        for (var i = 0; i < courses.length; i++) {
+
+                            if(courses[i].category_id == catId)
+                            {
+                                $("#Listado").append(
+                                    '<div class="card item-content">'+
+                                    '<div class="card-header item-inner" style="text-shadow:  1px 1px">'+ courses[i].name +
+                                    '<div class="item-after" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
+                                    '</div>'+
+                                    '<div class="card-content card-content-padding">'+
+                                    '<p class="date small">'+ courses[i].description +'</p>' +
+                                    '</div>' +
+                                    '<a href="/cursos/show/'+courses[i].idCourse+'/'+catId+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;">Ingresar al Curso</div></a>' +
+                                    '<div class="progressbar" data-progress="100">'+
+                                    '<span><br></span>'+
+                                    '</div></div>'
+                                );
+
+                                checkIfCoursesComplete(courses[i].idCourse);
+
+                            }
+
+                        }
+                    }
+                });
+                // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/courses/index.php', {catId: 2})
+                //     .then(function (res) {
+                //         let content = JSON.parse(res);
+                //         var valor = '';
+                //         content.forEach(data => {
+                //             valor += '<div class="card">'+
+                //                 '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ data.name +'</div>'+
+                //                 '<div class="card-content card-content-padding">'+
+                //                 '<p class="date small">'+ data.description +'</p>' +
+                //                 '</div>' +
+                //                 '<div class="card-footer"><a href="/cursos/show/'+ data.id +'" class="link">Ingresar al Curso</a></div>' +
+                //                 '<div class="progressbar" data-progress="100">'+
+                //                 ' <span></span>'+
+                //                 '</div></div>'
+                //         });
+                //         $("#Listado").html(valor);
+                //     })
+                //     .catch(function (err) {
+                //         console.log(err.xhr)
+                //         console.log(err.status)
+                //         console.log(err.message)
+                //     });
             }
         }
     }
 </script>
 
 <style>
-  .demo-card-header-pic .card-header {
-  height: 40vw;
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-}
-.demo-card-header-pic .card-content-padding .date{
-  color: #8e8e93;
-}
+    .demo-card-header-pic .card-header {
+        height: 40vw;
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+    }
+    .demo-card-header-pic .card-content-padding .date{
+        color: #8e8e93;
+    }
 </style>

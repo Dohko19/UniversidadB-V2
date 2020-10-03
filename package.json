@@ -26,6 +26,7 @@
     "cordova-plugin-device-motion": "^2.0.1",
     "cordova-plugin-device-orientation": "^2.0.1",
     "cordova-plugin-dialogs": "^2.0.1",
+    "cordova-plugin-enable-cleartext-traffic": "^2.1.0",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-file-downloader": "^0.4.0",
     "cordova-plugin-file-md5": "^0.3.3",
@@ -82,7 +83,8 @@
       "cordova.plugins.diagnostic": {
         "ANDROID_SUPPORT_VERSION": "28.+"
       },
-      "cordova-plugin-background-mode": {}
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-enable-cleartext-traffic": {}
     },
     "platforms": [
       "ios",

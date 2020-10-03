@@ -1,13 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.bennetts.vic" version="3.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>VIC</name>
+<widget id="com.bennetts.university" version="3.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Universidad Bennetts</name>
     <description>
         Derechos Reservados Especialidades Bennetts.
     </description>
     <author email="daniel.morales@bennetts.com.mx" href="http://serviciosbennetts.com/">
         Daniel Morales
-        Rosario San Juan
-        Gerardo Velasco
     </author>
     <content original-src="index.html" src="index.html" />
     <access origin="*" />
@@ -19,6 +17,11 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">http://serviciosbennetts.com/</domain>
+        <domain includeSubdomains="true">http://serveripaddress</domain>
+    </domain-config>
     <preference name="loadUrlTimeoutValue" value="70000" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />

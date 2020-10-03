@@ -1,11 +1,11 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "VIC",
-  "short_name": "VIC",
-  "version": "com.bennetts.vic",
+  "name": "Universidad Bennetts",
+  "short_name": "Universidad Bennetts",
+  "version": "com.bennetts.university",
   "description": "Derechos Reservados Especialidades Bennetts.",
-  "author": "Daniel Morales\n        Rosario San Juan\n        Gerardo Velasco",
+  "author": "Daniel Morales",
   "icons": [],
   "start_url": "index.html"
 }

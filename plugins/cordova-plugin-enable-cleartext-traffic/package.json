@@ -1,0 +1,55 @@
+{
+  "_from": "cordova-plugin-enable-cleartext-traffic",
+  "_id": "cordova-plugin-enable-cleartext-traffic@2.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-jP19M0jXV0vHNXbSOFyy1fMkBgQhEX/mitHHDgE3pP2ANmYlZVgR0gVCuSJjirVEBkiYRCoCyr5U1q8LaiHgJQ==",
+  "_location": "/cordova-plugin-enable-cleartext-traffic",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-enable-cleartext-traffic",
+    "name": "cordova-plugin-enable-cleartext-traffic",
+    "escapedName": "cordova-plugin-enable-cleartext-traffic",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-enable-cleartext-traffic/-/cordova-plugin-enable-cleartext-traffic-2.1.0.tgz",
+  "_shasum": "9d1ea8bf8c07afa34867aa07461106c43f39fbdb",
+  "_spec": "cordova-plugin-enable-cleartext-traffic",
+  "_where": "C:\\laragon\\www\\UniversidadB-V2",
+  "author": {
+    "name": "Rahul CV"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-enable-cleartext-traffic",
+    "platforms": [
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova Plugin Enable cleartextTraffic ",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.6.0"
+    }
+  ],
+  "keywords": [
+    "cordova",
+    "network",
+    "internet",
+    "cleartextTraffic",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-enable-cleartext-traffic",
+  "version": "2.1.0"
+}

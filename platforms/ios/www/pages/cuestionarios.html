@@ -25,7 +25,60 @@
                     <h2 style="color:#00008B;">Check List</h2>
                     <hr>
                     <div id="CUESTIO" class="list accordion-list">
-                        
+
+
+                       <!--  <ul>
+                            <li class='accordion-item'>
+                                <a href='#' class='item-link item-content'>
+                                    <div class='item-media'>
+                                        <img src='img/circuloRojo.png' width='15px' height='15px' id ='imgEstat' />
+                                    </div>
+                                    <div class='item-inner'>
+                                        <div class='item-title' id='bandeja"+i+"'>
+                                            <span id='IdCuestionario'>"+cont+"</span>.- 
+                                            <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div>
+                                    <div id='bandeja"+1+"' class='accordion-item-content'>
+                                        <div id='Block"+cont+"' class='block'>
+
+
+                                            <div id = 'card"+cont2+"' class='card demo-facebook-card'>
+                                                <div class='card-header'>
+                                                    <div class='demo-facebook-avatar'>
+                                                        <span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- 
+                                                    </div>
+                                                    <div class='demo-facebook-date'>Nivel de riesgo: 
+                                                        <span id='NivelRiesgo"+cont2+"'>"+ content2[j].NivelRiesgo +"</span>
+                                                    </div>
+                                                    <div class='demo-facebook-name'>
+                                                        <span align='justify'>"+content2[j].Pregunta+"</span><br><br> 
+                                                        <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;
+                                                        <label class='toggle toggle-init color-green'>
+                                                            <input id='"+cont2+"' type='checkbox' name='checkbox' >
+                                                            <span class='toggle-icon'></span>
+                                                        </label>&nbsp;&nbsp;&nbsp;
+                                                        <label style='color:#45DF01'>Si Cumple</label> 
+                                                       
+                                                        <br/><br/><br/>
+                                                        <textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/>
+                                                    </div><br>
+                                                </div><br>
+                                            </div>
+
+
+                                        </div><br>
+                                        <center>
+                                            <button id='ButtonC"+cont+"' onclick='gCuestionario();' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button>
+                                        </center><br>
+                                    </div><br>
+                                </div>
+                            </li>
+                        </ul>
+ -->
+
                     </div><br><br>
                 </div>
                 <br><br>
@@ -66,6 +119,7 @@
                         function(tx1, results){
 
                             var valor = results.rows.length;
+                            console.log(valor)
                             if(valor > 0){
                                 
                                 //JSON para carga de cuestionarios
@@ -76,50 +130,64 @@
                                         }else{
                                             var cont = 1;
                                             for (var i =0; i < content1.length; i++) {
-                                                $("#CUESTIO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloVerde.png' width='15px' height='15px' id ='imgEstat' /></div><div class='item-inner'><div class='item-title'><span id = 'IdCuestionario'>"+cont+"</span>.- <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span></div></div></a><div><div class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gCuestionario();' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
+                                                $("#CUESTIO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloVerde.png' width='15px' height='15px' id ='imgEstat"+cont+"' /></div><div class='item-inner'><div class='item-title'><span id = 'IdCuestionario'>"+cont+"</span>.- <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span></div></div></a><div><div id='bandeja"+cont+"' class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gCuestionario("+cont+");' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
                                                 cont++;
                                             }
                                             app.request.get(cordova.file.externalRootDirectory + '/jsons/PreguntasCuestionario.json', function (data) {
-                                                var content2 = JSON.parse(data);
-                                                var cont2 = 1;
-                                                for (var w =1; w <= cont; w++) {
-                                                    if(content2[i].IdCuestionario == w){
-                                                        for (var j =0; j < content2.length; j++) {
-                                                            var item2 = results.rows.item(j);
+                                                    var content2 = JSON.parse(data);
+                                                    var contValue1 = 0;
+                                                    var contValue2 = 0;
+                                                    // console.log(content2.length);
+                                                    console.log(content2[0].IdCuestionario);
+                                                    // if(IdCuestionario)
+                                                    // for (var j = 0; j < content2.length; j++) {
+                                                    for (var j = 0; j < content2.length; j++) {
 
+                                                        var item2 = results.rows.item(j);
+                                                        if(item2.IdCuestionario == 1){
+                                                            document.getElementById("imgEstat1").src = "img/circuloVerde.png";
+                                                            document.getElementById("imgEstat2").src = "img/circuloRojo.png";
                                                             if(item2.Checkbox == "true"){
-                                                                $("#Block" + w).append("<div id = 'card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgo"+cont2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br>    <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox' checked><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                                $("#Block1").append("<div id = 'card"+contValue1+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaD"+contValue1+"' value='"+contValue1+"' style='display: none;'><span id ='IdPreguntaD"+contValue1+"'>"+contValue1+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoD"+contValue1+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='D"+contValue1+"' type='checkbox' name='CDominos[]' checked><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='TD"+contValue1+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                                contValue1++;
                                                             }else{
-                                                                $("#Block" + w).append("<div id = 'card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgo"+cont2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                                $("#Block1").append("<div id = 'card"+contValue1+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaD"+contValue1+"' value='"+contValue1+"' style='display: none;'><span id ='IdPreguntaD"+contValue1+"'>"+contValue1+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoD"+contValue1+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='D"+contValue1+"' type='checkbox' name='CDominos[]'><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='TD"+contValue1+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                                contValue1++;
                                                             }
-                                                               
-                                                            cont2++;
                                                         }
+                                                        if(item2.IdCuestionario == 2){
+                                                            document.getElementById("imgEstat2").src = "img/circuloVerde.png";
+                                                            document.getElementById("imgEstat1").src = "img/circuloRojo.png";
+                                                            if(item2.IdPregunta == 14){
+                                                                if(item2.Checkbox == "true"){
+                                                                    $("#Block2").append("<div id = 'card"+contValue2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaV"+contValue2+"' value='"+contValue2+"' style='display: none;'><span id ='IdPreguntaV"+contValue2+"'>"+contValue2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoV"+contValue2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='V"+contValue2+"' type='checkbox' name='CVips[]'  checked ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><a href='#' style='background-color: white; border: none; outline:none; width: 15%;' onclick='capturePhoto();''><img src='img/cam.png' width='40px' /></a><br><input id ='smallImage' type='image' name='smallImage' style='display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage' src='' /><img src='"+item2.Evidencia+"' width='80px'><br><br/><textarea id='TV"+contValue2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                                    contValue2++;
+                                                                }else{
+                                                                    $("#Block2").append("<div id = 'card"+contValue2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaV"+contValue2+"' value='"+contValue2+"' style='display: none;'><span id ='IdPreguntaV"+contValue2+"'>"+contValue2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoV"+contValue2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='V"+contValue2+"' type='checkbox' name='CVips[]' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><a href='#' style='background-color: white; border: none; outline:none; width: 15%;' onclick='capturePhoto();''><img src='img/cam.png' width='40px' /></a><br><input id ='smallImage' type='image' name='smallImage' style='display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage' src='' /><img src='"+item2.Evidencia+"' width='80px'><br><br/><textarea id='TV"+contValue2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><br/></div><br></div><br></div>");
+                                                                    contValue2++;
+                                                                }
+                                                                
+
+                                                            }else{
+                                                                if(item2.Checkbox == "true"){
+                                                                    $("#Block2").append("<div id = 'card"+contValue2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaV"+contValue2+"' value='"+contValue2+"' style='display: none;'><span id ='IdPreguntaV"+contValue2+"'>"+contValue2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoV"+contValue2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='V"+contValue2+"' type='checkbox' name='CVips[]' checked><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='TV"+contValue2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><b0/></div><br></div><br></div>");
+                                                                    contValue2++;
+                                                                }else{
+                                                                    $("#Block2").append("<div id = 'card"+contValue2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaV"+contValue2+"' value='"+contValue2+"' style='display: none;'><span id ='IdPreguntaV"+contValue2+"'>"+contValue2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoV"+contValue2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='V"+contValue2+"' type='checkbox' name='CVips[]' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='TV"+contValue2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'>"+item2.Texto+"</textarea><b0/></div><br></div><br></div>");
+                                                                    contValue2++;
+                                                                }
+                                                            }
+                                                        } 
+                                                    
                                                     }
                                                 }
-                                            });
+                                            );
+
+
                                         }
                                     });
                                     app.preloader.hide();
                                     document.getElementById("Cargando").innerHTML ="";
-
-
-
-
-                                    // var con = 1;
-                                    // for(var i = 0; i< valor; i++){
-                                    //     var item2 = results.rows.item(i);
-                                    //     console.log(item2.Texto);
-                                    //     $("#T"+con).val(item2.Texto);
-                                    //     if(item2.Checkbox == "true"){
-                                    //         $("#"+con).prop("checked",true);
-                                    //     }else{
-
-                                    //     }
-                                    //         app.preloader.hide();
-                                    //         document.getElementById("Cargando").innerHTML ="";
-                                    //     con++;
-                                    // }
                             }else{
                                     
                                 //JSON para carga de cuestionarios
@@ -129,21 +197,32 @@
                                         $("#CUESTIO").html("No se encontraron cuestionarios.");
                                     }else{
                                         var cont = 1;
+
                                         for (var i =0; i < content1.length; i++) {
-                                            $("#CUESTIO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloRojo.png' width='15px' height='15px' id ='imgEstat' /></div><div class='item-inner'><div class='item-title'><span id = 'IdCuestionario'>"+cont+"</span>.- <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span></div></div></a><div><div class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gCuestionario();' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
+
+                                            $("#CUESTIO").append("<ul><li class='accordion-item'><a href='#' class='item-link item-content'><div class='item-media'><img src='img/circuloRojo.png' width='15px' height='15px' id ='imgEstat' /></div><div class='item-inner'><div class='item-title' id='bandeja"+cont+"'><span id = 'IdCuestionario'>"+cont+"</span>.- <span id='NameCuestionario'>"+content1[i].NombreCuestionario+"</span></div></div></a><div><div id ='bandeja"+cont+"' class='accordion-item-content'><div id='Block"+cont+"' class='block'></div><br><center><button id='ButtonC"+cont+"' onclick='gCuestionario("+cont+");' class='col button button-online button-round button-raised color-green' style='width: 50%'>LISTO</button></center><br></div><br></div></li></ul>");
                                             cont++;
                                         }
                                         app.request.get(cordova.file.externalRootDirectory + '/jsons/PreguntasCuestionario.json', function (data) {
-                                            var content2 = JSON.parse(data);
-                                            var cont2 = 1;
-                                            for (var w =1; w <= cont; w++) {
-                                                if(content2[i].IdCuestionario == w){
-                                                    for (var j =0; j < content2.length; j++) {
-                                                        $("#Block" + w).append("<div id = 'card"+cont2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><span id ='IdPregunta"+cont2+"'>"+cont2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgo"+cont2+"'>"+ content2[j].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[j].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='"+cont2+"' type='checkbox' name='checkbox'><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='T"+cont2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' rows='3' cols='50' placeholder='Recomendacion:'></textarea><br/></div><br></div><br></div>");
-                                                        
-                                                        cont2++;
-                                                    }
+                                                var content2 = JSON.parse(data);
+                                                var contValue1 = 0;
+                                                var contValue2 = 0;
+                                            for (var w =0; w <= content2.length; w++) {
+                                                // alert(content2[w].IdCuestionario)
+                                                if(content2[w].IdCuestionario == 1){
+                                                    $("#Block1").append("<div id = 'card"+contValue1+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaD"+contValue1+"' value='"+contValue1+"' style='display: none;'><span id ='IdPreguntaD"+contValue1+"'>"+contValue1+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoD"+contValue1+"'>"+ content2[w].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[w].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='D"+contValue1+"' type='checkbox' name='CDominos[]' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='TD"+contValue1+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'></textarea><br/></div><br></div><br></div>");
+                                                    contValue1++;
                                                 }
+                                                if(content2[w].IdCuestionario == 2){
+                                                    if(content2[w].IdPregunta == 43){
+                                                        $("#Block2").append("<div id = 'card"+contValue2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaV"+contValue2+"' value='"+contValue2+"' style='display: none;'><span id ='IdPreguntaV"+contValue2+"'>"+contValue2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoV"+contValue2+"'>"+ content2[w].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[w].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='V"+contValue2+"' type='checkbox' name='CVips[]' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><a href='#' style='background-color: white; border: none; outline:none; width: 15%;' onclick='capturePhoto();''><img src='img/cam.png' width='40px' /></a><br><input id ='smallImage' type='image' name='smallImage' style='display:none; margin: 0 auto;margin: 0 auto; width:90px; height:120px;' id='smallImage' src='' /><br><br/><textarea id='TV"+contValue2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'></textarea><br/></div><br></div><br></div>");
+                                                        contValue2++;
+
+                                                    }else{
+                                                        $("#Block2").append("<div id = 'card"+contValue2+"' class='card demo-facebook-card'><div class='card-header'><div class='demo-facebook-avatar'><input type='text' id='IdPreguntaV"+contValue2+"' value='"+contValue2+"' style='display: none;'><span id ='IdPreguntaV"+contValue2+"'>"+contValue2+"</span>.- </div><div class='demo-facebook-date'>Nivel de riesgo: <span id='NivelRiesgoV"+contValue2+"'>"+ content2[w].NivelRiesgo +"</span></div><div class='demo-facebook-name'><span align='justify'>"+content2[w].Pregunta+"</span><br><br> <label style='color:red'>No Cumple</label>&nbsp;&nbsp;&nbsp;<label class='toggle toggle-init color-green'><input id='V"+contValue2+"' type='checkbox' name='CVips[]' ><span class='toggle-icon'></span></label>&nbsp;&nbsp;&nbsp;<label style='color:#45DF01'>Si Cumple</label> <br/><br/><br/><textarea id='TV"+contValue2+"' style='width: 100%;border: 0;border-bottom: 1px solid rgba(0,0,0,.2); margin-bottom: 10px; color: grey;' row='3' cols='50' placeholder='Recomendacion:'></textarea><br/></div><br></div><br></div>");
+                                                        contValue2++;
+                                                    }
+                                                } 
                                             }
                                         });
                                     }

@@ -175,11 +175,30 @@
                           <th colspan='4' style='background-color: #83c6dd; color: black; text-align: center;'>Evaluación de apertura</th>
                         </tr>
                         <tr>
-                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos Criticos</th>
-                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos Inminentes</th>
+                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos<br> Criticos</th>
+                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos<br> Inminentes</th>
+                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos<br> Extras</th>
                         </tr>
                     </thead>
                     <tbody id="Eval1">
+                    </tbody>
+                </table>
+                <div class='sentencia7 preloader color-red infinite-scroll-preloader'></div>
+            </div>
+          </div>
+          <div class="card data-table" id="evaluacionV">
+          <div class="infinite-scroll-content">
+                <table id ="tabEvalV">
+                    <thead>
+                        <tr>
+                          <th colspan='4' style='background-color: #83c6dd; color: black; text-align: center;'>Evaluación de apertura</th>
+                        </tr>
+                        <tr>
+                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos<br> Criticos</th>
+                            <th class="numeric-cell" style="background-color: #D6D6D6; color: black; text-align: center">Riesgos<br> Inminentes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Eval1V">
                     </tbody>
                 </table>
                 <div class='sentencia7 preloader color-red infinite-scroll-preloader'></div>
@@ -268,94 +287,198 @@
             function(error){},
             function(){}
         );
+
+        //
         $("#evaluacion").hide();
+        $("#evaluacionV").hide();
+        //Cuestionaro dominos y vips
         databaseHandler.db.transaction(
-            function(tx5){
-                tx5.executeSql( 
-                  "SELECT cu.NivelRiesgo, COUNT(*) AS malas, cl.Cliente FROM Cuestionarios cu INNER JOIN Clientes  cl ON cl.IdCte = cu.Idcte WHERE cu.Checkbox = 'false' AND cu.IdCedula = ? AND cu.IdCte = ? GROUP BY cu.NivelRiesgo",
-                    [icedula,IdCte],
-                    function(tx5, results){
-                      //console.log(tx5);
-                        
-                        var length = results.rows.length;
-                       // console.log(length);
-                        var malasC = 0;
-                        var malasRI = 0;
-                        //alert(length);
-                        for(var i = 0; i< length; i++){
-                            var item = results.rows.item(i);
-                            //alert(item.NivelRiesgo);
-                             if(item.NivelRiesgo == 'C'){
-                                  var malasC = item.malas;
-                              }
-                              if(item.NivelRiesgo == 'RI'){
-                                  var malasRI = item.malas;
-                              }
+          function(tx5){
+            tx5.executeSql("SELECT * FROM Cuestionarios WHERE IdCedula = ?",
+              [icedula],
+              function(tx5,results){
+                var length = results.rows.length;
+                if(length > 0){
+                  var item2 = results.rows.item(0);
+                  var IdCuestionario = item2.IdCuestionario;
+                  if(IdCuestionario == 1){
+                    databaseHandler.db.transaction(
+                      function(tx5){
+                        tx5.executeSql("SELECT cu.NivelRiesgo, COUNT(*) AS malas, cl.Cliente FROM Cuestionarios cu INNER JOIN Clientes  cl ON cl.IdCte = cu.Idcte WHERE cu.Checkbox = 'false' AND cu.IdCedula = ? AND cu.IdCte = ? GROUP BY cu.NivelRiesgo",
+                          [icedula,IdCte],
+                          function(tx5, results){
+                            
+                            var length = results.rows.length;
+                            var malasC  = 0;
+                            var malasRI = 0;
+                            var malasE  = 0;
+                            var malasEC = 0;
+                            //alert(length);
+                            for(var i = 0; i< length; i++){
+                              var item = results.rows.item(i);
+                              // // alert(item.NivelRiesgo); //C, RI, E, EC
+                              if(item.NivelRiesgo == 'C'){  var malasC  = item.malas; /*alert(malasC); */ }
+                              if(item.NivelRiesgo == 'RI'){ var malasRI = item.malas; /*alert(malasRI);*/ }
+                              if(item.NivelRiesgo == 'E'){  var malasE  = item.malas; /*alert(malasE); */ }
+                              if(item.NivelRiesgo == 'EC'){ var malasEC = item.malas; /*alert(malasEC);*/ }
+                              var suma = parseInt(malasE) + parseInt(malasEC);
+                              // alert(suma);
                               var nombre = item.Cliente;
                               var ArCadena = nombre.split(' ');
                               var cliente = ArCadena[0];
-                               //$valor[] = (int)$evaluacion['malas'];
-                              // var riesgo[i] = item.NivelRiesgo;
-                              //$i++;
-                          }
-                              var ClienteMin = cliente.toLowerCase();
-                              //alert(IdCte);
-                          if (length > 0 && (ClienteMin == 'dominos' || IdCte == 10000)) {
-                            $("#evaluacion").show();
-                            if (length == 1) {
-                                if (malasRI>0) {
-                                  $("#tabEval #Eval1").append("<tr><td  style='text-align: center;'>0</td><td  style='background-color: #F9665E;color: white;text-align: center;'>"+malasRI+"</td></tr>");
-                                }else if(malasC > 4){
-                                  $("#tabEval #Eval1").append("<tr><td  style='background-color: #F9665E;color: white;text-align: center;'>"+malasC+"</td><td  style='text-align: center;'>"+malasRI+"</td></tr>");
-                                }else{
-                                $("#tabEval #Eval1").append("<tr><td style='text-align: center;'>"+malasC+"</td><td style='text-align: center;'>0</td></tr>");
-                                }
-                            }else{
-                              if (malasC > 4 && malasRI > 0) {
-                                $("#tabEval #Eval1").append("<tr><td style='background-color: #F9665E;color: white;text-align: center;'>"+malasC+"</td><td style='background-color: #F9665E;color: white;text-align: center;'>"+malasRI+"</td></tr>");
-                              }else if(malasC > 4 && malasRI == 0){
-                                $("#tabEval #Eval1").append("<tr><td style='background-color: #F9665E;color: white;text-align: center;'>"+malasC+"</td><td style='text-align: center;'>0</td></tr>");
-                              }else if(malasRI > 0 && (malasC > 0 && malasC <5) ){
-                                $("#tabEval #Eval1").append("<tr><td style='text-align: center;'>"+malasC+"</td><td style='background-color: #F9665E;color: white;text-align: center;'>"+malasRI+"</td></tr>");
-                              }
                             }
+                            var ClienteMin = cliente.toLowerCase();
+                            // alert(IdCte);
+                            // alert(ClienteMin);
+                            if (length > 0 && (ClienteMin == 'dominos' || IdCte == 10000)) {
+                              // alert("Hay malas");
+                              $("#evaluacion").show();
+                              $("#evaluacionV").hide();
+                              if(malasC > 4 && malasRI > 0 && suma > 0 ){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasC+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasRI+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+suma+"</td></tr>");
+                              }
+                              if(malasC > 4 && malasRI > 0 && suma == 0){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasC+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasRI+"</td><td style='text-align: center;'>"+suma+"</td></tr>");
+                              }
+                              if(malasC > 4 && malasRI == 0 && suma > 0){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasC+"</td><td style='text-align: center; '>"+malasRI+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+suma+"</td></tr>");
+                              }
+                              if(malasC > 4 && malasRI == 0 && suma == 0){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasC+"</td><td style='text-align: center; '>"+malasRI+"</td><td style='text-align: center;'>"+suma+"</td></tr>");
+                              }
+                              if(malasC < 5 && malasRI == 0 && suma > 0){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; '>"+malasC+"</td><td style='text-align: center; '>"+malasRI+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+suma+"</td></tr>");
+                              }
+                              if(malasC < 5 && malasRI > 0 && suma > 0){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; '>"+malasC+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasRI+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+suma+"</td></tr>");
+                              }
+                              if(malasC < 5 && malasRI > 0 && suma == 0){
+                                $("#tabEval #Eval1").append("<tr><td style='text-align: center; '>"+malasC+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasRI+"</td><td style='text-align: center;'>"+suma+"</td></tr>");
+                              }
+                            }else{
+                              // alert("jaja");
+                            }           
                           }
-                          
-                             
+                        );  
+                      },
+                      function(error){
+                        //CUANDO TODAS SON BUERNAS PASA A ESTA CONSULTA Y PONE TODO EN CEROS Y EN BLANCO 
+                        databaseHandler.db.transaction(
+                          function(tx5){
+                            tx5.executeSql("SELECT  cl.Cliente FROM Cuestionarios cu INNER JOIN Clientes  cl ON cl.IdCte = cu.Idcte where cu.IdCedula = ? AND cu.IdCte = ? LIMIT 1",
+                              [icedula,IdCte],
+                              function(tx5, results){
+                                var length = results.rows.length;
+                                var item2 = results.rows.item(0);
+                                var nombre = item2.Cliente;
+                                var ArCadena = nombre.split(' ');
+                                var cliente = ArCadena[0];
+                                var ClienteMin = cliente.toLowerCase();
+                                //alert(ClienteMin);
+                                if (ClienteMin == 'dominos' || IdCte == 10000) {
+                                  $("#evaluacion").show();
+                                  $("#tabEval #Eval1").append("<tr><td style='text-align: center;'>0</td><td style='text-align: center;'>0</td><td style='text-align: center;'>0</td></tr>");
+                                }                       
+                              }
+                            );  
+                          },
+                          function(error){},
+                          function(){}
+                        );
+                      },
+                      function(){}
+                    );
 
-                    }
-                );  
-            },
-            function(error){
-              
-              databaseHandler.db.transaction(
-                                function(tx5){
-                                    tx5.executeSql(
-                                        "SELECT  cl.Cliente FROM Cuestionarios cu INNER JOIN Clientes  cl ON cl.IdCte = cu.Idcte where cu.IdCedula = ? AND cu.IdCte = ? LIMIT 1",
-                                        [icedula,IdCte],
-                                        function(tx5, results){
-                                          var length = results.rows.length;
-                                          var item2 = results.rows.item(0);
-                                          var nombre = item2.Cliente;
-                                          var ArCadena = nombre.split(' ');
-                                          var cliente = ArCadena[0];
-                                          var ClienteMin = cliente.toLowerCase();
-                                          //alert(ClienteMin);
-                                          if (ClienteMin == 'dominos' || IdCte == 10000) {
-                                            $("#evaluacion").show();
-                                            $("#tabEval #Eval1").append("<tr><td style='text-align: center;'>0</td><td style='text-align: center;'>0</td></tr>");
-                                          }
+                  }
+                  if(IdCuestionario == 2){
+                    databaseHandler.db.transaction(
+                      function(tx5){
+                        tx5.executeSql("SELECT cu.NivelRiesgo, COUNT(*) AS malas, cl.Cliente FROM Cuestionarios cu INNER JOIN Clientes  cl ON cl.IdCte = cu.Idcte WHERE cu.Checkbox = 'false' AND cu.IdCedula = ? AND cu.IdCte = ? GROUP BY cu.NivelRiesgo",
+                          [icedula,IdCte],
+                          function(tx5, results){
+                            
+                            var length = results.rows.length;
+                            var malasC  = 0;
+                            var malasRI = 0;
+                            var malasE  = 0;
+                            var malasEC = 0;
+                            //alert(length);
+                            for(var i = 0; i< length; i++){
+                              var item = results.rows.item(i);
+                              // // alert(item.NivelRiesgo); //C, RI, E, EC
+                              if(item.NivelRiesgo == 'C'){  var malasC  = item.malas; /*alert(malasC); */ }
+                              if(item.NivelRiesgo == 'RI'){ var malasRI = item.malas; /*alert(malasRI);*/ }
+                              //if(item.NivelRiesgo == 'E'){  var malasE  = item.malas; /*alert(malasE); */ }
+                              //if(item.NivelRiesgo == 'EC'){ var malasEC = item.malas; /*alert(malasEC);*/ }
+                              //var suma = parseInt(malasE) + parseInt(malasEC);
+                              // alert(suma);
+                              var nombre = item.Cliente;
+                              var ArCadena = nombre.split(' ');
+                              var cliente = ArCadena[0];
+                            }
+                            var ClienteMin = cliente.toLowerCase();
+                            // alert(IdCte);
+                            // alert(ClienteMin);
+                            if (length > 0 && (ClienteMin == 'operadora' || IdCte == 10000)) {
+                              // alert("Hay malas");
+                              $("#evaluacionV").show();
+                              $("#evaluacion").hide();
+                              if(malasC > 4 && malasRI > 0){
+                                $("#tabEvalV #Eval1V").append("<tr><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasC+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasRI+"</td></tr>");
+                              }
+                              if(malasC > 4 && malasRI == 0){
+                                $("#tabEvalV #Eval1V").append("<tr><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasC+"</td><td style='text-align: center; color: black;'>"+malasRI+"</td></tr>");
+                              }
+                              if(malasC < 5 && malasRI > 0){
+                                $("#tabEvalV #Eval1V").append("<tr><td style='text-align: center; color: black;'>"+malasC+"</td><td style='text-align: center; color: white; background-color: #F9665E;'>"+malasRI+"</td></tr>");
+                              }
+                            }else{
+                              // alert("jaja");
+                            }           
+                          }
+                        );  
+                      },
+                      function(error){
+                        //CUANDO TODAS SON BUERNAS PASA A ESTA CONSULTA Y PONE TODO EN CEROS Y EN BLANCO 
+                        databaseHandler.db.transaction(
+                          function(tx5){
+                            tx5.executeSql("SELECT  cl.Cliente FROM Cuestionarios cu INNER JOIN Clientes  cl ON cl.IdCte = cu.Idcte where cu.IdCedula = ? AND cu.IdCte = ? LIMIT 1",
+                              [icedula,IdCte],
+                              function(tx5, results){
+                                var length = results.rows.length;
+                                var item2 = results.rows.item(0);
+                                var nombre = item2.Cliente;
+                                var ArCadena = nombre.split(' ');
+                                var cliente = ArCadena[0];
+                                var ClienteMin = cliente.toLowerCase();
+                                //alert(ClienteMin);
+                                if (ClienteMin == 'operadora' || IdCte == 10000) {
+                                  $("#evaluacionV").show();
+                                  $("#tabEvalV #Eval1V").append("<tr><td style='text-align: center;'>0</td><td style='text-align: center;'>0</td></tr>");
+                                }                       
+                              }
+                            );  
+                          },
+                          function(error){},
+                          function(){}
+                        );
+                      },
+                      function(){}
+                    );
+                  }
+                }else{
 
-                                            
-                                        }
-                                    );  
-                                },
-                                function(error){},
-                                function(){}
-                            );
-            },
-            function(){}
-        );
+                }
+              });
+        });
+
+        //FIN cuestionario vips y dominos
+        //------------------------------------------------------------------------
+        // 
+        
+        //------------------------------------------------------------------------
+
+        
         
         //Datos generales e imagen
         databaseHandler.db.transaction(
