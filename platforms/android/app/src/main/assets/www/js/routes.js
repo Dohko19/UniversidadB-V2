@@ -576,6 +576,12 @@ var routes = [
     path: '/cursos/show/:id/:catId',
     componentUrl: './pages/cursos/show.html',
   },
+  // Pages EVALUACION FINAL
+  {
+    name: 'evaluacion_final',
+    path: '/cursos/evaluaciones/',
+    componentUrl: './pages/evaluacionFinal.html',
+  },
   // Default route (404 page). MUST BE THE LAST
   {
     path: '(.*)',

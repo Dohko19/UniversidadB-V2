@@ -952,8 +952,7 @@ function registerQuest(lesson_id, course_id){
                          item3 = resultsA.rows.item(i).lesson_id;
                          dateF = resultsA.rows.item(i).dateF;
                         status = resultsA.rows.item(i).status;
-                        alert(item3);
-                        console.log(status);
+
                     }
                     if (status == 1 || status == 2 && dateF == dayOff)
                     {
@@ -979,34 +978,56 @@ function registerQuest(lesson_id, course_id){
                                         tx.executeSql("SELECT MAX(idCuestionario) as Id, status FROM register",
                                             [],
                                             function (tx, results) {
+
                                                 var length = results.rows.length;
-                                                console.log(results.rows);
                                                 var item = results.rows.item(0);
                                                 // alert(item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
                                                 var idC = localStorage.getItem("idCuestionario");
-                                                alert('ya mero' + idC);
                                             databaseHandler.db.transaction(
                                                 function (tx1) {
                                                 //answer_id == lesson ID
-                                                tx1.executeSql("SELECT question_id, user_id, idCuestionario FROM answer_user WHERE idCuestionario = ? AND user_id = ? AND dateF = ?",
+                                                tx1.executeSql("SELECT question_id, answer, answer_id, user_id, idCuestionario FROM answer_user WHERE idCuestionario = ? AND user_id = ? AND dateF = ?",
                                                     [idC, user_id, dayOff],
                                                     function (tx1, resultsQ) {
-                                                        var questionId;
+
+                                                        var questionId,ans,ansId;
                                                         var length = resultsQ.rows.length;
-                                                        alert("longitud" + length);
-                                                        for (var i = 0; length < i; i++)
+                                                        for (var i = 0; i < length; i++)
                                                         {
                                                             questionId = resultsQ.rows.item(i).question_id;
-                                                            alert("id cuestion" + questionId);
-                                                            $("#"+questionId).attr('checked', true);
+                                                            ans = resultsQ.rows.item(i).answer;
+                                                            ansId = resultsQ.rows.item(i).answer_id;
+                                                            console.log(i);
+                                                            console.log("questionID: " +questionId);
+                                                            // alert("id cuestion" + questionId);
+                                                            // var questnum =  $("#"+questionId).attr('data-ansId');
+                                                            // alert("id data n" + questnum);
+                                                            console.log("ansId: " +ansId);
+                                                            // console.log("questnum:" + questnum);
+                                                            $("#"+ansId).attr('disabled', true);
+
+                                                            $('input[name=pregunta'+questionId+']').attr("disabled",true);
+
+
+                                                                 // $('input[data-ansId='+questnum+']').attr("checked", true);
+                                                            $('input[data-ansId='+ansId+']').attr("checked", true);
+
+                                                            if(ans == 1)
+                                                            {
+                                                                $('#label'+ansId).css("background-color", "#2eff2b47");
+                                                            }
+                                                            else{
+                                                                $('#label'+ansId).css("background-color", "#ff757540");
+
+                                                            }
                                                         }
                                                     }
                                                 )
                                                 },
                                                 function (error) {
                                                     console.log("add client error: " + error.message);
-                                                    app.dialog.alert('Error al insertar registro. ccc2', 'Error');
+                                                    app.dialog.alert('Error al insertar registro. in data request for input check', 'Error');
                                                     app.preloader.hide();
                                                 });
                                             });
@@ -1027,8 +1048,12 @@ function registerQuest(lesson_id, course_id){
                                                 var item = results.rows.item(0);
                                                 // alert("insert new"+item.Id)
                                                 localStorage.setItem("idCuestionario", item.Id);
-                                                var idCuestionario = localStorage.getItem("idCuestionario");
+                                                localStorage.getItem("idCuestionario");
                                             })
+                                    },function (error) {
+                                        console.log("add client error: " + error.message);
+                                        app.dialog.alert('Error al insertar registro. new idcuest', 'Error');
+                                        app.preloader.hide();
                                     });
                             }
                         )
@@ -1039,8 +1064,6 @@ function registerQuest(lesson_id, course_id){
             console.log("add client error: " + error.message);
             app.dialog.alert('Error al insertar registro. ccc2', 'Error');
             app.preloader.hide();
-        },
-        function () {
         }
     );
 }
@@ -1329,10 +1352,7 @@ function EvniarCuestionarioBack() {
     databaseHandler.db.transaction(
         function (tx4) {                                    //regisstro            //seguimeinto                                         //Cierre
             tx4.executeSql("SELECT r.status, r.idUser, r.idCuestionario AS cuestionarioId, au.user_id, au.idCuestionario FROM register as r LEFT OUTER JOIN answer_user as au on cuestionarioId = au.idCuestionario WHERE user_id = ? AND r.status = 1 GROUP BY cuestionarioId",
-                [userId], //Verifica  que haya un registro que haya un seguimiento y un cierre
-                //tu haras lo mismo verifica que haya un registro de ese cuestionario
-                //que haya preguntas ocntestadas de ese cuestionario
-                //y que haya un cierre ;)
+                [userId],
                 function (tx4, results) {
                     var length = results.rows.length;
 
@@ -1434,7 +1454,7 @@ function updateStatusCourse()
     }
     let user_id = localStorage.getItem('id');
     localStorage.removeItem('status_course');
-    localStorage.setItem('status_course', 1)
+    localStorage.setItem('status_course', 1);
     const date = new Date();
     const dateWhenFinish = offDays(date, 0);
 
@@ -1442,7 +1462,7 @@ function updateStatusCourse()
         .then(function (res) {
             Swal.fire('Felicidades!', 'Haz completado satisfactoriamente todos los cursos, en el menu principal veras un boton para obtener tu certificado', 'success');
             $("#downloadCertificate").show();
-            $("#getCertificado").hide();
+            $("#finalQuestions").hide();
 
         })
         .catch(function (err) {
@@ -1511,26 +1531,217 @@ function checkIfCoursesComplete(course_id){
     );
 }
 
-function EvaluacionFinal(){
-    app.request.get(cordova.file.externalRootDirectory + '/jsons/eval_final_preguntas.json', function (data) {
-        console.log(data);
-        const preguntas = JSON.parse(data);
-        if (preguntas.length !== 0) {
-            $("#instructionsFinal").append('<p><b>Relación de Columnas: ' +
-                'En las siguientes colunmas encontras una el nombre del proceso y en otro los pasos de ' +
-                'cada procesos, deberás colocar sobre el cuadro verde el número que corresponda al proceso que ' +
-                'se está describiendo en los pasos.</p></b>');
-            for (var w = 0; w < preguntas.length; w++) { //preguntas
-                $("#content").append('<div class="card">' +
-                    '<div class="card-content card-content-padding">' +
-                    preguntas[w].pregunta +
-                    '</div>'+
-                    '</div>')
-            }
-        }
-        else {
-            Swal.fire('Atencion!', 'No hay disponible una evaluacion final, vuelve mas tarde', 'error');
-        }
-    });
+function EvaluacionFinal(respuesta_fkID, el,idRespuesta){
+    var user_id = localStorage.getItem('id');
+    var resAnswerFinal = el.value;
+    var preguntaID = respuesta_fkID;
+    var respuestaId = idRespuesta;
+    var resName = el.name;
+    var date = new Date();
+    var dateNow = offDays(date, 0);
+    var fecha = offDays(date, 0);
 
+    // $('input[name='+resName+']').on('change', function(e){
+        if($('input[name='+resName+']').prop('checked')){
+        // if(e.target.checked){
+
+            databaseHandler.db.transaction(
+                function (tx1) {
+                    tx1.executeSql("SELECT * FROM answer_question_final WHERE ansFinalId = ? AND user_id = ?",
+                        [respuestaId, user_id],
+                        function (tx, resultsA) {
+                            var length = resultsA.rows.length;
+                            var fecha, questionId, userId,answerId;
+                            for(var w = 0; w< length; w++) {
+                                answerId = resultsA.rows.item(w).ansFinalId;
+                                questionId = resultsA.rows.item(w).questFinalId;
+                                userId = resultsA.rows.item(w).user_id;
+                                fecha = resultsA.rows.item(w).fecha;
+                            }
+
+                            if (length > 0 && questionId == preguntaID && userId === user_id && fecha === dateNow)
+                            {
+
+                            }
+                            else {
+                                tx1.executeSql("INSERT INTO answer_question_final(ansFinalId, questFinalId, user_id, response, fecha, status ) VALUES (?,?,?,?,?,?)",
+                                    [respuestaId, preguntaID, user_id, resAnswerFinal, dateNow, 1],
+                                    function (tx1, results) {
+
+                                    }
+                                )
+                            }
+                        })
+
+                },
+                function (error) {
+                    console.log("add client error: " + error.message);
+                    app.dialog.alert('Error al insertar registro.', 'Error');
+                    app.preloader.hide();
+                },
+                function () {
+                }
+            );
+        } else {
+            databaseHandler.db.transaction(
+                function (tx1) {
+                    tx1.executeSql("DELETE FROM answer_question_final WHERE ansFinalId = ? AND user_id = ?",
+                        [respuestaId, user_id],
+                        function (tx1, results) {
+
+                        }
+                    )
+                }
+            );
+        }
+    // });
+
+    // app.request.get(cordova.file.externalRootDirectory + '/jsons/eval_final_preguntas.json', function (data) {
+    //     con
+    //     const preguntas = JSON.parse(data);
+    //     if (preguntas.length !== 0) {
+    //         for (var w = 0; w < preguntas.length; w++) { //preguntas
+    //             $("#content").append('<div class="card">' +
+    //                 '<div class="card-content card-content-padding">' +
+    //                 preguntas[w].pregunta +
+    //                 '</div>'+
+    //                 '</div>')
+    //         }
+    //     }
+    //     else {
+    //         Swal.fire('Atencion!', 'No hay disponible una evaluacion final, vuelve mas tarde', 'error');
+    //     }
+    // });
+
+}
+
+function enviarEvaluacionFinal(){
+
+    var answersFinalArray = [];
+    var a = 0;
+    var date = new Date();
+    var dateNow = offDays(date, 0);
+    Swal.fire({
+        title: '¿Estas seguro de enviar la evaluacion?',
+        text: "Una vez enviado no sera posible modificarlo",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si envialo!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            databaseHandler.db.transaction(
+                function (tx1) {
+                    tx1.executeSql("SELECT * FROM answer_question_final",
+                        [],
+                        function (tx, resultsF) {
+                            var length = resultsF.rows.length;
+
+                            for(var i = 0; i< length; i++) {
+                                var item4 = resultsF.rows.item(i);
+                                answersFinalArray[a] = {'ansFinalId': item4.ansFinalId, 'questFinalId': item4.questFinalId, 'user_id': item4.user_id, 'response': item4.response, 'fecha': item4.fecha};
+                                a++;
+                            }
+                            // console.log(JSON.stringify(answersArray));
+
+                            $.ajax({
+                                type: "POST",
+                                async: true,
+                                url: "http://serviciosbennetts.com/universidadBennetts/storeFinalEvaluation.php",
+                                data: { 'arrayF': JSON.stringify(answersFinalArray) },
+                                success: function(respuesta) {
+                                    if (respuesta == 1) {
+
+                                        databaseHandler.db.transaction(
+                                            function (tx1) {
+                                                tx1.executeSql("UPDATE answer_question_final SET status = 2 WHERE fecha = ?",
+                                                    [dateNow],
+                                                    function (tx, resultsA) {
+                                                        let timerInterval
+                                                        Swal.fire({
+                                                            title: 'Aviso:!',
+                                                            html: 'Guardando <b></b>',
+                                                            timer: 2000,
+                                                            timerProgressBar: true,
+                                                            willOpen: () => {
+                                                                Swal.showLoading()
+                                                                timerInterval = setInterval(() => {
+                                                                    const content = Swal.getContent()
+                                                                    if (content) {
+                                                                        const b = content.querySelector('b')
+                                                                        if (b) {
+                                                                            b.textContent = Swal.getTimerLeft()
+                                                                        }
+                                                                    }
+                                                                }, 100)
+                                                            },
+                                                            willClose: () => {
+                                                                clearInterval(timerInterval)
+                                                            }
+                                                        }).then((result) => {
+                                                            /* Read more about handling dismissals below */
+                                                            if (result.dismiss === Swal.DismissReason.timer) {
+                                                                Swal.fire(
+                                                                    'Enviado!',
+                                                                    'La evaluacion fue enviada.',
+                                                                    'success'
+                                                                );
+                                                                // updateStatusCourse();
+
+                                                                app.views.main.router.navigate({ name: 'home'});
+                                                            }
+                                                        }) //END SWAL FIRE
+                                                            .catch((err) => {
+                                                                alert(err);
+                                                            })
+
+                                                    })
+
+                                            },
+                                            function (error) {
+                                                console.log("add client error: " + error.message);
+                                                app.dialog.alert('Error al insertar registro.', 'Error');
+                                                app.preloader.hide();
+                                                Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
+
+                                            },
+                                            function () {
+                                            });
+                                    }
+                                    else if(respuesta == 0){
+                                        alert("Ocurrio un error intentalo mas tarde")
+                                    }
+                                    else {
+                                        Swal.fire('Guardado!', '', 'warning')
+                                    }
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+
+                                }
+                            })
+                        })
+
+                },
+                function (error) {
+                    console.log("add client error: " + error.message);
+                    app.dialog.alert('Error al insertar registro.', 'Error');
+                    app.preloader.hide();
+
+                }
+            )
+
+        }
+    })
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function backIndexCourses(id)
+{
+    app.views.main.router.navigate({ name: 'cursos_index' , params: {id: categoryId}});
 }

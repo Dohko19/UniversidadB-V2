@@ -1,16 +1,9 @@
-<!--suppress JSAnnotator -->
+    <!--suppress JSAnnotator -->
 <template>
        <div class="page">
               <div class="navbar">
               <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
-                  <div class="navbar-inner">
-                      <div class="left">
-                        <a href="#"  class="back">
-                          <i class="icon icon-back"></i>
-                          <span class="if-not-md">Back</span>
-                        </a>
-                      </div>
-                  </div>
+                  <div id="backButton"></div>
               </div>
               <div class="page-content">
                  <div class="row">
@@ -24,9 +17,18 @@
          on: {
            pageInit: function(e, page)
            {
+
               let id = app.views.main.router.currentRoute.params.id;
               let catId = app.views.main.router.currentRoute.params.catId;
               let user_id = localStorage.getItem("id");
+               $("#backButton").append('<div class="navbar-inner">' +
+                   '<div class="left">' +
+                   '   <a href="/cursos/index/'+catId+'">' +
+                   '     <i class="fas fa-chevron-circle-left"></i>Regresar' +
+                   '   </a>' +
+                   ' </div>' +
+                   '</div>'
+                    );
                //course_show.json
                app.request.get(cordova.file.externalRootDirectory + '/jsons/course_show.json', function (data) {
                    const courses_show = JSON.parse(data);

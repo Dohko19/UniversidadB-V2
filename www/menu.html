@@ -118,13 +118,12 @@
         margin-top: 12px;
     }
     .uniBack{
-        background-image: url("img/logouni.png");
+        background-image: url("img/logouniOdo.png");
         background-position: center;
         background-repeat: no-repeat;
         background-blend-mode: lighten;
-        -webkit-filter: blur(8px);
         /* Full height */
-        background-size: cover;
+        background-size:100% 100%;
     }
 </style>
 </head>
@@ -191,7 +190,7 @@
                     </center>
                 </div>
                 <div id="circleProgressBar" class="block block-strong">
-                    <div class="">
+                    <div class="uniBack">
 <!--                        <div class="col text-align-center">-->
 <!--                            <div id="values"></div>-->
 <!--                        </div>-->
@@ -225,14 +224,15 @@
                     <p class="row">
                         <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu" href="#">Supervisores</a>
                     </p>
-                    <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p>
-                    <p class="row"><a href="#" target="_blank" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
                     <p class="row">
-                        <a href="#" id="finalQuestions"
-                           class="col-100 dynamic-popup2 button button-fill button-large button-raised color-orange">
+                        <a href="/cursos/evaluaciones/" id="finalQuestions"
+                           class="col-100 button button-fill button-large button-raised color-orange">
                             Realizar Evalucion Final
                         </a>
                     </p>
+                    <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p>
+                    <p class="row"><a href="#" target="_blank" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
+
                 </div>
                 <div id="presentacion">
                     <center>
@@ -252,10 +252,10 @@
               <div class="block-footer">
                    <p> Centro de Ayuda <br> <br>
                     <!-- Close Popup -->
-                       <b>Buzon de Sugerencias:</b> 55-44-47-27-55 <br>
+                       <b>Buzón de sugerencias:</b> 55-44-47-27-55 <br>
                        <b>Correo:</b> admon.rh@bennetts.com.mx <br>
-                       <br>
-                       <b>Telefon: 55-55-67-49-69 <br> Ext. 2178, 2177, 2179</b>
+                       <br><br>
+                       <b>Teléfono: 55-55-67-49-69 <br><br> Ext. 2178, 2177, 2179</b>
                        <br><br>
                       <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
                       <br>
@@ -308,117 +308,25 @@
 
 
         //Verificar GPS
-        cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
-          console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
-          if(enabled == true){
+        // cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+        //   console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
+        //   if(enabled == true){
+        //
+        //   }else{
+        //       app.dialog.alert('Favor de encender tu GPS.','Aviso!');
+        //   }
+        // },function(error){
+        //     console.error("The following error occurred: "+error);
+        // });
 
-          }else{
-              app.dialog.alert('Favor de encender tu GPS.','Aviso!');
-          }
-        },function(error){
-            console.error("The following error occurred: "+error);
-        });
-
-      }, false);
+      }, false
+      );
 
       function onDeviceReady() {
           pictureSource=navigator.camera.PictureSourceType;
           destinationType=navigator.camera.DestinationType;
           cordova.plugins.backgroundMode.disable();
       }
-      // Called when a photo is successfully retrieved
-      //
-      function onPhotoDataSuccess(imageData) {
-        // Uncomment to view the base64-encoded image data
-        // console.log(imageData);un
-        // Get image handle
-        //
-        var smallImage = document.getElementById('smallImage');
-        // Unhide image elements
-        //
-        smallImage.style.display = 'block';
-        // Show the captured photo
-        // The in-line CSS rules are used to resize the image
-        //
-        var nameima = "data:image/jpeg;base64," + imageData;
-        smallImage.src = "data:image/jpeg;base64," + imageData;
-
-        $("#imagenC").val(nameima); //modificacion 26 de mayo
-      }
-      // Called when a photo is successfully retrieved
-      //
-      function onPhotoURISuccess(imageURI) {
-        // Uncomment to view the image file URI
-        // console.log(imageURI);
-        // Get image handle
-        //
-        var largeImage = document.getElementById('largeImage');
-        // Unhide image elements
-        //
-        largeImage.style.display = 'block';
-        // Show the captured photo
-        // The in-line CSS rules are used to resize the image
-        //
-        largeImage.src = imageURI;
-       // alert(largeImage); ///coloque este el 25 de mayo
-
-      }
-      // A button will call this function
-      //
-      function prueba(cont2, total){
-        $("#Foto").val(cont2);
-        $("#total").val(total);
-
-        var total = total;
-        var valor = cont2;
-        var gg = capturePhotoAuditoria(valor,total);
-
-        function capturePhotoAuditoria(cont2, total) {
-
-                    navigator.camera.getPicture(onPhotoDataSuccess2, onFail, { quality: 50,
-                      destinationType: destinationType.DATA_URL,
-                      targetWidth: 300, targetHeight: 300 });
-                  }
-
-        function onPhotoDataSuccess2(imageData) {
-
-
-          //alert(valor);
-          //alert(total);
-
-          var smallImage = document.getElementById('smallImage'+valor);
-          //alert(smallImage);
-          smallImage.style.display = 'block';
-          var nameima = "data:image/jpeg;base64," + imageData;
-          smallImage.src = "data:image/jpeg;base64," + imageData;
-          $("#imagenC").val(nameima);
-
-          //a partir de aqui aqui guardas la foto al momento de que la tomas
-          /*
-          var fd = new FormData();
-          fd.append("valor", valor);
-          fd.append("imageData", imageData);
-          alert("holaa");
-          $.ajax({
-              type: "POST",
-              url: "http://www.appbennetts.com/VIC/ProcesosVIC7/guarda_foto.php",
-              data: fd,
-              processData: false,  // tell jQuery not to process the data
-              contentType: false ,
-              DataType : 'json'
-              ,success: function(data){
-                alert(data);
-
-              }
-          });
-          */
-
-        }
-
-
-    }
-      // Called if something bad happens.
-      //
       function onFail(message) {
         //app.dialog.alert('Error' + message, 'Error!');
         alert("Failed because: "+message);
@@ -442,6 +350,7 @@
           on: {
               open: function (popup) {
                   console.log('Open eval final');
+                  $("#instructionsFinal").empty();
 
               },
               opened: function (popup) {
@@ -586,7 +495,7 @@
               swal.fire('Mensaje','Gracias por ver el video de presentacion, a continuacion puedes acceder a tus cursos', 'info');
 
           }
-}
+      }
 </script>
 
 <script>
@@ -893,15 +802,54 @@
 
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
             const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
+            const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
+            // const response3 = 40;
 
-            if (response.data == 100) {
-                $("#getCertificado").show();
-            } else {
-                $("#getCertificado").hide();
+            // if (response2.data == 100) {
+            //     $("#getCertificado").show();
+            // } else {
+            //     $("#getCertificado").hide();
+            //
+            // }
+            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
+
+            if(response3.data == 'INF')
+            {
+                var p3 = 0.0;
+            }
+            else{
+                var p3 = response3.data;
 
             }
-            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
-            let dataBar2 = response2.data/100; // solo acepta numeros entre 0.1 a 1.0
+            if(response2.data == 'INF')
+            {
+                var p2 = 0.0
+            }
+            else{
+                var p2 = response2.data;
+
+            }
+
+
+            let dataBarTotal = p2 + p3 / 100;
+            let dataBarTotalW = p2 + p3;
+
+            if (response2.data >= 40)
+            {
+                $("#finalQuestions").show();
+                // updateStatusCourse()
+            }else{
+                $("#finalQuestions").hide();
+            }
+
+            if (dataBarTotalW >= 80)
+            {
+                $("#finalQuestions").hide();
+                $("#getCertificado").show()
+            }else{
+                $("#getCertificado").hide()
+            }
+
             $("#demo").circleProgress({
                 value: dataBar,
                 fill: { gradient: ['#0dc9f3','#058f94'] },
@@ -915,7 +863,7 @@
             });
 
             $('#demo2').circleProgress({ // calificacion general
-                value: dataBar2,
+                value: dataBarTotal,
                 thickness: 'auto',
                 animation: {
                     duration: 1200,
@@ -926,7 +874,7 @@
                     gradient: ['#92f533','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
                 },
             }).on('circle-animation-progress', function(event, progress) {
-                $(this).find('strong').html(response2.data+'%');
+                $(this).find('strong').html(dataBarTotalW+'%');
             });
 
         } catch (error) {
@@ -978,13 +926,13 @@
     var role_id = localStorage.getItem('role_id');
     let status_course = localStorage.getItem('status_course');
 
-    // if (status_course == 0){
-    //     $("#getCertificado").hide();
-    //     $("#downloadCertificate").hide();
-    // }
-    // else {
-    //     $("#getCertificado").show();
-    // }
+    if (status_course == 0){
+        // $("#getCertificado").hide();
+        $("#downloadCertificate").hide();
+    }
+    else {
+        $("#downloadCertificate").show();
+    }
     $("#downloadCertificate").hide();
 
     if (role_id == 1 || role_id == 2)

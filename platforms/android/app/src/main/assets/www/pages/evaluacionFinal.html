@@ -1,0 +1,128 @@
+<!--suppress JSAnnotator -->
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Framework7</span>
+                    </a>
+                </div>
+                <div class="title">Evaluacion Final</div>
+                <div class="title-large">
+                    <div class="title-large-text">Evaluacion Final</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title">Instrucciones:</div>
+            <div class="block block-strong">
+                <p>Relación de Columnas:
+                    En las siguientes colunmas encontras una el nombre del proceso y en otro los pasos de
+                    cada procesos, deberás colocar sobre el cuadro verde el número que corresponda al proceso que
+                    se está describiendo en los pasos.
+                </p>
+            </div>
+            <div class="block" id="finalQuestion">
+                <div id="lists"></div>
+                <div id="enviarEvaluacion"></div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function(e, page)
+            {
+                app.request.get(cordova.file.externalRootDirectory + '/jsons/eval_final_preguntas.json', function (data) {
+                app.request.get(cordova.file.externalRootDirectory + '/jsons/respuestas_eva_final.json', function (res) {
+
+                    const preguntas = JSON.parse(data);
+                    const respuestas = JSON.parse(res);
+
+                    if (preguntas.length !== 0) {
+                        $("#enviarEvaluacion").append('<button onclick="enviarEvaluacionFinal()" ' +
+                            'class="link col button button-large button-raised button-fill color-green">' +
+                            '<i class="fas fa-save"></i>' +
+                            '    Guardar' +
+                            '</button>');
+                    if (respuestas.length !== 0) {
+                        for (var w = 0; w < preguntas.length; w++) { //preguntas
+                        $("#lists").append('<div class="list">' +
+                            '                    <ul>' +
+                            '                        <li>' +
+                            '                            <label class="item-checkbox item-content">' +
+                            '                                <input type="checkbox" name="'+preguntas[w].idFinal+'" disabled />' +
+                            '                                <i class="icon icon-checkbox"></i>' +
+                            '                                <div class="item-inner">' +
+                            '                                    <div class="item-title">'+preguntas[w].pregunta+'</div>' +
+                            '                                </div>' +
+                            '                            </label>' +
+                                                        '<div id="respuestasList'+w+'"></div>' +
+                            '                        </li>' +
+                            '                    </ul>' +
+                            '                </div>');
+
+                            for (var r = 0; r < respuestas.length; r++) { //respuestas
+                                if (preguntas[w].idFinal == respuestas[r].evail_final_id){
+                                    $("#respuestasList"+w).append('<ul>' +
+                                        '                                <li>' +
+                                        '                                    <label class="item-checkbox item-content">' +
+                                        '                                        <input type="checkbox" onclick="EvaluacionFinal('+respuestas[r].evail_final_id+', this, '+respuestas[r].idRespuestaFinal+')" ' +
+                                        '                                                       name="respuesta'+respuestas[r].idRespuestaFinal+'" value="'+respuestas[r].answer_correct+'"/>' +
+                                        '                                        <i class="icon icon-checkbox"></i>' +
+                                        '                                        <div class="item-inner">' +
+                                        '                                            <div class="item-title">' + respuestas[r].respuesta_final + '</div>' +
+                                        '                                        </div>' +
+                                        '                                    </label>' +
+                                        '                                </li>' +
+                                        '                            </ul>');
+                                }
+                            }
+
+
+
+                        }
+                    }
+                    else {
+                        Swal.fire('Atencion!', 'No hay disponible una evaluacion final, vuelve mas tarde', 'error');
+                    }
+                    }
+                    else {
+                        Swal.fire('Atencion!', 'No hay disponible una evaluacion final, vuelve mas tarde', 'error');
+                    }
+                });
+                });
+
+                // $("#lists").append('<div class="list">'+
+                //     '<ul>'+
+                //     '<li>'+
+                //     '<a class="item-link smart-select smartSelect smart-select-init" data-open-in="popup"  data-searchbar="false" data-searchbar-placeholder="Selecciona una o varias opciones">'+
+                //     '<select name="car" multiple>'+
+                //     '<optgroup label="Japanese">'+
+                //     '<option value="honda" selected>Honda</option>'+
+                //     '<option value="lexus">Lexus</option>'+
+                //     '<option value="mazda">Mazda</option>'+
+                //     '<option value="nissan">Nissan</option>'+
+                //     '<option value="toyota">Toyota</option>'+
+                //     '</optgroup>'+
+                //     '</select>'+
+                //     '<div class="item-content">'+
+                //     '<div class="item-inner">'+
+                //     '<div class="item-title">Car</div>'+
+                //     '</div>'+
+                //     '</div>'+
+                //     '</a>'+
+                //     '</li>'+
+                //     '</ul>'+
+                //     '</div>');
+
+
+
+
+            }
+        }
+    }
+</script>
