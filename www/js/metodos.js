@@ -1206,6 +1206,7 @@ function EnviarCuestionario(course_id, catId){
             $("#Questions").hide();
             $("#primary-title").hide();
             $("#enviarCuestionario").hide();
+
             $("#success").append('<div style="background-color: green;"><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
             databaseHandler.db.transaction(
                 function (tx1) {
@@ -1213,6 +1214,7 @@ function EnviarCuestionario(course_id, catId){
                         [idCuestionario],
                         function (tx, resultsA) {
                         //do Something
+
                         })
 
                 },
@@ -1245,10 +1247,31 @@ function EnviarCuestionario(course_id, catId){
                                 url: "http://serviciosbennetts.com/universidadBennetts/questionaires/store.php",
                                 data: { 'arrayAQ': JSON.stringify(answersArray) },
                                 success: function(respuesta) {
-                                    if (respuesta == 1) {
 
+                                    var respu1 = respuesta.split("._.");
+                                    var dat1 = respu1[0];
+                                    var dat2 = respu1[1];
+
+                                    if(dat1 == "REPORTE"){ //El texto que se ocncateno
+                                        if(dat2 > 0){ // Ultimo Id Insrtado o consultado
+                                            databaseHandler.db.transaction(
+                                                function(tx7){
+                                                    tx7.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
+                                                    [idCuestionario],
+                                                    function(tx7, results){
+                                                        alert("AWEBO QUE SI")
+                                                    }
+                                                )} //awebo xd puebamelo
+                                                //XD
+                                            );
+                                          }
+                                      }
+
+                                    if (respuesta == 1) {
                                         databaseHandler.db.transaction(
                                             function (tx1) {
+                                                // PERFECTO AMIGO ESTE MISMO ESTATTUS VA A SER ESTE MIRA
+
                                                 tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
                                                     [idCuestionario],
                                                     function (tx, resultsA) {
@@ -1275,6 +1298,9 @@ function EnviarCuestionario(course_id, catId){
                                                             }
                                                         }).then((result) => {
                                                             /* Read more about handling dismissals below */
+
+                                                            //Va a entrar a este insert siempre y cuando yo ya le de en enviar no?asi es
+                                                            // ok aqui vamso a hacer la validacion mira
                                                             if (result.dismiss === Swal.DismissReason.timer) {
                                                                 databaseHandler.db.transaction(
                                                                     function (tx1) {
@@ -1314,7 +1340,13 @@ function EnviarCuestionario(course_id, catId){
                                             function () {
                                             });
                                     } else {
-                                        Swal.fire('Guardado!', '', 'warning')
+                                        Swal.fire('Error al guardar!', 'se enviara automaticmante o usted puede hacerlo manualmente', 'error') // aqui envie una confirmacion xd y era error
+                                        //aaaaa ok ok entonces manda Error pero no vuelves a hacer una segunda peticion en background para que se envie solito o le de uno manualmente
+                                        //eso es lo que falta
+                                        // a perro XDxDentonces ahora bien tenemos que no se envia vale
+                                        // vamos autilizar tu alertita verde de "Terminado como un semaforo
+                                        // okey
+                                        // primero esto...
                                     }
                                 },
                                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -1690,7 +1722,7 @@ function enviarEvaluacionFinal(){
                                                                 );
                                                                 // updateStatusCourse();
 
-                                                                app.views.main.router.navigate({ name: 'home'});
+                                                                app.views.main.router.navigate({ name: 'inicio'});
                                                             }
                                                         }) //END SWAL FIRE
                                                             .catch((err) => {
@@ -1744,4 +1776,56 @@ function getRndInteger(min, max) {
 function backIndexCourses(id)
 {
     app.views.main.router.navigate({ name: 'cursos_index' , params: {id: categoryId}});
+}
+
+function checkConnection() {
+    var networkState = navigator.connection.type;
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+
+    alert('Connection type: ' + states[networkState]);
+}
+
+
+function Verificar(idCourse){
+
+    //validar sitiene internesss
+    //verga como lo metemos aca XD esa wea no puedes escuchar cuando cambia> hay documentacion para eso? alch no se XD jajajajaja amos a comer ahoritaa vemos xdo checamos bien no? ssee
+    //eh?si we hya q ver q pex pero amos a comer o q?
+    ///si we vamso a comer y ahorita en una hora le seguimos dando ;) va provecho we
+
+        // Handle the online event
+        var networkState = navigator.connection.type;
+
+        if (networkState !== Connection.NONE) {
+            app.views.main.router.navigate( {name: 'cursos', params: {id: idCourse} } );
+
+        }
+        else {
+            app.dialog.alert("Error","Necesitas una conexion a internet");
+        }
+       //awebitoooo perrin XD XDsimon xd
+    //Ahora si hay internet nos va a pasar a cargar en otra pantalla en video y para iniciar el curso, si asi es
+    //perfecto ahora cada que terminas un cuestionario lo guardar directamente en SQLite no?
+    /////asi es, hasta q le dan en guardar lo envia
+    //el guardar que esta al ultimo de cada cuestionario?
+    //siwe
+    //perfecto espera deja pienso lo demas
+
+
+    // if(onOffline()){
+    //     //y aqui ya podemos utilizar el mismo idCourse que le pasas
+    //     //app.views.main.router.navigate({name: 'show'});
+    //     app.dialog.alert("awebo que si !");
+    // }else{
+    //     app.dialog.alert("Vaya no tienes internessssssssssss!");
+    // }
 }

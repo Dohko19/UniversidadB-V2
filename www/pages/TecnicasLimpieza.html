@@ -1,0 +1,70 @@
+<!--suppress JSAnnotator -->
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="width: 99%;">
+                <input type="hidden" name="geolocation" id="geolocation" placeholder='Geolocalización...' disabled="disabled"/>
+
+                <form>
+                    <div class="row">
+                        <div id="Listado"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function () {
+                let catId = 2;
+                app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
+                    const courses = JSON.parse(data);
+                    console.log(courses);
+                    if (courses.length !== 0)
+                    {
+                        for (var i = 0; i < courses.length; i++) {
+
+                            if(courses[i].category_id == catId)
+                            {
+                                $("#Listado").append(
+                                    '<div class="card item-content">'+
+                                    '<div class="card-header item-inner" style="text-shadow:  1px 1px">'+ courses[i].name +
+                                    '<div class="item-after" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
+                                    '</div>'+
+                                    '<div class="card-content card-content-padding">'+
+                                    '<p class="date small">'+ courses[i].description +'</p>' +
+                                    '</div>' +
+                                    '<a onclick="Verificar('+courses[i].idCourse+')" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;">Ingresar al Curso</div></a>' +
+                                    '<div class="progressbar" data-progress="100">'+
+                                    '<span><br></span>'+
+                                    '</div></div>'
+                                );
+
+                                checkIfCoursesComplete(courses[i].idCourse);
+
+                            }
+
+                        }
+                    }
+                });
+            }
+        }
+    }
+</script>
+
+
+

@@ -213,7 +213,8 @@
                     <p>Listado de Cursos</p>
                     <p class="row">
                         <a href="/cursos/index/1" class="col button button-large button-raised button-fill">Induccion</a>
-                        <a href="/cursos/index/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
+                        <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
+                        <a href="/cursos/index/" class="col button button-large button-raised button-fill">Tecnicas2a</a>
                     </p>
                     <p class="row">
                         <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
@@ -489,6 +490,9 @@
               $("#progreso").show();
               $("#menuPrincipal").show();
               $("#player").hide();
+              $("#messageWelcome").show();
+              $("#circleProgressBar").show();
+              $("#presentacion").hide();
               removeFirstLogin(id);
               window.localStorage.removeItem("first_login");
               localStorage.setItem("first_login", 0);
@@ -803,6 +807,8 @@
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
             const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
             const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
+            alert(response2.data)
+            alert(response3.data)
             // const response3 = 40;
 
             // if (response2.data == 100) {
@@ -830,8 +836,8 @@
 
             }
 
-
-            let dataBarTotal = p2 + p3 / 100;
+            var totalBar = p2 + p3;
+            let dataBarTotal = totalBar / 100;
             let dataBarTotalW = p2 + p3;
 
             if (response2.data >= 40)
@@ -864,7 +870,6 @@
 
             $('#demo2').circleProgress({ // calificacion general
                 value: dataBarTotal,
-                thickness: 'auto',
                 animation: {
                     duration: 1200,
                     easing: 'circleProgressEasing'
