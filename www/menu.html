@@ -173,77 +173,77 @@
           </div>
         </div>
         <div class="page-content ptr-content">
-        <div class="ptr-preloader color-red">
-            <br /><br /><br /><div id="process" style="text-align: center; color: #FF0000; font-weight: bold; background-color:#FFFFFF;" hidden="true">0%</div>
-            <div class="preloader color-red"></div>
-            <div class="ptr-arrow"></div>
-        </div>
-            <div>
-                <div class="block" id="messageWelcome">
-                    <center>
-                        <div id="welcome" style="color: red; font-size: 17px; font-weight: bold"></div>
+      <div class="ptr-preloader color-red">
+                <br /><br /><br /><div id="process" style="text-align: center; color: #FF0000; font-weight: bold; background-color:#FFFFFF;" hidden="true">0%</div>
+                <div class="preloader color-red"></div>
+                <div class="ptr-arrow"></div>
+            </div>
+      <div>
+                    <div class="block" id="messageWelcome">
                         <center>
-                            <span style="color:gray; font-size: 12px; text-align: right; font-weight: bold;">Ultima actualizacion de datos: </span>
-                            <br>
-                            <span id="Fecha" name="Fecha" style="color: red; font-weight: bold; font-size: 14px; text-align: right; ">Sus datos no estan actualizados</span>
+                            <div id="welcome" style="color: red; font-size: 17px; font-weight: bold"></div>
+                            <center>
+                                <span style="color:gray; font-size: 12px; text-align: right; font-weight: bold;">Ultima actualizacion de datos: </span>
+                                <br>
+                                <span id="Fecha" name="Fecha" style="color: red; font-weight: bold; font-size: 14px; text-align: right; ">Sus datos no estan actualizados</span>
+                            </center>
                         </center>
-                    </center>
-                </div>
-                <div id="circleProgressBar" class="block block-strong">
-                    <div class="uniBack">
-<!--                        <div class="col text-align-center">-->
-<!--                            <div id="values"></div>-->
-<!--                        </div>-->
+                    </div>
+                    <div id="circleProgressBar" class="block block-strong">
+                        <div class="uniBack">
+    <!--                        <div class="col text-align-center">-->
+    <!--                            <div id="values"></div>-->
+    <!--                        </div>-->
+                            <center>
+                                <div class="circles">
+                                    <div id="demo" class="circle">
+                                        <strong></strong>
+                                        <span>Progreso de Cursos</span>
+                                    </div>
+                                    <div id="demo2" class="circle">
+                                        <strong></strong>
+                                        <span>Calif. Cuestionarios</span>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="block" id="menuPrincipal">
+
+                        <p>Listado de Cursos</p>
+                        <p class="row">
+                            <a href="/Induccion/1" class="col button button-large button-raised button-fill">Induccion</a>
+                            <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
+<!--                            <a href="/cursos/index/" class="col button button-large button-raised button-fill">Tecnicas2a</a>-->
+                        </p>
+                        <p class="row">
+                            <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
+                                <i class="far fa-question-circle"></i> Ayuda
+                            </a>
+                            <a class="col button dynamic-popup button-large button-raised button-fill"  href="#">Avisos</a>
+                        </p>
+                        <p class="row">
+                            <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu" href="#">Supervisores</a>
+                        </p>
+                        <p class="row">
+                            <a href="/cursos/evaluaciones/" id="finalQuestions"
+                               class="col-100 button button-fill button-large button-raised color-orange">
+                                Realizar Evalucion Final
+                            </a>
+                        </p>
+                        <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p>
+                        <p class="row"><a href="#" target="_blank" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
+
+                    </div>
+                    <div id="presentacion">
                         <center>
-                            <div class="circles">
-                                <div id="demo" class="circle">
-                                    <strong></strong>
-                                    <span>Progreso de Cursos</span>
-                                </div>
-                                <div id="demo2" class="circle">
-                                    <strong></strong>
-                                    <span>Calif. Cuestionarios</span>
-                                </div>
+                            <div id="player">
                             </div>
+                            <span><b><h3 style="color: red;">Puedes tocar dos veces el video para entrar en modo pantalla completa</h3></b></span>
                         </center>
                     </div>
                 </div>
-                <div class="block" id="menuPrincipal">
-
-                    <p>Listado de Cursos</p>
-                    <p class="row">
-                        <a href="/cursos/index/1" class="col button button-large button-raised button-fill">Induccion</a>
-                        <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
-                        <a href="/cursos/index/" class="col button button-large button-raised button-fill">Tecnicas2a</a>
-                    </p>
-                    <p class="row">
-                        <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
-                            <i class="far fa-question-circle"></i> Ayuda
-                        </a>
-                        <a class="col button dynamic-popup button-large button-raised button-fill"  href="#">Avisos</a>
-                    </p>
-                    <p class="row">
-                        <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu" href="#">Supervisores</a>
-                    </p>
-                    <p class="row">
-                        <a href="/cursos/evaluaciones/" id="finalQuestions"
-                           class="col-100 button button-fill button-large button-raised color-orange">
-                            Realizar Evalucion Final
-                        </a>
-                    </p>
-                    <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p>
-                    <p class="row"><a href="#" target="_blank" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
-
-                </div>
-                <div id="presentacion">
-                    <center>
-                        <div id="player">
-                        </div>
-                        <span><b><h3 style="color: red;">Puedes tocar dos veces el video para entrar en modo pantalla completa</h3></b></span>
-                    </center>
-                </div>
-            </div>
-  <div class="login-screen">
+      <div class="login-screen">
     <div class="view">
       <div class="page">
         <div class="page-content login-screen-content">
@@ -269,8 +269,8 @@
     </div>
   </div>
         </div>
-            </div>
-        </div> <!-- PAGE CONTENT -->
+        </div>
+      </div> <!-- PAGE CONTENT -->
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script src="lib/framework7/js/framework7.bundle.min.js"></script>
@@ -807,8 +807,8 @@
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
             const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
             const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
-            alert(response2.data)
-            alert(response3.data)
+            // alert(response2.data)
+            // alert(response3.data)
             // const response3 = 40;
 
             // if (response2.data == 100) {

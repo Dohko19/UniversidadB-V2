@@ -39,9 +39,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -67,23 +65,25 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/www/pages" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\UniversidadB-V2\www\pages" />
+      <recent name="C:\laragon\www\apps\UniversidadB\www\pages\cursos" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\apps\VIC Beta\www\pages" />
       <recent name="C:\laragon\www\apps\VIC Beta\www\img" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\apps\UniversidadB\www\pages\cursos" />
-    </key>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -120,24 +120,27 @@
       <workItem from="1601912296347" duration="20478000" />
       <workItem from="1601937694481" duration="21174000" />
       <workItem from="1602085799137" duration="19583000" />
+      <workItem from="1602170252364" duration="94000" />
+      <workItem from="1602170381321" duration="1320000" />
+      <workItem from="1602173814758" duration="2073000" />
+      <workItem from="1602180345384" duration="9789000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -163,11 +166,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600786585689" />
-    <state x="211" y="9" key="SettingsEditor" timestamp="1601396715977">
-      <screen x="0" y="0" width="1360" height="728" />
+    <state x="275" y="0" key="SettingsEditor" timestamp="1602181488833">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="211" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1601396715977" />
-    <state x="212" y="9" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600784603755" />
+    <state x="275" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602181488833" />
     <state x="398" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1602085837663">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -187,11 +190,11 @@
     <state x="338" y="162" key="run.anything.popup/0.0.1360.728@0.0.1360.728" timestamp="1601570879516" />
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601326899725" />
     <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1601868249421" />
-    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup" timestamp="1601949365558">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602196424622">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601416305954" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602196424622" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601949365558" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1601858683627" />
   </component>

@@ -895,6 +895,10 @@ function ConsultarMinuta(IdProyecto){
 //Universidad bennnettttsstl
 function learn(id)
 {
+    var networkState = navigator.connection.type;
+
+    if (networkState !== Connection.NONE) {
+
     var user_id = localStorage.getItem("id");
     app.request.promise.post('http://serviciosbennetts.com/universidadBennetts/courses/update.php', {user_id: user_id, lesson_id: id})
         .then(function (res) {
@@ -922,6 +926,11 @@ function learn(id)
             console.log(err.status);
             console.log(err.message);
         });
+    }
+    else {
+
+        app.views.main.router.navigate( {name: 'inicio' } );
+    }
 }
 
 
@@ -1259,7 +1268,7 @@ function EnviarCuestionario(course_id, catId){
                                                     tx7.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
                                                     [idCuestionario],
                                                     function(tx7, results){
-                                                        alert("AWEBO QUE SI")
+
                                                     }
                                                 )} //awebo xd puebamelo
                                                 //XD
@@ -1271,7 +1280,6 @@ function EnviarCuestionario(course_id, catId){
                                         databaseHandler.db.transaction(
                                             function (tx1) {
                                                 // PERFECTO AMIGO ESTE MISMO ESTATTUS VA A SER ESTE MIRA
-
                                                 tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
                                                     [idCuestionario],
                                                     function (tx, resultsA) {
@@ -1307,8 +1315,21 @@ function EnviarCuestionario(course_id, catId){
                                                                         tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
                                                                             [courseID, now, 1],
                                                                             function (tx, resultsA) {
+                                                                                var length = resultsA.rows.length;
+                                                                                var dateF, course_id, finish;
+                                                                                for(var w = 0; w< length; w++) {
+                                                                                    course_id = resultsA.rows.item(w).course_id
+                                                                                    dateF = resultsA.rows.item(w).dateF
+                                                                                    finish = resultsA.rows.item(w).finish
+                                                                                }
                                                                                 Swal.fire('Guardado!', '', 'success');
-                                                                                app.views.main.router.navigate({ name: 'cursos_index' , params: {id: categoryId}});
+
+                                                                                if(course_id >= 78 && course_id <= 99)
+                                                                                {
+                                                                                    app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
+                                                                                }else{
+                                                                                    app.views.main.router.navigate( { name: 'Induccion' , params: {id: 1} } );
+                                                                                }
 
                                                                             })
                                                                     },
@@ -1341,18 +1362,12 @@ function EnviarCuestionario(course_id, catId){
                                             });
                                     } else {
                                         Swal.fire('Error al guardar!', 'se enviara automaticmante o usted puede hacerlo manualmente', 'error') // aqui envie una confirmacion xd y era error
-                                        //aaaaa ok ok entonces manda Error pero no vuelves a hacer una segunda peticion en background para que se envie solito o le de uno manualmente
-                                        //eso es lo que falta
-                                        // a perro XDxDentonces ahora bien tenemos que no se envia vale
-                                        // vamos autilizar tu alertita verde de "Terminado como un semaforo
-                                        // okey
-                                        // primero esto...
                                     }
                                 },
                                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                                     $("#preguntas").hide();
                                     $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
-                                    Swal.fire('Enhorabuena!', 'Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success')
+                                    // Swal.fire('Enhorabuena!', 'Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success')
 
                                 }
                             })
@@ -1461,7 +1476,7 @@ function storeQuestions(questionId){
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             $("#preguntas").hide();
-                            Swal.fire('Enhorabuena!', 'Ya respondiste este cuestionario, regresa mañana para voler a intentarlo', 'info');
+                            // Swal.fire('Enhorabuena!', 'Ya respondiste este cuestionario, regresa mañana para voler a intentarlo', 'info');
 
                             // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                         }
@@ -1812,20 +1827,9 @@ function Verificar(idCourse){
         else {
             app.dialog.alert("Error","Necesitas una conexion a internet");
         }
-       //awebitoooo perrin XD XDsimon xd
-    //Ahora si hay internet nos va a pasar a cargar en otra pantalla en video y para iniciar el curso, si asi es
-    //perfecto ahora cada que terminas un cuestionario lo guardar directamente en SQLite no?
-    /////asi es, hasta q le dan en guardar lo envia
-    //el guardar que esta al ultimo de cada cuestionario?
-    //siwe
-    //perfecto espera deja pienso lo demas
 
+}
 
-    // if(onOffline()){
-    //     //y aqui ya podemos utilizar el mismo idCourse que le pasas
-    //     //app.views.main.router.navigate({name: 'show'});
-    //     app.dialog.alert("awebo que si !");
-    // }else{
-    //     app.dialog.alert("Vaya no tienes internessssssssssss!");
-    // }
+function backHome(){
+    app.views.main.router.navigate( {name: 'inicio' } );
 }

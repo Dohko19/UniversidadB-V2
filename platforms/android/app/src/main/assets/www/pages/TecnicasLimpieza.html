@@ -2,17 +2,16 @@
 <template>
     <div class="page">
         <div class="navbar">
-            <div style="text-align: center; margin-top: 4px;"></div>
-            <div class="navbar-inner sliding">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
+            <div class="navbar-inner">
                 <div class="left">
-                    <a href="#" class="link back">
+                    <a onclick="regresar()"  class="back">
                         <i class="icon icon-back"></i>
-                        <span class="if-not-md">Back</span>
+                        <span class="if-not-md"></span>
                     </a>
                 </div>
             </div>
         </div>
-
         <div class="page-content">
             <div style="width: 99%;">
                 <input type="hidden" name="geolocation" id="geolocation" placeholder='Geolocalización...' disabled="disabled"/>

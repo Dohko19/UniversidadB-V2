@@ -68,6 +68,11 @@ var routes = [
     path: '/TecnicasLimpieza/:id',
     componentUrl: './pages/TecnicasLimpieza.html',
   },
+  {
+    name: 'Induccion',
+    path: '/Induccion/:id',
+    componentUrl: './pages/Induccion.html',
+  },
   // Default route (404 page). MUST BE THE LAST
   {
     path: '(.*)',
