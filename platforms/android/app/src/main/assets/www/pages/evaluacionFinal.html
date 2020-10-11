@@ -11,11 +11,12 @@
                 </div>
                 <div class="title">Evaluacion Final</div>
                 <div class="title-large">
-                    <div class="title-large-text">Evaluacion Final</div>
+                    <div class="title-large-text">Evaluacion Final </div>
                 </div>
             </div>
         </div>
         <div class="page-content">
+            <div class="block"><span id="try"></span></div>
             <div class="block-title">Instrucciones:</div>
             <div class="block block-strong">
                 <p>Relación de Columnas:
@@ -50,20 +51,10 @@
                             '</button>');
                     if (respuestas.length !== 0) {
                         for (var w = 0; w < preguntas.length; w++) { //preguntas
-                        $("#lists").append('<div class="list">' +
-                            '                    <ul>' +
-                            '                        <li>' +
-                            '                            <label class="item-checkbox item-content">' +
-                            '                                <input type="checkbox" name="'+preguntas[w].idFinal+'" disabled />' +
-                            '                                <i class="icon icon-checkbox"></i>' +
-                            '                                <div class="item-inner">' +
-                            '                                    <div class="item-title">'+preguntas[w].pregunta+'</div>' +
-                            '                                </div>' +
-                            '                            </label>' +
-                                                        '<div id="respuestasList'+w+'"></div>' +
-                            '                        </li>' +
-                            '                    </ul>' +
-                            '                </div>');
+                        $("#lists").append('<div class="block-title" id="pregunta'+preguntas[w].idFinal+'"> '+
+                                                        preguntas[w].pregunta+
+                                            '</div>' +
+                                            '<div class="list" id="respuestasList'+w+'"></div>');
 
                             for (var r = 0; r < respuestas.length; r++) { //respuestas
                                 if (preguntas[w].idFinal == respuestas[r].evail_final_id){
@@ -81,9 +72,6 @@
                                         '                            </ul>');
                                 }
                             }
-
-
-
                         }
                     }
                     else {

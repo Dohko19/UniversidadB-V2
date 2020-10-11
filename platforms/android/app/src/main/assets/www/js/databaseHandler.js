@@ -94,7 +94,27 @@ var databaseHandler = {
             function (tx) {
                 //Run sql here using tx
                 tx.executeSql(
-                    "create table if not exists answer_question_final (ansFinalId integer, questFinalId integer, user_id integer, response integer, fecha text, status integer)",
+                    "create table if not exists answer_question_final (ansFinalId integer, questFinalId integer, user_id integer, response integer, fecha text, status integer, bandera integer)",
+                    [],
+                    function (tx, results) {
+                    },
+                    function (tx, error) {
+                        console.log("Error while creating the table Actualizaciones " + error.message);
+                    }
+                );
+            },
+            function (error) {
+                console.log("Transaction error: " + error.message);
+            },
+            function () {
+                console.log("Create DB transaction completed successfully");
+            }
+        );
+        this.db.transaction(
+            function (tx) {
+                //Run sql here using tx
+                tx.executeSql(
+                    "create table if not exists register_final (idFinal integer primary key, user_id integer, fecha text, fecha2 text, fecha3 text, status integer, bandera integer)",
                     [],
                     function (tx, results) {
                     },

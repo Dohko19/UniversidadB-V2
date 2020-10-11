@@ -28,7 +28,7 @@
           app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
               const courses = JSON.parse(data);
               console.log(courses);
-              // const courses_show = JSON.parse(data);
+              // const courses_show = JSON.parse(data); '/'+catId+'
 
               if (courses.length !== 0)
               {
@@ -44,7 +44,7 @@
                             '<div class="card-content card-content-padding">'+
                             '<p class="date small">'+ courses[i].description +'</p>' +
                             '</div>' +
-                            '<a href="/cursos/show/'+courses[i].idCourse+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;"> Ingresar al Curso</div></a>' +
+                            '<a href="/cursos/show/'+courses[i].idCourse+'/'+catId+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;"> Ingresar al Curso</div></a>' +
                             '<div class="progressbar" data-progress="100">'+
                             '<span><br></span>'+
                             '</div></div>'

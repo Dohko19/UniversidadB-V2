@@ -23,15 +23,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/Induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/Induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/evaluacionFinal.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/evaluacionFinal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/Induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/Induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/evaluacionFinal.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/evaluacionFinal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +79,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/www/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../university/university" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -124,6 +138,8 @@
       <workItem from="1602170381321" duration="1320000" />
       <workItem from="1602173814758" duration="2073000" />
       <workItem from="1602180345384" duration="9789000" />
+      <workItem from="1602207989152" duration="46282000" />
+      <workItem from="1602299944693" duration="41846000" />
     </task>
     <servers />
   </component>
@@ -162,20 +178,30 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="272" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1360.728@0.0.1360.728" timestamp="1601582436063" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1600786585689">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1602298835257">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1602298835257" />
+    <state x="521" y="135" key="FileChooserDialogImpl" timestamp="1602405996821">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600786585689" />
-    <state x="275" y="0" key="SettingsEditor" timestamp="1602181488833">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="521" y="135" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602405996821" />
+    <state x="309" y="0" key="SettingsEditor" timestamp="1602300020010">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="211" y="9" key="SettingsEditor/0.0.1360.728@0.0.1360.728" timestamp="1601396715977" />
     <state x="275" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602181488833" />
-    <state x="398" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1602085837663">
+    <state x="309" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602300020010" />
+    <state x="398" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1602208011050">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601937774636" />
-    <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1602085837663" />
+    <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1602208011050" />
+    <state x="445" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602280076208">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="445" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1602280076208" />
     <state x="464" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601403295007">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -184,18 +210,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="367" y="47" width="743" height="658" key="find.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600360828545" />
-    <state x="382" y="183" key="run.anything.popup" timestamp="1601868249421">
+    <state x="382" y="183" key="run.anything.popup" timestamp="1602266856229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="338" y="162" key="run.anything.popup/0.0.1360.728@0.0.1360.728" timestamp="1601570879516" />
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601326899725" />
-    <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1601868249421" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602196424622">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602266856229" />
+    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup" timestamp="1602446800565">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602196424622" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601949365558" />
-    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1601858683627" />
+    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602446800565" />
   </component>
 </project>

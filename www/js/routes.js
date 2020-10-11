@@ -54,7 +54,7 @@ var routes = [
   // Pages EVALUACION
   {
     name: 'cursos',
-    path: '/cursos/show/:id/',
+    path: '/cursos/show/:id/:catid',
     componentUrl: './pages/cursos/show.html',
   },
   // Pages EVALUACION FINAL

@@ -19,7 +19,7 @@
            {
 
               let id = app.views.main.router.currentRoute.params.id;
-              let catId = app.views.main.router.currentRoute.params.catId;
+              let catId = app.views.main.router.currentRoute.params.catid;
               let user_id = localStorage.getItem("id");
                $("#backButton").append('<div class="navbar-inner">' +
                    '<div class="left">' +
@@ -32,7 +32,6 @@
                //course_show.json
                app.request.get(cordova.file.externalRootDirectory + '/jsons/course_show.json', function (data) {
                    const courses_show = JSON.parse(data);
-                   console.log("COURSES SHOW   " + data)
 
                    if (courses_show.length !== 0)
                    {
