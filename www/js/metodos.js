@@ -2064,11 +2064,15 @@ function enviarEvaluacionFinal(){
                                                                     tx2.executeSql("UPDATE register_final SET status = ?, bandera = ? WHERE fecha = ? AND user_id = ?",
                                                                     [2, 2, dateNow, user_id],
                                                                     function(tx,resultsB){
-                                                                    Swal.fire(
-                                                                        'Enviado!',
-                                                                        'La evaluacion fue enviada.',
-                                                                        'success'
-                                                                    );
+                                                                        tx2.executeSql("DELETE FROM answer_question_final WHERE user_id = ? AND bandera = ?",
+                                                                            [user_id, 2],
+                                                                            function(txx, resutlsZ){
+                                                                                Swal.fire(
+                                                                                    'Enviado!',
+                                                                                    'La evaluacion fue enviada.',
+                                                                                    'success'
+                                                                                );
+                                                                            });
                                                                     // updateStatusCourse();
 
                                                                     regresar();
