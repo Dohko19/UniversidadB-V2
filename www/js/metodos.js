@@ -2020,6 +2020,7 @@ function enviarEvaluacionFinal(){
                                 url: "http://serviciosbennetts.com/universidadBennetts/storeFinalEvaluation.php",
                                 data: { 'arrayF': JSON.stringify(answersFinalArray) },
                                 success: function(respuesta) {
+                                    console.log(respuesta)
                                     var respu1 = respuesta.split("._.");
                                     var dat1 = respu1[0];
                                     var dat2 = respu1[1];
@@ -2057,9 +2058,12 @@ function enviarEvaluacionFinal(){
                                                         }).then((result) => {
                                                             /* Read more about handling dismissals below */
                                                             if (result.dismiss === Swal.DismissReason.timer) {
-                                                                tx1.executeSql("UPDATE register_final SET status = ?, bandera = ? WHERE fecha = ? AND user_id = ?",
+
+                                                                databaseHandler.db.transaction(
+                                                                    function (tx2) {
+                                                                    tx2.executeSql("UPDATE register_final SET status = ?, bandera = ? WHERE fecha = ? AND user_id = ?",
                                                                     [2, 2, dateNow, user_id],
-                                                                function(tx,resultsB){
+                                                                    function(tx,resultsB){
                                                                     Swal.fire(
                                                                         'Enviado!',
                                                                         'La evaluacion fue enviada.',
@@ -2068,10 +2072,8 @@ function enviarEvaluacionFinal(){
                                                                     // updateStatusCourse();
 
                                                                     regresar();
-                                                                }
-                                                                )
-
-
+                                                                    })
+                                                                })
                                                             }
                                                         }) //END SWAL FIRE
                                                             .catch((err) => {
@@ -2087,12 +2089,10 @@ function enviarEvaluacionFinal(){
                                                 app.preloader.hide();
                                                 Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
 
-                                            },
-                                            function () {
                                             });
-                                            }else {Swal.fire('Error al Guardar!', dat3, 'warning')}
-                                        }else {Swal.fire('Error al Guardar!', dat2, 'warning')}
-                                    }else {Swal.fire('Error al Guardar!', dat1, 'warning')}
+                                            }else {Swal.fire('Error al Guardar3!', dat3, 'warning')}
+                                        }else {Swal.fire('Error al Guardar2!', dat2, 'warning')}
+                                    }else {Swal.fire('Error al Guardar1!', dat1, 'warning')}
 
                                 },
                                 error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -118,12 +118,17 @@
         margin-top: 12px;
     }
     .uniBack{
-        background-image: url("img/logouniOdo.png");
+        background-image: url("img/logouni.png");
         background-position: center;
         background-repeat: no-repeat;
         background-blend-mode: lighten;
         /* Full height */
         background-size:100% 100%;
+        width: 78%;
+        height: 107px;
+        margin-left: 40px;
+        margin-right: 20px;
+        margin-top: 16px;;
     }
 </style>
 </head>
@@ -147,19 +152,21 @@
             </ul>
             </div>
             <br> <br> <br>
-            <center>
-                <span style="color: black; font-size: 15px; font-weight: bold">Bienvenido</span><br>
-                <span id="NombreUsuario" name="NombreUsuario" style="color: black; font-size: 15px; font-weight: bold"></span><br>
-                <span style="color: #a1a1a1;">Rol</span><br>
-                <span id="RoleName" name="RoleName" style="color: #a1a1a1; font-weight: bold;"></span>
-            </center>
+            <div class="">
+                <center>
+                    <span style="color: black; font-size: 15px; font-weight: bold">Bienvenido</span><br>
+                    <span id="NombreUsuario" name="NombreUsuario" style="color: black; font-size: 15px; font-weight: bold"></span><br>
+                    <span style="color: #a1a1a1;">Rol</span><br>
+                    <span id="RoleName" name="RoleName" style="color: #a1a1a1; font-weight: bold;"></span>
+                </center>
+            </div>
         </div>
       </div>
     </div>
     <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="800" data-url="/">
       <div class="page">
         <div class="navbar">
-         <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
+         <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="65px"  alt="logo-Uni"/></div>
           <div class="navbar-inner">
             <div class="left">
               <a href="#" class="link icon-only panel-open" data-panel="left">
@@ -179,18 +186,9 @@
                 <div class="ptr-arrow"></div>
             </div>
       <div>
-                    <div class="block" id="messageWelcome">
-                        <center>
-                            <div id="welcome" style="color: red; font-size: 17px; font-weight: bold"></div>
-                            <center>
-                                <span style="color:gray; font-size: 12px; text-align: right; font-weight: bold;">Ultima actualizacion de datos: </span>
-                                <br>
-                                <span id="Fecha" name="Fecha" style="color: red; font-weight: bold; font-size: 14px; text-align: right; ">Sus datos no estan actualizados</span>
-                            </center>
-                        </center>
-                    </div>
-                    <div id="circleProgressBar" class="block block-strong">
-                        <div class="uniBack">
+                    <div class="uniBack"></div>
+                    <div id="circleProgressBar" class="block">
+                        <div class="">
     <!--                        <div class="col text-align-center">-->
     <!--                            <div id="values"></div>-->
     <!--                        </div>-->
@@ -208,8 +206,17 @@
                             </center>
                         </div>
                     </div>
+                      <div class="block" id="messageWelcome">
+                          <center>
+                              <div id="welcome" style="color: #ff0101; font-size: 17px; font-weight: bold"></div>
+                              <center>
+                                  <span style="color:gray; font-size: 12px; text-align: right; font-weight: bold;">Ultima actualizacion de datos: </span>
+                                  <br>
+                                  <span id="Fecha" name="Fecha" style="color: red; font-weight: bold; font-size: 14px; text-align: right; ">Sus datos no estan actualizados</span>
+                              </center>
+                          </center>
+                      </div>
                     <div class="block" id="menuPrincipal">
-
                         <p>Listado de Cursos</p>
                         <p class="row">
                             <a href="/Induccion/1" class="col button button-large button-raised button-fill">Induccion</a>
