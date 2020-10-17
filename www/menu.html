@@ -713,7 +713,7 @@
           app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se descargaran los datos.', 'Alerta!');
         }
     $(document).ready(function(){
-        app.dialog.preloader('Cargando...');
+        // app.dialog.preloader('Cargando...');
 
 
     function onOnline() {
@@ -813,7 +813,7 @@
 
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
             const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
-            const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
+            // const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
             // alert(response2.data)
             // alert(response3.data)
             // const response3 = 40;
@@ -824,44 +824,49 @@
             //     $("#getCertificado").hide();
             //
             // }
-            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
 
-            if(response3.data == 'INF')
-            {
-                var p3 = 0.0;
-            }
-            else{
-                var p3 = response3.data;
-
-            }
+            // if(response3.data == 'INF')
+            // {
+            //     var p3 = 0.0;
+            // }
+            // else{
+            //     var p3 = response3.data;
+            //
+            // }
             if(response2.data == 'INF')
             {
                 var p2 = 0.0
             }
             else{
                 var p2 = response2.data;
-
             }
 
-            var totalBar = p2 + p3;
-            let dataBarTotal = totalBar / 100;
-            let dataBarTotalW = p2 + p3;
+            // var totalBar = p2 + p3;
+            let dataBarTotal = response2.data / 100;
+            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
 
-            if (response2.data >= 40)
+            // let dataBarTotalW = p2 + p3;
+
+            if (response2.data >= 80)
             {
-                $("#finalQuestions").show();
+                // $("#finalQuestions").show();
                 // updateStatusCourse()
-            }else{
-                $("#finalQuestions").hide();
-            }
-
-            if (dataBarTotalW >= 80)
-            {
                 $("#finalQuestions").hide();
                 $("#getCertificado").show()
+
             }else{
+                $("#finalQuestions").hide();
+                // $("#finalQuestions").show();
                 $("#getCertificado").hide()
             }
+
+            // if (dataBarTotalW >= 80)
+            // {
+            //     $("#finalQuestions").hide();
+            //     $("#getCertificado").show()
+            // }else{
+            //     $("#getCertificado").hide()
+            // }
 
             $("#demo").circleProgress({
                 value: dataBar,
@@ -883,14 +888,14 @@
                 },
                 emptyFill: "#929292",
                 fill: {
-                    gradient: ['#92f533','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+                    gradient: ['#64b519','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
                 },
             }).on('circle-animation-progress', function(event, progress) {
-                $(this).find('strong').html(dataBarTotalW+'%');
+                $(this).find('strong').html(p2+'%');
             });
-
         } catch (error) {
             console.error(error);
+            Swal.fire('Warning', 'Ocurrio un error al obtener los datos'+error,'warning')
         }
     }
     waitBar();

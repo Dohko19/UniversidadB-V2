@@ -34,19 +34,23 @@
 
                             if(courses[i].category_id == catId)
                             {
-                                $("#Listado").append(
-                                    '<div class="card item-content">'+
-                                    '<div class="card-header item-inner" style="text-shadow:  1px 1px">'+ courses[i].name +
-                                    '<div class="item-after" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
-                                    '</div>'+
-                                    '<div class="card-content card-content-padding">'+
-                                    '<p class="date small">'+ courses[i].description +'</p>' +
+                                $("#Listado").append('<div class="card">' +
+                                    '<div class="card-header">' +
+                                    '<b>'+
+                                    courses[i].name+
+                                    '</b>'+
                                     '</div>' +
-                                    '<a href="/cursos/show/'+courses[i].idCourse+'/'+catId+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;">Ingresar al Curso</div></a>' +
-                                    '<div class="progressbar" data-progress="100">'+
-                                    '<span><br></span>'+
-                                    '</div></div>'
-                                );
+                                    ' <a href="#" onclick="Verificar('+courses[i].idCourse+', '+catId+')"' +
+                                    '>' +
+                                    '<div class="card-footer" style="background-color: #1b89fd; color:white;" class="card-footer">'+
+                                    '<div class="demo-facebook-date" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
+                                    '<div id="linkToC'+ courses[i].idCourse +'"' +
+                                    '>' +
+                                    '<span style="color:white;" class="col-50">Iniciar Curso</span>' +
+                                    '</div>' +
+                                    '</div>'+
+                                    '</a>' +
+                                    '</div>');
 
                                 checkIfCoursesComplete(courses[i].idCourse);
 
@@ -91,5 +95,12 @@
     }
     .demo-card-header-pic .card-content-padding .date{
         color: #8e8e93;
+    }
+</style>
+<style>
+    .shadow-card{
+        -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+        -moz-box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+        box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
     }
 </style>

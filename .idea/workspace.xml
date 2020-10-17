@@ -79,7 +79,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WMC4Suro" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -141,6 +141,10 @@
       <workItem from="1602207989152" duration="46282000" />
       <workItem from="1602299944693" duration="41846000" />
       <workItem from="1602512640723" duration="8461000" />
+      <workItem from="1602772367004" duration="14130000" />
+      <workItem from="1602797945130" duration="4520000" />
+      <workItem from="1602855318042" duration="13045000" />
+      <workItem from="1602944244348" duration="11456000" />
     </task>
     <servers />
   </component>
@@ -203,25 +207,28 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="445" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1602280076208" />
-    <state x="464" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601403295007">
+    <state x="464" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602794683996">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="464" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601403295007" />
+    <state x="464" y="274" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1602794683996" />
     <state x="367" y="47" width="743" height="658" key="find.popup" timestamp="1600360828545">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="367" y="47" width="743" height="658" key="find.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600360828545" />
-    <state x="382" y="183" key="run.anything.popup" timestamp="1602266856229">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="340" y="162" key="run.anything.popup" timestamp="1602948830358">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="338" y="162" key="run.anything.popup/0.0.1360.728@0.0.1360.728" timestamp="1601570879516" />
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601326899725" />
+    <state x="340" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1602948830358" />
     <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602266856229" />
-    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup" timestamp="1602446800565">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="346" y="49" width="673" height="679" key="search.everywhere.popup" timestamp="1602948374772">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602196424622" />
+    <state x="346" y="49" width="673" height="679" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602948374772" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601949365558" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602446800565" />
   </component>

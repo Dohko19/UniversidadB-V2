@@ -1654,7 +1654,6 @@ function checkIfCoursesComplete(course_id){
 
     const date = new Date();
     const dayOff = offDays(date, 0);
-
     databaseHandler.db.transaction(
         function (tx1) {
             tx1.executeSql("SELECT course_id, dateF, finish FROM courses_finish WHERE course_id = ?", //
@@ -1671,31 +1670,86 @@ function checkIfCoursesComplete(course_id){
                         if ( status == 1 ){
                             $("#linkToC"+id_curso).hide();
                             $("#terminadoCourse"+id_curso).show();
+                            app.preloader.hide();
                         }
                         else{
-                            // $("#linkToC"+course_id).show();
-                            // $("#terminadoCourse"+course_id).hide();
+                            $("#linkToC"+course_id).show();
+                            $("#terminadoCourse"+course_id).hide();
+                            app.preloader.hide();
+
                         }
                     }
                     else {
                         // $("#linkToC"+course_id).show();
                         $("#terminadoCourse"+course_id).hide();
-                    }
+                        app.preloader.hide();
 
+                    }
                 })
-            let timerInterval
 
         },
         function (error) {
             console.log("add client error: " + error.message);
             app.dialog.alert('Error al insertar registro.  in checkIfCoursesComplete', 'Error');
             app.preloader.hide();
-        },
-        function () {
         }
     );
 }
 
+function checkAR(course_id){
+    const date = new Date();
+    const dayOff = offDays(date, 0);
+    databaseHandler.db.transaction(
+        function (tx1) {
+            tx1.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ? AND register.dateF = ?",
+                [course_id, dayOff],
+                function (tx1, res) {
+                    var long = res.rows.length;
+                    const answers = [];
+                    if (long > 0) {
+                        for (var z = 0; z < long; z++) {
+                            var item = res.rows.item(z);
+                            var id_curso = item.course_id
+                           var total = answers.push(item.answer);
+                        }
+                        if (total > 0){
+                            // let sum = answers.reduce((previous, current) => current += previous);
+                            // let avg = sum / answers.length;
+                            if(answers == 3 || answers == 4){
+                                let total = answers.length - 1;
+                                if (total == 2){
+                                    $("#Aprobado"+course_id).show();
+                                    $("#NoAprobado"+course_id).hide();
+                                }else{
+                                    $("#Aprobado"+course_id).hide();
+                                    $("#NoAprobado"+course_id).show();
+                                }
+                            }else if(answers == 5){
+                                let total = answers.length - 2;
+                                if (total == 3){
+                                    $("#Aprobado"+course_id).show();
+                                    $("#NoAprobado"+course_id).hide();
+                                }else{
+                                    $("#Aprobado"+course_id).hide();
+                                    $("#NoAprobado"+course_id).show();
+                                }
+                            }else{
+                                let total = answers.length - 3;
+                            }
+
+                        }
+                    }else{
+
+                    }
+                })
+        },
+        function (error) {
+            console.log("add client error: " + error.message);
+            app.dialog.alert('Error el verficar datos A R', 'Error');
+            app.preloader.hide();
+        }
+    )
+}
 function checkEvaluacionFinal()
 {
     var user_id = localStorage.getItem('id');
@@ -2148,12 +2202,6 @@ function checkConnection() {
 
 
 function Verificar(idCourse, catId){
-
-    //validar sitiene internesss
-    //verga como lo metemos aca XD esa wea no puedes escuchar cuando cambia> hay documentacion para eso? alch no se XD jajajajaja amos a comer ahoritaa vemos xdo checamos bien no? ssee
-    //eh?si we hya q ver q pex pero amos a comer o q?
-    ///si we vamso a comer y ahorita en una hora le seguimos dando ;) va provecho we
-
         // Handle the online event
         var networkState = navigator.connection.type;
 

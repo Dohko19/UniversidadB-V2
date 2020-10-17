@@ -5,7 +5,7 @@
             <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
             <div class="navbar-inner">
                 <div class="left">
-                    <a onclick="regresar()"  class="back">
+                    <a onclick="regresar()" class="back">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md"></span>
                     </a>
@@ -13,83 +13,115 @@
             </div>
         </div>
         <div class="page-content">
-            <div class="row">
-                <div id="Listado"></div>
+            <div class="">
+                <div id="Listado" style="width: 100%;"></div>
             </div>
+            <script>
+                return {
+                    on: {
+                        pageInit: function(e, page)
+                        {
+
+                            let catId = app.views.main.router.currentRoute.params.id;
+                            app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
+                                const courses = JSON.parse(data);
+                                console.log(courses);
+                                if (courses.length !== 0)
+                                {
+                                    for (var i = 0; i < courses.length; i++) {
+
+                                        if(courses[i].category_id == catId)
+                                        {
+                                            // $("#Listado").append('<div class="card">' +
+                                            //     '<div class="card-header" style="background-color: #1b89fd; color:white;">' +
+                                            //     '<b>'+
+                                            //     courses[i].name+
+                                            //     '</b>'+
+                                            //     '</div>' +
+                                            //     ' <a href="#" class="button" onclick="Verificar('+courses[i].idCourse+', '+catId+')"' +
+                                            //     '>' +
+                                            //     '<div class="card-footer" style="background-color: #a1d7ff; color:white;" class="card-footer">'+
+                                            //     '<div class="" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
+                                            //     '<div id="linkToC'+ courses[i].idCourse +'"' +
+                                            //     '>' +
+                                            //     '<span style="color:white;" class="col-50">Iniciar Curso</span>' +
+                                            //     '</div>' +
+                                            //     '</div>'+
+                                            //     '</a>' +
+                                            $("#Listado").append(''+
+                                                '<div class="card shadow-card padding-bottom margin-bottom">' +
+                                                '  <div class="card-header">Curso:' +
+                                                '<div class="chip color-orange" id="terminadoCourse'+ courses[i].idCourse +'">' +
+                                                '    <div class="chip-label">Terminado</div>' +
+                                                '</div>' +
+                                                '<div class="chip color-red">' +
+                                                '    <div class="chip-label">No aprobado</div>' +
+                                                '</div>' +
+                                                '<div class="chip color-green">' +
+                                                '    <div class="chip-label">Aprobado</div>' +
+                                                '  </div>' +
+                                                '</div>' +
+                                                '  <div class="card-content">' +
+                                                '   <div class="list media-list">' +
+                                                '      <ul>' +
+                                                '        <li class="item-content">' +
+                                                '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
+                                                '          <div class="item-inner">' +
+                                                '            <div class="item-title-row">' +
+                                                '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
+                                                '            </div>' +
+                                                '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
+                                                '          </div>' +
+                                                '        </li>'+
+                                                '      </ul>' +
+                                                '    </div>' +
+                                                '  </div>' +
+                                                '<div align="right">'+
+                                                '<a onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                                                '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
+                                                '</div>'+
+                                                '</div>');
+                                            checkIfCoursesComplete(courses[i].idCourse);
+
+                                        }
+                                    }
+
+                                    //     '</div>');
+                                }
+                            });
+                            // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/courses/index.php', {catId: 2})
+                            //     .then(function (res) {
+                            //         let content = JSON.parse(res);
+                            //         var valor = '';
+                            //         content.forEach(data => {
+                            //             valor += '<div class="card">'+
+                            //                 '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ data.name +'</div>'+
+                            //                 '<div class="card-content card-content-padding">'+
+                            //                 '<p class="date small">'+ data.description +'</p>' +
+                            //                 '</div>' +
+                            //                 '<div class="card-footer"><a href="/cursos/show/'+ data.id +'" class="link">Ingresar al Curso</a></div>' +
+                            //                 '<div class="progressbar" data-progress="100">'+
+                            //                 ' <span></span>'+
+                            //                 '</div></div>'
+                            //         });
+                            //         $("#Listado").html(valor);
+                            //     })
+                            //     .catch(function (err) {
+                            //         console.log(err.xhr)
+                            //         console.log(err.status)
+                            //         console.log(err.message)
+                            //     });
+                        }
+                    }
+                }
+            </script>
         </div>
     </div>
 </template>
-<script>
-    return {
-        on: {
-            pageInit: function(e, page)
-            {
-                let catId = app.views.main.router.currentRoute.params.id;
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
-                    const courses = JSON.parse(data);
-                    console.log(courses);
-                    if (courses.length !== 0)
-                    {
-                        for (var i = 0; i < courses.length; i++) {
-
-                            if(courses[i].category_id == catId)
-                            {
-                                $("#Listado").append(
-                                    '<div class="card item-content">'+
-                                    '<div class="card-header item-inner" style="text-shadow:  1px 1px">'+ courses[i].name +
-                                    '<div class="item-after" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
-                                    '</div>'+
-                                    '<div class="card-content card-content-padding">'+
-                                    '<p class="date small">'+ courses[i].description +'</p>' +
-                                    '</div>' +
-                                    '<a href="/cursos/show/'+courses[i].idCourse+'/'+catId+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;">Ingresar al Curso</div></a>' +
-                                    '<div class="progressbar" data-progress="100">'+
-                                    '<span><br></span>'+
-                                    '</div></div>'
-                                );
-
-                                checkIfCoursesComplete(courses[i].idCourse);
-
-                            }
-
-                        }
-                    }
-                });
-                // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/courses/index.php', {catId: 2})
-                //     .then(function (res) {
-                //         let content = JSON.parse(res);
-                //         var valor = '';
-                //         content.forEach(data => {
-                //             valor += '<div class="card">'+
-                //                 '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ data.name +'</div>'+
-                //                 '<div class="card-content card-content-padding">'+
-                //                 '<p class="date small">'+ data.description +'</p>' +
-                //                 '</div>' +
-                //                 '<div class="card-footer"><a href="/cursos/show/'+ data.id +'" class="link">Ingresar al Curso</a></div>' +
-                //                 '<div class="progressbar" data-progress="100">'+
-                //                 ' <span></span>'+
-                //                 '</div></div>'
-                //         });
-                //         $("#Listado").html(valor);
-                //     })
-                //     .catch(function (err) {
-                //         console.log(err.xhr)
-                //         console.log(err.status)
-                //         console.log(err.message)
-                //     });
-            }
-        }
-    }
-</script>
-
 <style>
-    .demo-card-header-pic .card-header {
-        height: 40vw;
-        background-size: cover;
-        background-position: center;
-        color: #fff;
-    }
-    .demo-card-header-pic .card-content-padding .date{
-        color: #8e8e93;
+    .shadow-card{
+        -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+        -moz-box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+        box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
     }
 </style>

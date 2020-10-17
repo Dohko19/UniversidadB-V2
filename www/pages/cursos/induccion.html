@@ -15,7 +15,7 @@
            <div class="page-content">
               <div class="row">
                 <div id="Listado"></div>
-           </div>
+              </div>
         </div>
        </div>
 </template>
@@ -36,19 +36,39 @@
 
                       if(courses[i].category_id == catId)
                       {
-                        $("#Listado").append(
-                            '<div class="card item-content">'+
-                            '<div class="card-header item-inner" style="text-shadow:  1px 1px">'+ courses[i].name +
-                            '<div class="item-after" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
-                            '</div>'+
-                            '<div class="card-content card-content-padding">'+
-                            '<p class="date small">'+ courses[i].description +'</p>' +
-                            '</div>' +
-                            '<a href="/cursos/show/'+courses[i].idCourse+'/'+catId+'" class="link" ><div class="card-footer" id="linkToC'+ courses[i].idCourse +'" style="color: deepskyblue;"> Ingresar al Curso</div></a>' +
-                            '<div class="progressbar" data-progress="100">'+
-                            '<span><br></span>'+
-                            '</div></div>'
-                        );
+                          $("#Listado").append(''+
+                              '<div class="card shadow-card padding-bottom margin-bottom">' +
+                              '  <div class="card-header">Curso:' +
+                              '<div class="chip color-orange" id="terminadoCourse'+ courses[i].idCourse +'">' +
+                              '    <div class="chip-label">Terminado</div>' +
+                              '</div>' +
+                              '<div class="chip color-red">' +
+                              '    <div class="chip-label">No aprobado</div>' +
+                              '</div>' +
+                              '<div class="chip color-green">' +
+                              '    <div class="chip-label">Aprobado</div>' +
+                              '  </div>' +
+                              '</div>' +
+                              '  <div class="card-content">' +
+                              '   <div class="list media-list">' +
+                              '      <ul>' +
+                              '        <li class="item-content">' +
+                              '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
+                              '          <div class="item-inner">' +
+                              '            <div class="item-title-row">' +
+                              '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
+                              '            </div>' +
+                              '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
+                              '          </div>' +
+                              '        </li>'+
+                              '      </ul>' +
+                              '    </div>' +
+                              '  </div>' +
+                              '<div align="right">'+
+                              '<a onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                              '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
+                              '</div>'+
+                              '</div>');
 
                           checkIfCoursesComplete(courses[i].idCourse);
 
