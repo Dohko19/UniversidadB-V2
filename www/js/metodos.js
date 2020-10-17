@@ -1713,10 +1713,9 @@ function checkAR(course_id){
                            var total = answers.push(item.answer);
                         }
                         if (total > 0){
-                            // let sum = answers.reduce((previous, current) => current += previous);
-                            // let avg = sum / answers.length;
-                            if(answers == 3 || answers == 4){
-                                let total = answers.length - 1;
+                            if(total == 3 || total == 4){
+                                let sum = answers.reduce((previous, current) => current += previous);
+                                let avg = sum / answers.length;
                                 if (total == 2){
                                     $("#Aprobado"+course_id).show();
                                     $("#NoAprobado"+course_id).hide();
@@ -1724,7 +1723,7 @@ function checkAR(course_id){
                                     $("#Aprobado"+course_id).hide();
                                     $("#NoAprobado"+course_id).show();
                                 }
-                            }else if(answers == 5){
+                            }else if(total == 5){
                                 let total = answers.length - 2;
                                 if (total == 3){
                                     $("#Aprobado"+course_id).show();
