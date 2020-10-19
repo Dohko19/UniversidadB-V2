@@ -34,25 +34,35 @@
 
                             if(courses[i].category_id == catId)
                             {
-                                $("#Listado").append('<div class="card">' +
-                                    '<div class="card-header">' +
-                                    '<b>'+
-                                    courses[i].name+
-                                    '</b>'+
+                                $("#Listado").append(''+
+                                    '<div class="card shadow-card padding-bottom margin-bottom">' +
+                                    '  <div class="card-header">Curso:' +
+                                    '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
+                                    '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
                                     '</div>' +
-                                    ' <a href="#" onclick="Verificar('+courses[i].idCourse+', '+catId+')"' +
-                                    '>' +
-                                    '<div class="card-footer" style="background-color: #1b89fd; color:white;" class="card-footer">'+
-                                    '<div class="demo-facebook-date" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
-                                    '<div id="linkToC'+ courses[i].idCourse +'"' +
-                                    '>' +
-                                    '<span style="color:white;" class="col-50">Iniciar Curso</span>' +
-                                    '</div>' +
+                                    '  <div class="card-content">' +
+                                    '   <div class="list media-list">' +
+                                    '      <ul>' +
+                                    '        <li class="item-content">' +
+                                    '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
+                                    '          <div class="item-inner">' +
+                                    '            <div class="item-title-row">' +
+                                    '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
+                                    '            </div>' +
+                                    '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
+                                    '          </div>' +
+                                    '        </li>'+
+                                    '      </ul>' +
+                                    '    </div>' +
+                                    '  </div>' +
+                                    '<div align="right" id="linkToC'+ courses[i].idCourse +'">'+
+                                    '<a onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                                    '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
                                     '</div>'+
-                                    '</a>' +
                                     '</div>');
-
                                 checkIfCoursesComplete(courses[i].idCourse);
+                                checkAR(courses[i].idCourse);
 
                             }
 

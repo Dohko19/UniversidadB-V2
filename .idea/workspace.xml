@@ -24,28 +24,18 @@
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/Induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/Induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/evaluacionFinal.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/evaluacionFinal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/Induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/Induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages/evaluacionFinal.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/evaluacionFinal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +135,7 @@
       <workItem from="1602797945130" duration="4520000" />
       <workItem from="1602855318042" duration="13045000" />
       <workItem from="1602944244348" duration="12398000" />
+      <workItem from="1603122933693" duration="10506000" />
     </task>
     <servers />
   </component>

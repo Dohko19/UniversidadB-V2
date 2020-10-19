@@ -1667,22 +1667,19 @@ function checkIfCoursesComplete(course_id){
                             status = resultsA.rows.item(i).finish;
                             finiDate = resultsA.rows.item(i).dateF;
                         }
-                        if ( status == 1 ){
+                        if ( status == 1 && finiDate == dayOff){
                             $("#linkToC"+id_curso).hide();
                             $("#terminadoCourse"+id_curso).show();
-                            app.preloader.hide();
                         }
                         else{
                             $("#linkToC"+course_id).show();
                             $("#terminadoCourse"+course_id).hide();
-                            app.preloader.hide();
 
                         }
                     }
                     else {
-                        // $("#linkToC"+course_id).show();
+                        $("#linkToC"+course_id).show();
                         $("#terminadoCourse"+course_id).hide();
-                        app.preloader.hide();
 
                     }
                 })
@@ -1705,19 +1702,71 @@ function checkAR(course_id){
                 [course_id, dayOff],
                 function (tx1, res) {
                     var long = res.rows.length;
-                    const answers = [];
+                    var answers = [];
+                    var repetidos = {};
                     if (long > 0) {
                         for (var z = 0; z < long; z++) {
                             var item = res.rows.item(z);
+                            var id_curso = item.course_id
                            var total = answers.push(item.answer);
                         }
                         if (total > 0){
-                            let sum = answers.reduce((previous, current) => current += previous);
-                            let avg = sum / answers.length;
-                            console.log(avg)
+                            // console.log(sum);
+                            // console.log(sum[0]); // respuestas con 0 fallidas
+                            // console.log(sum[1]); // Respuesta con 1 acertadas
+                            if(total == 3 || total == 4){
+
+                                var sum = answers.reduce((contador, valor) => {
+                                    contador[valor] = (contador[valor] || 0) + 1;
+                                    return contador;
+                                },{});
+
+                                var avg = (sum[1] * 100)/ answers.length;
+
+                                if (avg >= 65){
+                                    $("#Aprobado"+course_id).show();
+                                    $("#NoAprobado"+course_id).hide();
+                                }else{
+                                    $("#Aprobado"+course_id).hide();
+                                    $("#NoAprobado"+course_id).show();
+                                }
+                            }else if(total == 5){
+                                var sum = answers.reduce((contador, valor) => {
+                                    contador[valor] = (contador[valor] || 0) + 1;
+                                    return contador;
+                                },{});
+
+                                var avg = (sum[1] * 100)/ answers.length;
+                                if (avg >= 60){
+                                    $("#Aprobado"+course_id).show();
+                                    $("#NoAprobado"+course_id).hide();
+                                }else{
+                                    $("#Aprobado"+course_id).hide();
+                                    $("#NoAprobado"+course_id).show();
+                                }
+                            }else{
+                                var sum = answers.reduce((contador, valor) => {
+                                    contador[valor] = (contador[valor] || 0) + 1;
+                                    return contador;
+                                },{});
+
+                                var avg = (sum[1] * 100)/ answers.length;
+                                if (avg >= 65){
+                                    $("#Aprobado"+course_id).show();
+                                    $("#NoAprobado"+course_id).hide();
+                                }else{
+                                    $("#Aprobado"+course_id).hide();
+                                    $("#NoAprobado"+course_id).show();
+                                }
+                            }
+                        }
+                        else{
+                            $("#Aprobado"+course_id).hide();
+                            $("#NoAprobado"+course_id).hide();
                         }
                     }else{
-
+                        $("#Aprobado"+course_id).hide();
+                        $("#NoAprobado"+course_id).hide();
                     }
                 })
         },

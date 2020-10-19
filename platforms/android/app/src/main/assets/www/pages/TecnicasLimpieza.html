@@ -32,15 +32,9 @@
                                 $("#Listado").append(''+
                                     '<div class="card shadow-card padding-bottom margin-bottom">' +
                                     '  <div class="card-header">Curso:' +
-                                    '<div class="chip color-orange" id="terminadoCourse'+ courses[i].idCourse +'">' +
-                                    '    <div class="chip-label">Terminado</div>' +
-                                    '</div>' +
-                                    '<div class="chip color-red">' +
-                                    '    <div class="chip-label">No aprobado</div>' +
-                                    '</div>' +
-                                    '<div class="chip color-green">' +
-                                    '    <div class="chip-label">Aprobado</div>' +
-                                    '  </div>' +
+                                    '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
+                                    '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
                                     '</div>' +
                                     '  <div class="card-content">' +
                                     '   <div class="list media-list">' +
