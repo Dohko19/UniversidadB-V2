@@ -910,6 +910,8 @@ function learn(id)
             toastTop.open();
             var inp = $("#complete"+id);
             inp.attr("disabled", !inp.prop('disabled'));
+            $("#questionaire").show();
+            $("#nota").hide();
             // document.getElementById("showQuests").style.display = "block";
         })
         .catch(function (err) {
@@ -935,13 +937,13 @@ function learn(id)
 
 
 //-----------------------------------------------------------
-function registerQuest(lesson_id, courseid){
+function registerQuest(lesson_id, course_id){
 
     var now = new Date();
     var idCuestionario = localStorage.getItem('idCuestionario');
 
-    var user_id = localStorage.getItem("id")
-    var idCurso = courseid;
+    var user_id = localStorage.getItem("id");
+    var idCurso = course_id;
     var fecha = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     var fechaF = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
 
@@ -1056,7 +1058,7 @@ function registerQuest(lesson_id, courseid){
                     }
                     else {
                         tx1.executeSql("INSERT INTO register(idUser, status, lesson_id, course_id,  created_at, dateF ) VALUES (?,?,?,?,?,?)",
-                            [user_id, 0, lesson_id, courseid, fecha, fechaF],
+                            [user_id, 0, lesson_id, idCurso, fecha, fechaF],
                             function (tx1, results) {
                                 databaseHandler.db.transaction(
                                     function (tx) {
@@ -1225,225 +1227,254 @@ function EnviarCuestionario(course_id, catId){
     var courseID = course_id;
     const dateNow = new Date();
     const now = offDays(dateNow, 0);
-    Swal.fire({
-        title: '¿Estas seguro de enviar el cuestionario?',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: `Enviar`,
-        denyButtonText: `No enviar`,
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+    var networkState = navigator.connection.type;
 
-        if (result.isConfirmed) {
-            $("#Questions").hide();
-            $("#primary-title").hide();
-            $("#enviarCuestionario").hide();
+    if (networkState !== Connection.NONE) {
+        Swal.fire({
+            title: '¿Estas seguro de enviar el cuestionario?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: `Enviar`,
+            denyButtonText: `No enviar`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $("#Questions").hide();
+                $("#primary-title").hide();
+                $("#enviarCuestionario").hide();
 
-            $("#success").append('<div style="background-color: green;"><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
-            databaseHandler.db.transaction(
-                function (tx1) {
-                    tx1.executeSql("UPDATE register SET status = 1 WHERE idCuestionario = ?",
-                        [idCuestionario],
-                        function (tx, resultsAZ) {
-                            databaseHandler.db.transaction(
-                                function (tx1) {
-                                    tx1.executeSql("SELECT * FROM answer_user as r WHERE idCuestionario = ?",
-                                        [idCuestionario],
-                                        function (tx, resultsA) {
-                                            var length = resultsA.rows.length;
+                $("#success").append('<div style="background-color: green;"><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
+                databaseHandler.db.transaction(
+                    function (tx1) {
+                        tx1.executeSql("UPDATE register SET status = 1 WHERE idCuestionario = ?",
+                            [idCuestionario],
+                            function (tx, resultsAZ) {
+                                databaseHandler.db.transaction(
+                                    function (tx1) {
+                                        tx1.executeSql("SELECT * FROM answer_user as r WHERE idCuestionario = ?",
+                                            [idCuestionario],
+                                            function (tx, resultsA) {
+                                                var length = resultsA.rows.length;
 
-                                            for(var i = 0; i< length; i++) {
-                                                var item4 = resultsA.rows.item(i);
-                                                answersArray[a] = {'valor:': a, 'question_id': item4.question_id, 'user_id': item4.user_id, 'answer': item4.answer, 'answer_id': item4.answer_id, 'created_at': item4.created_at, 'updated_at': item4.updated_at, 'dateF': item4.dateF};
-                                                a++;
-                                            }
-                                            // console.log(JSON.stringify(answersArray));
-
-                                            $.ajax({
-                                                type: "POST",
-                                                async: true,
-                                                url: "http://serviciosbennetts.com/universidadBennetts/questionaires/store.php",
-                                                data: { 'arrayAQ': JSON.stringify(answersArray) },
-                                                success: function(respuesta) {
-                                                    console.log(respuesta);
-                                                    var respu1 = respuesta.split("._.");
-                                                    var dat1 = respu1[0];
-                                                    var dat2 = respu1[1];
-                                                    var dat3 = respu1[2];
-
-                                                    if(dat1 == "REPORTE"){ //El texto que se ocncateno
-                                                        if(dat2 > 0){ // Ultimo Id Insrtado o consultado
-
-                                                            if(dat3){
-
-                                                                databaseHandler.db.transaction(
-                                                                    function(tx7){
-                                                                        tx7.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
-                                                                            [idCuestionario],
-                                                                            function(tx7, results){
-                                                                                databaseHandler.db.transaction(
-                                                                                    function (tx1) {
-                                                                                        // PERFECTO AMIGO ESTE MISMO ESTATTUS VA A SER ESTE MIRA
-                                                                                        tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
-                                                                                            [idCuestionario],
-                                                                                            function (tx, resultsA) {
-                                                                                                let timerInterval
-                                                                                                Swal.fire({
-                                                                                                    title: 'Aviso:!',
-                                                                                                    html: 'Guardando <b></b>',
-                                                                                                    timer: 2000,
-                                                                                                    timerProgressBar: true,
-                                                                                                    willOpen: () => {
-                                                                                                        Swal.showLoading()
-                                                                                                        timerInterval = setInterval(() => {
-                                                                                                            const content = Swal.getContent()
-                                                                                                            if (content) {
-                                                                                                                const b = content.querySelector('b')
-                                                                                                                if (b) {
-                                                                                                                    b.textContent = Swal.getTimerLeft()
-                                                                                                                }
-                                                                                                            }
-                                                                                                        }, 100)
-                                                                                                    },
-                                                                                                    willClose: () => {
-                                                                                                        clearInterval(timerInterval)
-                                                                                                    }
-                                                                                                }).then((result) => {
-                                                                                                    /* Read more about handling dismissals below */
-
-                                                                                                    //Va a entrar a este insert siempre y cuando yo ya le de en enviar no?asi es
-                                                                                                    // ok aqui vamso a hacer la validacion mira
-                                                                                                    if (result.dismiss === Swal.DismissReason.timer) {
-                                                                                                        databaseHandler.db.transaction(
-                                                                                                            function (tx1) {
-                                                                                                                tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
-                                                                                                                    [courseID, now, 1],
-                                                                                                                    function (tx, resultsA) {
-                                                                                                                        if(course_id >= 78 && course_id <= 99)
-                                                                                                                        {
-                                                                                                                            app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
-                                                                                                                        }else{
-                                                                                                                            app.views.main.router.navigate( { name: 'Induccion' , params: {id: 1} } );
-                                                                                                                        }
-
-                                                                                                                        // var length = resultsA.rows.length;
-                                                                                                                        // var dateF, course_id, finish;
-                                                                                                                        // for(var w = 0; w< length; w++) {
-                                                                                                                        //     course_id = resultsA.rows.item(w).course_id
-                                                                                                                        //     dateF = resultsA.rows.item(w).dateF
-                                                                                                                        //     finish = resultsA.rows.item(w).finish
-                                                                                                                        // }
-                                                                                                                        // Swal.fire('Guardado!', '', 'success');
-                                                                                                                        //
-                                                                                                                        // if(course_id >= 78 && course_id <= 99)
-                                                                                                                        // {
-                                                                                                                        //     app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
-                                                                                                                        // }else{
-                                                                                                                        //     app.views.main.router.navigate( { name: 'Induccion' , params: {id: 1} } );
-                                                                                                                        // }
-
-                                                                                                                    })
-                                                                                                            },
-                                                                                                            function (error) {
-                                                                                                                console.log("add client error: " + error.message);
-                                                                                                                app.dialog.alert('Error al insertar registro.', 'Error');
-                                                                                                                app.preloader.hide();
-                                                                                                                Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
-
-                                                                                                            },
-                                                                                                            function () {
-                                                                                                            });
-                                                                                                    }
-                                                                                                }) //END SWAL FIRE
-                                                                                                    .catch((err) => {
-                                                                                                        Swal.fire('Algo salio mal :(', err, 'error')
-                                                                                                    })
-
-                                                                                            })
-
-                                                                                    },
-                                                                                    function (error) {
-                                                                                        console.log("add client error: " + error.message);
-                                                                                        app.dialog.alert('Error al insertar registro.', 'Error');
-                                                                                        app.preloader.hide();
-                                                                                    },
-                                                                                    function () {
-                                                                                    });
-                                                                            }
-                                                                        )} //awebo xd puebamelo
-                                                                    //XD
-                                                                );
-                                                            }else { Swal.fire('Error al guardar!', 'Intenalo mas tarde 2', 'error') }
-                                                        }else { Swal.fire('Error al guardar!', 'Intenalo mas tarde 3', 'error') }
-                                                    }else { Swal.fire('Error al guardar!', 'Intenalo mas tarde4', 'error') }
-                                                },
-                                                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                                    $("#preguntas").hide();
-                                                    $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
-                                                    databaseHandler.db.transaction(
-                                                        function (tx1) {
-                                                            tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
-                                                                [courseID, now, 1],
-                                                                function (tx, resultsA) {
-                                                                    var length = resultsA.rows.length;
-                                                                    var dateF, course_id, finish;
-                                                                    for(var w = 0; w< length; w++) {
-                                                                        course_id = resultsA.rows.item(w).course_id
-                                                                        dateF = resultsA.rows.item(w).dateF
-                                                                        finish = resultsA.rows.item(w).finish
-                                                                    }
-                                                                    Swal.fire('Warning!', 'Tenemos problemas para enviar tu encuesta, nosotros lo haremos por ti mas tarde o cuando tengas una conexion a internet estable', 'warning');
-
-                                                                    if(course_id >= 78 && course_id <= 99)
-                                                                    {
-                                                                        app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
-                                                                    }else{
-                                                                        app.views.main.router.navigate( { name: 'Induccion' , params: {id: 1} } );
-                                                                    }
-
-                                                                })
-                                                        },
-                                                        function (error) {
-                                                            console.log("add client error: " + error.message);
-                                                            app.dialog.alert('Error al insertar registro.', 'Error');
-                                                            app.preloader.hide();
-                                                            Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
-
-                                                        },
-                                                        function () {
-                                                        });
-                                                    // Swal.fire('Enhorabuena!', 'Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success')
-
+                                                for (var i = 0; i < length; i++) {
+                                                    var item4 = resultsA.rows.item(i);
+                                                    answersArray[a] = {
+                                                        'valor:': a,
+                                                        'question_id': item4.question_id,
+                                                        'user_id': item4.user_id,
+                                                        'answer': item4.answer,
+                                                        'answer_id': item4.answer_id,
+                                                        'created_at': item4.created_at,
+                                                        'updated_at': item4.updated_at,
+                                                        'dateF': item4.dateF
+                                                    };
+                                                    a++;
                                                 }
+                                                // console.log(JSON.stringify(answersArray));
+
+                                                $.ajax({
+                                                    type: "POST",
+                                                    async: true,
+                                                    url: "http://serviciosbennetts.com/universidadBennetts/questionaires/store.php",
+                                                    data: {'arrayAQ': JSON.stringify(answersArray)},
+                                                    success: function (respuesta) {
+                                                        console.log(respuesta);
+                                                        var respu1 = respuesta.split("._.");
+                                                        var dat1 = respu1[0];
+                                                        var dat2 = respu1[1];
+                                                        var dat3 = respu1[2];
+
+                                                        if (dat1 == "REPORTE") { //El texto que se ocncateno
+                                                            if (dat2 > 0) { // Ultimo Id Insrtado o consultado
+
+                                                                if (dat3) {
+
+                                                                    databaseHandler.db.transaction(
+                                                                        function (tx7) {
+                                                                            tx7.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
+                                                                                [idCuestionario],
+                                                                                function (tx7, results) {
+                                                                                    databaseHandler.db.transaction(
+                                                                                        function (tx1) {
+                                                                                            // PERFECTO AMIGO ESTE MISMO ESTATTUS VA A SER ESTE MIRA
+                                                                                            tx1.executeSql("UPDATE register SET status = 2 WHERE idCuestionario = ?",
+                                                                                                [idCuestionario],
+                                                                                                function (tx, resultsA) {
+                                                                                                    learn(courseID);
+                                                                                                    let timerInterval
+                                                                                                    Swal.fire({
+                                                                                                        title: 'Aviso:!',
+                                                                                                        html: 'Guardando <b></b>',
+                                                                                                        timer: 100,
+                                                                                                        timerProgressBar: true,
+                                                                                                        willOpen: () => {
+                                                                                                            Swal.showLoading()
+                                                                                                            timerInterval = setInterval(() => {
+                                                                                                                const content = Swal.getContent()
+                                                                                                                if (content) {
+                                                                                                                    const b = content.querySelector('b')
+                                                                                                                    if (b) {
+                                                                                                                        b.textContent = Swal.getTimerLeft()
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }, 100)
+                                                                                                        },
+                                                                                                        willClose: () => {
+                                                                                                            clearInterval(timerInterval)
+                                                                                                        }
+                                                                                                    }).then((result) => {
+                                                                                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                                                                                            databaseHandler.db.transaction(
+                                                                                                                function (tx1) {
+                                                                                                                    tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
+                                                                                                                        [courseID, now, 1],
+                                                                                                                        function (tx, resultsA) {
+                                                                                                                            if (course_id >= 78 && course_id <= 99) {
+                                                                                                                                app.views.main.router.navigate({
+                                                                                                                                    name: 'TecnicasLimpieza',
+                                                                                                                                    params: {id: 2}
+                                                                                                                                });
+                                                                                                                            } else {
+                                                                                                                                app.views.main.router.navigate({
+                                                                                                                                    name: 'Induccion',
+                                                                                                                                    params: {id: 1}
+                                                                                                                                });
+                                                                                                                            }
+
+                                                                                                                            // var length = resultsA.rows.length;
+                                                                                                                            // var dateF, course_id, finish;
+                                                                                                                            // for(var w = 0; w< length; w++) {
+                                                                                                                            //     course_id = resultsA.rows.item(w).course_id
+                                                                                                                            //     dateF = resultsA.rows.item(w).dateF
+                                                                                                                            //     finish = resultsA.rows.item(w).finish
+                                                                                                                            // }
+                                                                                                                            // Swal.fire('Guardado!', '', 'success');
+                                                                                                                            //
+                                                                                                                            // if(course_id >= 78 && course_id <= 99)
+                                                                                                                            // {
+                                                                                                                            //     app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
+                                                                                                                            // }else{
+                                                                                                                            //     app.views.main.router.navigate( { name: 'Induccion' , params: {id: 1} } );
+                                                                                                                            // }
+
+                                                                                                                        })
+                                                                                                                },
+                                                                                                                function (error) {
+                                                                                                                    console.log("add client error: " + error.message);
+                                                                                                                    app.dialog.alert('Error al insertar registro.', 'Error');
+                                                                                                                    app.preloader.hide();
+                                                                                                                    Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
+
+                                                                                                                },
+                                                                                                                function () {
+                                                                                                                });
+                                                                                                        }
+                                                                                                    }) //END SWAL FIRE
+                                                                                                        .catch((err) => {
+                                                                                                            Swal.fire('Algo salio mal :(', err, 'error')
+                                                                                                        })
+
+                                                                                                })
+
+                                                                                        },
+                                                                                        function (error) {
+                                                                                            console.log("add client error: " + error.message);
+                                                                                            app.dialog.alert('Error al insertar registro.', 'Error');
+                                                                                            app.preloader.hide();
+                                                                                        },
+                                                                                        function () {
+                                                                                        });
+                                                                                }
+                                                                            )
+                                                                        } //awebo xd puebamelo
+                                                                        //XD
+                                                                    );
+                                                                } else {
+                                                                    Swal.fire('Error al guardar!', 'Intenalo mas tarde 2', 'error')
+                                                                }
+                                                            } else {
+                                                                Swal.fire('Error al guardar!', 'Intenalo mas tarde 3', 'error')
+                                                            }
+                                                        } else {
+                                                            Swal.fire('Error al guardar!', 'Intenalo mas tarde4', 'error')
+                                                        }
+                                                    },
+                                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                        $("#preguntas").hide();
+                                                        $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
+                                                        databaseHandler.db.transaction(
+                                                            function (tx1) {
+                                                                tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
+                                                                    [courseID, now, 1],
+                                                                    function (tx, resultsA) {
+                                                                        var length = resultsA.rows.length;
+                                                                        var dateF, course_id, finish;
+                                                                        for (var w = 0; w < length; w++) {
+                                                                            course_id = resultsA.rows.item(w).course_id
+                                                                            dateF = resultsA.rows.item(w).dateF
+                                                                            finish = resultsA.rows.item(w).finish
+                                                                        }
+                                                                        Swal.fire('Warning!', 'Tenemos problemas para enviar tu encuesta, nosotros lo haremos por ti mas tarde o cuando tengas una conexion a internet estable', 'warning');
+
+                                                                        if (course_id >= 78 && course_id <= 99) {
+                                                                            app.views.main.router.navigate({
+                                                                                name: 'TecnicasLimpieza',
+                                                                                params: {id: 2}
+                                                                            });
+                                                                        } else {
+                                                                            app.views.main.router.navigate({
+                                                                                name: 'Induccion',
+                                                                                params: {id: 1}
+                                                                            });
+                                                                        }
+
+                                                                    })
+                                                            },
+                                                            function (error) {
+                                                                console.log("add client error: " + error.message);
+                                                                app.dialog.alert('Error al insertar registro.', 'Error');
+                                                                app.preloader.hide();
+                                                                Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
+
+                                                            },
+                                                            function () {
+                                                            });
+                                                        // Swal.fire('Enhorabuena!', 'Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success')
+
+                                                    }
+                                                })
                                             })
-                                        })
 
-                                },
-                                function (error) {
-                                    console.log("add client error: " + error.message);
-                                    app.dialog.alert('Error al insertar registro.', 'Error');
-                                    app.preloader.hide();
+                                    },
+                                    function (error) {
+                                        console.log("add client error: " + error.message);
+                                        app.dialog.alert('Error al insertar registro.', 'Error');
+                                        app.preloader.hide();
 
-                                }
-                            )
+                                    }
+                                )
 
-                        })
+                            })
 
-                },
-                function (error) {
-                    console.log("add client error: " + error.message);
-                    app.dialog.alert('Error al insertar registro.', 'Error');
-                    app.preloader.hide();
-                },
-                function () {
-                }
-            );
+                    },
+                    function (error) {
+                        console.log("add client error: " + error.message);
+                        app.dialog.alert('Error al insertar registro.', 'Error');
+                        app.preloader.hide();
+                    },
+                    function () {
+                    }
+                );
 
-        }
-        else if (result.isDenied) {
-            Swal.fire('Los cambios no se guardaron', '', 'info')
-        }
-    })
+            } else if (result.isDenied) {
+                Swal.fire('Los cambios no se guardaron', '', 'info')
+            }
+        })
+    }
+    else {
+        Swal.fire('Error', 'Necesitas una conexion a internet para enviar el cuestionario, tus respuestas estan a salvo', 'error')
+        app.views.main.router.navigate( {name: 'inicio' } );
+    }
 }
 
 function goBackxtwo()
