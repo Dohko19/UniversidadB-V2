@@ -58,14 +58,16 @@
                               '      </ul>' +
                               '    </div>' +
                               '  </div>' +
-                              '<div align="right" id="linkToC'+ courses[i].idCourse +'">'+
-                              '<a onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                              '<div align="right" >'+
+                              '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
                               '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
-                              '</div>'+
-                              '</div>');
+                              ''+
+                              '<span id="watchVidio'+ courses[i].idCourse +'">' +
+                              '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
+                              '</span>'+
+                              '</div></div>');
                           checkIfCoursesComplete(courses[i].idCourse);
                           checkAR(courses[i].idCourse);
-
                       }
 
                   }

@@ -21,6 +21,8 @@
               let id = app.views.main.router.currentRoute.params.id;
               let catId = app.views.main.router.currentRoute.params.catid;
               let user_id = localStorage.getItem("id");
+               let sc = localStorage.getItem("status_course");
+
                $("#backButton").append('<div class="navbar-inner">' +
                    '<div class="left">' +
                    '   <a href="/cursos/index/'+catId+'">' +
@@ -54,6 +56,10 @@
                                      '</span>'+
                                      '</div>'
                                );
+                               if (sc == 1)
+                               {
+                                   $("#questionaire").hide();
+                               }
                            }
 
                        }

@@ -23,19 +23,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico1.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico2.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/watchVideo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/triptico1.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/triptico2.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/pages/cursos/watchVideo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/img/triptico2.PNG" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/Induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/Induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/img/triptico1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/img/triptico2.PNG" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/Induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/Induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/induccion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,6 +156,8 @@
       <workItem from="1603122933693" duration="10506000" />
       <workItem from="1603201404270" duration="1008000" />
       <workItem from="1603203612140" duration="17287000" />
+      <workItem from="1603242836344" duration="6463000" />
+      <workItem from="1603289251587" duration="12082000" />
     </task>
     <servers />
   </component>
@@ -209,20 +229,20 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="367" y="47" width="743" height="658" key="find.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1600360828545" />
-    <state x="340" y="162" key="run.anything.popup" timestamp="1602948830358">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="382" y="183" key="run.anything.popup" timestamp="1603291948478">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="338" y="162" key="run.anything.popup/0.0.1360.728@0.0.1360.728" timestamp="1601570879516" />
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601326899725" />
     <state x="340" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1602948830358" />
-    <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1602266856229" />
-    <state x="346" y="49" width="673" height="679" key="search.everywhere.popup" timestamp="1602948374772">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1603291948478" />
+    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup" timestamp="1603244667693">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602196424622" />
     <state x="346" y="49" width="673" height="679" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1602948374772" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601949365558" />
-    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1602446800565" />
+    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603244667693" />
   </component>
 </project>

@@ -14,10 +14,11 @@
         </div>
         <div class="page-content">
             <div class="row">
-                <div id="primary-title" class="block-title">Cuestionario Correspondiente a la leccion:
-                    <center>
-                        <div id="title" class="items-cente"></div>
-                    </center>
+                <div id="primary-title" class="block-title">Cuestionario Correspondiente a la leccion:</div>
+
+                <div class="block block-strong medium-inset">
+                        <p  id="title" class="items-center">
+                        </p>
                 </div>
                 <div id="Questions" style="width: 100%;"></div>
                     <span style="width: 100%;" id="enviarCuestionario"></span>
@@ -46,6 +47,7 @@
                     const questions = JSON.parse(data);
                     if (questions.length !== 0) {
                         $("#title").append('<b>'+name+'</b>');
+
                         $("#enviarCuestionario").append('<button onclick="EnviarCuestionario('+cursoID+', '+catId+')" ' +
                             'class="link col button button-large button-raised button-fill color-green" id="sendQuest" disabled>' +
                                                         '<i class="fas fa-save"></i>' +

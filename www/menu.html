@@ -265,9 +265,9 @@
                        <br><br>
                        <b>Teléfono: 55-55-67-49-69 <br><br> Ext. 2178, 2177, 2179</b>
                        <br><br>
-                      <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
+                      <img src="img/triptico1.JPG" width="100%" alt="triptico parte 1">
                       <br>
-                      <img src="img/triptico2.PNG" width="100%" alt="triptico parte 2">
+                      <img src="img/triptico2.JPG" width="100%" alt="triptico parte 2">
                     </p>
               </div>
             </div>
@@ -570,40 +570,6 @@
             }
         });
     }
-    //   function ptrpro() {
-    //       $("#processclick").show();
-    //       $("#processclick").removeClass('99badge99');
-    //       $("#processclick").addClass('badge');
-    //
-    //       downloader.init({folder: "jsons", unzip: true});
-    //       downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
-    //       document.addEventListener('DOWNLOADER_downloadProgress', function(event){
-    //           var data = event.data;
-    //           console.log('Proceso', data);
-    //           $("#processclick").html(data[0] + "%");
-    //           if(data[0] == 99 || data[0] == 100){
-    //               app.ptr.done();
-    //               $("#processclick").html("Actualizados");
-    //
-    //               downloader.abort();
-    //           }
-    //       });
-    //       document.addEventListener('DOWNLOADER_downloadError', function(event){
-    //           var data = event.data;
-    //           console.log('Proceso', data);
-    //               app.ptr.done();
-    //               $("#processclick").hide();
-    //               app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
-    //               downloader.abort();
-    //       });
-    //       document.addEventListener('downloadSuccess', function(event){
-    //           var data = event.data;
-    //           console.log('Proceso', data);
-    //               app.ptr.done();
-    //               $("#processclick").html("Actualizados");
-    //               downloader.abort();
-    //       });
-    //   }
     // PTR en pantalla
     var $ptrContent = $('.ptr-content');
     $ptrContent.on('ptr:refresh', function (e) {
@@ -661,40 +627,6 @@
             });
         })
         })
-    //   var $ptrContent = $('.ptr-content');
-    //   $ptrContent.on('ptr:refresh', function (e) {
-    //     $("#process").show();
-    //     setTimeout(function () {
-    //         downloader.init({folder: "jsons", unzip: true});
-    //         downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
-    //         document.addEventListener('DOWNLOADER_downloadProgress', function(event){
-    //             var data = event.data;
-    //             console.log('Proceso', data);
-    //             $("#process").html(data[0] + "%");
-    //             if(data[0] == 99 || data[0] == 100){
-    //                 app.ptr.done();
-    //                 $("#process").hide();
-    //                 downloader.abort();
-    //             }
-    //         });
-    //         document.addEventListener('DOWNLOADER_downloadError', function(event){
-    //             var data = event.data;
-    //             console.log('Proceso', data);
-    //                 app.ptr.done();
-    //                 $("#process").hide();
-    //                 app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
-    //                 downloader.abort();
-    //         })
-    //         document.addEventListener('downloadSuccess', function(event){
-    //             var data = event.data;
-    //             console.log('Proceso', data);
-    //                 app.ptr.done();
-    //                 $("#process").hide();
-    //                 downloader.abort();
-    //         });
-    //     }, 100);
-    // });
-      //Sin conexion
       document.addEventListener("offline", onOffline, false);
       function networkInfo() {
        var networkState = navigator.connection.type;

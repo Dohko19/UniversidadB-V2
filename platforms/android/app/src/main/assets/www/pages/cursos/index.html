@@ -32,22 +32,6 @@
 
                                         if(courses[i].category_id == catId)
                                         {
-                                            // $("#Listado").append('<div class="card">' +
-                                            //     '<div class="card-header" style="background-color: #1b89fd; color:white;">' +
-                                            //     '<b>'+
-                                            //     courses[i].name+
-                                            //     '</b>'+
-                                            //     '</div>' +
-                                            //     ' <a href="#" class="button" onclick="Verificar('+courses[i].idCourse+', '+catId+')"' +
-                                            //     '>' +
-                                            //     '<div class="card-footer" style="background-color: #a1d7ff; color:white;" class="card-footer">'+
-                                            //     '<div class="" id="terminadoCourse'+ courses[i].idCourse +'" ><span class="badge color-green">Terminado</span></div>'+
-                                            //     '<div id="linkToC'+ courses[i].idCourse +'"' +
-                                            //     '>' +
-                                            //     '<span style="color:white;" class="col-50">Iniciar Curso</span>' +
-                                            //     '</div>' +
-                                            //     '</div>'+
-                                            //     '</a>' +
                                             $("#Listado").append(''+
                                                 '<div class="card shadow-card padding-bottom margin-bottom">' +
                                                 '  <div class="card-header">Curso:' +
@@ -70,14 +54,16 @@
                                                 '      </ul>' +
                                                 '    </div>' +
                                                 '  </div>' +
-                                                '<div align="right" id="linkToC'+ courses[i].idCourse +'">'+
-                                                '<a onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                                                '<div align="right" >'+
+                                                '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
                                                 '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
-                                                '</div>'+
-                                                '</div>');
+                                                ''+
+                                                '<span id="watchVidio'+ courses[i].idCourse +'">' +
+                                                '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
+                                                '</span>'+
+                                                '</div></div>');
                                             checkIfCoursesComplete(courses[i].idCourse);
                                             checkAR(courses[i].idCourse);
-
                                         }
                                     }
 

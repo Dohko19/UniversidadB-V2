@@ -57,6 +57,11 @@ var routes = [
     path: '/cursos/show/:id/:catid',
     componentUrl: './pages/cursos/show.html',
   },
+  {
+    name: 'watchVideo',
+    path: '/watchVideo/:id/:catid',
+    componentUrl: './pages/cursos/watchVideo.html',
+  },
   // Pages EVALUACION FINAL
   {
     name: 'evaluacion_final',

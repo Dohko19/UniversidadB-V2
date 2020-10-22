@@ -1701,16 +1701,19 @@ function checkIfCoursesComplete(course_id){
                         if ( status == 1 && finiDate == dayOff){
                             $("#linkToC"+id_curso).hide();
                             $("#terminadoCourse"+id_curso).show();
+                            $("#watchVidio"+id_curso).show();
                         }
                         else{
                             $("#linkToC"+course_id).show();
                             $("#terminadoCourse"+course_id).hide();
+                            $("#watchVidio"+course_id).hide();
 
                         }
                     }
                     else {
                         $("#linkToC"+course_id).show();
                         $("#terminadoCourse"+course_id).hide();
+                        $("#watchVidio"+course_id).hide();
 
                     }
                 })
@@ -1728,78 +1731,91 @@ function checkAR(course_id){
     const date = new Date();
     const dayOff = offDays(date, 0);
     databaseHandler.db.transaction(
-        function (tx1) {
-            tx1.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ? AND register.dateF = ?",
+        function(tx1){
+            tx1.executeSql("SELECT * FROM courses_finish WHERE course_id = ? AND dateF = ?",
                 [course_id, dayOff],
-                function (tx1, res) {
-                    var long = res.rows.length;
-                    var answers = [];
-                    var repetidos = {};
-                    if (long > 0) {
-                        for (var z = 0; z < long; z++) {
-                            var item = res.rows.item(z);
-                            var id_curso = item.course_id
-                           var total = answers.push(item.answer);
-                        }
-                        if (total > 0){
-                            // console.log(sum);
-                            // console.log(sum[0]); // respuestas con 0 fallidas
-                            // console.log(sum[1]); // Respuesta con 1 acertadas
-                            if(total == 3 || total == 4){
+                function(tx1, response){
+                var longitud = response.rows.length;
 
-                                var sum = answers.reduce((contador, valor) => {
-                                    contador[valor] = (contador[valor] || 0) + 1;
-                                    return contador;
-                                },{});
+                    if (longitud > 0){
+                        tx1.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ? AND register.dateF = ?",
+                            [course_id, dayOff],
+                            function (tx1, res) {
+                                var long = res.rows.length;
+                                var answers = [];
+                                var repetidos = {};
+                                if (long > 0) {
+                                    for (var z = 0; z < long; z++) {
+                                        var item = res.rows.item(z);
+                                        var id_curso = item.course_id
+                                        var total = answers.push(item.answer);
+                                    }
+                                    if (total > 0){
+                                        // console.log(sum);
+                                        // console.log(sum[0]); // respuestas con 0 fallidas
+                                        // console.log(sum[1]); // Respuesta con 1 acertadas
+                                        if(total == 3 || total == 4){
 
-                                var avg = (sum[1] * 100)/ answers.length;
+                                            var sum = answers.reduce((contador, valor) => {
+                                                contador[valor] = (contador[valor] || 0) + 1;
+                                                return contador;
+                                            },{});
 
-                                if (avg >= 65){
-                                    $("#Aprobado"+course_id).show();
-                                    $("#NoAprobado"+course_id).hide();
+                                            var avg = (sum[1] * 100)/ answers.length;
+
+                                            if (avg >= 65){
+                                                $("#Aprobado"+course_id).show();
+                                                $("#NoAprobado"+course_id).hide();
+                                            }else{
+                                                $("#Aprobado"+course_id).hide();
+                                                $("#NoAprobado"+course_id).show();
+                                            }
+                                        }else if(total == 5){
+                                            var sum = answers.reduce((contador, valor) => {
+                                                contador[valor] = (contador[valor] || 0) + 1;
+                                                return contador;
+                                            },{});
+
+                                            var avg = (sum[1] * 100)/ answers.length;
+                                            if (avg >= 60){
+                                                $("#Aprobado"+course_id).show();
+                                                $("#NoAprobado"+course_id).hide();
+                                            }else{
+                                                $("#Aprobado"+course_id).hide();
+                                                $("#NoAprobado"+course_id).show();
+                                            }
+                                        }else{
+                                            var sum = answers.reduce((contador, valor) => {
+                                                contador[valor] = (contador[valor] || 0) + 1;
+                                                return contador;
+                                            },{});
+
+                                            var avg = (sum[1] * 100)/ answers.length;
+                                            if (avg >= 65){
+                                                $("#Aprobado"+course_id).show();
+                                                $("#NoAprobado"+course_id).hide();
+                                            }else{
+                                                $("#Aprobado"+course_id).hide();
+                                                $("#NoAprobado"+course_id).show();
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        $("#Aprobado"+course_id).hide();
+                                        $("#NoAprobado"+course_id).hide();
+                                    }
                                 }else{
                                     $("#Aprobado"+course_id).hide();
-                                    $("#NoAprobado"+course_id).show();
-                                }
-                            }else if(total == 5){
-                                var sum = answers.reduce((contador, valor) => {
-                                    contador[valor] = (contador[valor] || 0) + 1;
-                                    return contador;
-                                },{});
-
-                                var avg = (sum[1] * 100)/ answers.length;
-                                if (avg >= 60){
-                                    $("#Aprobado"+course_id).show();
                                     $("#NoAprobado"+course_id).hide();
-                                }else{
-                                    $("#Aprobado"+course_id).hide();
-                                    $("#NoAprobado"+course_id).show();
                                 }
-                            }else{
-                                var sum = answers.reduce((contador, valor) => {
-                                    contador[valor] = (contador[valor] || 0) + 1;
-                                    return contador;
-                                },{});
+                            })
 
-                                var avg = (sum[1] * 100)/ answers.length;
-                                if (avg >= 65){
-                                    $("#Aprobado"+course_id).show();
-                                    $("#NoAprobado"+course_id).hide();
-                                }else{
-                                    $("#Aprobado"+course_id).hide();
-                                    $("#NoAprobado"+course_id).show();
-                                }
-                            }
-                        }
-                        else{
-                            $("#Aprobado"+course_id).hide();
-                            $("#NoAprobado"+course_id).hide();
-                        }
                     }else{
                         $("#Aprobado"+course_id).hide();
                         $("#NoAprobado"+course_id).hide();
                     }
-                })
+                }
+            );
         },
         function (error) {
             console.log("add client error: " + error.message);
@@ -2273,6 +2289,41 @@ function Verificar(idCourse, catId){
 
 }
 
+function Verificar2(idCourse, catId){
+    // Handle the online event
+    var networkState = navigator.connection.type;
+
+    if (networkState !== Connection.NONE) {
+        app.views.main.router.navigate( {name: 'watchVideo', params: {id: idCourse, catid: catId} } );
+
+    }
+    else {
+        app.dialog.alert("Error","Necesitas una conexion a internet");
+    }
+
+}
+
 function backHome(){
     app.views.main.router.navigate( {name: 'inicio' } );
+}
+
+function watchlesson(){
+    // Create dynamic Popup
+    var dynamicPopup = app.popup.create({
+        content: '<div class="popup">'+
+            '<div class="block">'+
+            '<p>Popup created dynamically.</p>'+
+            '<p><a href="#" class="link popup-close">Close me</a></p>'+
+            '</div>'+
+            '</div>',
+        // Events
+        on: {
+            open: function (popup) {
+                console.log('Popup open');
+            },
+            opened: function (popup) {
+                console.log('Popup opened');
+            },
+        }
+    });
 }
