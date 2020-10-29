@@ -1763,7 +1763,7 @@ function checkAR(course_id){
 
                                             var avg = (sum[1] * 100)/ answers.length;
 
-                                            if (avg >= 65){
+                                            if (avg >= 100){
                                                 $("#Aprobado"+course_id).show();
                                                 $("#NoAprobado"+course_id).hide();
                                             }else{
@@ -1777,7 +1777,7 @@ function checkAR(course_id){
                                             },{});
 
                                             var avg = (sum[1] * 100)/ answers.length;
-                                            if (avg >= 60){
+                                            if (avg >= 100){
                                                 $("#Aprobado"+course_id).show();
                                                 $("#NoAprobado"+course_id).hide();
                                             }else{
@@ -1791,7 +1791,7 @@ function checkAR(course_id){
                                             },{});
 
                                             var avg = (sum[1] * 100)/ answers.length;
-                                            if (avg >= 65){
+                                            if (avg >= 100){
                                                 $("#Aprobado"+course_id).show();
                                                 $("#NoAprobado"+course_id).hide();
                                             }else{
