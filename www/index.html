@@ -1,133 +1,275 @@
-<html>
-<head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script>
-        function calculaRFC() {
-            function quitaArticulos(palabra) {
-                return palabra.replace("DEL ", "").replace("LAS ", "").replace("DE ",
-                    "").replace("LA ", "").replace("Y ", "").replace("A ", "");
+<script>
+var IdUsuario = localStorage.getItem("id");
+    if (IdUsuario > 0){
+        // var IdUsuario = localStorage.setItem(id);
+        let active = localStorage.getItem('active')
+        let id_role = localStorage.getItem('id_role')
+        if(active == 1)
+        {
+            if(id_role == 1)
+            {
+                window.location.href = "menu.html";
             }
-            function esVocal(letra) {
-                if (letra == 'A' || letra == 'E' || letra == 'I' || letra == 'O'
-                    || letra == 'U' || letra == 'a' || letra == 'e' || letra == 'i'
-                    || letra == 'o' || letra == 'u')
-                    return true;
-                else
-                    return false;
+            else if(id_role == 2)
+            {
+                window.location.href = "menu.html";
             }
-
-            nombre = $("#NOMBRE_PERSONA").val().toUpperCase();
-
-            apellidoPaterno = $("#APELLIDO_PATERNO").val().toUpperCase();
-
-            apellidoMaterno = $("#APELLIDO_MATERNO").val().toUpperCase();
-
-            fecha = $("#F_NACIMIENTO").val();
-
-            var rfc = "";
-
-            apellidoPaterno = quitaArticulos(apellidoPaterno);
-            apellidoMaterno = quitaArticulos(apellidoMaterno);
-
-            rfc += apellidoPaterno.substr(0, 1);
-
-            var l = apellidoPaterno.length;
-            var c;
-            for (i = 0; i < l; i++) {
-                c = apellidoPaterno.charAt(i);
-                if (esVocal(c)) {
-                    rfc += c;
-                    break;
-                }
+            else if(id_role == 3)
+            {
+                window.location.href = "menu.html";
             }
-
-            rfc += apellidoMaterno.substr(0, 1);
-
-            rfc += nombre.substr(0, 1);
-
-            rfc += fecha.substr(8, 10);
-
-            rfc += fecha.substr(3, 5).substr(0, 2);
-
-            rfc += fecha.substr(0, 2);
-
-            // rfc += "-" + homclave;
-
-            $("#RFC").val(rfc);
-
+            else{
+                Swal.fire(
+                        'Info',
+                        'No tienes asignado ningun rol',
+                        'info'
+                )
+                $("#preloader").fadeOut("slow");
+            }
         }
-    </script>
+    }
+</script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Universidad Bennetts</title>
+<!--    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="css/util.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="css/main.css">-->
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="login-plugin/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="login-plugin/css/util.css">
+    <link rel="stylesheet" type="text/css" href="login-plugin/css/main.css">
+    <script type="text/javascript" src="cordova.js"></script>
+
 </head>
 <body>
-<fieldset>
-    <legend>Informaci&oacute;n General</legend>
-    <div>
-        <table>
-            <tr>
-                <td >
-                    Nombre(s):
-                </td>
-                <td>
-                    <input id ="NOMBRE_PERSONA" type="text" size = "20" maxlength="30"
-                           class="uppercase" onchange="calculaRFC();"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Apellido Paterno:
-                </td>
-                <td>
-                    <input  id ="APELLIDO_PATERNO" type="text"  size="20" maxlength="30"
-                            class="uppercase" onchange="calculaRFC();"/>
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    Apellido Materno:
-                </td>
-                <td>
-                    <input class="uppercase" id ="APELLIDO_MATERNO" name="APELLIDO_MATERNO" type="text"
-                           size="20" maxlength="30" onchange="calculaRFC();"/>
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    Fecha Nacimiento:
-                </td>
-                <td>
-                    <input  id ="F_NACIMIENTO" name="F_NACIMIENTO" class="campofechaNac" type="text"
-                            onchange="calculaRFC();"/>
-                </td>
-                <td>
+<!--     <div class="container-login100" >-->
+<!--        <div class="wrap-login100">-->
+<!--        <div style="text-align: center;">-->
+<!--            <img src="img/bennetts.png" width="50%" />-->
+<!--            </div>-->
+<!--            <div id="preloader"></div>-->
+<!--            <form  method="post" class="login100-form validate-form" id="formulario">-->
+<!--                <div class="wrap-input100 validate-input m-b-26" >-->
+<!--                    <span class="label-input100">Usuario</span>-->
+<!--                    <input class="input100" type="text" name="username" id="username" required>-->
+<!--                    <span class="focus-input100"></span>-->
+<!--                </div>-->
+<!--                <div class="wrap-input100 validate-input m-b-18" >-->
+<!--                    <span class="label-input100">Password</span>-->
+<!--                    <input class="input100" type="password" name="password" id="password" required >-->
+<!--                    <span class="focus-input100"></span>-->
+<!--                </div>-->
+<!--                <div class="container-login100-form-btn">-->
+<!--                <br />-->
+<!--                    <a id="insert"  class="login100-form-btn" style="text-decoration: none;">-->
+<!--                        Login-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" method="post" id="formulario">
+                    <span class="login100-form-title p-b-26">
+                        <img src="img/bennetts.png" width="50%" alt="logo-bennetts" />
+                    </span>
+<!--                <span class="login100-form-title p-b-48">-->
+<!--                        <i class="zmdi zmdi-font"></i>-->
+<!--                    </span>-->
 
-            </tr>
-            <tr>
-                <td>
-                    Sexo:
-                </td>
-                <td>
-                    <div>
-                        <input id="sexoFemenino" type="radio" name="SEXO" value="F" class="simple_radio">
-                        <span>Femenino</span>
-                    </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" name="username" id="username" required>
+                    <span class="focus-input100" data-placeholder="Nombre de Usuario"></span>
+                </div>
 
-                    <div>
-                        <input id="sexoMasculino" type="radio" name="SEXO" value="M" class="simple_radio" >
-                        <span>Masculino</span>
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                    <input class="input100" type="password" name="password" id="password">
+                    <span class="focus-input100" data-placeholder="Password"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <a id="insert" class="login100-form-btn" style="color: white;">
+                            Iniciar Sesion
+                        </a>
                     </div>
-                    <label for="SEXO" class="error">Selecci&oacute;n es requerida</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    RFC:
-                </td>
-                <td>
-                    <input class="uppercase" id="RFC"  name="RFC" type="text" />
-                </td>
-            </tr>
-        </table>
+                </div>
+            </form>
+        </div>
     </div>
-</fieldset>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="login-plugin/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="login-plugin/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="login-plugin/vendor/bootstrap/js/popper.js"></script>
+<script src="login-plugin/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="login-plugin/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="login-plugin/vendor/daterangepicker/moment.min.js"></script>
+<script src="login-plugin/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="login-plugin/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="login-plugin/js/main.js"></script>
+<script type="text/javascript" src="js/sweetalert2.all.min.js"></script>
+<script src="js/metodos.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+        document.addEventListener('backbutton', function (e) {
+            app.views.main.router.back();
+        });
+        document.addEventListener("offline", onOffline, false);
+        function networkInfo() {
+            var networkState = navigator.connection.type;
+            var states = {};
+            states[Connection.UNKNOWN]  = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI]     = 'WiFi connection';
+            states[Connection.CELL_2G]  = 'Cell 2G connection';
+            states[Connection.CELL_3G]  = 'Cell 3G connection';
+            states[Connection.CELL_4G]  = 'Cell 4G connection';
+            states[Connection.CELL]     = 'Cell generic connection';
+            states[Connection.NONE]     = 'No network connection';
+            alert("Connection type:"+ states[networkState]);
+        }
+        function onOffline() {
+            window.location.href = "offline.html";
+        }
+        $("#insert").click(function(){
+            $('#preloader').html('<div class="preloader"></div>');
+            var username = $('#username').val();
+            var password = $("#password").val();
+            var datos = "username=" + username + "&password=" + password +"&insert=";
+            if($.trim(username).length > 0 && $.trim(password).length > 0){
+                $.ajax({
+                    type: "POST",
+                    url: "http://serviciosbennetts.com/universidadBennetts/login.php",
+                    data: datos,
+                    success: function(data){
+                        if(data == "0"){
+                            Swal.fire(
+                                '!!',
+                                'Usuario y/o contraseña Incorrectos',
+                                'error'
+                            )
+                            $("#preloader").fadeOut("slow");
+                        }else{
+                            let separado = data.split("/");
+                            let id = separado[0];
+                            let name = separado[1];
+                            let last_name = separado[2];
+                            let active = separado[3];
+                            let avatar = separado[4];
+                            let role_id = separado[5];
+                            let last_login = separado[6];
+                            let status_course = separado[7];
+                            let role_name = separado[8];
+                            let role_displayName = separado[9];
+                            let id_role = separado[10];
+                            let first_login = separado[11];
+                            localStorage.setItem("id", id);
+                            localStorage.setItem("name", name);
+                            localStorage.setItem("last_name", last_name);
+                            localStorage.setItem("active", active)
+                            localStorage.setItem("avatar", avatar)
+                            localStorage.setItem("role_id", role_id)
+                            localStorage.setItem("last_login", last_login)
+                            localStorage.setItem("status_course", status_course)
+                            localStorage.setItem("role_name", role_name)
+                            localStorage.setItem("role_displayName", role_displayName)
+                            localStorage.setItem("id_role", id_role)
+                            localStorage.setItem("first_login", first_login)
+                            if(active == 1)
+                            {
+                                if(id_role == 1)
+                                {
+                                    window.location.href = "menu.html";
+                                }
+                                else if(id_role == 2)
+                                {
+                                    window.location.href = "menu.html";
+                                }
+                                else if(id_role == 3)
+                                {
+                                    window.location.href = "menu.html";
+                                }
+                                else{
+                                    Swal.fire(
+                                        'Info',
+                                        'No tienes asignado ningun rol',
+                                        'info'
+                                    )
+                                    logaout()
+                                    // app.dialog.alert('Favor de completar todos los datos.', 'Aviso');
+
+                                    $("#preloader").fadeOut("slow");
+                                }
+                            }
+                            else
+                            {
+                                Swal.fire(
+                                    'Este Usuario fue dado de baja',
+                                    'Porfavor de contactar con soporte si es un error',
+                                    'info'
+                                )
+
+                                $("#preloader").fadeOut("slow");
+                            }
+                        }
+                    }
+                });
+            }else{
+                // app.dialog.alert('Favor de completar todos los datos.', 'Aviso');
+                Swal.fire(
+                    '!!',
+                    'Datos Incompletos',
+                    'warning'
+                )
+
+                $("#preloader").fadeOut("slow");
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
