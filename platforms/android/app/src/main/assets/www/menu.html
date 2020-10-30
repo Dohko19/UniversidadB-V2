@@ -265,9 +265,9 @@
                        <br><br>
                        <b>Teléfono: 55-55-67-49-69 <br><br> Ext. 2178, 2177, 2179</b>
                        <br><br>
-                      <img src="img/triptico1.JPG" width="100%" alt="triptico parte 1">
+                      <img src="img/triptico1.PNG" width="100%" alt="triptico parte 1">
                       <br>
-                      <img src="img/triptico2.JPG" width="100%" alt="triptico parte 2">
+                      <img src="img/triptico2.PNG" width="100%" alt="triptico parte 2">
                     </p>
               </div>
             </div>
@@ -570,6 +570,40 @@
             }
         });
     }
+    //   function ptrpro() {
+    //       $("#processclick").show();
+    //       $("#processclick").removeClass('99badge99');
+    //       $("#processclick").addClass('badge');
+    //
+    //       downloader.init({folder: "jsons", unzip: true});
+    //       downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+    //       document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+    //           var data = event.data;
+    //           console.log('Proceso', data);
+    //           $("#processclick").html(data[0] + "%");
+    //           if(data[0] == 99 || data[0] == 100){
+    //               app.ptr.done();
+    //               $("#processclick").html("Actualizados");
+    //
+    //               downloader.abort();
+    //           }
+    //       });
+    //       document.addEventListener('DOWNLOADER_downloadError', function(event){
+    //           var data = event.data;
+    //           console.log('Proceso', data);
+    //               app.ptr.done();
+    //               $("#processclick").hide();
+    //               app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+    //               downloader.abort();
+    //       });
+    //       document.addEventListener('downloadSuccess', function(event){
+    //           var data = event.data;
+    //           console.log('Proceso', data);
+    //               app.ptr.done();
+    //               $("#processclick").html("Actualizados");
+    //               downloader.abort();
+    //       });
+    //   }
     // PTR en pantalla
     var $ptrContent = $('.ptr-content');
     $ptrContent.on('ptr:refresh', function (e) {
@@ -627,6 +661,40 @@
             });
         })
         })
+    //   var $ptrContent = $('.ptr-content');
+    //   $ptrContent.on('ptr:refresh', function (e) {
+    //     $("#process").show();
+    //     setTimeout(function () {
+    //         downloader.init({folder: "jsons", unzip: true});
+    //         downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
+    //         document.addEventListener('DOWNLOADER_downloadProgress', function(event){
+    //             var data = event.data;
+    //             console.log('Proceso', data);
+    //             $("#process").html(data[0] + "%");
+    //             if(data[0] == 99 || data[0] == 100){
+    //                 app.ptr.done();
+    //                 $("#process").hide();
+    //                 downloader.abort();
+    //             }
+    //         });
+    //         document.addEventListener('DOWNLOADER_downloadError', function(event){
+    //             var data = event.data;
+    //             console.log('Proceso', data);
+    //                 app.ptr.done();
+    //                 $("#process").hide();
+    //                 app.dialog.alert('Error al descargar. Favor de revisar tu conexión a internet.', 'Alerta!');
+    //                 downloader.abort();
+    //         })
+    //         document.addEventListener('downloadSuccess', function(event){
+    //             var data = event.data;
+    //             console.log('Proceso', data);
+    //                 app.ptr.done();
+    //                 $("#process").hide();
+    //                 downloader.abort();
+    //         });
+    //     }, 100);
+    // });
+      //Sin conexion
       document.addEventListener("offline", onOffline, false);
       function networkInfo() {
        var networkState = navigator.connection.type;
@@ -645,7 +713,7 @@
           app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se descargaran los datos.', 'Alerta!');
         }
     $(document).ready(function(){
-        // app.dialog.preloader('Cargando...');
+        app.dialog.preloader('Cargando...');
 
 
     function onOnline() {
@@ -745,7 +813,7 @@
 
             const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
             const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
-            // const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
+            const response3 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getCalifFInal.php?id='+id);
             // alert(response2.data)
             // alert(response3.data)
             // const response3 = 40;
@@ -756,49 +824,44 @@
             //     $("#getCertificado").hide();
             //
             // }
+            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
 
-            // if(response3.data == 'INF')
-            // {
-            //     var p3 = 0.0;
-            // }
-            // else{
-            //     var p3 = response3.data;
-            //
-            // }
+            if(response3.data == 'INF')
+            {
+                var p3 = 0.0;
+            }
+            else{
+                var p3 = response3.data;
+
+            }
             if(response2.data == 'INF')
             {
                 var p2 = 0.0
             }
             else{
                 var p2 = response2.data;
+
             }
 
-            // var totalBar = p2 + p3;
-            let dataBarTotal = response2.data / 100;
-            let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
+            var totalBar = p2 + p3;
+            let dataBarTotal = totalBar / 100;
+            let dataBarTotalW = p2 + p3;
 
-            // let dataBarTotalW = p2 + p3;
-
-            if (response2.data >= 80)
+            if (response2.data >= 40)
             {
-                // $("#finalQuestions").show();
+                $("#finalQuestions").show();
                 // updateStatusCourse()
-                $("#finalQuestions").hide();
-                $("#getCertificado").show()
-
             }else{
                 $("#finalQuestions").hide();
-                // $("#finalQuestions").show();
-                $("#getCertificado").hide()
             }
 
-            // if (dataBarTotalW >= 80)
-            // {
-            //     $("#finalQuestions").hide();
-            //     $("#getCertificado").show()
-            // }else{
-            //     $("#getCertificado").hide()
-            // }
+            if (dataBarTotalW >= 80)
+            {
+                $("#finalQuestions").hide();
+                $("#getCertificado").show()
+            }else{
+                $("#getCertificado").hide()
+            }
 
             $("#demo").circleProgress({
                 value: dataBar,
@@ -820,14 +883,14 @@
                 },
                 emptyFill: "#929292",
                 fill: {
-                    gradient: ['#64b519','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+                    gradient: ['#92f533','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
                 },
             }).on('circle-animation-progress', function(event, progress) {
-                $(this).find('strong').html(p2+'%');
+                $(this).find('strong').html(dataBarTotalW+'%');
             });
+
         } catch (error) {
             console.error(error);
-            Swal.fire('Warning', 'Ocurrio un error al obtener los datos'+error,'warning')
         }
     }
     waitBar();
