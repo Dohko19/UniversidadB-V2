@@ -1,25 +1,37 @@
+---
+name: Bug report
+about: Report a problem
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 <!--
 IMPORTANT: PLEASE READ
 
 WARNING: Failure to follow the issue template guidelines below will result in the issue being immediately closed.
-
-Only bug reports should be opened here.
-
-Before opening an issue, please do the following:
-- check a similar issue is not already open (or closed) against this plugin.
-	- Duplicates or near-duplicates will be closed immediately.
-- try to reproduce the issue using the example project
-	- or if that's not possible, using an isolated test project that you are able to share
-	- this will eliminate bugs in your code or conflicts with other code as possible causes of the issue
-- Any issue which is suspected of being caused by the Ionic Native wrapper should be reported against Ionic Native (https://github.com/ionic-team/ionic-native/issues)
-	- Ionic Native Typescript wrappers are maintained by the Ionic Team:
-	- To verify an if an issue is caused by this plugin or its Typescript wrapper, please re-test using the vanilla Javascript plugin interface (without the Ionic Native wrapper).
-	- Any issue opened here which is obviously an Ionic Typescript wrapper issue will be closed immediately.
 -->
 
 <!-- Fill out the relevant sections below and delete irrelevant sections. -->
 
 # Bug report
+
+<!-- COMPLETE THIS CHECKLIST -->
+**CHECKLIST**
+- [ ] I have read the [issue reporting guidelines](https://github.com/dpa99c/cordova-diagnostic-plugin#reporting-issues)
+
+- [ ] I confirm this is a suspected bug or issue that will affect other users
+<!-- i.e. this is not a request for support in using/integrating the plugin into your specific project -->
+
+- [ ] I have reproduced the issue using the [example project](https://github.com/dpa99c/cordova-diagnostic-plugin-example) or provided the necessary information to reproduce the issue.
+<!-- necessary information e.g. exact steps, FCM notification message content, test case project repo -->
+
+- [ ] I have read [the documentation](https://github.com/dpa99c/cordova-diagnostic-plugin) thoroughly and it does not help solve my issue.
+<!-- e.g. if you're having a build issue ensure you've read through the build environment notes -->
+
+- [ ] I have checked that no similar issues (open or closed) already exist.
+<!-- Duplicates or near-duplicates will be closed immediately. -->
 
 **Current behavior:**
 
@@ -55,9 +67,9 @@ Before opening an issue, please do the following:
         
 _Runtime issue_
 - Device details
-    - _e.g. iPhone 7, Samsung Galaxy S8, iPhone X Simulator, Pixel XL Emulator_
+    - _e.g. iPhone X, Samsung Galaxy S8, iPhone X Simulator, Pixel XL Emulator_
 - OS details
-    - _e.g. iOS 11.2, Android 8.1_	
+    - _e.g. iOS 12.2, Android 9.0_	
 	
 _Android build issue:_	
 - Node JS version

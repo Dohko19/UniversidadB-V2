@@ -221,6 +221,7 @@
                         <p class="row">
                             <a href="/Induccion/1" class="col button button-large button-raised button-fill">Induccion</a>
                             <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
+                            <button onclick="downloadzip()" class="col button button-large button-raised button-fill">Download</button>
 <!--                            <a href="/cursos/index/" class="col button button-large button-raised button-fill">Tecnicas2a</a>-->
                         </p>
                         <p class="row">
@@ -298,6 +299,34 @@
       //Activar el escucha
       document.addEventListener("deviceready",onDeviceReady,false);
 
+      function downloadzip(){
+          var nameJson = ['course_show.json','cursos_detalle_list.json', 'cursos_list.json',
+                          'eval_final_preguntas.json', 'less_user.json', 'noticias_news.json',
+                          'preguntas_leccion.json', 'preguntas_leccion.json', 'respuestas_pregunta.json' ];
+        nameJson.forEach( function(valor, indice, array) {
+                console.log("En el índice " + indice + " hay este valor: " + valor);
+                    var fileTransfer = new FileTransfer();
+          
+            var filePath = '///storage/emulated/0/jsons/'+valor;
+            var uri = encodeURI ("http://serviciosbennetts.com/universidadBennetts/questionaires/"+valor);
+
+            fileTransfer.download (uri, filePath, function(entry) {console.log ("descarga completa:" + entry.fullPath);
+                console.log("download complete: " + entry.toURL());
+            }, function(error) {console.log ("error al descargar el origen" + error.source);
+                Console.log ("descargar error objetivo" + error.target);
+                Console.log ("código de error de carga" + error.code);
+            }, false, {headers: {"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="}});
+
+            function falso(error) {
+                alert("An error has occurred: Code = " + error.code);
+                console.log("upload error source " + error.source);
+                console.log("upload error target " + error.target);
+            }
+            });
+      
+         
+        
+      }
       //GPS Activated
 
       //

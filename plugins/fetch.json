@@ -170,9 +170,9 @@
   "cordova-plugin-zip": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-zip@>=3.1.0"
+      "id": "cordova-plugin-zip@^3.1.0"
     },
-    "is_top_level": false,
+    "is_top_level": true,
     "variables": {}
   },
   "cordova-plugin-file-md5": {
