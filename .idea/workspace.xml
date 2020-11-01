@@ -23,15 +23,94 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/plugins/cordova-plugin-downloader/www/download.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/platform_www/plugins/cordova-plugin-downloader/www/download.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/android-versions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/android-versions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/android-versions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/android-versions/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/android-versions/tests/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/android-versions/tests/index.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/cross-spawn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/cross-spawn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/lib/command.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/lib/error.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/lib/kill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/lib/promise.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/lib/stdio.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/lib/stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/execa/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/get-stream/buffer-stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/get-stream/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/get-stream/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/get-stream/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/get-stream/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/get-stream/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/is-stream/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/is-stream/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/is-stream/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/is-stream/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/is-stream/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/jsonfile/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/npm-run-path/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/npm-run-path/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/npm-run-path/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/npm-run-path/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/npm-run-path/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/path-key/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/path-key/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/universalify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/node_modules/universalify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/cordova-android/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cordova-android/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/properties-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/properties-parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.codepointat/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/string.prototype.codepointat/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/res/xml/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/cross-spawn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/cross-spawn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/lib/command.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/lib/error.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/lib/kill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/lib/promise.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/lib/stdio.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/lib/stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/execa/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/get-stream/buffer-stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/get-stream/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/get-stream/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/get-stream/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/get-stream/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/get-stream/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/is-stream/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/is-stream/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/is-stream/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/is-stream/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/is-stream/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/jsonfile/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/npm-run-path/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/npm-run-path/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/npm-run-path/license" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/npm-run-path/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/npm-run-path/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/path-key/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/path-key/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/cordova/node_modules/universalify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/cordova/node_modules/universalify/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/platform_www/cordova_plugins.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/android.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/browser.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/browser.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fetch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ios.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

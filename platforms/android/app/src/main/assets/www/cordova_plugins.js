@@ -364,6 +364,22 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
+      "id": "cordova-plugin-zip.Zip",
+      "file": "plugins/cordova-plugin-zip/zip.js",
+      "pluginId": "cordova-plugin-zip",
+      "clobbers": [
+        "zip"
+      ]
+    },
+    {
+      "id": "cordova-plugin-downloader.download",
+      "file": "plugins/cordova-plugin-downloader/www/download.js",
+      "pluginId": "cordova-plugin-downloader",
+      "clobbers": [
+        "download"
+      ]
+    },
+    {
       "id": "cordova-plugin-file-transfer.FileTransferError",
       "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
       "pluginId": "cordova-plugin-file-transfer",
@@ -394,14 +410,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "pluginId": "cordova-plugin-network-information",
       "clobbers": [
         "Connection"
-      ]
-    },
-    {
-      "id": "cordova-plugin-zip.Zip",
-      "file": "plugins/cordova-plugin-zip/zip.js",
-      "pluginId": "cordova-plugin-zip",
-      "clobbers": [
-        "zip"
       ]
     },
     {
@@ -665,9 +673,11 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-device-orientation": "2.0.1",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-file": "6.0.1",
+    "cordova-plugin-zip": "3.1.0",
+    "cordova-plugin-downloader": "0.0.4",
+    "cordova-plugin-enable-cleartext-traffic": "2.1.0",
     "cordova-plugin-file-transfer": "1.7.1",
     "cordova-plugin-network-information": "2.0.1",
-    "cordova-plugin-zip": "3.1.0",
     "cordova-plugin-file-md5": "0.3.3",
     "cordova-plugin-file-downloader": "0.4.0",
     "cordova-plugin-geolocation": "4.0.1",
@@ -681,7 +691,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-vibration": "3.1.0",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-sqlite-storage": "3.2.0",
-    "cordova.plugins.diagnostic": "5.0.1",
-    "cordova-plugin-enable-cleartext-traffic": "2.1.0"
+    "cordova.plugins.diagnostic": "5.0.1"
   };
 });

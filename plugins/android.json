@@ -34,6 +34,9 @@
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "com.bennetts.university"
     },
+    "cordova-plugin-enable-cleartext-traffic": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.bennetts.university"
     },
@@ -73,21 +76,21 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.bennetts.university"
     },
+    "cordova-plugin-zip": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.bennetts.university"
     },
     "cordova.plugins.diagnostic": {
       "ANDROID_SUPPORT_VERSION": "28.+",
       "PACKAGE_NAME": "com.bennetts.university"
-    },
-    "cordova-plugin-enable-cleartext-traffic": {
-      "PACKAGE_NAME": "com.bennetts.university"
-    },
-    "cordova-plugin-zip": {
-      "PACKAGE_NAME": "com.bennetts.university"
     }
   },
   "dependent_plugins": {
+    "cordova-plugin-downloader": {
+      "PACKAGE_NAME": "com.bennetts.university"
+    },
     "cordova-plugin-file-md5": {
       "PACKAGE_NAME": "com.bennetts.university"
     },

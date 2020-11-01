@@ -127,6 +127,8 @@
         <domain includeSubdomains="true">http://serviciosbennetts.com/</domain>
         <domain includeSubdomains="true">http://serveripaddress</domain>
     </domain-config>
+    <preference default="27.+" name="ANDROID_SUPPORT_V4_VERSION" />
+    <framework src="com.android.support:supportv4:$ANDROID_SUPPORT_V4_VERSION" />
     <allow-intent href="market:*" />
     <splash density="land-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
     <splash density="land-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
@@ -164,4 +166,5 @@
     <preference name="android-minSdkVersion" value="22" />
     <preference name="android-targetSdkVersion" value="29" />
     <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="AndroidXEnabled" value="false" />
 </widget>

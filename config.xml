@@ -41,6 +41,7 @@
         <preference name="android-minSdkVersion" value="22" />
         <preference name="android-targetSdkVersion" value="29" />
         <preference name="SplashMaintainAspectRatio" value="true" />
+        <preference name="AndroidXEnabled" value="false" />
         <splash density="land-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
         <splash density="land-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
         <splash density="land-xhdpi" src="res/screen/android/drawable-xhdpi/screen.png" />
@@ -58,9 +59,15 @@
         <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
         <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
+    <preference name="ANDROID_SUPPORT_V4_VERSION" default="27.+"/>
+    <framework src="com.android.support:supportv4:$ANDROID_SUPPORT_V4_VERSION"/>
     <platform name="ios">
         <config-file parent="CFBundleAllowMixedLocalizations" platform="ios" target="*-Info.plist">
             <true />
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <preference name="GradlePluginGoogleServicesEnabled" value="true" />
+            <preference name="GradlePluginGoogleServicesVersion" value="4.2.0" />
         </config-file>
         <preference name="iosPersistentFileLocation" value="Library" />
         <preference name="iosPersistentFileLocation" value="Compatibility" />
@@ -89,6 +96,7 @@
     </platform>
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.NetworkManager" />
+        <plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
     </feature>
     <preference name="loadUrlTimeoutValue" value="70000" />
     <preference name="UIWebViewBounce" value="false" />
@@ -126,4 +134,5 @@
     <plugin name="cordova.plugins.diagnostic" spec="~5.0.1" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.3" />
     <plugin name="cordova-plugin-enable-cleartext-traffic" spec="~2.1.0" />
+
 </widget>
