@@ -81,12 +81,12 @@
     },
     "cordova-plugin-enable-cleartext-traffic": {
       "PACKAGE_NAME": "com.bennetts.vic"
+    },
+    "cordova-plugin-zip": {
+      "PACKAGE_NAME": "com.bennetts.vic"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-zip": {
-      "PACKAGE_NAME": "com.bennetts.vic"
-    },
     "cordova-plugin-file-md5": {
       "PACKAGE_NAME": "com.bennetts.vic"
     }

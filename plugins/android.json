@@ -82,12 +82,12 @@
     },
     "cordova-plugin-enable-cleartext-traffic": {
       "PACKAGE_NAME": "com.bennetts.university"
+    },
+    "cordova-plugin-zip": {
+      "PACKAGE_NAME": "com.bennetts.university"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-zip": {
-      "PACKAGE_NAME": "com.bennetts.university"
-    },
     "cordova-plugin-file-md5": {
       "PACKAGE_NAME": "com.bennetts.university"
     },
