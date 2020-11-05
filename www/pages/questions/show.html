@@ -41,8 +41,8 @@
                 let user_id = localStorage.getItem("id");
 
 
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/preguntas_leccion.json', function (data) {
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/respues_pregunta.json', function (ans) {
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/preguntas_leccion.json', function (data) {
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/respues_pregunta.json', function (ans) {
                     const answers = JSON.parse(ans);
                     const questions = JSON.parse(data);
                     if (questions.length !== 0) {
