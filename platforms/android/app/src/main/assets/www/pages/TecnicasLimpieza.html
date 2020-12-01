@@ -23,6 +23,7 @@
             pageInit: function () {
                 let catId = 2;
                 app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
+                    app.preloader.show();
                     const courses = JSON.parse(data);
                     if (courses.length !== 0)
                     {
@@ -64,6 +65,7 @@
                             }
                         }
                     }
+                    app.preloader.hide();
                 });
             }
         }

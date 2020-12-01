@@ -110,6 +110,7 @@ var databaseHandler = {
                 console.log("Create DB transaction completed successfully");
             }
         );
+
         this.db.transaction(
             function (tx) {
                 //Run sql here using tx
@@ -120,6 +121,27 @@ var databaseHandler = {
                     },
                     function (tx, error) {
                         console.log("Error while creating the table Actualizaciones " + error.message);
+                    }
+                );
+            },
+            function (error) {
+                console.log("Transaction error: " + error.message);
+            },
+            function () {
+                console.log("Create DB transaction completed successfully");
+            }
+        );
+
+        this.db.transaction(
+            function (tx) {
+                //Run sql here using tx
+                tx.executeSql(
+                    "create table if not exists courses_progress (idProg integer primary key, user_id integer, course_id integer, average integer, fecha text)",
+                    [],
+                    function (tx, results) {
+                    },
+                    function (tx, error) {
+                        console.log("Error while creating the table Cursos progress " + error.message);
                     }
                 );
             },

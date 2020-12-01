@@ -221,8 +221,6 @@
                         <p class="row">
                             <a href="/Induccion/1" class="col button button-large button-raised button-fill">Induccion</a>
                             <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
-                            <button onclick="downloadzip()" class="col button button-large button-raised button-fill">Download</button>
-<!--                            <a href="/cursos/index/" class="col button button-large button-raised button-fill">Tecnicas2a</a>-->
                         </p>
                         <p class="row">
                             <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
@@ -809,13 +807,6 @@
         function(){}
     );
 
-    // async function waitForBar() {
-    //     await drawProgressBar();
-    //
-    // }
-    //
-    // waitForBar();
-
     async function waitBar()
     {
         try {
@@ -910,7 +901,10 @@
     }
     waitBar();
 
-    function horizontal2(){
+        storeLocalA();
+
+
+        function horizontal2(){
         var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 
         if (orientation === "landscape-primary") {

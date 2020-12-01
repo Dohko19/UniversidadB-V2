@@ -1728,102 +1728,213 @@ function checkIfCoursesComplete(course_id){
 }
 
 function checkAR(course_id){
-    const date = new Date();
-    const dayOff = offDays(date, 0);
-    databaseHandler.db.transaction(
-        function(tx1){
-            tx1.executeSql("SELECT * FROM courses_finish WHERE course_id = ? AND dateF = ?",
-                [course_id, dayOff],
-                function(tx1, response){
-                var longitud = response.rows.length;
+        const date = new Date();
+        const dayOff = offDays(date, 0);
+        databaseHandler.db.transaction(
+            function(tx1){
+                tx1.executeSql("SELECT * FROM courses_finish WHERE course_id = ? AND dateF = ?",
+                    [course_id, dayOff],
+                    function(tx1, response){
+                        var longitud = response.rows.length;
 
-                    if (longitud > 0){
-                        tx1.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ? AND register.dateF = ?",
-                            [course_id, dayOff],
-                            function (tx1, res) {
-                                var long = res.rows.length;
-                                var answers = [];
-                                var repetidos = {};
-                                if (long > 0) {
-                                    for (var z = 0; z < long; z++) {
-                                        var item = res.rows.item(z);
-                                        var id_curso = item.course_id
-                                        var total = answers.push(item.answer);
-                                    }
-                                    if (total > 0){
-                                        // console.log(sum);
-                                        // console.log(sum[0]); // respuestas con 0 fallidas
-                                        // console.log(sum[1]); // Respuesta con 1 acertadas
-                                        if(total == 3 || total == 4){
+                        if (longitud > 0){
+                            tx1.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ? AND register.dateF = ?",
+                                [course_id, dayOff],
+                                function (tx1, res) {
+                                    var long = res.rows.length;
+                                    var answers = [];
+                                    var repetidos = {};
+                                    if (long > 0) {
+                                        for (var z = 0; z < long; z++) {
+                                            var item = res.rows.item(z);
+                                            var id_curso = item.course_id
+                                            var total = answers.push(item.answer);
+                                        }
+                                        if (total > 0){
+                                            // console.log(sum);
+                                            // console.log(sum[0]); // respuestas con 0 fallidas
+                                            // console.log(sum[1]); // Respuesta con 1 acertadas
+                                            if(total == 3 || total == 4)
+                                            {
 
-                                            var sum = answers.reduce((contador, valor) => {
-                                                contador[valor] = (contador[valor] || 0) + 1;
-                                                return contador;
-                                            },{});
+                                                var sum = answers.reduce((contador, valor) => {
+                                                    contador[valor] = (contador[valor] || 0) + 1;
+                                                    return contador;
+                                                },{});
 
-                                            var avg = (sum[1] * 100)/ answers.length;
+                                                var avg = (sum[1] * 100)/ answers.length;
+                                                storeQualification(avg, id_curso);
 
-                                            if (avg >= 100){
-                                                $("#Aprobado"+course_id).show();
-                                                $("#NoAprobado"+course_id).hide();
-                                            }else{
-                                                $("#Aprobado"+course_id).hide();
-                                                $("#NoAprobado"+course_id).show();
+                                                if (avg >= 100){
+                                                    $("#Aprobado"+course_id).show();
+                                                    $("#NoAprobado"+course_id).hide();
+                                                }else{
+                                                    $("#Aprobado"+course_id).hide();
+                                                    $("#NoAprobado"+course_id).show();
+                                                }
                                             }
-                                        }else if(total == 5){
-                                            var sum = answers.reduce((contador, valor) => {
-                                                contador[valor] = (contador[valor] || 0) + 1;
-                                                return contador;
-                                            },{});
+                                            else if(total == 5)
+                                            {
+                                                var sum = answers.reduce((contador, valor) => {
+                                                    contador[valor] = (contador[valor] || 0) + 1;
+                                                    return contador;
+                                                },{});
 
-                                            var avg = (sum[1] * 100)/ answers.length;
-                                            if (avg >= 100){
-                                                $("#Aprobado"+course_id).show();
-                                                $("#NoAprobado"+course_id).hide();
-                                            }else{
-                                                $("#Aprobado"+course_id).hide();
-                                                $("#NoAprobado"+course_id).show();
+                                                var avg = (sum[1] * 100)/ answers.length;
+                                                storeQualification(avg, id_curso);
+                                                if (avg >= 100){
+                                                    $("#Aprobado"+course_id).show();
+                                                    $("#NoAprobado"+course_id).hide();
+                                                }else{
+                                                    $("#Aprobado"+course_id).hide();
+                                                    $("#NoAprobado"+course_id).show();
+                                                }
                                             }
-                                        }else{
-                                            var sum = answers.reduce((contador, valor) => {
-                                                contador[valor] = (contador[valor] || 0) + 1;
-                                                return contador;
-                                            },{});
+                                            else{
+                                                var sum = answers.reduce((contador, valor) => {
+                                                    contador[valor] = (contador[valor] || 0) + 1;
+                                                    return contador;
+                                                },{});
 
-                                            var avg = (sum[1] * 100)/ answers.length;
-                                            if (avg >= 100){
-                                                $("#Aprobado"+course_id).show();
-                                                $("#NoAprobado"+course_id).hide();
-                                            }else{
-                                                $("#Aprobado"+course_id).hide();
-                                                $("#NoAprobado"+course_id).show();
+                                                var avg = (sum[1] * 100)/ answers.length;
+                                                storeQualification(avg, id_curso);
+                                                if (avg >= 100){
+                                                    $("#Aprobado"+course_id).show();
+                                                    $("#NoAprobado"+course_id).hide();
+                                                }else{
+                                                    $("#Aprobado"+course_id).hide();
+                                                    $("#NoAprobado"+course_id).show();
+                                                }
                                             }
                                         }
-                                    }
-                                    else{
+                                        else{
+                                            $("#Aprobado"+course_id).hide();
+                                            $("#NoAprobado"+course_id).hide();
+                                        }
+                                    }else{
                                         $("#Aprobado"+course_id).hide();
                                         $("#NoAprobado"+course_id).hide();
                                     }
-                                }else{
-                                    $("#Aprobado"+course_id).hide();
-                                    $("#NoAprobado"+course_id).hide();
-                                }
-                            })
+                                })
 
-                    }else{
-                        $("#Aprobado"+course_id).hide();
-                        $("#NoAprobado"+course_id).hide();
+                        }else{
+                            $("#Aprobado"+course_id).hide();
+                            $("#NoAprobado"+course_id).hide();
+                        }
                     }
-                }
-            );
-        },
-        function (error) {
-            console.log("add client error: " + error.message);
-            app.dialog.alert('Error el verficar datos A R', 'Error');
-            app.preloader.hide();
-        }
-    )
+                );
+            },
+            function (error) {
+                console.log("add client error: " + error.message);
+                app.dialog.alert('Error el verficar datos A R, line:1829', 'Error');
+                app.preloader.hide();
+            }
+        )
+
 }
+
+
+function storeLocalA()
+{
+    let userId = localStorage.getItem('id');
+    let hasData = false;
+    let response;
+    databaseHandler.db.transaction(
+        function(tx9){
+            tx9.executeSql("SELECT * FROM courses_progress",
+                function(tx, res){
+                    var longitud = response.rows.length;
+                    if (longitud < 1){
+                        axios.get(`http://serviciosbennetts.com/universidadBennetts/Qualify/indexAvg.php?user_id=${userId}`)
+                            .then(res => {
+                                this.response = res.data;
+                                if(this.response.length > 0)
+                                {
+                                    this.response.forEach((items) => {
+                                        console.log(items)
+                                        var userId = items.user_id;
+                                        var courseId = items.course_id;
+                                        var average = items.average;
+                                        var fecha = items.fecha;
+
+                                        databaseHandler.db.transaction(
+                                            function(tx1)
+                                            {
+                                                tx1.executeSql("INSERT INTO courses_progress (user_id, course_id, average, fecha) VALUES (?,?,?,?)",
+                                                    [userId, courseId, average, fecha],
+                                                    function(tx1, response)
+                                                    {
+                                                        console.log('insertado');
+                                                    }
+                                                );
+                                            },
+                                            function (error) {
+                                                console.log("add client error: " + error.message);
+                                                console.log("error al insertar datos del curso.")
+                                            }
+                                        );
+
+                                    });
+
+                                }
+                                else
+                                {
+                                    console.log('nada por aqui')
+                                }
+
+                            })
+                            .catch(err => {
+                                toastTop('Ocurrio un error al cargar', 3000);
+                            });
+                    }
+                })
+        }
+    );
+}
+
+/**
+ *
+ * @param {number} avg
+ * @param {number} courseId
+ */
+function storeQualification(avg, courseId)
+{
+    app.preloader.show();
+    let average = avg;
+    let course = courseId;
+    let url = "http://serviciosbennetts.com/universidadBennetts/Qualify/storeAvg.php";
+    var formData = new FormData;
+    formData.append('avg', average);
+    formData.append('user_id', localStorage.getItem('id'))
+    formData.append('course_id', course)
+    axios.post(url, formData)
+        .then(res => {
+            app.preloader.hide();
+            toastTop('Preguna guardada', 2000);
+        })
+        .catch(err =>{
+            console.log(err);
+            toastTop('Ocurrio un error al guardar, revisa tu conexion a intenret', 2000);
+            app.preloader.hide();
+        });
+
+}
+
+/**
+ *
+ * @param {string} message
+ * @param {...number} milliseconds
+ */
+function toastTop(message = 'this is a toaster message', milliseconds = 2000)
+{
+    app.toast.create({
+        text: message,
+        position: 'top',
+        closeTimeout: milliseconds,
+    }).open();
+    // toasterTop.open();
+}
+
 function checkEvaluacionFinal()
 {
     var user_id = localStorage.getItem('id');
