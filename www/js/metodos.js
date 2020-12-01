@@ -1914,13 +1914,11 @@ function storeQualification(avg, courseId)
     formData.append('course_id', course)
     axios.post(url, formData)
         .then(res => {
-            app.preloader.hide();
             toastTop('Preguna guardada', 2000);
         })
         .catch(err =>{
-            console.log(err);
             toastTop('Ocurrio un error al guardar, revisa tu conexion a intenret', 2000);
-            app.preloader.hide();
+
         });
 
 }
