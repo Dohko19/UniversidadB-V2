@@ -34,8 +34,8 @@
         on: {
             pageInit: function(e, page)
             {
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/eval_final_preguntas.json', function (data) {
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/respuestas_eva_final.json', function (res) {
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/eval_final_preguntas.json', function (data) {
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/respuestas_eva_final.json', function (res) {
 
                     const preguntas = JSON.parse(data);
                     const respuestas = JSON.parse(res);

@@ -32,7 +32,7 @@
                     '</div>'
                 );
                 //course_show.json
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/course_show.json', function (data) {
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/course_show.json', function (data) {
                     const courses_show = JSON.parse(data);
 
                     if (courses_show.length !== 0)

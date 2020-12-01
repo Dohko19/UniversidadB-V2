@@ -25,7 +25,7 @@
       pageInit: function(e, page)
       {
           let catId = 1;
-          app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
+          app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
               const courses = JSON.parse(data);
               console.log(courses);
               // const courses_show = JSON.parse(data); '/'+catId+'
