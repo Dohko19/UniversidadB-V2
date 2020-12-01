@@ -30,6 +30,11 @@ var routes = [
       transition: 'f7-circle',
     },
   },
+  {
+    name: "watchVideo",
+    path: '/watchVideo/:id/:catid',
+    componentUrl: './pages/cursos/watchVideo.html'
+  },
   { // ruta no usada
     name: 'cursos_induccion',
     path: '/cursos/induccion/',

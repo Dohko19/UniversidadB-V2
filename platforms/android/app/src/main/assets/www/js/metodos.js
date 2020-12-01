@@ -1763,6 +1763,7 @@ function checkAR(course_id){
                                                 },{});
 
                                                 var avg = (sum[1] * 100)/ answers.length;
+                                                alert(avg);
                                                 storeQualification(avg, id_curso);
 
                                                 if (avg >= 100){
@@ -1781,6 +1782,7 @@ function checkAR(course_id){
                                                 },{});
 
                                                 var avg = (sum[1] * 100)/ answers.length;
+                                                alert(avg);
                                                 storeQualification(avg, id_curso);
                                                 if (avg >= 100){
                                                     $("#Aprobado"+course_id).show();
@@ -1797,6 +1799,7 @@ function checkAR(course_id){
                                                 },{});
 
                                                 var avg = (sum[1] * 100)/ answers.length;
+                                                alert(avg);
                                                 storeQualification(avg, id_curso);
                                                 if (avg >= 100){
                                                     $("#Aprobado"+course_id).show();
@@ -1842,8 +1845,9 @@ function storeLocalA()
     databaseHandler.db.transaction(
         function(tx9){
             tx9.executeSql("SELECT * FROM courses_progress",
+                [],
                 function(tx, res){
-                    var longitud = response.rows.length;
+                    var longitud = res.rows.length;
                     if (longitud < 1){
                         axios.get(`http://serviciosbennetts.com/universidadBennetts/Qualify/indexAvg.php?user_id=${userId}`)
                             .then(res => {
@@ -1899,9 +1903,10 @@ function storeLocalA()
  */
 function storeQualification(avg, courseId)
 {
-    app.preloader.show();
     let average = avg;
     let course = courseId;
+    alert(avg)
+    alert(courseId)
     let url = "http://serviciosbennetts.com/universidadBennetts/Qualify/storeAvg.php";
     var formData = new FormData;
     formData.append('avg', average);

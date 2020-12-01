@@ -305,7 +305,7 @@
 
                     var fileTransfer = new FileTransfer();
 
-            var filePath = '///storage/emulated/0/jsons/'+valor;
+            var filePath = cordova.file.externalApplicationStorageDirectory+"/jsons/"+valor;
             var uri = encodeURI ("http://serviciosbennetts.com/universidadBennetts/questionaires/"+valor);
 
             fileTransfer.download (uri, filePath, function(entry) {console.log ("descarga completa: " + entry.fullPath);
@@ -595,7 +595,7 @@
         $("#processclick").removeClass('99badge99');
         $("#processclick").addClass('badge');
 
-        downloader.init({folder: "jsons", unzip: true});
+        downloader.init({folder: cordova.file.externalApplicationStorageDirectory+"/jsons", unzip: true});
         downloader.get("http://serviciosbennetts.com/universidadBennetts/jsons.zip");
         document.addEventListener('DOWNLOADER_downloadProgress', function (event) {
             var data = event.data;
