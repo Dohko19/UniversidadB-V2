@@ -47,7 +47,6 @@
                     const questions = JSON.parse(data);
                     if (questions.length !== 0) {
                         $("#title").append('<b>'+name+'</b>');
-
                         $("#enviarCuestionario").append('<button onclick="EnviarCuestionario('+cursoID+', '+catId+')" ' +
                             'class="link col button button-large button-raised button-fill color-green" id="sendQuest" disabled>' +
                                                         '<i class="fas fa-save"></i>' +

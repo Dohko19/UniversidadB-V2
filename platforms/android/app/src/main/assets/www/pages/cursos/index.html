@@ -21,7 +21,6 @@
                     on: {
                         pageInit: function(e, page)
                         {
-
                             let catId = app.views.main.router.currentRoute.params.id;
                             app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
                                 const courses = JSON.parse(data);
@@ -34,7 +33,7 @@
                                         {
                                             $("#Listado").append(''+
                                                 '<div class="card shadow-card padding-bottom margin-bottom">' +
-                                                '  <div class="card-header">Curso:' +
+                                                '  <div class="card-header">' +
                                                 '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
                                                 '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
                                                 '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
@@ -61,9 +60,15 @@
                                                 '<span id="watchVidio'+ courses[i].idCourse +'">' +
                                                 '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
                                                 '</span>'+
-                                                '</div></div>');
+                                                '</div>' +
+                                                '<div class="card-footer">' +
+                                                '<p style="background-color: forestgreen; color: white;" id="Faprovado'+ courses[i].idCourse+'">Aprobado</p>'+
+                                                '<p style="background-color: red; color: white;" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</p>'+
+                                                '</div>'+
+                                                '</div>');
                                             checkIfCoursesComplete(courses[i].idCourse);
                                             checkAR(courses[i].idCourse);
+                                            checkQualify(courses[i].idCourse)
                                         }
                                     }
 

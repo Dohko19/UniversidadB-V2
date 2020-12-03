@@ -1145,7 +1145,6 @@ function EnviarCuestionario(course_id){
                         function (tx, resultsA) {
                         //do Something
                         })
-
                 },
                 function (error) {
                     console.log("add client error: " + error.message);
@@ -1168,8 +1167,6 @@ function EnviarCuestionario(course_id){
                                 answersArray[a] = {'valor:': a, 'question_id': item4.question_id, 'user_id': item4.user_id, 'answer': item4.answer, 'answer_id': item4.answer_id, 'created_at': item4.created_at, 'updated_at': item4.updated_at, 'dateF': item4.dateF};
                                 a++;
                             }
-                            // console.log(JSON.stringify(answersArray));
-
                             $.ajax({
                                 type: "POST",
                                 async: true,
@@ -1207,15 +1204,13 @@ function EnviarCuestionario(course_id){
                                                         }).then((result) => {
                                                             /* Read more about handling dismissals below */
                                                             if (result.dismiss === Swal.DismissReason.timer) {
-                                                                // $("#Questions").hide();
-                                                                // $("#enviarCuestionario").hide();
-                                                                // $("#success").append('<p>Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p>');
                                                                 Swal.fire('Guardado!', '', 'success');
                                                                 databaseHandler.db.transaction(
                                                                     function (tx1) {
                                                                         tx1.executeSql("INSERT INTO courses_finish (course_id, dateF, finish) VALUES (?,?,?)",
                                                                             [courseID, now, 1],
                                                                             function (tx, resultsA) {
+
                                                                             })
 
                                                                     },

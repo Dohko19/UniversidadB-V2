@@ -22,7 +22,7 @@
         on: {
             pageInit: function () {
                 let catId = 2;
-                app.request.get(cordova.file.externalRootDirectory + '/jsons/cursos_list.json', function (data) {
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
                     app.preloader.show();
                     const courses = JSON.parse(data);
                     if (courses.length !== 0)
@@ -59,9 +59,16 @@
                                     '<span id="watchVidio'+ courses[i].idCourse +'">' +
                                     '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
                                     '</span>'+
-                                    '</div></div>');
+                                    '</div>' +
+                                    '<div class="card-footer">' +
+                                    '<span class="badge color-blue" id="Faprovado'+ courses[i].idCourse+'">Aprobado</span>'+
+                                    '<span class="badge color-orange" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
+                                    '</div>'+
+                                    '</div>');
                                 checkIfCoursesComplete(courses[i].idCourse);
                                 checkAR(courses[i].idCourse);
+                                checkQualify(courses[i].idCourse)
+
                             }
                         }
                     }

@@ -73,7 +73,7 @@ var databaseHandler = {
             function (tx) {
                 //Run sql here using tx
                 tx.executeSql(
-                    "create table if not exists courses_finish (course_id integer, dateF text, finish integer DEFAULT 0)",
+                    "create table if not exists courses_finish (idcf integer primary key,course_id integer, dateF text, finish integer DEFAULT 0)",
                     [],
                     function (tx, results) {
                     },

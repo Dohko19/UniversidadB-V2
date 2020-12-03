@@ -65,9 +65,15 @@
                               '<span id="watchVidio'+ courses[i].idCourse +'">' +
                               '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
                               '</span>'+
-                              '</div></div>');
+                              '</div>' +
+                              '<div class="card-footer">' +
+                              '<p style="background-color: forestgreen; color: white;" id="Faprovado'+ courses[i].idCourse+'">Aprobado</p>'+
+                              '<p style="background-color: red; color: white;" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</p>'+
+                              '</div>'+
+                              '</div>');
                           checkIfCoursesComplete(courses[i].idCourse);
                           checkAR(courses[i].idCourse);
+                          checkQualify(courses[i].idCourse)
                       }
 
                   }

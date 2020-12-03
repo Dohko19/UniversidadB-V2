@@ -23,13 +23,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/platforms/android/android/.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/TecnicasLimpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/ios/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/ios/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/databaseHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/databaseHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/TecnicasLimpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/induccion.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/induccion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/operador_limpieza.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +49,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution />
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -63,7 +77,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../social" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -81,7 +95,7 @@
       <recent name="C:\laragon\www\apps\UniversidadB\www\pages\cursos" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -143,23 +157,26 @@
       <workItem from="1606773969970" duration="630000" />
       <workItem from="1606774683078" duration="4423000" />
       <workItem from="1606837683535" duration="11220000" />
+      <workItem from="1606876721810" duration="15106000" />
+      <workItem from="1606927177357" duration="23722000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -185,12 +202,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1602298835257" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1606774964581">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="521" y="135" key="FileChooserDialogImpl" timestamp="1606964662202">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1604092708570" />
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1606774964581" />
-    <state x="521" y="135" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1603327303841" />
+    <state x="521" y="135" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606964662202" />
     <state x="275" y="0" key="SettingsEditor" timestamp="1606774638421">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -198,11 +215,11 @@
     <state x="275" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1602181488833" />
     <state x="275" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606774638421" />
     <state x="309" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602300020010" />
-    <state x="398" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1602208011050">
+    <state x="398" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1606927179484">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601937774636" />
-    <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1602208011050" />
+    <state x="398" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1606927179484" />
     <state x="445" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602280076208">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -223,13 +240,13 @@
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1601326899725" />
     <state x="340" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1602948830358" />
     <state x="382" y="183" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1603291948478" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606864347919">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup" timestamp="1606897550404">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="344" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1360.728@0.0.1360.728" timestamp="1601583009512" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1606864347919" />
     <state x="346" y="49" width="673" height="679" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1606777757073" />
     <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1601949365558" />
-    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603244667693" />
+    <state x="389" y="55" width="756" height="768" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606897550404" />
   </component>
 </project>
