@@ -38,8 +38,10 @@
                                     '<div class="card shadow-card padding-bottom margin-bottom">' +
                                     '  <div class="card-header">Curso:' +
                                     '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
-                                    '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
-                                    '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    '    <div id="FNoaprovado'+ courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    '    <span id="Faprovado'+ courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    // '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    // '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
                                     '</div>' +
                                     '  <div class="card-content">' +
                                     '   <div class="list media-list">' +
@@ -64,15 +66,16 @@
                                     '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
                                     '</span>'+
                                     '</div>' +
-                                    '<div class="card-footer">' +
-                                    '<span class="badge color-red" id="Faprovado'+ courses[i].idCourse+'">Aprobado</span>'+
-                                    '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
-                                    '</div>'+
+                                    // '<div class="card-footer">' +
+                                    // '<span class="badge color-red" id="Faprovado'+ courses[i].idCourse+'">Aprobado</span>'+
+                                    // '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
+                                    // '</div>'+
                                     '</div>');
                                 checkIfCoursesComplete(courses[i].idCourse);
-                                checkAR(courses[i].idCourse);
-                                checkQualify(courses[i].idCourse)
+                                // checkAR(courses[i].idCourse);
+                                checkQualify(courses[i].idCourse);
                             }
+
 
                         }
                     }

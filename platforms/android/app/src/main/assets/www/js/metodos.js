@@ -1309,30 +1309,33 @@ function EnviarCuestionario(course_id, catId){
                                                                                                                                         function (tx, results) {
                                                                                                                                             var length = results.rows.length;
                                                                                                                                             var idcf = results.rows.item(0);
-                                                                                                                                            storeQualification(idcf, courseID);
+                                                                                                                                            // storeQualification(idcf, courseID);
                                                                                                                                             // alert("insert new"+item.Id)
+                                                                                                                                            callStoreAqulif(idcf, courseID).then(r => function(){
+                                                                                                                                                console.log(r);
+
+                                                                                                                                            })
                                                                                                                                         })
                                                                                                                                 },function (error) {
                                                                                                                                     console.log("add client error: " + error.message);
                                                                                                                             });
                                                                                                                         // FUncion para guardar y calcular el average de cada curso
-                                                                                                                            if (course_id >= 78 && course_id <= 99) {
-                                                                                                                                app.views.main.router.navigate({
-                                                                                                                                    name: 'TecnicasLimpieza',
-                                                                                                                                    params: {id: 2}
-                                                                                                                                });
-                                                                                                                            } else {
-                                                                                                                                app.views.main.router.navigate({
-                                                                                                                                    name: 'Induccion',
-                                                                                                                                    params: {id: 1}
-                                                                                                                                });
-                                                                                                                            }
+                                                                                                                        //     if (course_id >= 78 && course_id <= 99) {
+                                                                                                                        //         app.views.main.router.navigate({
+                                                                                                                        //             name: 'TecnicasLimpieza',
+                                                                                                                        //             params: {id: 2}
+                                                                                                                        //         });
+                                                                                                                        //     } else {
+                                                                                                                        //         app.views.main.router.navigate({
+                                                                                                                        //             name: 'Induccion',
+                                                                                                                        //             params: {id: 1}
+                                                                                                                        //         });
+                                                                                                                        //     }
                                                                                                                         })
                                                                                                                 },
                                                                                                                 function (error) {
                                                                                                                     console.log("add client error: " + error.message);
                                                                                                                     app.dialog.alert('Error al insertar registro.', 'Error');
-                                                                                                                    app.preloader.hide();
                                                                                                                     Swal.fire('Guardado!', 'Puedes seguir usando la aplicacion.', 'warning')
 
                                                                                                                 },
@@ -1350,7 +1353,6 @@ function EnviarCuestionario(course_id, catId){
                                                                                         function (error) {
                                                                                             console.log("add client error: " + error.message);
                                                                                             app.dialog.alert('Error al insertar registro.', 'Error');
-                                                                                            app.preloader.hide();
                                                                                         },
                                                                                         function () {
                                                                                         });
@@ -1385,18 +1387,35 @@ function EnviarCuestionario(course_id, catId){
                                                                             finish = resultsA.rows.item(w).finish
                                                                         }
                                                                         Swal.fire('Warning!', 'Tenemos problemas para enviar tu encuesta, nosotros lo haremos por ti mas tarde o cuando tengas una conexion a internet estable', 'warning');
+                                                                        databaseHandler.db.transaction(
+                                                                            function (tx) {
+                                                                                tx.executeSql("SELECT MAX(idcf) as id FROM courses_finish",
+                                                                                    [],
+                                                                                    function (tx, results) {
+                                                                                        var length = results.rows.length;
+                                                                                        var idcf = results.rows.item(0);
+                                                                                        // storeQualification(idcf, courseID);
+                                                                                        callStoreAqulif(idcf, courseID).then(r => function(){
+                                                                                            console.log(r);
 
-                                                                        if (course_id >= 78 && course_id <= 99) {
-                                                                            app.views.main.router.navigate({
-                                                                                name: 'TecnicasLimpieza',
-                                                                                params: {id: 2}
+                                                                                        }
+                                                                                        )
+                                                                                        // alert("insert new"+item.Id)
+                                                                                    })
+                                                                            },function (error) {
+                                                                                console.log("add client error: " + error.message);
                                                                             });
-                                                                        } else {
-                                                                            app.views.main.router.navigate({
-                                                                                name: 'Induccion',
-                                                                                params: {id: 1}
-                                                                            });
-                                                                        }
+                                                                        // if (course_id >= 78 && course_id <= 99) {
+                                                                        //     app.views.main.router.navigate({
+                                                                        //         name: 'TecnicasLimpieza',
+                                                                        //         params: {id: 2}
+                                                                        //     });
+                                                                        // } else {
+                                                                        //     app.views.main.router.navigate({
+                                                                        //         name: 'Induccion',
+                                                                        //         params: {id: 1}
+                                                                        //     });
+                                                                        // }
 
                                                                     })
                                                             },
@@ -1733,6 +1752,8 @@ function checkIfCoursesComplete(course_id){
 
 function checkQualify(course_id)
 {
+    $("#Faprovado"+course_id).hide();
+    $("#FNoaprovado"+course_id).hide();
     let userId = localStorage.getItem('id');
 
     databaseHandler.db.transaction(
@@ -1747,21 +1768,20 @@ function checkQualify(course_id)
                         courses = res.rows.item(i).course_id;
                     }
                     if (length > 0){
-                        if (total >= 60 )
+                        if (total == 100 )
                         {
                             $("#Faprovado"+courses).show();
+                            $("#terminadoCourse"+courses).show();
                             $("#FNoaprovado"+courses).hide();
-                        }
-                        else if(total < 60){
-                            $("#Faprovado"+courses).hide();
-                            $("#FNoaprovado"+courses).show();
                         }else{
                             $("#Faprovado"+courses).hide();
-                            $("#FNoaprovado"+courses).hide();
+                            $("#FNoaprovado"+courses).show();
+                            $("#terminadoCourse"+courses).show();
                         }
 
                     }else{
                         $("#Faprovado"+courses).hide();
+                        $("#terminadoCourse"+courses).hide();
                         $("#FNoaprovado"+courses).hide();
                     }
                 })
@@ -1931,6 +1951,13 @@ function storeLocalA()
     );
 }
 
+async function callStoreAqulif(idcf, course_id)
+{
+    const result = await storeQualification(idcf, course_id)
+
+}
+
+
 /**
  *
  * @param {number} idcf
@@ -1944,6 +1971,7 @@ function storeQualification(idcf, course_id)
 
     const date = new Date();
     const now = offDays(date, 0);
+    app.dialog.preloader('Cargando...','red');
 
     databaseHandler.db.transaction(
         function (tx1) {
@@ -1953,7 +1981,7 @@ function storeQualification(idcf, course_id)
                     var length = resultsA.rows.length;
 
                     for (var i = 0; i < length; i++) {
-                        let user_id = results.rows.item(i).user_id;
+                        let user_id = resultsA.rows.item(i).user_id;
                         let course_id = resultsA.rows.item(i).course_id;
                     }
 
@@ -1968,11 +1996,6 @@ function storeQualification(idcf, course_id)
                                         //Buscar registros para sacar el promedio del curso, en caso de ser cero comprar con NaN
                                         var longitud = resultC.rows.length;
                                         if (longitud > 0){ //se descargaron los datos del servidor
-
-
-                                        }
-                                        else{
-                                            // toastTop('Hubo un error al guardar longitud', 2500);
                                             tx3.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ?",
                                                 [courseID],
                                                 function (tx1, res) {
@@ -2031,6 +2054,101 @@ function storeQualification(idcf, course_id)
                                                     }
                                                 })
                                         }
+                                        else{
+                                            // toastTop('Hubo un error al guardar longitud', 2500);
+                                            tx3.executeSql("SELECT register.*, au.* FROM register INNER JOIN answer_user AS au ON register.idCuestionario = au.idCuestionario WHERE register.course_id = ?",
+                                                [courseID],
+                                                function (tx1, res) {
+                                                    var long = res.rows.length;
+                                                    var answers = [];
+                                                    var repetidos = {};
+                                                    alert(long)
+                                                    if (long > 0) {
+                                                        for (var z = 0; z < long; z++) {
+                                                            var item = res.rows.item(z);
+                                                            var id_curso = item.course_id
+                                                            var total = answers.push(item.answer);
+                                                        }
+                                                        alert('total: ' + total)
+                                                        if (total > 0){
+                                                            var sum = answers.reduce((contador, valor) => {
+                                                                contador[valor] = (contador[valor] || 0) + 1;
+                                                                return contador;
+                                                            },{});
+
+                                                            var avg = (sum[1] * 100)/ answers.length;
+                                                            if ( isNaN(avg) )
+                                                            {
+                                                                avg = 0;
+                                                            }
+
+                                                            databaseHandler.db.transaction(
+                                                                function(tx5){
+                                                                    tx5.executeSql("UPDATE courses_progress SET average = ?, fecha = ? WHERE user_id = ? AND course_id = ?",
+                                                                        [avg, now, user_id, courseID],
+                                                                        function(tx1, res){
+                                                                        alert('entro a la funcion update')
+                                                                            toastTop('Trabajando...', 2000);
+                                                                            let url = "http://serviciosbennetts.com/universidadBennetts/Qualify/storeAvg.php";
+                                                                            var formData = new FormData;
+                                                                            formData.append('user_id', user_id);
+                                                                            formData.append('course_id', courseID);
+                                                                            formData.append('avg', avg);
+                                                                            formData.append('fecha', now);
+                                                                            axios.post(url, formData)
+                                                                                .then(res => {
+                                                                                    toastTop('Preguntas registradas', 2000);
+                                                                                    if (course_id >= 78 && course_id <= 99) {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'TecnicasLimpieza',
+                                                                                            params: {id: 2}
+                                                                                        });
+                                                                                    } else {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'Induccion',
+                                                                                            params: {id: 1}
+                                                                                        });
+                                                                                    }
+                                                                                    app.dialog.close();
+
+                                                                                })
+                                                                                .catch(err =>{
+                                                                                    toastTop('Ocurrio un error al guardar, revisa tu conexion a intenret, lo intentaremos por tu mas tarde', 4000);
+                                                                                    app.dialog.close();
+                                                                                    if (course_id >= 78 && course_id <= 99) {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'TecnicasLimpieza',
+                                                                                            params: {id: 2}
+                                                                                        });
+                                                                                    } else {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'Induccion',
+                                                                                            params: {id: 1}
+                                                                                        });
+                                                                                    }
+                                                                                });
+                                                                        }
+                                                                    )
+                                                                },function(error){
+                                                                    console.log("error en insert "+error.message)
+                                                                    app.dialog.close();
+
+                                                                }
+                                                            )
+                                                        }
+                                                        else{
+                                                            toastTop('Hubo un error al guardar total 0', 2500);
+                                                            app.dialog.close();
+
+                                                        }
+                                                    }
+                                                    else{
+                                                        toastTop('Hubo un error al guardar LONG', 2500);
+                                                        app.dialog.close();
+
+                                                    }
+                                                })
+                                        }
                                     })
                             }
                         );
@@ -2046,7 +2164,6 @@ function storeQualification(idcf, course_id)
                                         //Buscar registros para sacar el promedio del curso, en caso de ser cero comprar con NaN
                                         var longitud = resultC.rows.length;
                                         if (longitud > 0){ //se descargaron los datos del servidor
-
 
                                         }
                                         else{
@@ -2090,9 +2207,34 @@ function storeQualification(idcf, course_id)
                                                                             axios.post(url, formData)
                                                                                 .then(res => {
                                                                                     toastTop('Preguntas registradas', 2000);
+                                                                                    if (course_id >= 78 && course_id <= 99) {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'TecnicasLimpieza',
+                                                                                            params: {id: 2}
+                                                                                        });
+                                                                                    } else {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'Induccion',
+                                                                                            params: {id: 1}
+                                                                                        });
+                                                                                    }
+                                                                                    app.dialog.close();
+
                                                                                 })
                                                                                 .catch(err =>{
-                                                                                    toastTop('Ocurrio un error al guardar, revisa tu conexion a intenret', 2000);
+                                                                                    toastTop('Ocurrio un error al guardar, revisa tu conexion a intenret, lo intentaremos por ti mas tarde', 2000);
+                                                                                    app.dialog.close();
+                                                                                    if (course_id >= 78 && course_id <= 99) {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'TecnicasLimpieza',
+                                                                                            params: {id: 2}
+                                                                                        });
+                                                                                    } else {
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'Induccion',
+                                                                                            params: {id: 1}
+                                                                                        });
+                                                                                    }
 
                                                                                 });
                                                                         }
@@ -2102,10 +2244,14 @@ function storeQualification(idcf, course_id)
                                                         }
                                                         else{
                                                             toastTop('Hubo un error al guardar total 0', 2500);
+                                                            app.dialog.close();
+
                                                         }
                                                     }
                                                     else{
                                                         toastTop('Hubo un error al guardar LONG', 2500);
+                                                        app.dialog.close();
+
                                                     }
                                                 })
                                         }
@@ -2204,9 +2350,6 @@ function checkEvaluacionFinal()
                                         }
                                     }
                                 );
-                            },
-                            function(error){
-                                console.log("error en insert "+error.message)
                             }
                         );
                     }

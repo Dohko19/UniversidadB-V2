@@ -20,90 +20,90 @@
        </div>
 </template>
 <script>
-  return {
-    on: {
-      pageInit: function(e, page)
-      {
-          let catId = 1;
-          app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
-              const courses = JSON.parse(data);
-              console.log(courses);
-              // const courses_show = JSON.parse(data); '/'+catId+'
+    return {
+        on: {
+            pageInit: function(e, page)
+            {
+                let catId = 2;
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
+                    const courses = JSON.parse(data);
+                    console.log(courses);
+                    if (courses.length !== 0)
+                    {
+                        for (var i = 0; i < courses.length; i++) {
 
-              if (courses.length !== 0)
-              {
-                  for (var i = 0; i < courses.length; i++) {
+                            if(courses[i].category_id == catId)
+                            {
+                                $("#Listado").append(''+
+                                    '<div class="card shadow-card padding-bottom margin-bottom">' +
+                                    '  <div class="card-header">Curso:' +
+                                    '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
+                                    '    <div id="FNoaprovado'+ courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    '    <span id="Faprovado'+ courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    // '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    // '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    '</div>' +
+                                    '  <div class="card-content">' +
+                                    '   <div class="list media-list">' +
+                                    '      <ul>' +
+                                    '        <li class="item-content">' +
+                                    '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
+                                    '          <div class="item-inner">' +
+                                    '            <div class="item-title-row">' +
+                                    '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
+                                    '            </div>' +
+                                    '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
+                                    '          </div>' +
+                                    '        </li>'+
+                                    '      </ul>' +
+                                    '    </div>' +
+                                    '  </div>' +
+                                    '<div align="right" >'+
+                                    '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                                    '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
+                                    ''+
+                                    '<span id="watchVidio'+ courses[i].idCourse +'">' +
+                                    '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
+                                    '</span>'+
+                                    '</div>' +
+                                    // '<div class="card-footer">' +
+                                    // '<span class="badge color-red" id="Faprovado'+ courses[i].idCourse+'">Aprobado</span>'+
+                                    // '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
+                                    // '</div>'+
+                                    '</div>');
+                                checkIfCoursesComplete(courses[i].idCourse);
+                                // checkAR(courses[i].idCourse);
+                                checkQualify(courses[i].idCourse);
+                            }
 
-                      if(courses[i].category_id == catId)
-                      {
-                          $("#Listado").append(''+
-                              '<div class="card shadow-card padding-bottom margin-bottom">' +
-                              '  <div class="card-header">Curso:' +
-                              '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
-                              '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
-                              '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
-                              '</div>' +
-                              '  <div class="card-content">' +
-                              '   <div class="list media-list">' +
-                              '      <ul>' +
-                              '        <li class="item-content">' +
-                              '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
-                              '          <div class="item-inner">' +
-                              '            <div class="item-title-row">' +
-                              '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
-                              '            </div>' +
-                              '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
-                              '          </div>' +
-                              '        </li>'+
-                              '      </ul>' +
-                              '    </div>' +
-                              '  </div>' +
-                              '<div align="right" >'+
-                              '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
-                              '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
-                              ''+
-                              '<span id="watchVidio'+ courses[i].idCourse +'">' +
-                              '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
-                              '</span>'+
-                              '</div>' +
-                              '<div class="card-footer">' +
-                              '<p style="background-color: forestgreen; color: white;" id="Faprovado'+ courses[i].idCourse+'">Aprobado</p>'+
-                              '<p style="background-color: red; color: white;" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</p>'+
-                              '</div>'+
-                              '</div>');
-                          checkIfCoursesComplete(courses[i].idCourse);
-                          checkAR(courses[i].idCourse);
-                          checkQualify(courses[i].idCourse)
-                      }
-
-                  }
-              }
-          });
-        // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/courses/index.php', {catId: 1})
-        // .then(function (res) {
-        //   let content = JSON.parse(res);
-        //   var valor = '';
-        //   content.forEach(data => {
-        //       valor += '<div class="card">'+
-        //           '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ data.name +'</div>'+
-        //           '<div class="card-content card-content-padding">'+
-        //           '<p class="date small">'+ data.description +'</p>' +
-        //           '</div>' +
-        //           '<div class="card-footer"><a href="/cursos/show/'+ data.id +'" class="link">Ingresar al Curso</a></div>' +
-        //           '<div class="progressbar" data-progress="100">'+
-        //           ' <span></span>'+
-        //           '</div></div>'
-        //   });
-        //   $("#Listado").html(valor);
-        // })
-        // .catch(function (err) {
-        //   console.log(err.xhr)
-        //   console.log(err.status)
-        //   console.log(err.message)
-        // });
-      }
+                        }
+                    }
+                });
+                // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/courses/index.php', {catId: 2})
+                //     .then(function (res) {
+                //         let content = JSON.parse(res);
+                //         var valor = '';
+                //         content.forEach(data => {
+                //             valor += '<div class="card">'+
+                //                 '<div class="card-header" style="text-shadow: black 0.1em 0.1em 0.2em">'+ data.name +'</div>'+
+                //                 '<div class="card-content card-content-padding">'+
+                //                 '<p class="date small">'+ data.description +'</p>' +
+                //                 '</div>' +
+                //                 '<div class="card-footer"><a href="/cursos/show/'+ data.id +'" class="link">Ingresar al Curso</a></div>' +
+                //                 '<div class="progressbar" data-progress="100">'+
+                //                 ' <span></span>'+
+                //                 '</div></div>'
+                //         });
+                //         $("#Listado").html(valor);
+                //     })
+                //     .catch(function (err) {
+                //         console.log(err.xhr)
+                //         console.log(err.status)
+                //         console.log(err.message)
+                //     });
+            }
+        }
     }
-  }
 </script>
 
 <style>
