@@ -1704,6 +1704,11 @@ function getCertificate()
     }
 }
 
+function readMore($link)
+{
+    window.open($link, '_system');
+}
+
 function checkIfCoursesComplete(course_id){
 
     const date = new Date();

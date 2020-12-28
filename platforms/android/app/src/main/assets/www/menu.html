@@ -418,43 +418,46 @@
 
       //end
       function newsUB() {
-          app.request.get(cordova.file.externalApplicationStorageDirectory + 'jsons/noticias_news.json', function (data) {
+        //   app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/noticias_news.json', function (data) {
+        //       let content1 = JSON.parse(data);
+        //               let news = '';
+        //               content1.forEach(data => {
+        //                   news += '' +
+        //                       '<div class="card-content card-content-padding">' +
+        //                       '<p><strong>' + data.title + '</strong></p>' +
+        //                       '<p> <img src="'+data.body+'"></p>' +
+        //                       '<hr>' +
+        //                       '</div>' +
+        //                       ''
+        //               });
+        //               $("#news").html(news);
+        //               // Dalle fuego  XD 
 
-              let content1 = JSON.parse(data);
-                      let news = '';
-                      content1.forEach(data => {
-                          news += '' +
-                              '<div class="card-content card-content-padding">' +
-                              '<p><strong>' + data.title + '</strong></p>' +
-                              '<p>' + data.excerpt + '</p>' +
-                              '<hr>' +
-                              '</div>' +
-                              ''
-                      });
-                      $("#news").html(news);
-          });
-          // app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php'){
-          //     then(function (res) {
-          //         let content1 = JSON.parse(res);
-          //         let news = '';
-          //         content1.forEach(data => {
-          //             news += '' +
-          //                 '<div class="card-content card-content-padding">' +
-          //                 '<p><strong>' + data.title + '</strong></p>' +
-          //                 '<p>' + data.excerpt + '</p>' +
-          //                 '<hr>' +
-          //                 '</div>' +
-          //                 ''
-          //         });
-          //         $("#news").html(news);
-          //     })
-          //         .catch(function (err) {
-          //             console.log(err.xhr);
-          //             console.log(err.status);
-          //             console.log(err.message);
-          //         });
-          // }
-      }
+        //   });
+          app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php')
+              .then(function (res) {
+                  let content1 = JSON.parse(res);
+                  console.log(content1)
+                  let news = '';
+                  content1.forEach(data => {
+                      $("#news").append(
+                          '<div class="card-content card-content-padding">' +
+                            '<p><b>' + data.title + '</b></p>' +
+                            '<p class="date">' + data.excerpt + '</p>' +
+                            '<p> <img width="100%" src="'+data.body+'"></p>' +
+                          '</div>' +
+                          '<div class="card-footer"><button onclick="readMore(\'' + data.pdf + '\')" class="button">Leer mas </button></div>'+
+                          '');
+                  });
+                })
+                  .catch(function (err) {
+                      console.log(err.xhr);
+                      console.log(err.status);
+                      console.log(err.message);
+                  });
+          
+           
+        }
       //Video presentacion
       var player, iframe;
       let first_login = localStorage.getItem('first_login');
