@@ -434,23 +434,31 @@
         //               // Dalle fuego  XD 
 
         //   });
-          app.request.promise.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php')
-              .then(function (res) {
-                  let content1 = JSON.parse(res);
+          axios.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php')
+              .then(res => {
+                console.log(res.data)
+                  let content1 = res.data;
                   console.log(content1)
-                  let news = '';
-                  content1.forEach(data => {
-                      $("#news").append(
-                          '<div class="card-content card-content-padding">' +
-                            '<p><b>' + data.title + '</b></p>' +
-                            '<p class="date">' + data.excerpt + '</p>' +
-                            '<p> <img width="100%" src="'+data.body+'"></p>' +
-                          '</div>' +
-                          '<div class="card-footer"><button onclick="readMore(\'' + data.pdf + '\')" class="button">Leer mas </button></div>'+
-                          '');
-                  });
+                  if(content1.length)
+                  {
+                      content1.forEach(data => {
+                        $("#news").append(
+                            '<div class="card-content card-content-padding">' +
+                              '<p><b>' + data.title + '</b></p>' +
+                              '<p class="date">' + data.excerpt + '</p>' +
+                              '<p> <img width="100%" src="'+data.body+'"></p>' +
+                            '</div>' +
+                            '<div class="card-footer"><button onclick="readMore(\'' + data.pdf + '\')" class="button">Leer mas </button></div>'+
+                            '');
+                      });
+                  }else{
+                    $("#news").append('<div class="card-content card-content-padding">' +
+                      '<p><b>Nada por aqui...</b></p>' + ''
+                      );
+                  }
+                  
                 })
-                  .catch(function (err) {
+                  .catch(err => {
                       console.log(err.xhr);
                       console.log(err.status);
                       console.log(err.message);
