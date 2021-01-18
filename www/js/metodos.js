@@ -2092,7 +2092,6 @@ function storeQualification(idcf, course_id)
                                                                     tx5.executeSql("UPDATE courses_progress SET average = ?, fecha = ? WHERE user_id = ? AND course_id = ?",
                                                                         [avg, now, user_id, courseID],
                                                                         function(tx1, res){
-                                                                        alert('entro a la funcion update')
                                                                             toastTop('Trabajando...', 2000);
                                                                             let url = "http://serviciosbennetts.com/universidadBennetts/Qualify/storeAvg.php";
                                                                             var formData = new FormData;
