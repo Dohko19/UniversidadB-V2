@@ -14,101 +14,60 @@
 </template>
 <script>
        return {
-         on: {
-           pageInit: function(e, page)
-           {
+           on: {
+               pageInit: function (e, page) {
 
-              let id = app.views.main.router.currentRoute.params.id;
-              let catId = app.views.main.router.currentRoute.params.catid;
-              let user_id = localStorage.getItem("id");
-               let sc = localStorage.getItem("status_course");
+                   let id = app.views.main.router.currentRoute.params.id;
+                   let catId = app.views.main.router.currentRoute.params.catid;
+                   let user_id = localStorage.getItem("id");
+                   let sc = localStorage.getItem("status_course");
 
-               $("#backButton").append('<div class="navbar-inner">' +
-                   '<div class="left">' +
-                   '   <a href="/cursos/index/'+catId+'">' +
-                   '     <i class="fas fa-chevron-circle-left"></i>Regresar' +
-                   '   </a>' +
-                   ' </div>' +
-                   '</div>'
-                    );
-               //course_show.json
-               app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/course_show.json', function (data) {
-                   const courses_show = JSON.parse(data);
+                   $("#backButton").append('<div class="navbar-inner">' +
+                       '<div class="left">' +
+                       '   <a href="#" onclick=regresar2(' + catId + ')>' +
+                       '     <i class="fas fa-chevron-circle-left"></i>Regresar' +
+                       '   </a>' +
+                       ' </div>' +
+                       '</div>'
+                   );
+                   //course_show.json
+                   app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/course_show.json', function (data) {
+                       const courses_show = JSON.parse(data);
 
-                   if (courses_show.length !== 0)
-                   {
-                       for (var i = 0; i < courses_show.length; i++) {
-                           if(courses_show[i].course_id == id)
-                           {
-                               $("#Lessons").append(
-                                   '<div class="card">'+
-                                     '<div class="card-header" style="font-size: 20px; background-color: #2196f3; color: white;">'+courses_show[i].name+'</div>'+
-                                     '<div class="card-content card-content-padding">' +
-                                     '<iframe width="100%" height="315" src="'+courses_show[i].video_src+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'+
-                                     '<div class="card-footer">'+
-                                     // '<label for="complete'+courses_show[i].id+'">'+
-                                     // '<input type="checkbox" onclick="learn('+courses_show[i].id+')" id="complete'+courses_show[i].id+'" name="complete'+courses_show[i].id+'" value="0"/>'+
-                                     // 'Completar esta Lección'+
-                                     '</div>'+
-                                     '<span class="row" id="questionaire">'+
-                                     '<a onclick="registerQuest('+ courses_show[i].id +', '+courses_show[i].course_id+')" href="/questions/show/'+courses_show[i].id+'/'+courses_show[i].course_id+'/'+catId+'/'+courses_show[i].name+'" class="link col button button-large button-raised button-fill">'+
-                                     '<i class="fas fa-question"></i> Resolver Cuestionario</a>'+
-                                     '</span>'+
-                                     '</div>'
-                               );
-                               if (sc == 1)
-                               {
-                                   $("#questionaire").hide();
+                       if (courses_show.length !== 0) {
+                           for (var i = 0; i < courses_show.length; i++) {
+                               if (courses_show[i].course_id == id) {
+                                   $("#Lessons").append(
+                                       '<div class="card">' +
+                                       '<div class="card-header" style="font-size: 20px; background-color: #2196f3; color: white;">' + courses_show[i].name + '</div>' +
+                                       '<div class="card-content card-content-padding">' +
+                                       // '<iframe width="100%" height="315" src="' + courses_show[i].video_src + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen rel=0></iframe></div>' +
+                                       '<div id="player" style="width: 100%; height: 315px">' +
+                                       '</div>' +
+                                       '</div>' +
+                                       '<div class="card-footer">' +
+                                       // '<label for="complete'+courses_show[i].id+'">'+
+                                       // '<input type="checkbox" onclick="learn('+courses_show[i].id+')" id="complete'+courses_show[i].id+'" name="complete'+courses_show[i].id+'" value="0"/>'+
+                                       // 'Completar esta Lección'+
+                                       '</div>' +
+                                       '<span class="row" id="questionaire">' +
+                                       '<a onclick="registerQuest(' + courses_show[i].id + ', ' + courses_show[i].course_id + ')" href="/questions/show/' + courses_show[i].id + '/' + courses_show[i].course_id + '/' + catId + '/' + courses_show[i].name + '" class="link col button button-large button-raised button-fill">' +
+                                       '<i class="fas fa-question"></i> Resolver Cuestionario</a>' +
+                                       '</span>' +
+                                       '</div>'
+                                   );
+                                   onYouTubePlayerAPIReady(courses_show[i].created_at)
+
+                                   if (sc == 1) {
+                                       $("#questionaire").hide();
+                                   }
                                }
-                           }
 
+                           }
                        }
-                   }
-               });
-              // var url = "http://serviciosbennetts.com/universidadBennetts/courses/show.php";
-              // app.request.promise.get(url, {id: id, user_id: user_id})
-              // .then(function (res) {
-              //     // console.log(res);
-              // let content = JSON.parse(res);
-              //     if (content[1] !== null && content[0] !== null){
-              //           content[1].forEach(combo => {
-              //             let inp = $("#complete" + combo.id);
-              //             inp.attr("disabled", !inp.prop('disabled'));
-              //
-              //             let inpCheck = $("#complete" + combo.id);
-              //             let isCheck = inpCheck.attr("checked", !inp.prop("checked"));
-              //
-              //               if ($('#complete'+ combo.id).attr('checked') ) {
-              //                   // alert("Checkbox seleccionado");
-              //                   $("#questionaire").show();
-              //                   $("#nota").hide();
-              //               }
-              //             // if (inp.attr("checked"))
-              //             // {
-              //             //     alert('checkeado compa')
-              //
-              //             // }
-              //             // else{
-              //             //     $("#questionaire").hide();
-              //             //     $("#nota").show();
-              //             //     $("#nota").css('color', 'red');
-              //             // }
-              //
-              //         });
-              //     }else {
-              //         $("#questionaire").hide();
-              //         $("#nota").show();
-              //         $("#nota").css('color', 'red');
-              //     }
-              //
-              // })
-              // .catch(function (err) {
-              // console.log(err)
-              // console.log(err.status)
-              // console.log(err.message)
-              // });
+                   });
+               }
            }
-         }
        }
 </script>
 <style>

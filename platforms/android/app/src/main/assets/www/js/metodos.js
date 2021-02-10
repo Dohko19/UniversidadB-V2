@@ -460,6 +460,10 @@ function regresar(){
      screen.orientation.lock('portrait');
 }
 
+function regresar2(catId){
+    app.views.main.router.navigate({ name: 'cursos_index' , params: {id: catId}});
+}
+
 function llevarTodoSegInd(cte, ced){
     app.dialog.alert(" Puede seguir usando la aplicacion","Enviando.");
     databaseHandler.db.transaction(
@@ -2764,4 +2768,98 @@ function watchlesson(){
             },
         }
     });
+}
+// JS Youtube API
+var player, iframe;
+
+function onYouTubePlayerAPIReady(id) {
+    player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: ''+id+'',
+        playerVars: {
+            controls: 1,
+            disablekb: 0,
+            autoplay: 0,
+            showinfo: 1,
+            rel: 0,
+            hl: 0,
+            playsinline: 0,
+            fs: 1
+        },
+        events: {
+            'onReady': onPlayerReadyM,
+            'onStateChange': onPlayerStateChangeM,
+            'onFullscreen': onFullscreenM
+        }
+    });
+}
+
+function stopVideo() {
+    player.stopVideo();
+}
+function onPlayerReadyM(event) {
+    event.target.playVideo();
+    console.log(event);
+    iframe = $("#player");
+
+}
+
+function playFullscreen (){
+    console.log('is full screen after if function')
+
+    var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    if (requestFullScreen) {
+        console.log('is full screen')
+
+        requestFullScreen.bind(iframe)();
+    }
+}
+function onFullscreenM(event){
+    console.log(event)
+}
+// document.addEventListener("fullscreenchange", function() {
+//     if (!document.fullscreenElement) player.stopVideo();
+//   }, false);
+
+//   document.addEventListener("msfullscreenchange", function() {
+//     if (!document.msFullscreenElement) player.stopVideo();
+//   }, false);
+
+//   document.addEventListener("mozfullscreenchange", function() {
+//     if (!document.mozFullScreen) player.stopVideo();
+//   }, false);
+
+//   document.addEventListener("webkitfullscreenchange", function() {
+//     if (!document.webkitIsFullScreen) player.stopVideo();
+//   }, false);
+
+// when video ends
+function onPlayerStateChangeM(event) {
+    console.log(event)
+    if (event.data === -1) {
+        playFullscreen()
+        console.log('is full screen')
+    }
+    if(event.data === 0) {
+        stopVideo()
+        // swal.fire({
+        //     title: '¿Estas listo para realizar los cuestionarios?',
+        //     text: "",
+        //     icon: 'warning',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Si, estoy listo!',
+        //     cancelButtonText: 'Aun no estoy listo'
+        // }).then((result) => {
+        //     if (result.isConfirmed) {
+        //
+        //     }else{
+        //         screen.orientation.lock('portrait');
+        //     }
+        //     ;
+        // })
+
+    }
 }
