@@ -353,7 +353,7 @@
 
       // Create dynamic Popup
       var dynamicPopup2 = app.popup.create({
-          content: '<div class="popup">'+
+          content: '<div class="popup" style="overflow:scroll;">'+
               '<p><a href="#" class="link popup-close"><i class="fas fa-window-close"></i></a></p>'+
               '<div class="page"><div class="page-content">'+
               '<div class="block">'+
@@ -418,22 +418,7 @@
 
       //end
       function newsUB() {
-        //   app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/noticias_news.json', function (data) {
-        //       let content1 = JSON.parse(data);
-        //               let news = '';
-        //               content1.forEach(data => {
-        //                   news += '' +
-        //                       '<div class="card-content card-content-padding">' +
-        //                       '<p><strong>' + data.title + '</strong></p>' +
-        //                       '<p> <img src="'+data.body+'"></p>' +
-        //                       '<hr>' +
-        //                       '</div>' +
-        //                       ''
-        //               });
-        //               $("#news").html(news);
-        //               // Dalle fuego  XD 
-
-        //   });
+          $("#news").empty();
           axios.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php')
               .then(res => {
                 console.log(res.data)
