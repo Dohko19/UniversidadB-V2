@@ -139,7 +139,7 @@
       <div class="page">
         <div class="page-content">
           <div class="block-title" style="text-align: center;">
-              <img src="img/logouni.png" width="120px" /><br /><br /><!--Ver. 7.4.2 -->Universidad Bennettss</div>
+              <img src="img/logouni.png" width="120px" /><br /><br /><!--Ver. 7.4.2 -->Universidad Bennetts</div>
             <div class="list">
             <ul>
             <li>
@@ -258,7 +258,14 @@
               <div class="login-screen-title" style="color: #2196f3;">¿Necesitas Ayuda?</div>
             <div class="list">
               <div class="block-footer">
-                   <p> Centro de Ayuda <br> <br>
+                <p><h3>Centro de Ayuda </h3></p>
+                <p><i class="fas fa-phone-alt"></i> Proteccion Civil: 56832222</p>
+                <p><i class="fas fa-phone-alt"></i> Emergencias: 911</p>
+                <p><i class="fas fa-phone-alt"></i> Sistema de Aguas: 56543210</p>
+                <p><i class="fas fa-phone-alt"></i> Localtel: 56581111 <i class="fas fa-map-marker-alt"></i></p>
+                <p><i class="fas fa-phone-alt"></i> Bomberos: 911 / 57683800</p>
+                <p><i class="fas fa-phone-alt"></i> Cruz Roja: 911 <i style="color: red;" class="fas fa-plus"></i></p>
+                   <p><br> <br>
                     <!-- Close Popup -->
                        <b>Buzón de sugerencias:</b> 55-44-47-27-55 <br>
                        <b>Correo:</b> admon.rh@bennetts.com.mx <br>
@@ -284,12 +291,12 @@
     <script src="js/routes.js"></script>
     <script src="js/signature/modernizr.js"></script>
     <script src="js/app.js"></script>
+<script src="js/player_api.js"></script>
     <script src="js/metodos.js"></script>
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/SimpleStarRating.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/circle-progress.min.js"></script>
-    <script src="js/player_api.js"></script>
 <!--    <script src="http://www.youtube.com/player_api?enablejsapi=1&version=3"></script>-->
 <script type="text/javascript" charset="utf-8">
       var pictureSource;   // picture source
@@ -353,7 +360,7 @@
 
       // Create dynamic Popup
       var dynamicPopup2 = app.popup.create({
-          content: '<div class="popup" style="overflow:scroll;">'+
+          content: '<div class="popup">'+
               '<p><a href="#" class="link popup-close"><i class="fas fa-window-close"></i></a></p>'+
               '<div class="page"><div class="page-content">'+
               '<div class="block">'+
@@ -384,8 +391,8 @@
       // Create dynamic Popup
       var dynamicPopup = app.popup.create({
           content: '<div class="popup">'+
-              '<div class="">'+
-              '<div class="card">' +
+              '<div class="page">'+
+              '<div class="card page-content">' +
               '<div class="card-header">Avisos/Boletines: <a style="padding-left: 30px !important;" href="#" class="link popup-close"><i class="far fa-times-circle"></i></a></div>'+
               ''+
               '<div id="news"></div>'+
@@ -418,7 +425,22 @@
 
       //end
       function newsUB() {
-          $("#news").empty();
+        //   app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/noticias_news.json', function (data) {
+        //       let content1 = JSON.parse(data);
+        //               let news = '';
+        //               content1.forEach(data => {
+        //                   news += '' +
+        //                       '<div class="card-content card-content-padding">' +
+        //                       '<p><strong>' + data.title + '</strong></p>' +
+        //                       '<p> <img src="'+data.body+'"></p>' +
+        //                       '<hr>' +
+        //                       '</div>' +
+        //                       ''
+        //               });
+        //               $("#news").html(news);
+        //               // Dalle fuego  XD
+
+        //   });
           axios.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php')
               .then(res => {
                 console.log(res.data)
@@ -428,7 +450,7 @@
                   {
                       content1.forEach(data => {
                         $("#news").append(
-                            '<div class="card-content card-content-padding">' +
+                            '<div class="page-content card-content card-content-padding ">' +
                               '<p><b>' + data.title + '</b></p>' +
                               '<p class="date">' + data.excerpt + '</p>' +
                               '<p> <img width="100%" src="'+data.body+'"></p>' +
@@ -441,15 +463,15 @@
                       '<p><b>Nada por aqui...</b></p>' + ''
                       );
                   }
-                  
+
                 })
                   .catch(err => {
                       console.log(err.xhr);
                       console.log(err.status);
                       console.log(err.message);
                   });
-          
-           
+
+
         }
       //Video presentacion
       var player, iframe;
@@ -472,8 +494,8 @@
                   },
                   events: {
                       'onReady': onPlayerReady,
-                      'onStateChange': onPlayerStateChange
-                  }
+                      'onStateChange': onPlayerStateChange,
+                      'onFullscreen': onFullscreen                  }
               });
           }
       }
@@ -482,35 +504,79 @@
           event.target.playVideo();
           console.log(event);
           iframe = $("#player");
+
       }
 
       function playFullscreen (){
+              console.log('is full screen after if function')
+
           var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
           if (requestFullScreen) {
+              console.log('is full screen')
+
               requestFullScreen.bind(iframe)();
           }
       }
+      function onFullscreen(event){
+        console.log(event)
+      }
+      // document.addEventListener("fullscreenchange", function() {
+      //     if (!document.fullscreenElement) player.stopVideo();
+      //   }, false);
+
+      //   document.addEventListener("msfullscreenchange", function() {
+      //     if (!document.msFullscreenElement) player.stopVideo();
+      //   }, false);
+
+      //   document.addEventListener("mozfullscreenchange", function() {
+      //     if (!document.mozFullScreen) player.stopVideo();
+      //   }, false);
+
+      //   document.addEventListener("webkitfullscreenchange", function() {
+      //     if (!document.webkitIsFullScreen) player.stopVideo();
+      //   }, false);
 
       // when video ends
       function onPlayerStateChange(event) {
           console.log(event)
           if (event.data === -1) {
               playFullscreen()
+              console.log('is full screen')
           }
           if(event.data === 0) {
-              var id = localStorage.getItem("id");
-              $("#progreso").show();
-              $("#menuPrincipal").show();
-              $("#player").hide();
-              $("#messageWelcome").show();
-              $("#circleProgressBar").show();
-              $("#presentacion").hide();
-              removeFirstLogin(id);
-              window.localStorage.removeItem("first_login");
-              localStorage.setItem("first_login", 0);
-              swal.fire('Mensaje','Gracias por ver el video de presentacion, a continuacion puedes acceder a tus cursos', 'info');
+              swal.fire({
+              title: '¿Estas listo para realizar los cuestionarios?',
+              text: "",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si, estoy listo!',
+              cancelButtonText: 'Aun no estoy listo'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                var id = localStorage.getItem("id");
+                  $("#progreso").show();
+                  $("#menuPrincipal").show();
+                  $("#player").hide();
+                  $("#messageWelcome").show();
+                  $("#circleProgressBar").show();
+                  $("#presentacion").hide();
+                  removeFirstLogin(id);
+                  window.localStorage.removeItem("first_login");
+                  localStorage.setItem("first_login", 0);
+                  swal.fire('Mensaje','Gracias por ver el video de presentacion, a continuacion puedes acceder a tus cursos', 'info')
+              }else{
+                window.location.href = "./menu.html";
+                screen.orientation.lock('portrait');
+              }
+              ;
+            })
 
           }
+          }
+      function stopVideo() {
+          player.stopVideo();
       }
 </script>
 
