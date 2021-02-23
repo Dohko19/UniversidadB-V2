@@ -942,7 +942,7 @@ function learn(id)
 
 //-----------------------------------------------------------
 function registerQuest(lesson_id, course_id){
-
+    stopVideo()
     var now = new Date();
     var idCuestionario = localStorage.getItem('idCuestionario');
 
