@@ -206,6 +206,7 @@ var IdUsuario = localStorage.getItem("id");
                             let role_displayName = separado[9];
                             let id_role = separado[10];
                             let first_login = separado[11];
+                            let sitio = separado[12];
                             localStorage.setItem("id", id);
                             localStorage.setItem("name", name);
                             localStorage.setItem("last_name", last_name);
@@ -218,6 +219,7 @@ var IdUsuario = localStorage.getItem("id");
                             localStorage.setItem("role_displayName", role_displayName)
                             localStorage.setItem("id_role", id_role)
                             localStorage.setItem("first_login", first_login)
+                            localStorage.setItem("sitio", sitio)
                             if(active == 1)
                             {
                                 if(id_role == 1)

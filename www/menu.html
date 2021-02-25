@@ -149,6 +149,13 @@
                 </div>
                 </div>
             </li>
+            <li>
+                <div class="item-content">
+                <div class="item-inner">
+                <div class="item-title"><a href="/supervisor/operadores">Operadores en espera de aprovacion</a></div>
+                </div>
+                </div>
+            </li>
             </ul>
             </div>
             <br> <br> <br>
@@ -3063,8 +3070,8 @@
         try {
             var id = localStorage.getItem("id");
 
-            const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
-            const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
+        const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
+        const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
             if(response2.data == 'INF')
             {
                 var p2 = 0.0
@@ -3079,7 +3086,7 @@
 
             // let dataBarTotalW = p2 + p3;
 
-            if (response2.data >= 100)
+            if (response2.data >= 90)
             {
                 // $("#finalQuestions").show();
                 // updateStatusCourse()
@@ -3131,10 +3138,7 @@
         }
     }
     waitBar();
-
         storeLocalA();
-
-
         function horizontal2(){
         var orientation = (screen.orientation || {}).type || screen.mozOrientation || screen.msOrientation;
 

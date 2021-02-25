@@ -2863,3 +2863,15 @@ function onPlayerStateChangeM(event) {
 
     }
 }
+
+function vobo(id){
+    let formData = new FormData()
+    formData.append('id', id)
+    axios.post('https://serviciosbennetts.com/universidadBennetts/supervisor/certificateVobo.php', formData)
+        .then(res => {
+            toastTop('Actualizado', 3000)
+        })
+        .catch( err => {
+            toastTop('Ocurrio un error, intentalo mas tarde', 2500);
+        })
+}

@@ -74,6 +74,11 @@ var routes = [
     componentUrl: './pages/TecnicasLimpieza.html',
   },
   {
+    name: 'supervisores-operadores',
+    path: '/supervisor/operadores',
+    componentUrl: './pages/supervisor/operadores.html',
+  },
+  {
     name: 'Induccion',
     path: '/Induccion/:id',
     componentUrl: './pages/Induccion.html',
