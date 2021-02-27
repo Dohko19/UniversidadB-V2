@@ -149,7 +149,7 @@
                 </div>
                 </div>
             </li>
-            <li>
+            <li id="vobos">
                 <div class="item-content">
                 <div class="item-inner">
                 <div class="item-title"><a href="/supervisor/operadores">Operadores en espera de aprovacion</a></div>
@@ -3066,7 +3066,7 @@
 
     async function waitBar()
     {
-        updateStatusCourse()
+        
         try {
             var id = localStorage.getItem("id");
 
@@ -3086,8 +3086,9 @@
 
             // let dataBarTotalW = p2 + p3;
 
-            if (response2.data >= 90)
+            if (response2.data >= 85)
             {
+                updateStatusCourse()
                 // $("#finalQuestions").show();
                 // updateStatusCourse()
                 $("#finalQuestions").hide();
@@ -3181,6 +3182,13 @@
     var nombreCompleto = name + " " + last_name;
     var role_id = localStorage.getItem('role_id');
     let status_course = localStorage.getItem('status_course');
+
+    if(role_id === 1 || role_id === 2)
+    {
+      $("#vobos").show();
+    }else{
+      $("#vobos").hide();
+    }
 
     if (status_course == 0){
         // $("#getCertificado").hide();
