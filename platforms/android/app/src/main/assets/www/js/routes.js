@@ -79,6 +79,11 @@ var routes = [
     componentUrl: './pages/supervisor/operadores.html',
   },
   {
+    name: 'supervisores',
+    path: '/supervisor/:id',
+    componentUrl: './pages/supervisor/supervisor.html',
+  },
+  {
     name: 'Induccion',
     path: '/Induccion/:id',
     componentUrl: './pages/Induccion.html',

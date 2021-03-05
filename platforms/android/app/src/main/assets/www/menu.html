@@ -149,7 +149,7 @@
                 </div>
                 </div>
             </li>
-            <li>
+            <li id="vobos">
                 <div class="item-content">
                 <div class="item-inner">
                 <div class="item-title"><a href="/supervisor/operadores">Operadores en espera de aprovacion</a></div>
@@ -236,7 +236,8 @@
                 <a class="col button dynamic-popup button-large button-raised button-fill"  href="#">Avisos</a>
             </p>
             <p class="row">
-                <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu" href="#">Supervisores</a>
+                <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu"
+                   href="/supervisor/3">Supervisores</a>
             </p>
             <!-- <p class="row">
                 <a href="/cursos/evaluaciones/" onclick="loadFinalEval()" id="finalQuestions"
@@ -245,7 +246,7 @@
                 </a>
             </p> -->
             <!-- <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p> -->
-            <p class="row"><a href="#" target="_system" onclick="getCertificate()" id="downloadCertificate" class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
+            <p class="row" id="downloadCertificate"><a href="#" target="_system" onclick="getCertificate()"  class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
 
         </div>
         <div id="presentacion">
@@ -3066,7 +3067,7 @@
 
     async function waitBar()
     {
-        updateStatusCourse()
+        
         try {
             var id = localStorage.getItem("id");
 
@@ -3088,6 +3089,7 @@
 
             if (response2.data >= 90)
             {
+                updateStatusCourse()
                 // $("#finalQuestions").show();
                 // updateStatusCourse()
                 $("#finalQuestions").hide();
@@ -3182,14 +3184,20 @@
     var role_id = localStorage.getItem('role_id');
     let status_course = localStorage.getItem('status_course');
 
+    if(role_id == 1 || role_id == 2)
+    {
+      $("#vobos").show();
+    }else{
+      $("#vobos").hide();
+    }
+
     if (status_course == 0){
-        // $("#getCertificado").hide();
         $("#downloadCertificate").hide();
     }
     else {
         $("#downloadCertificate").show();
     }
-    $("#downloadCertificate").hide();
+    // $("#downloadCertificate").hide();
 
     if (role_id == 1 || role_id == 2)
     {
