@@ -14,6 +14,7 @@
         </div>
         <div class="page-content">
             <div id="Listado" class=""></div>
+            <div id="calif-perfil"></div>
         </div>
     </div>
 </template>
@@ -29,7 +30,7 @@
                     if (courses.length !== 0)
                     {
                         for (var i = 0; i < courses.length; i++) {
-                            if(courses[i].category_id == catId)
+                            if(courses[i].category_id == catId && courses[i].preview !== 'cp')
                             {
                                 $("#Listado").append(''+
                                     '<div class="card shadow-card padding-bottom margin-bottom">' +
@@ -75,6 +76,21 @@
                         }
                     }
                     app.dialog.close();
+                    $('#calif-perfil').append(''+
+                    ' <div class="page-content">' +
+                    '      <div class="block-title" style="font-weight: bold; font-size: 18px">Calificacion de Perfil</div>' +
+                    '      <div class="card">' +
+                        '<div class="card-content">'+
+                            '<div class="list links-list no-ios-edges">'+
+                             '   <ul>'+
+                              '      <li><a href="/calif_perfil/3">Curso Calificacion de Perfil</a></li>'+
+                               '     <li><a href="/competencias/3">Competencias</a></li>'+
+                                '    <li><a href="/actividades_administrativas/3">Actividades Administrativas</a></li>'+
+                                '</ul>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>' +
+                    '');
                 });
             }
         }

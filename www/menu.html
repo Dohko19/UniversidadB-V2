@@ -225,19 +225,27 @@
           </div>
         <div class="block" id="menuPrincipal">
             <p>Listado de Cursos</p>
+            <span id="operador">
+                <p class="row">
+                    <a href="/Induccion/1" class="col button button-large button-raised button-fill">Induccion</a>
+                        <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">
+                            Tecnicas de Limpieza
+                        </a>
+                </p>
+            </span>
+
             <p class="row">
-                <a href="/Induccion/1" class="col button button-large button-raised button-fill">Induccion</a>
-                <a href="/TecnicasLimpieza/2" class="col button button-large button-raised button-fill">Tecnicas de Limpieza</a>
-            </p>
-            <p class="row">
-                <a href="#" data-login-screen=".login-screen" class="col button login-screen-open button-large button-raised button-fill">
+                <a href="#" data-login-screen=".login-screen"
+                   class="col button login-screen-open button-large button-raised button-fill">
                     <i class="far fa-question-circle"></i> Ayuda
                 </a>
                 <a class="col button dynamic-popup button-large button-raised button-fill"  href="#">Avisos</a>
             </p>
             <p class="row">
+                <span id="supervisor">
                 <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu"
                    href="/supervisor/3">Supervisores</a>
+                </span>
             </p>
             <!-- <p class="row">
                 <a href="/cursos/evaluaciones/" onclick="loadFinalEval()" id="finalQuestions"
@@ -3183,6 +3191,25 @@
     var nombreCompleto = name + " " + last_name;
     var role_id = localStorage.getItem('role_id');
     let status_course = localStorage.getItem('status_course');
+
+    if(role_id == 1 || role_id == 2){
+        $('#operador').show()
+        $('#supervisor').hide()
+    }else{
+        $('#operador').hide()
+        $('#supervisor').hide()
+
+    }
+
+    if(role_id == 1 || role_id == 3){
+        $('#supervisor').show()
+        $('#operador').hide()
+
+    }else{
+        $('#operador').hide()
+        $('#supervisor').hide()
+
+    }
 
     if(role_id == 1 || role_id == 2)
     {

@@ -84,6 +84,21 @@ var routes = [
     componentUrl: './pages/supervisor/supervisor.html',
   },
   {
+    name: 'calificacion-perfil',
+    path: '/calif_perfil/:id',
+    componentUrl: './pages/supervisor/calificacion_perfil/cp.html',
+  },
+  {
+    name: 'competencias',
+    path: '/competencias/:id',
+    componentUrl: './pages/supervisor/calificacion_perfil/competencias.html',
+  },
+  {
+    name: 'actividades_administrativas',
+    path: '/actividades_administrativas/:id',
+    componentUrl: './pages/supervisor/calificacion_perfil/actividades_administrativas.html',
+  },
+  {
     name: 'Induccion',
     path: '/Induccion/:id',
     componentUrl: './pages/Induccion.html',

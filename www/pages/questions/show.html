@@ -5,10 +5,10 @@
             <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
             <div class="navbar-inner">
                 <div class="left">
-<!--                    <a href="#"  class="back">-->
-<!--                        <i class="icon icon-back"></i>-->
-<!--                        <span class="if-not-md">Back</span>-->
-<!--                    </a>-->
+                    <a href="#"  class="back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -63,6 +63,7 @@
                                 );
                                 for (let i = 0; i < answers.length; i++) // respuestas
                                 {
+                                    console.log(answers[i].question_id)
                                     if (answers[i].question_id == questions[w].id)
                                     {
                                         $("#answers"+w).append(

@@ -5,16 +5,15 @@
             <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
             <div class="navbar-inner">
                 <div class="left">
-                    <a onclick="regresar()"  class="back">
+                    <a href="#"  class="back">
                         <i class="icon icon-back"></i>
-                        <span class="if-not-md"></span>
+                        <span class="if-not-md">Back</span>
                     </a>
                 </div>
             </div>
         </div>
         <div class="page-content">
-            <div id="Listado" class=""></div>
-            <div id="calif-perfil"></div>
+            <div id="listado" class=""></div>
         </div>
     </div>
 </template>
@@ -29,15 +28,16 @@
                     const courses = JSON.parse(data);
                     if (courses.length !== 0)
                     {
+                        console.log(courses)
                         for (var i = 0; i < courses.length; i++) {
-                            if(courses[i].category_id == catId && courses[i].preview !== 'cp')
+                            if(courses[i].category_id == catId && courses[i].preview == 'aa')
                             {
-                                $("#Listado").append(''+
+                                $("#listado").append(''+
                                     '<div class="card shadow-card padding-bottom margin-bottom">' +
                                     '  <div class="card-header">Curso:' +
-                                    '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
-                                    '    <div id="FNoaprovado'+ courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
-                                    '    <span id="Faprovado'+ courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    // '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
+                                    // '    <div id="FNoaprovado'+ courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    // '    <span id="Faprovado'+ courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
                                     // '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
                                     // '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
                                     '</div>' +
@@ -58,10 +58,10 @@
                                     '  </div>' +
                                     '<div align="right" >'+
                                     '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
-                                    '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
+                                    '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar</a>'+
                                     ''+
                                     '<span id="watchVidio'+ courses[i].idCourse +'">' +
-                                    '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
+                                    // '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
                                     '</span>'+
                                     '</div>' +
                                     // '<div class="card-footer">' +
@@ -69,28 +69,13 @@
                                     // '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
                                     // '</div>'+
                                     '</div>');
-                                checkIfCoursesComplete(courses[i].idCourse);
+                                // checkIfCoursesComplete(courses[i].idCourse);
                                 // checkAR(courses[i].idCourse);
-                                checkQualify(courses[i].idCourse);
+                                // checkQualify(courses[i].idCourse);
                             }
                         }
                     }
                     app.dialog.close();
-                    $('#calif-perfil').append(''+
-                    ' <div class="page-content">' +
-                    '      <div class="block-title" style="font-weight: bold; font-size: 18px">Calificacion de Perfil</div>' +
-                    '      <div class="card">' +
-                        '<div class="card-content">'+
-                            '<div class="list links-list no-ios-edges">'+
-                             '   <ul>'+
-                              '      <li><a href="/calif_perfil/3">Curso Calificacion de Perfil</a></li>'+
-                               '     <li><a href="/competencias/3">Competencias</a></li>'+
-                                '    <li><a href="/actividades_administrativas/3">Actividades Administrativas</a></li>'+
-                                '</ul>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>' +
-                    '');
                 });
             }
         }

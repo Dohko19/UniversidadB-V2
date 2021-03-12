@@ -1673,7 +1673,11 @@ function updateStatusCourse()
 {
     if (localStorage.getItem('status_course') == 1 ) {
             $("#downloadCertificate").show();
-            return;
+        return
+
+    }
+    else{
+        return
     }
     let user_id = localStorage.getItem('id');
     localStorage.removeItem('status_course');
@@ -1702,7 +1706,7 @@ function getCertificate()
     var statusCourse = localStorage.getItem('status_course');
     if (statusCourse == 1)
     {
-        window.open("http://serviciosbennetts.com/universidadBennetts/certificate.php?id="+ id, '_system');
+        window.open("http://serviciosbennetts.com/universidadBennetts/certificate.php?id="+ id, '_system', 'location=yes');
     }else{
         swal.fire('Atencion', 'termina todos tu cursos para obtener tu certificado', 'info');
     }
@@ -2874,4 +2878,9 @@ function vobo(id){
         .catch( err => {
             toastTop('Ocurrio un error, intentalo mas tarde', 2500);
         })
+}
+
+function pdf(links)
+{
+    window.open(links, '_system');
 }

@@ -23,11 +23,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58a28739-d387-4585-aa4b-c989a62d4a63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/www/pages/supervisor/supervisor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/calificacion_perfil/actividades_administrativas.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/calificacion_perfil/competencias.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/calificacion_perfil/cp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/pages/supervisor/calificacion_perfil/actividades_administrativas.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/pages/supervisor/calificacion_perfil/competencias.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/pages/supervisor/calificacion_perfil/cp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/metodos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/operadores.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/operadores.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/supervisor.html" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/pages/supervisor/supervisor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/js/metodos.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/metodos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/js/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/cursos/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/cursos/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/questions/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/questions/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/supervisor/operadores.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/supervisor/operadores.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages/supervisor/supervisor.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages/supervisor/supervisor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +77,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bennetts-university" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../People-Center" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -146,6 +162,7 @@
       <workItem from="1612978664642" duration="8978000" />
       <workItem from="1614279403328" duration="10469000" />
       <workItem from="1614874281763" duration="1217000" />
+      <workItem from="1615478776336" duration="12835000" />
     </task>
     <servers />
   </component>
@@ -172,20 +189,20 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="409" y="153" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1614279996404" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1614875973338">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1615497937727">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1614293470787" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1615497937727" />
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614875973338" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1614874437580">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1614288892040" />
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614874437580" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614280726488">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615479011095">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1614280726488" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1615479011095" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

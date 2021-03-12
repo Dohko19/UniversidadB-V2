@@ -1,4 +1,3 @@
-<!--suppress ALL -->
 <template>
     <div class="page">
         <div class="navbar">
@@ -23,36 +22,34 @@
             pageInit: function () {
                 var sitio = localStorage.getItem('sitio')
                 axios.get('https://serviciosbennetts.com/universidadBennetts/supervisor/getOperatorsCertificate.php?id='+sitio)
-                .then(res => {
-                    const lists = res.data;
-
-                    for (var i = 0; i < lists.length; i++) {
-
-                        $("#Listado").append(''+
-                            '<div class="card">'+
+                    .then(res => {
+                        const lists = res.data;
+                        for (var i = 0; i < lists.length; i++) {
+                            $("#Listado").append(''+
+                                '<div class="card">'+
                                 '<div class="card-header">' +
-                                    '<span class="badge color-green">Aprovado</span>'+
+                                '<span class="badge color-green">Aprovado</span>'+
                                 '</div>'+
-                                    '<div class="card-content card-content-padding">'+
-                                    '<p> '+ lists[i].name + ' ' + lists[i].last_name +'</p> '+
-                                    '<p> '+ 'Terminado el: '+lists[i].finished_course + '</p> '+
-                                    '</div>'+
+                                '<div class="card-content card-content-padding">'+
+                                '<p> '+ lists[i].name + ' ' + lists[i].last_name +'</p> '+
+                                '<p> '+ 'Terminado el: '+lists[i].finished_course + '</p> '+
+                                '</div>'+
                                 '<div  class="card-footer">' +
-                                    '<span id="voboSupervisor'+lists[i].id+'">'+
-                                        '<a onclick="vobo('+ lists[i].id +')" class="col button button-fill color-orange">Vobo</a>' +
-                                    '</span>'+
+                                '<span id="voboSupervisor'+lists[i].id+'">'+
+                                '<a onclick="vobo('+ lists[i].id +')" class="col button button-fill color-orange">Vobo</a>' +
+                                '</span>'+
                                 '</div>'+
-                            '</div>');
-                        if (lists[i].vobo === 1 || lists[i].vobo === "1")
-                        {
-                            $("#voboSupervisor"+lists[i].id).hide();
+                                '</div>');
+                            if (lists[i].vobo === 1 || lists[i].vobo === "1")
+                            {
+                                $("#voboSupervisor"+lists[i].id).hide();
+                            }
                         }
-                    }
-                })
-                .catch(err => {
-                   toastTop('Ocurrio un error al obtener los datos, verifica tu conexion a internet', 5 * 1000)
-                   toastTop(err, 6*1000)
-                })
+                    })
+                    .catch(err => {
+                        toastTop('Ocurrio un error al obtener los datos, verifica tu conexion a internet', 5 * 1000)
+                        toastTop(err, 6*1000)
+                    })
             }
         }
     }
