@@ -24,26 +24,32 @@
                 axios.get('https://serviciosbennetts.com/universidadBennetts/supervisor/getOperatorsCertificate.php?id='+sitio)
                     .then(res => {
                         const lists = res.data;
-                        for (var i = 0; i < lists.length; i++) {
-                            $("#Listado").append(''+
-                                '<div class="card">'+
-                                '<div class="card-header">' +
-                                '<span class="badge color-green">Aprovado</span>'+
-                                '</div>'+
-                                '<div class="card-content card-content-padding">'+
-                                '<p> '+ lists[i].name + ' ' + lists[i].last_name +'</p> '+
-                                '<p> '+ 'Terminado el: '+lists[i].finished_course + '</p> '+
-                                '</div>'+
-                                '<div  class="card-footer">' +
-                                '<span id="voboSupervisor'+lists[i].id+'">'+
-                                '<a onclick="vobo('+ lists[i].id +')" class="col button button-fill color-orange">Vobo</a>' +
-                                '</span>'+
-                                '</div>'+
-                                '</div>');
-                            if (lists[i].vobo === 1 || lists[i].vobo === "1")
-                            {
-                                $("#voboSupervisor"+lists[i].id).hide();
+                        if (lists.length > 0){
+                            for (var i = 0; i < lists.length; i++) {
+                                $("#Listado").append(''+
+                                    '<div class="card">'+
+                                    '<div class="card-header">' +
+                                    '<span class="badge color-green">Aprovado</span>'+
+                                    '</div>'+
+                                    '<div class="card-content card-content-padding">'+
+                                    '<p> '+ lists[i].name + ' ' + lists[i].last_name +'</p> '+
+                                    '<p> '+ 'Terminado el: '+lists[i].finished_course + '</p> '+
+                                    '</div>'+
+                                    '<div  class="card-footer">' +
+                                    '<span id="voboSupervisor'+lists[i].id+'">'+
+                                    '<a onclick="vobo('+ lists[i].id +')" class="col button button-fill color-orange">Vobo</a>' +
+                                    '</span>'+
+                                    '</div>'+
+                                    '</div>');
+                                if (lists[i].vobo === 1 || lists[i].vobo === "1")
+                                {
+                                    $("#voboSupervisor"+lists[i].id).hide();
+                                }
                             }
+                        }else{
+                            $("#Listado").append('<div class="block block-strong inset">' +
+                                '<p>Sin datos, aun no hay operadores que hayan terminado sus cursos y sacar una nota aprovatoria</p>' +
+                                '</div>');
                         }
                     })
                     .catch(err => {

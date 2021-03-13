@@ -12,8 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="page-content">
-            <div id="Listado" class=""></div>
+        <div class="">
             <div id="calif-perfil"></div>
         </div>
     </div>
@@ -23,59 +22,6 @@
         on: {
             pageInit: function () {
                 let catId = 3;
-
-                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
-                    app.dialog.preloader('Cargando...','red');
-                    const courses = JSON.parse(data);
-                    if (courses.length !== 0)
-                    {
-                        for (var i = 0; i < courses.length; i++) {
-                            if(courses[i].category_id == catId && courses[i].preview !== 'cp')
-                            {
-                                $("#Listado").append(''+
-                                    '<div class="card shadow-card padding-bottom margin-bottom">' +
-                                    '  <div class="card-header">Curso:' +
-                                    '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
-                                    '    <div id="FNoaprovado'+ courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
-                                    '    <span id="Faprovado'+ courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
-                                    // '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
-                                    // '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
-                                    '</div>' +
-                                    '  <div class="card-content">' +
-                                    '   <div class="list media-list">' +
-                                    '      <ul>' +
-                                    '        <li class="item-content">' +
-                                    '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
-                                    '          <div class="item-inner">' +
-                                    '            <div class="item-title-row">' +
-                                    '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
-                                    '            </div>' +
-                                    '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
-                                    '          </div>' +
-                                    '        </li>'+
-                                    '      </ul>' +
-                                    '    </div>' +
-                                    '  </div>' +
-                                    '<div align="right" >'+
-                                    '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
-                                    '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar Curso</a>'+
-                                    ''+
-                                    '<span id="watchVidio'+ courses[i].idCourse +'">' +
-                                    '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
-                                    '</span>'+
-                                    '</div>' +
-                                    // '<div class="card-footer">' +
-                                    // '<span class="badge color-red" id="Faprovado'+ courses[i].idCourse+'">Aprobado</span>'+
-                                    // '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
-                                    // '</div>'+
-                                    '</div>');
-                                checkIfCoursesComplete(courses[i].idCourse);
-                                // checkAR(courses[i].idCourse);
-                                checkQualify(courses[i].idCourse);
-                            }
-                        }
-                    }
-                    app.dialog.close();
                     $('#calif-perfil').append(''+
                     ' <div class="page-content">' +
                     '      <div class="block-title" style="font-weight: bold; font-size: 18px">Calificacion de Perfil</div>' +
@@ -86,12 +32,12 @@
                               '      <li><a href="/calif_perfil/3">Curso Calificacion de Perfil</a></li>'+
                                '     <li><a href="/competencias/3">Competencias</a></li>'+
                                 '    <li><a href="/actividades_administrativas/3">Actividades Administrativas</a></li>'+
+                                '    <li><a href="/supervisores-evaluacion/3">Evaluacion a Supervisores</a></li>'+
                                 '</ul>'+
                             '</div>'+
                         '</div>'+
                     '</div>' +
                     '');
-                });
             }
         }
     }

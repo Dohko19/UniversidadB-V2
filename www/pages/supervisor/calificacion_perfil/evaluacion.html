@@ -1,0 +1,90 @@
+<!--suppress JSAnnotator -->
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div style="text-align: center; margin-top: 4px;"><img src="img/logouni.png" width="60px" /></div>
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#"  class="back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div id="listado" class=""></div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function () {
+                let catId = 3;
+
+                app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/cursos_list.json', function (data) {
+                    app.dialog.preloader('Cargando...','red');
+                    const courses = JSON.parse(data);
+                    if (courses.length !== 0)
+                    {
+                        console.log(courses)
+                        for (var i = 0; i < courses.length; i++) {
+                            if(courses[i].category_id == catId && courses[i].preview == 'es')
+                            {
+                                $("#listado").append(''+
+                                    '<div class="card shadow-card padding-bottom margin-bottom">' +
+                                    '  <div class="card-header">Curso:' +
+                                    '    <span id="terminadoCourse'+ courses[i].idCourse +'" class="badge color-blue">Terminado</span>' +
+                                    '    <div id="FNoaprovado'+ courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    '    <span id="Faprovado'+ courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    // '    <div id="NoAprobado'+courses[i].idCourse+'" class="badge color-red">No aprobado</div>' +
+                                    // '    <span id="Aprobado'+courses[i].idCourse+'" class="badge color-green">Aprobado</span>' +
+                                    '</div>' +
+                                    '  <div class="card-content">' +
+                                    '   <div class="list media-list">' +
+                                    '      <ul>' +
+                                    '        <li class="item-content">' +
+                                    '          <div class="item-media"><img src="img/uni.png" width="44"/></div>' +
+                                    '          <div class="item-inner">' +
+                                    '            <div class="item-title-row">' +
+                                    '              <div class="item-title" style="font-size: 23px"><b>'+courses[i].name+'</b></div>' +
+                                    '            </div>' +
+                                    '            <div class="item-subtitle" style="color:#0a6ebd;"></div>' +
+                                    '          </div>' +
+                                    '        </li>'+
+                                    '      </ul>' +
+                                    '    </div>' +
+                                    '  </div>' +
+                                    '<div align="right" >'+
+                                    '<a id="linkToC'+ courses[i].idCourse +'" onclick="Verificar('+courses[i].idCourse+', '+catId+')" class="link col-50 button button-raised button-fill" style="width: 40%">'+
+                                    '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar</a>'+
+                                    ''+
+                                    '<span id="watchVidio'+ courses[i].idCourse +'">' +
+                                    '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
+                                    '</span>'+
+                                    '</div>' +
+                                    // '<div class="card-footer">' +
+                                    // '<span class="badge color-red" id="Faprovado'+ courses[i].idCourse+'">Aprobado</span>'+
+                                    // '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
+                                    // '</div>'+
+                                    '</div>');
+                                checkIfCoursesComplete(courses[i].idCourse);
+                                checkAR(courses[i].idCourse);
+                                checkQualify(courses[i].idCourse);
+                            }
+                        }
+                    }
+                    app.dialog.close();
+                });
+            }
+        }
+    }
+</script>
+<style>
+    .shadow-card{
+        -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+        -moz-box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+        box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.46);
+    }
+</style>

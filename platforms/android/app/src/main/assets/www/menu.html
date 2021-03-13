@@ -144,16 +144,24 @@
             <ul>
             <li>
                 <div class="item-content">
-                <div class="item-inner">
-                <div class="item-title"><a href="#" onclick="logaout();">Cerrar sesión</a></div>
-                </div>
+                    <div class="item-inner">
+                        <div class="item-title"><a href="#" onclick="ptrpro();">Actualizar Datos</a></div>
+                        <div id="processclick" class="99badge99"></div>
+                    </div>
                 </div>
             </li>
             <li id="vobos">
                 <div class="item-content">
-                <div class="item-inner">
-                <div class="item-title"><a href="/supervisor/operadores">Operadores en espera de aprovacion</a></div>
+                    <div class="item-inner">
+                        <div class="item-title"><a href="/supervisor/operadores">Operadores en espera de aprovacion</a></div>
+                    </div>
                 </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><a href="#" onclick="logaout();">Cerrar sesión</a></div>
+                    </div>
                 </div>
             </li>
             </ul>
@@ -244,7 +252,7 @@
             <p class="row">
                 <span id="supervisor">
                 <a class="col-50 button button-large button-raised button-fill color-green" id="supervisorMenu"
-                   href="/supervisor/3">Supervisores</a>
+                   href="/supervisor/3">Supervisores de sitio</a>
                 </span>
             </p>
             <!-- <p class="row">
@@ -2575,7 +2583,7 @@
           content: '<div class="popup">'+
               '<div class="page">'+
               '<div class="card page-content">' +
-              '<div class="card-header">Avisos/Boletines: <a style="padding-left: 30px !important;" href="#" class="link popup-close"><i class="far fa-times-circle"></i></a></div>'+
+              '<div class="card-header">Avisos/Boletines: <a style="padding-left: 30px !important;" href="#" class="link                    popup-close"><i class="far fa-times-circle"></i></a></div>'+
               ''+
               '<div id="news"></div>'+
               '<div>'+
@@ -2607,22 +2615,6 @@
 
       //end
       function newsUB() {
-        //   app.request.get(cordova.file.externalApplicationStorageDirectory + '/jsons/noticias_news.json', function (data) {
-        //       let content1 = JSON.parse(data);
-        //               let news = '';
-        //               content1.forEach(data => {
-        //                   news += '' +
-        //                       '<div class="card-content card-content-padding">' +
-        //                       '<p><strong>' + data.title + '</strong></p>' +
-        //                       '<p> <img src="'+data.body+'"></p>' +
-        //                       '<hr>' +
-        //                       '</div>' +
-        //                       ''
-        //               });
-        //               $("#news").html(news);
-        //               // Dalle fuego  XD
-
-        //   });
           axios.get('http://serviciosbennetts.com/universidadBennetts/news_courses.php')
               .then(res => {
                 console.log(res.data)
@@ -3078,10 +3070,19 @@
         
         try {
             var id = localStorage.getItem("id");
+            var response2, response;
+        if(localStorage.getItem('role_id') == 2 || localStorage.getItem('role_id') == 1)
+        {
+            response =
+                await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
 
-        const response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
-        const response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
-            if(response2.data == 'INF')
+            response2 =
+                await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBarSupervisor.php?id='+id);
+        }else{
+            response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
+            response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
+        }
+            if(response2.data == 'INF' || response2.data == 'NAN')
             {
                 var p2 = 0.0
             }
@@ -3192,22 +3193,15 @@
     var role_id = localStorage.getItem('role_id');
     let status_course = localStorage.getItem('status_course');
 
+
     if(role_id == 1 || role_id == 2){
         $('#operador').show()
-        $('#supervisor').hide()
-    }else{
-        $('#operador').hide()
-        $('#supervisor').hide()
-
+        $('#supervisor').show()
     }
 
     if(role_id == 1 || role_id == 3){
-        $('#supervisor').show()
-        $('#operador').hide()
-
-    }else{
-        $('#operador').hide()
         $('#supervisor').hide()
+        $('#operador').show()
 
     }
 

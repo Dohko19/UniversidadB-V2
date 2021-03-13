@@ -79,6 +79,11 @@ var routes = [
     componentUrl: './pages/supervisor/operadores.html',
   },
   {
+    name: 'supervisores-evaluacion',
+    path: '/supervisores-evaluacion/:id',
+    componentUrl: './pages/supervisor/calificacion_perfil/evaluacion.html',
+  },
+  {
     name: 'supervisores',
     path: '/supervisor/:id',
     componentUrl: './pages/supervisor/supervisor.html',

@@ -2075,14 +2075,12 @@ function storeQualification(idcf, course_id)
                                                     var long = res.rows.length;
                                                     var answers = [];
                                                     var repetidos = {};
-                                                    alert(long)
                                                     if (long > 0) {
                                                         for (var z = 0; z < long; z++) {
                                                             var item = res.rows.item(z);
                                                             var id_curso = item.course_id
                                                             var total = answers.push(item.answer);
                                                         }
-                                                        alert('total: ' + total)
                                                         if (total > 0){
                                                             var sum = answers.reduce((contador, valor) => {
                                                                 contador[valor] = (contador[valor] || 0) + 1;
@@ -2115,6 +2113,11 @@ function storeQualification(idcf, course_id)
                                                                                             name: 'TecnicasLimpieza',
                                                                                             params: {id: 2}
                                                                                         });
+                                                                                    }else if(course_id > 100){
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'supervisores',
+                                                                                            params: {id: 3}
+                                                                                        });
                                                                                     } else {
                                                                                         app.views.main.router.navigate({
                                                                                             name: 'Induccion',
@@ -2131,6 +2134,11 @@ function storeQualification(idcf, course_id)
                                                                                         app.views.main.router.navigate({
                                                                                             name: 'TecnicasLimpieza',
                                                                                             params: {id: 2}
+                                                                                        });
+                                                                                    }else if(course_id > 100){
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'supervisores',
+                                                                                            params: {id: 3}
                                                                                         });
                                                                                     } else {
                                                                                         app.views.main.router.navigate({
@@ -2224,6 +2232,11 @@ function storeQualification(idcf, course_id)
                                                                                             name: 'TecnicasLimpieza',
                                                                                             params: {id: 2}
                                                                                         });
+                                                                                    }else if(course_id > 100){
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'supervisores',
+                                                                                            params: {id: 3}
+                                                                                        });
                                                                                     } else {
                                                                                         app.views.main.router.navigate({
                                                                                             name: 'Induccion',
@@ -2240,6 +2253,11 @@ function storeQualification(idcf, course_id)
                                                                                         app.views.main.router.navigate({
                                                                                             name: 'TecnicasLimpieza',
                                                                                             params: {id: 2}
+                                                                                        });
+                                                                                    }else if(course_id > 100){
+                                                                                        app.views.main.router.navigate({
+                                                                                            name: 'supervisores',
+                                                                                            params: {id: 3}
                                                                                         });
                                                                                     } else {
                                                                                         app.views.main.router.navigate({
@@ -2261,7 +2279,7 @@ function storeQualification(idcf, course_id)
                                                         }
                                                     }
                                                     else{
-                                                        toastTop('Hubo un error al guardar LONG', 2500);
+                                                        toastTop('Hubo un error al guardar LONG in else', 2500);
                                                         app.dialog.close();
 
                                                     }
