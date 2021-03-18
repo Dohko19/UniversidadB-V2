@@ -215,7 +215,11 @@
                         </div>
                         <div id="demo2" class="circle">
                             <strong></strong>
-                            <span>Calif. Cuestionarios</span>
+                            <span>Cuestionarios Supervisores</span>
+                        </div>
+                        <div id="demo3" class="circle">
+                            <strong></strong>
+                            <span>Cursos OL</span>
                         </div>
                     </div>
                 </center>
@@ -262,7 +266,11 @@
                 </a>
             </p> -->
             <!-- <p class="row"><a href="#" onclick="updateStatusCourse()" id="getCertificado" class="col-100 button button-fill button-large button-raised color-yellow">Obtener Certificado</a></p> -->
-            <p class="row" id="downloadCertificate"><a href="#" target="_system" onclick="getCertificate()"  class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a></p>
+            <p class="row">
+                <span id="downloadCertificate">
+                    <a href="#" target="_system" onclick="getCertificate()"  class="col-100 button button-fill button-large button-raised color-orange">Descargar Certificado</a>
+                </span>
+            </p>
 
         </div>
         <div id="presentacion">
@@ -3093,7 +3101,7 @@
         
         try {
             var id = localStorage.getItem("id");
-            var response2, response;
+            var response2, response, response3;
         if(localStorage.getItem('role_id') == 2 || localStorage.getItem('role_id') == 1)
         {
             response =
@@ -3101,6 +3109,8 @@
 
             response2 =
                 await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBarSupervisor.php?id='+id);
+            response3 =
+                await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
         }else{
             response = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressBar.php?id='+id);
             response2 = await axios.get('https://serviciosbennetts.com/universidadBennetts/getProgressCalifBar.php?id='+id);
@@ -3112,25 +3122,47 @@
             else{
                 var p2 = response2.data;
             }
+            if(response3.data == 'INF' || response3.data == 'NAN')
+            {
+                var p3 = 0.0
+            }
+            else{
+                var p3 = response3.data;
+            }
 
             // var totalBar = p2 + p3;
             let dataBarTotal = response2.data / 100;
+            let dataBarTotal2 = response3.data / 100;
             let dataBar = response.data/100; // solo acepta numeros entre 0.1 a 1.0
 
             // let dataBarTotalW = p2 + p3;
+            let role = localStorage.getItem('role_id')
 
-            if (response2.data >= 90)
-            {
-                updateStatusCourse()
-                // $("#finalQuestions").show();
-                // updateStatusCourse()
-                $("#finalQuestions").hide();
-                $("#getCertificado").show()
+            if(role !== '2' || role != 2){
+                alert('super')
+                if (response2.data >= 85 && response3.data >= 85){
+                    $("#finalQuestions").hide();
+                    $("#downloadCertificate").show()
+                    updateStatusCourse()
 
+                }else{
+                    $("#finalQuestions").hide();
+                    $("#downloadCertificate").hide()
+                }
             }else{
-                $("#finalQuestions").hide();
-                // $("#finalQuestions").show();
-                $("#getCertificado").hide()
+                if (response2.data >= 85)
+                {
+                    updateStatusCourse()
+                    // $("#finalQuestions").show();
+                    // updateStatusCourse()
+                    $("#finalQuestions").hide();
+                    $("#downloadCertificate").show()
+
+                }else{
+                    $("#finalQuestions").hide();
+                    // $("#finalQuestions").show();
+                    $("#downloadCertificate").hide()
+                }
             }
 
             // if (dataBarTotalW >= 80)
@@ -3161,11 +3193,26 @@
                 },
                 emptyFill: "#929292",
                 fill: {
-                    gradient: ['#64b519','#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+                    gradient: ['#ff0000','#8d0404']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
                 },
             }).on('circle-animation-progress', function(event, progress) {
                 $(this).find('strong').html(p2+'%');
             });
+            if(localStorage.getItem('role_id') == 2 || localStorage.getItem('role_id') == 1) {
+                $('#demo3').circleProgress({ // calificacion general supervisor
+                    value: dataBarTotal2,
+                    animation: {
+                        duration: 1200,
+                        easing: 'circleProgressEasing'
+                    },
+                    emptyFill: "#929292",
+                    fill: {
+                        gradient: ['#64b519', '#35f320']// or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+                    },
+                }).on('circle-animation-progress', function (event, progress) {
+                    $(this).find('strong').html(p3 + '%');
+                });
+            }
         } catch (error) {
             console.error(error);
             Swal.fire('Warning', 'Ocurrio un error al obtener los datos'+error,'warning')

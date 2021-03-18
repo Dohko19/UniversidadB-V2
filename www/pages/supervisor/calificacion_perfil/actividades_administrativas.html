@@ -61,7 +61,7 @@
                                     '<i class="icon f7-icons if-not-md">square_arrow_right</i> Iniciar</a>'+
                                     ''+
                                     '<span id="watchVidio'+ courses[i].idCourse +'">' +
-                                    // '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
+                                    '<a class="button" onclick="Verificar2('+courses[i].idCourse+', '+catId+')" href="#"">Repasar la Leccion</a>' +
                                     '</span>'+
                                     '</div>' +
                                     // '<div class="card-footer">' +
@@ -69,9 +69,9 @@
                                     // '<span class="badge color-green" id="FNoaprovado'+ courses[i].idCourse+'">No Aprobado</span>'+
                                     // '</div>'+
                                     '</div>');
-                                // checkIfCoursesComplete(courses[i].idCourse);
-                                // checkAR(courses[i].idCourse);
-                                // checkQualify(courses[i].idCourse);
+                                checkIfCoursesComplete(courses[i].idCourse);
+                                checkAR(courses[i].idCourse);
+                                checkQualify(courses[i].idCourse);
                             }
                         }
                     }

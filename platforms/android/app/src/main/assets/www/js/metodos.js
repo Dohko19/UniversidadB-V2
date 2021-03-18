@@ -942,7 +942,7 @@ function learn(id)
 
 //-----------------------------------------------------------
 function registerQuest(lesson_id, course_id){
-    stopVideo()
+    stopVideo();
     var now = new Date();
     var idCuestionario = localStorage.getItem('idCuestionario');
 
@@ -976,7 +976,11 @@ function registerQuest(lesson_id, course_id){
                         $("#note").hide();
                         $("#enviarCuestionario").hide();
                         // $("#success").append('<div style="background-color: forestgreen; color: #FFFFFF;" ><p style="color: #FFFFFF;"> En hora buena.Haz completado este cuestionario, vuelve el dia de mañana para repetirlo</p></div>');
-                        if(courseid >= 78 && courseid <= 99){
+                        if(idCurso >= 78 && idCurso <= 99){
+
+                            Swal.fire('Enhorabuena!', '¡Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success');
+                            app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
+                        }else if(idCurso >= 101){
 
                             Swal.fire('Enhorabuena!', '¡Haz completado este cuestionario, vuelve el dia de mañana para repetirlo', 'success');
                             app.views.main.router.navigate( { name: 'TecnicasLimpieza' , params: {id: 2} } );
@@ -1120,9 +1124,9 @@ function saveQuest(el, ansId)
                     var length = resultsA.rows.length;
                     var dateF, questionId, userId;
                     for(var w = 0; w< length; w++) {
-                        questionId = resultsA.rows.item(w).question_id
-                        dateF = resultsA.rows.item(w).dateF
-                        userId = resultsA.rows.item(w).user_id
+                        questionId = resultsA.rows.item(w).question_id;
+                        dateF = resultsA.rows.item(w).dateF;
+                        userId = resultsA.rows.item(w).user_id;
                     }
 
                     if (length > 0 && questionId == question_id && userId === user_id && dateF === dateY)
@@ -1140,7 +1144,7 @@ function saveQuest(el, ansId)
                             }
 
                             $('input[name=pregunta'+question_id+']').attr("disabled",true);
-                        })
+                        });
                     }
                     else {
                         tx1.executeSql("INSERT INTO answer_user(idCuestionario, answer, question_id, user_id, answer_id, created_at, dateF ) VALUES (?,?,?,?,?,?,?)",
@@ -1156,7 +1160,7 @@ function saveQuest(el, ansId)
                             }
                                 $('input[name=pregunta'+question_id+']').attr("disabled",true);
                             }
-                        )
+                        );
                     }
                 var ql = $('input[name=pregunta'+question_id+']').length;
                     if (ql > 1){
@@ -1966,7 +1970,12 @@ function storeLocalA()
 
 async function callStoreAqulif(idcf, course_id)
 {
-    const result = await storeQualification(idcf, course_id)
+    try {
+        const result = await storeQualification(idcf, course_id)
+
+    }catch (e){
+        console.log(e)
+    }
 
 }
 
@@ -2015,6 +2024,7 @@ function storeQualification(idcf, course_id)
                                                     var long = res.rows.length;
                                                     var answers = [];
                                                     var repetidos = {};
+                                                    console.log(long)
                                                     if (long > 0) {
                                                         for (var z = 0; z < long; z++) {
                                                             var item = res.rows.item(z);
@@ -2063,7 +2073,7 @@ function storeQualification(idcf, course_id)
                                                         }
                                                     }
                                                     else{
-                                                        toastTop('Hubo un error al guardar LONG', 2500);
+                                                        toastTop('Hubo un error al guardar LONG in Else', 2500);
                                                     }
                                                 })
                                         }

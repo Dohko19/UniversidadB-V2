@@ -44,11 +44,15 @@
                                     '<div class="card">'+
                                     '<div class="card-header" style="font-size: 20px; background-color: #2196f3; color: white;">'+courses_show[i].name+'</div>'+
                                     '<div class="card-content card-content-padding">' +
-                                    '<iframe width="100%" height="315" src="'+courses_show[i].video_src+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'+
+                                    '<div id="player" style="width: 100%; height: 315px">' +
+                                    '</div>' +
+                                    '</div>' +
+                                    // '<iframe width="100%" height="315" src="'+courses_show[i].video_src+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'+
                                     '<div class="card-footer">'+
                                     '</div>'+
                                     '</div>'
                                 );
+                                onYouTubePlayerAPIReady(courses_show[i].created_at)
                             }
 
                         }
