@@ -13,7 +13,7 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "cordova": "^10.0.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.1.1",
