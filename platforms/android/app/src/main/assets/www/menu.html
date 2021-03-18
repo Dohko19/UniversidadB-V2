@@ -2761,30 +2761,179 @@
         $("#processclick").removeClass('99badge99');
         $("#processclick").addClass('badge');
 
-        var fileTransfer = new FileTransfer();
+        var jsonPadre = new download();
+        jsonPadre.Initialize({
+            fileSystem : cordova.file.externalApplicationStorageDirectory,
+            folder: "jsons",
+            remove: false,
+            timeout: 0,
+            success: DownloaderSuccess,
+            error: DownloaderError,
+            headers: [
+                {
+                    Key: 'Authorization',
+                    Value: 'Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=='
+                }
+            ]
+        });
 
-        var fileURL = cordova.file.externalApplicationStorageDirectory+"/jsons/jsonName.json";
-        var uri = encodeURI ("http://serviciosbennetts.com/universidadBennetts/questionaires/jsonName.json");
+        jsonPadre.Get("http://serviciosbennetts.com/universidadBennetts/questionaires/jsonName.json");
 
-        fileTransfer.download(
-            uri,
-            fileURL,
-            function(entry) {
-                console.log("download complete: " + entry.toURL());
-                var fileTransfer = new FileTransfer();
+        function DownloaderError(err) {
+            console.error("Error al descargar: " + err);
+            $("#processclick").html("Error");
+            app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+        }
+        function DownloaderSuccess() {
+            app.request.get(cordova.file.externalApplicationStorageDirectory + "jsons/jsonName.json", function (data) {
+                const nameJson = JSON.parse(data);
+                var countptr = 0;
+                nameJson.forEach((valor, indice, array) => {
+                    $("#process").html("Descargando...");
+                    window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function(oEntry) {
+                        var jsonHijos = new download();
+                        jsonHijos.Initialize({
+                            fileSystem : cordova.file.externalApplicationStorageDirectory,
+                            folder: "jsons",
+                            remove: false,
+                            timeout: 0,
+                            success: DownloaderSuccess,
+                            error: DownloaderError,
+                            headers: [
+                                {
+                                    Key: 'Authorization',
+                                    Value: 'Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=='
+                                }
+                            ]
+                        });
+                        jsonHijos.Get("http://serviciosbennetts.com/universidadBennetts/questionaires/" + valor.jsonName);
+                        function DownloaderError(err) {
+                            console.error("Error al descargar: " + valor.jsonName + " " + err);
+                            $("#processclick").html("Error");
+                            app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+                        }
+                        function DownloaderSuccess() {
+                            console.warn(valor.jsonName , "Se descargo correctamente.");
+                            app.ptr.done();
+                            $("#process").hide();
+                            var fecha = new Date();
+                            var fFinal = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+                            databaseHandler.db.transaction(
+                                function (tx5) {
+                                    tx5.executeSql(
+                                        "INSERT INTO Actualizaciones (IdUsuario, Fecha) VALUES (?,?)",
+                                        [IdUsuario, fFinal],
+                                        function (tx5, results) {
+                                            databaseHandler.db.transaction(
+                                                function (tx5) {
+                                                    tx5.executeSql(
+                                                        "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                                        [],
+                                                        function (tx5, results) {
+                                                            var length = results.rows.length;
+                                                            var item1 = results.rows.item(0);
+                                                            $("#Fecha").html(item1.Fecha);
+                                                            $("#Fecha2").html(item1.Fecha);
+                                                            // $("#Fecha").css("color","#1e90ff");
+                                                            $("#Fecha").css("color", "#019CDC");
+                                                            $("#Fecha2").css("color", "#019CDC");
+                                                        }
+                                                    );
+                                                },
+                                                function (error) {
+                                                },
+                                                function () {
+                                                }
+                                            );
+                                        }
+                                    );
+                                },
+                                function (error) {
+                                },
+                                function () {
+                                }
+                            );
+                            $("#processclick").html("Actualizados");
+                        }
+                    });
+                });
+                console.warn("Ya termine");
+            });
+        }
+    }
+    // PTR en pantalla
+    var $ptrContent = $('.ptr-content');
+    $ptrContent.on('ptr:refresh', function (e) {
+        $("#process").show();
+        var jsonPadre = new download();
+        jsonPadre.Initialize({
+            fileSystem : cordova.file.externalApplicationStorageDirectory,
+            folder: "jsons",
+            remove: false,
+            timeout: 0,
+            success: DownloaderSuccess,
+            error: DownloaderError,
+            headers: [
+                {
+                    Key: 'Authorization',
+                    Value: 'Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=='
+                }
+            ]
+        });
 
-                var downloadProgress = 0;
-                window.resolveLocalFileSystemURL(cordova.file.applicationStorageDirectory, function(oEntry){
-                    app.request.get(cordova.file.externalApplicationStorageDirectory + "/jsons/jsonName.json", function (data) {
-                        const nameJson = JSON.parse(data);
-                        nameJson.forEach( function(valor, indice, array) {
-                            var pathToRoot = cordova.file.externalApplicationStorageDirectory + "/jsons/" + valor.jsonName;
-                            var uri = encodeURI("http://serviciosbennetts.com/universidadBennetts/questionaires/" + valor.jsonName);
-                            fileTransfer.onprogress = function (result) {
-                                downloadProgress = result.loaded / result.total * 100;
-                                downloadProgress = Math.round(downloadProgress);
-                                console.log("progress: " + downloadProgress);
-                                $("#processclick").html(downloadProgress + "%");
+        jsonPadre.Get("http://serviciosbennetts.com/universidadBennetts/questionaires/jsonName.json");
+
+        function DownloaderError(err) {
+            console.error("Error al descargar: " + err);
+            $("#processclick").html("Error");
+            app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+        }
+        function DownloaderSuccess() {
+            app.request.get(cordova.file.externalApplicationStorageDirectory + "jsons/jsonName.json", function (data) {
+                const nameJson = JSON.parse(data);
+                var countptr = 0;
+                var progress = 0;
+                var dialog = app.dialog.progress('Sincronizando Datos', progress);
+                dialog.setText('Archivo 1 de ' + nameJson.length);
+                nameJson.forEach((valor, indice, array) => {
+                    $("#process").html("Descargando...");
+                    window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function(oEntry) {
+                        var jsonHijos = new download();
+                        jsonHijos.Initialize({
+                            fileSystem : cordova.file.externalApplicationStorageDirectory,
+                            folder: "jsons",
+                            remove: false,
+                            timeout: 0,
+                            success: DownloaderSuccess,
+                            error: DownloaderError,
+                            headers: [
+                                {
+                                    Key: 'Authorization',
+                                    Value: 'Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=='
+                                }
+                            ]
+                        });
+                        jsonHijos.Get("http://serviciosbennetts.com/universidadBennetts/questionaires/" + valor.jsonName);
+                        function DownloaderError(err) {
+                            console.error("Error al descargar: " + valor.jsonName + " " + err);
+                            $("#processclick").html("Error");
+                            app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+                        }
+                        function DownloaderSuccess() {
+                            console.warn(valor.jsonName , "Se descargo correctamente.");
+                            progress += 1;
+                            countptr++;
+                            var interval = setInterval(function () {
+                                dialog.setProgress((progress * 100) / nameJson.length);
+                                dialog.setText('Archivo ' + progress + ' de ' + nameJson.length);
+                                if (progress === nameJson.length) {
+                                    clearInterval(interval);
+                                    dialog.close();
+                                }
+                            }, 300)
+                            if(countptr == nameJson.length){
+                                app.ptr.done();
+                                $("#process").hide();
                                 var fecha = new Date();
                                 var fFinal = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
                                 databaseHandler.db.transaction(
@@ -2823,144 +2972,18 @@
                                     }
                                 );
                                 $("#processclick").html("Actualizados");
-                            };
-
-                            fileTransfer.download(
-                                uri,
-                                pathToRoot,
-
-                                function (entry) {
-                                    console.log("download complete: " + entry.toURL());
-                                },
-
-                                function (error) {
-                                    console.log("download error source " + error.source);
-                                    console.log("download error target " + error.target);
-                                    console.log("download error code: " + error.code);
-                                });
-                        });
+                            }
+                        }
                     });
-                }, function(){ console.log("error");});
-            },
-            function(error) {
-                console.log("download error source " + error.source);
-                console.log("download error target " + error.target);
-                console.log("download error code" + error.code);
-            },
-            false,
-            {
-                headers: {
-                    "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-                }
-            }
-        );
-    }
-    // PTR en pantalla
-    var $ptrContent = $('.ptr-content');
-    $ptrContent.on('ptr:refresh', function (e) {
-        $("#process").show();
-        setTimeout(function () {
-            var fileTransfer = new FileTransfer();
-
-            var fileURL = cordova.file.externalApplicationStorageDirectory+"/jsons/jsonName.json";
-            var uri = encodeURI ("http://serviciosbennetts.com/universidadBennetts/questionaires/jsonName.json");
-
-            fileTransfer.download(
-                uri,
-                fileURL,
-                function(entry) {
-                    console.log("download complete: " + entry.toURL());
-                    var fileTransfer = new FileTransfer();
-
-                    var downloadProgress = 0;
-                    console.log("directorio; "+cordova.file.externalApplicationStorageDirectory);
-                    window.resolveLocalFileSystemURL(cordova.file.externalApplicationStorageDirectory, function(oEntry){
-                        app.request.get(cordova.file.externalApplicationStorageDirectory + "/jsons/jsonName.json", function (data) {
-                            const nameJson = JSON.parse(data);
-                            nameJson.forEach( function(valor, indice, array) {
-                                var pathToRoot = cordova.file.externalApplicationStorageDirectory + "/jsons/" + valor.jsonName;
-                                var uri = encodeURI("http://serviciosbennetts.com/universidadBennetts/questionaires/" + valor.jsonName);
-                                fileTransfer.onprogress = function (result) {
-                                    downloadProgress = result.loaded / result.total * 100;
-                                    downloadProgress = Math.round(downloadProgress);
-                                    console.log("progress: " + downloadProgress);
-                                    $("#process").html(downloadProgress + "%");
-                                    var fecha = new Date();
-                                    $("#processclick").html("Actualizados");
-                                };
-
-                                fileTransfer.download(
-                                    uri,
-                                    pathToRoot,
-
-                                    function (entry) {
-                                        console.log("download complete: " + entry.toURL());
-                                        app.ptr.done();
-                                        $("#process").hide();
-                                        var fecha = new Date();
-                                        var fFinal = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
-                                        databaseHandler.db.transaction(
-                                            function (tx5) {
-                                                tx5.executeSql(
-                                                    "INSERT INTO Actualizaciones (IdUsuario, Fecha) VALUES (?,?)",
-                                                    [IdUsuario, fFinal],
-                                                    function (tx5, results) {
-                                                        databaseHandler.db.transaction(
-                                                            function (tx5) {
-                                                                tx5.executeSql(
-                                                                    "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
-                                                                    [],
-                                                                    function (tx5, results) {
-                                                                        var length = results.rows.length;
-                                                                        var item1 = results.rows.item(0);
-                                                                        $("#Fecha").html(item1.Fecha);
-                                                                        $("#Fecha2").html(item1.Fecha);
-                                                                        // $("#Fecha").css("color","#1e90ff");
-                                                                        $("#Fecha").css("color", "#019CDC");
-                                                                        $("#Fecha2").css("color", "#019CDC");
-                                                                    }
-                                                                );
-                                                            },
-                                                            function (error) {
-                                                            },
-                                                            function () {
-                                                            }
-                                                        );
-                                                    }
-                                                );
-                                            },
-                                            function (error) {
-                                            },
-                                            function () {
-                                            }
-                                        );
-
-                                    },
-
-                                    function (error) {
-                                        console.log("download error source " + error.source);
-                                        console.log("download error target " + error.target);
-                                        console.log("download error code: " + error.code);
-                                    });
-                            });
-                        });
-                    }, function(){ console.log("error");});
-                },
-                function(error) {
-                    console.log("download error source " + error.source);
-                    console.log("download error target " + error.target);
-                    console.log("download error code" + error.code);
-                },
-                false,
-                {
-                    headers: {
-                        "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-                    }
-                }
-            );
-        })
+                });
+                console.warn("Ya termine");
+            });
+        }
     })
-      document.addEventListener("offline", onOffline, false);
+
+
+
+    document.addEventListener("offline", onOffline, false);
       function networkInfo() {
        var networkState = navigator.connection.type;
        var states = {};
